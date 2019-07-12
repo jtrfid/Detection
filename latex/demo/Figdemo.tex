@@ -1,0 +1,26 @@
+\documentclass{beamer} 
+\usepackage{ctex}
+\usetheme[secheader]{Madrid} %这是beamer宏包的主题之一
+\usecolortheme{rose} %这是beamer宏包的颜色主题之一
+\usecolortheme{seahorse}  %这是beamer宏包的颜色主题之一
+\usepackage{graphicx} %插入图片的包
+\titlegraphic{\includegraphics[height=0.1\textwidth]{xd.jpg}}
+%图片logo.png放在当前文件位置下，若放在其他位置则在logo.png前面加上路径
+%这是第一种在幻灯片首页插入图标
+\logo{\includegraphics[height=0.07\textwidth]{xd.jpg}}
+%这是第二种在幻灯片除首页外每页都插上图标
+\begin{document}
+\title[]{标题}           %标题
+%\author[]{主讲者姓名}          %作者
+\institute[]{主讲者单位}       %单位
+\date{2019年1月10日}
+\begin{frame}[plain]          %“帧”的开始（帧即是一页幻灯片）                    
+\titlepage                      
+\end{frame}
+
+\begin{frame}
+第一页
+\includegraphics[scale=0.4]{xd.jpg} 
+%在幻灯片正文中插入图片，这儿插入图片和在article插入图片的语法一致，可以在figure浮动环境中插入图片
+\end{frame}
+\end{document}  
