@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%% ch3
+\begin{frame}
+  \frametitle{主要内容}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{准备知识}
+\begin{frame}
+\begin{theorem}
+	如果函数$f(x)$在区间$[a,b]$上连续，则积分上限函数
+	\[\Phi(x)=\int_a^x f(t)dt\]
+	在[a,b]上具有导数，并且它的导数是
+	\[\Phi^\prime(x)=\frac{d}{dx}\int_a^xf(t)dt=f(x)\qquad (a\le x\le b) \]
+\end{theorem}
+\begin{theorem}
+	如果函数$f(x)$在区间$[a,b]$上连续，则函数
+	\[\Phi(x)=\int_a^x f(t)dt\]	
+	就是$f(x)$在$[a,b]$上的一个原函数。
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}
+	如果函数$F(x)$是连续函数$f(x)$在区间$[a,b]$上的一个原函数，则
+	\[\int_a^b f(x)dx=F(b)-F(a)\]	
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+似然比检验的判别式：
+\[\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+判决概率:
+\[P_F=P(H_1|H_0)=\int_{\eta}^{\infty}p(\lambda|H_0)d\lambda \]
+\[P_D=P(H_1|H_1)=\int_{\eta}^{\infty}p(\lambda|H_1)d\lambda \]
+\end{frame}
+
+\begin{frame}
+\begin{align*}
+&P_D =P_D=P(H_1|H_1)=\int_{\eta}^{\infty}p(\lambda|H_1)d\lambda=P_D(\eta) \\
+&P_F =P(H_1|H_0)=\int_{\eta}^{\infty}p(\lambda|H_0)d\lambda=P_F(\eta) \\
+&\frac{dP_D(\eta)}{d\eta} =-p(\eta|H_1) \\ 
+&\frac{dP_F(\eta)}{d\eta} =-p(\eta|H_0) \\ 
+&\qquad \text{ by } \Phi^\prime(x)=\frac{d}{dx}\int_a^xf(t)dt=f(x)\qquad (a\le x\le b) \\
+&\frac{dP_D(\eta)}{dP_F(\eta)} =\frac{-p(\eta|H_1)}{-p(\eta|H_0)}=\frac{p(\eta|H_1)}{p(\eta|H_0)}\\
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\begin{align*}
+P_D(\eta) &=P[(\lambda|H_1)\ge\eta]&\\
+&=\int_{\eta}^{\infty}p(\lambda|H_1)d\lambda&\\
+&=\int_{R_1}^{\infty}p(x|H_1)dx&\\
+&=\int_{R_1}^{\infty}\lambda p(x|H_0)dx &\text{ by }\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta&\\
+&=\int_{\eta}^{\infty}\lambda p(\lambda|H_0)d\lambda&
+\end{align*}
+\[\frac{dP_D(\eta)}{d\eta}=-\eta p(\eta|H_0)\]
+\[\frac{dP_D(\eta)}{dP_F(\eta)}=\frac{-p(\eta|H_1)}{-p(\eta|H_0)}=\frac{-\eta p(\eta|H_0)}{-p(\eta|H_0)}=\eta \]  
+\end{frame}
+
+\begin{frame}
+$H_1$含随机变量$m$的似然比检验的判别式：
+\[\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}=\frac{\int_{-\infty}^{\infty}p(x|m,H_1)p(m)dm}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\end{frame}
+
+\begin{frame}
+$p(m)$未知
+\begin{align*}
+&p(x|H_0)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{x^2}{2\sigma_n^2})\\
+&p(x|m;H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{(x-m)^2}{2\sigma_n^2})\\
+&\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+&\exp(\frac{2mx}{2\sigma_n^2}-\frac{m^2}{2\sigma_n^2})\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+&mx\mathop{\gtrless}_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\begin{align*}
+&m_0\le m\le m_1,m_0>0\\
+&mx\mathop{\gtrless}_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\\
+&l(x)=x\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma_n^2}{m}\ln\eta+\frac{m}{2}\mathop{=}^{def}\gamma^+\\
+&\int_{\gamma^+}^{\infty}(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{l^2}{2\sigma_n^2})dl=\alpha
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\begin{align*}
+&m_0\le m\le m_1,m_1<00\\
+&mx\mathop{\gtrless}_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\\
+&l(x)=x\mathop{\lessgtr}_{H_0}^{H_1}-\frac{\sigma_n^2}{|m|}\ln\eta-\frac{|m|}{2}\mathop{=}^{def}\gamma^-\\
+&\int_{-\infty}^{\gamma^-}(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{l^2}{2\sigma_n^2})dl=\alpha
+\end{align*}
+\end{frame}
+
+\begin{frame}
+若$m_0>0$, $m$仅取正值, 则在$P(H_1|H_0)=\alpha$的约束下, $P^{(m)}(H_1|H_1)$是最大的,其一致最大功效检验成立;\\
+若$m_1<0$, $m$仅取负值, 则在$P(H_1|H_0)=\alpha$的约束下, $P^{(m)}(H_1|H_1)$也是最大的。
+\end{frame}
+
+\begin{frame}
+若$m_0<0,m_1>0$, 即$m$取值可能为正或可能为负的情况下, 无论参量信号的统计检测，按$m$仅取正值设计，还是按$m$仅取负值设计，都有可能在某些$m$值下,   $P^{(m)}(H_1|H_1)$不满足最大的要求。\\
+例如，按$m$取正设计信号检测系统，当$m$为正时，$P^{(m)}(H_1|H_1)$最大, 但当$m$为负时, $P^{(m)}(H_1|H_1)$可能最小。\\
+因此, 这种情况下不能采用奈曼-皮尔逊准则来实际最佳检测系统。
+\end{frame}
+
+\begin{frame}
+若$m_0<0,m_1>0$, 即$m$取值可能为正或可能为负,奈曼-皮尔逊准则不能保证$P^{(m)}(H_1|H_1)$最大要求。考虑把约束条件$P(H_1|H_0)=\alpha$分成两个$\alpha/2$, 假设$H_1成立$的判决域由两部分组成。判决表示式为
+	\[|x|\mathop{\gtrless}_{H_0}^{H_1}\gamma \]
+
+\begin{block}{}
+	虽然双边检验比均值$m$假定为正确时的单边检验性能差，但是比均值$m$假定为错误时的单边检验性能要好的多。因此不失为一种好的折中方法。
+\end{block}
+\end{frame}
+
+\begin{frame}{广义似然比检验}
+\begin{align*}
+&\text{似然函数}\\
+&p(x|m;H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{(x-m)^2}{2\sigma_n^2})\\
+&\text{对$m$求偏导,令结果等于零，即} \\
+&\frac{\partial\ln p(x|m;H_1)}{\partial m}|_{m=\widehat{m}_{ml}}=0\\
+&\text{解得单次观测时,$m$的最大似然估计量$\widehat{m}_{ml}=x$, 于是有 }\\
+&p(x|\widehat{m}_{ml};H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{(x-\widehat{m}_{ml})^2}{2\sigma_n^2})|_{\widehat{m}_{ml}=x}=(\frac{1}{2\pi\sigma_n^2})^{1/2}\\
+\end{align*}
+\end{frame}
+\begin{frame}{广义似然比检验}
+\begin{align*}
+&p(x|H_0)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{x^2}{2\sigma_n^2})
+&p(x|\widehat{m}_{ml};H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\\
+&\text{代入广义似然比检验中, 有}\\
+&\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+&\lambda(x)=\frac{(\frac{1}{2\pi\sigma_n^2})^{1/2}}{(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{x^2}{2\sigma_n^2})}\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+&\text{化简得判决表示式}
+&x^2\mathop{\gtrless}_{H_0}^{H_1}2\sigma_n^2\ln\eta\mathop{=}^{def}\gamma^2 \implies |x|\mathop{\gtrless}_{H_0}^{H_1}\gamma
+\end{align*}
+这正是前面讨论过的双边检验。只是前面是从奈曼-皮尔逊准则出发推导得到。而这里是从似然比检验的概念导出的，似然函数$p(x|m;H_1)$中的信号参量$m$由其最大似然估计量$\widehat{m}_{ml}$代换，所以是广义似然比检验。
+\end{frame}
+
