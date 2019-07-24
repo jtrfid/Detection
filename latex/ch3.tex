@@ -134,13 +134,4 @@ $p(m)$未知
 这正是前面讨论过的双边检验。只是前面是从奈曼-皮尔逊准则出发推导得到。而这里是从似然比检验的概念导出的，似然函数$p(x|m;H_1)$中的信号参量$m$由其最大似然估计量$\widehat{m}_{ml}$代换，所以是广义似然比检验。
 \end{frame}
 
-\begin{frame}
-\begin{align*}
-Var[x_k|H_0]&=E[n_k^2]=E[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du]&\\
-&=\int_{0}^{T}f_k(t)\int_{0}^{T}E[n(t)n(u)]f_k(u)dudt& \text{ by }E[n(t)n(u)]=r_n(t-u)\\
-&=\int_{0}^{T}f_k(t)\int_{0}^{T}\frac{N_0}{2}\delta(t-u)f_k(u)dudt&\text{ by } r_n(t-u)=\frac{N_0}{2}\delta(t-u)\\
-&=\int_{0}^{T}f_k(t)\frac{N_0}{2}f_k(t)dt&\\
-&=\frac{N_0}{2}&
-\end{align*}
-\end{frame}
 
