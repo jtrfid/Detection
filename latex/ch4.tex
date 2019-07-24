@@ -223,6 +223,17 @@ c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
 
 \begin{frame}
 \begin{align*}
+\mu_x(t)&\mathop{=}^{def}E[x(t)]=\int_{-\infty}^{\infty}xp(x;t)dx&\\
+E[\int_{0}^{T}x(t)f_k(t)dt]&=\int_{-\infty}^{\infty}\int_{0}^{T}x(t)f_k(t)dtp(x;t)dx\\
+&=\int_{0}^{T}\int_{-\infty}^{\infty}x(t)f_k(t)p(x;t)dxdt\\
+&=\int_{0}^{T}\left(\int_{-\infty}^{\infty}x(t)p(x;t)dx\right)f_k(t)dt\\
+&=\int_{0}^{T}E[x(t)]f_k(t)dt\\
+\end{align*}
+\end{frame}
+
+
+\begin{frame}
+\begin{align*}
 Var[x_k|H_0]&=E[n_k^2]=E[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du]&\\
 &=\int_{0}^{T}f_k(t)\int_{0}^{T}E[n(t)n(u)]f_k(u)dudt& \text{ by }E[n(t)n(u)]=r_n(t-u)\\
 &=\int_{0}^{T}f_k(t)\int_{0}^{T}\frac{N_0}{2}\delta(t-u)f_k(u)dudt&\text{ by } r_n(t-u)=\frac{N_0}{2}\delta(t-u)\\
