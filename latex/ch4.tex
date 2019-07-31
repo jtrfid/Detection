@@ -89,7 +89,7 @@ c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
 		\[E[x(t_j)x(t_k)]=E[x(t_j)x(t_j+\tau)]=r_x(\tau) \]
 	\end{enumerate}
 \end{definition}
-平稳随机过程$x(t)$自相关函数$r_x(t_j-t_k)$仅取决于时间间隔$(t_j-t_k)$,而与时间的起始时刻无关。$E[x(t_j)x(t_k)]=r_x[t_j-t_k]$
+平稳随机过程$x(t)$自相关函数$r_x(t_k-t_j)$仅取决于时间间隔$(t_k-t_j)$,而与时间的起始时刻无关。$E[x(t_j)x(t_k)]=r_x[t_k-t_j]$
 \end{frame}
 
 \begin{frame}{平稳随机过程的统计平均量之间的关系}
@@ -300,14 +300,535 @@ c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
 \end{block}
 \end{frame}
 
-\begin{frame}{随机过程的卡亨南-洛维展开}
+\begin{frame}{$x_k,s_k,n_k$之间的关系}
+\begin{block}{$x_k,s_k,n_k$之间的关系}
+	\[x(t)=s(t)+n(t); \quad x_k=s_k+n_k \]
+	随机变量$x(t)$展开系数$x_k$=确知信号$s(t)$展开系数$s_k$+噪声$n(t)$展开系数$n_k$
+\end{block}
 \begin{align*}
-E[x_k(t)]&=E\left[\int_{0}^{T}f_k(t)x(t)dt\right]&\\
-&=E\left[\int_{0}^{T}f_k(t)(s(t)+n(t))dt\right]&\\
-&=E\left[\int_{0}^{T}f_k(t)s(t)dt+\int_{0}^{T}f_k(t)n(t))dt\right]&\\
-&=E\left[\int_{0}^{T}f_k(t)s(t))dt\right]+\int_{0}^{T}f(t)E[n(t)]dt&\\
-&=E\left[\int_{0}^{T}f_k(t)s(t))dt\right]& \text{(by $n(t)$均值为0},E[n(t)]=0)\\
+x_k&=\int_{0}^{T}f_k(t)x(t)dt\\
+&=\int_{0}^{T}f_k(t)(s(t)+n(t))dt\\
+&=\int_{0}^{T}f_k(t)s(t)dt+\int_{0}^{T}f_k(t)n(t))dt\\
+&=s_k+n_k
 \end{align*}
+\end{frame}
+
+\begin{frame}{展开系数级数展开-准备公式}
+\begin{itemize}
+	\item 随机过程: $x(t)=s(t)+n(t)$
+	\item $\{f_k(t)\}$是一组正交函数集, $k=1,2,\dots$
+	\item 随机过程$x(t)的$正交展开系数$x_k$是一个随机变量: $x_k=\int_{0}^{T}x(t)f_k(t)dt$
+	\item 确知信号$s(t)$正交展开系数$s_k$是一个确定的量: $s_k=\int_{0}^{T}s(t)f_k(t)dt$
+	\item 确知信号$s(t)$的展开系数$s_k$为确定的量，其均值就是本身: $E(s_k)=E\left[\int_{0}^{T}s(t)f_k(t)dt\right]=\int_{0}^{T}E[s(t)]f_k(t)dt=\int_{0}^{T}s(t)f_k(t)dt=s_k$
+	\item 噪声$n(t)$是一个零均值的平稳随机过程:
+	\begin{itemize}
+		\item[-] $E[n(t)]=0$
+		\item[-]  $n(t)$的自相关函数只取决于时间间隔$(t_k-t_j)$,而与时间的起始时刻无关,$E[n(t_j)n(t_k)]=r_n(t_k-t_j)$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{展开系数$x_k$均值(推导一)}
+\begin{align*}
+E[x_k]&=E\left[\int_{0}^{T}f_k(t)x(t)dt\right]=E\left[\int_{0}^{T}f_k(t)(s(t)+n(t))dt\right]\\
+&=E\left[\int_{0}^{T}f_k(t)s(t)dt+\int_{0}^{T}f_k(t)n(t))dt\right]\\
+&=E[s_k+n_k]\\
+&=E[s_k]+E[n_k]\qquad (\text{by }E[n(t)]=0\implies E[n_k]=0)\\
+&= E[s_k] = s_k\qquad \text{(确知信号的展开系数为确定的量，其均值就是本身)}
+\end{align*}
+\end{frame}
+
+\begin{frame}{展开系数$x_k$均值(推导二),课件采用}
+\begin{align*}
+E[x_k]&=E\left[\int_{0}^{T}f_k(t)x(t)dt\right]=E\left[\int_{0}^{T}f_k(t)(s(t)+n(t))dt\right]\\
+&=E\left[\int_{0}^{T}f_k(t)s(t)dt+\int_{0}^{T}f_k(t)n(t))dt\right]\\
+&=E\left[\int_{0}^{T}f_k(t)s(t)dt\right]+E\left[\int_{0}^{T}f_k(t)n(t))dt\right]\\
+&=E\left[\int_{0}^{T}f_k(t)s(t)dt\right]+\int_{0}^{T}f_k(t)E[n(t))]dt \qquad  (\text{by }E[n(t)]=0)\\
+&=E\left[\int_{0}^{T}f_k(t)s(t)dt\right]\\
+&= E[s_k] = s_k\qquad \text{  (确知信号的展开系数为确定的量，其均值就是本身)}
+\end{align*}
+\end{frame}
+
+\begin{frame}{展开系数$x_j$与$x_k$协方差,在t时刻两个随机变量减去各自的均值后的乘积}
+\begin{align*}
+&E[(x_j-E(x_j))(x_k-E(x_k))]=E[(x_j-s_j)(x_k-s_k)]\\
+&=E\left[\left(\int_{0}^{T}f_j(t)x(t)dt-s_j\right)\left(\int_{0}^{T}f_k(t)x(t)dt-s_k\right)\right]\\
+&=E\left[\left(\int_{0}^{T}f_j(t)(s(t)+n(t))dt-s_j\right)\left(\int_{0}^{T}f_k(t)(s(t)+n(t))dt-s_k\right)\right]\\
+&=E\left[\left(\int_{0}^{T}f_j(t)n(t)dt\right)\left(\int_{0}^{T}f_k(t)n(t)dt\right)\right]=E\left[\left(\int_{0}^{T}f_j(t)n(t)dt\right)\left(\int_{0}^{T}f_k(u)n(t)du\right)\right]\\
+&=E\left[\int_{0}^{T}f_j(t)\left[\int_{0}^{T}n(t)n(u)f_k(u)du\right]dt\right]=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}E[n(t)n(u)]f_k(u)du\right]dt\\
+&=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}r_n(t-u)f_k(u)du\right]dt\quad (\text{by }E[n(t_j)n(t_k)]=r_n(t_k-t_j))
+\end{align*}
+\end{frame}
+
+\begin{frame}{随机过程的卡亨南-洛维展开}
+希望$x(t)$各展开系数$x_j$与$x_k$的协方差满足:
+\[E[(x_j-E(x_j))(x_k-E(x_k))]=E[(x_j-s_j)(x_k-s_k)]=\lambda_k\delta_{jk} \]
+式中$\delta_{jk}=
+\begin{cases}
+1, & (j=k)\\
+0, & (j\ne k)
+\end{cases}$, $\lambda_k$是展开系数$x_k$的方差, $k=1,2,\dots$\\
+这样,当$j\ne k$时, $E[(x_j-s_j)(x_k-s_k)]=0$,即展开式的各展开系数之间互不相关; 当$j=k$时, $E[(x_j-s_j)(x_k-s_k)]=\lambda_k$, 是展开系数$x_k$的方差。
+\end{frame}
+
+\begin{frame}{随机过程的卡亨南-洛维展开}
+展开系数$x_j$与$x_k$协方差:
+\[E[(x_j-s_j)(x_k-s_k)]=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}r_n(t-u)f_k(u)du\right]dt \]
+其中, $x(t)=s(t)+n(t)(0\le t\le T),r_n(t-u)=E[n(t)n(u)]$是零均值平稳噪声过程$n(t)$的自相关函数。
+
+为保证$E[(x_j-s_j)(x_k-s_k)]=\lambda_k\delta_{jk}$
+\[\int_{0}^{T}r_n(t-u)f_k(u)du=\lambda_kf_k(t), 0\le t\le T \]
+该式是齐次积分方程。该方程的解$f_k(t)$就是正交函数集$\{f_k(t) \}$的第$k$个坐标函数。
+
+$E[(x_j-s_j)(x_k-s_k)]=\lambda_k\int_{0}^{T}f_j(t)f_k(t)dt=\lambda_k\delta_{jk}\implies f_j(t)$与$f_k(t)$正交。
+\end{frame}
+
+\begin{frame}{白噪声条件下正交函数集的任意性(1)}
+假设接收信号为$x(t)=s(t)+n(t)$, $n(t)$是零均值,功率谱密度为$P_n(\omega)=N_0/2$的白噪声，其自相关函数为: $r_n(t-u)=\frac{N_0}{2}\delta(t-u)$,(说明噪声自相关函数在$t=u$时不为0，其他时刻都为0，自相关性最强)\\
+对于任意招教函数集$\{f_k(t)\}$,展开系数$x_j$与$x_k$协方差:
+\begin{align*}
+E[(x_j-s_j)(x_k-s_k)]&=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}r_n(t-u)f_k(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}f_j(t)\left[\int_{0}^{T}\delta(t-u)f_k(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}f_j(t)f_k(t)dt=\frac{N_0}{2}\delta_{jk}
+\end{align*}
+式中$\delta_{jk}=
+\begin{cases}
+1, & (j=k)\\
+0, & (j\ne k) 
+\end{cases},\quad
+\delta(t-u)=
+\begin{cases}
+	1, & (t=u)\\
+	0, & (t\ne u) 
+\end{cases}
+$
+\end{frame}
+
+\begin{frame}{白噪声条件下正交函数集的任意性(1)}
+假设接收信号为$x(t)=s(t)+n(t)$, $n(t)$是零均值,功率谱密度为$P_n(\omega)=N_0/2$的白噪声，其自相关函数为: 
+\[r_n(t-u)=\frac{N_0}{2}\delta(t-u)\]
+对于任意招教函数集$\{f_k(t)\}$,展开系数$x_j$与$x_k$协方差:
+\begin{align*}
+E[(x_j-s_j)(x_k-s_k)]=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}r_n(t-u)f_k(u)du\right]dt=\frac{N_0}{2}\delta_{jk}
+\end{align*}
+\begin{block}{重要结论}
+	当$j\ne k$时，展开系数$x_j$与$x_k$协方差=0。这说明，在$n(t)$是白噪声的条件下，取任意正交函数集$\{f_k(t)\}$对平稳随机过程$x(t)$进行展开，其展开系数$x_k(k=1,2,\dots)$之间都是互不相关的。
+	这就是白噪声条件下正交函数集的任意性。
+\end{block}
+\end{frame}
+
+\begin{frame}{白噪声条件下正交函数集的任意性(2)}
+\[r_n(t-u)=\frac{N_0}{2}\delta(t-u) \]
+展开系数$x_j$与$x_k$协方差:
+\begin{align*}
+E[(x_j-s_j)(x_k-s_k)]&=\int_{0}^{T}f_j(t)\left[\int_{0}^{T}r_n(t-u)f_k(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}f_j(t)\left[\int_{0}^{T}\delta(t-u)f_k(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}f_j(t)f_k(t)dt=\frac{N_0}{2}\delta_{jk}
+\end{align*}
+\end{frame}
+
+\begin{frame}{二元信号波形检测}
+\tikzstyle{int}=[draw, fill=blue!20, minimum size=2em]
+\begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
+\node [int] (a) {$x(t)$};
+\node [int] (b) [right of=a] {$x_k$};
+\node [int] (c) [right of=b] {$x_N$};
+\node [int] (d) [below of=c] {$\frac{p(x_N|H_1)}{p(x_N|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta$};
+\node [int] (e) [left of=d] {$l(x)\mathop{\gtrless}_{H_0}^{H_1}\gamma$};
+\path[->] (a) edge node {$\{f_k(t)\}$正交展开} (b);
+\path[->] (b) edge node {前N项$x_k$构成$x_N$} (c);
+\path[->] (c) edge [swap] node {贝叶斯检测} (d);
+\path[->] (d) edge [swap] node {$N\to\infty$} (e);
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测}
+\begin{columns}
+	\column{0.4\textwidth}
+	$H_0: x(t)=n(t)$\\
+	$H_1: x(t)=s(t)+n(t)$\\
+	$x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)$\\
+	$x_k=\int_{0}^{T}x(t)f_k(t)dt, k=1,2,\dots$\\
+	$s_k=\int_{0}^{T}s(t)f_k(t)dt, k=1,2,\dots$\\
+	$n_k=\int_{0}^{T}n(t)f_k(t)dt, k=1,2,\dots$\\
+	$H_0: x_k=n_k,k=1,2,\dots$\\
+	$H_1: x_k=s_k+n_k,k=1,2,\dots$
+	\column{0.6\textwidth}
+	\begin{itemize}
+		\item 信号s(t)是确知信号,n(t)是均值为0,功率谱密度为$P_n(\omega)=N_0/2$的高斯白噪声;
+		\item 无论在假设$H_1$下还是在假设$H_2$下，接收信号的$x(t)$都是高斯随机过程;
+		\item 展开系数$x_k$是高斯随机过程的积分结果,因而$x_k$是高斯随机变量;
+		\item 展开系数$x_k$之间是互不相关的,也是相互统计独立的;
+		\item 高斯随机变量由均值和方差决定。由此求出两个假设下的概率密度函数$p(x_k|H_j),k=1,2,\dots;j=0,1$。
+	\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测$H_0$}
+$n(t)$是高斯白噪声$\implies E[n(t)n(u)]=r_n(t-u) =\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(\delta(t-u)=1,t=u)$ \\
+$f_k(t)$是一组正交函数集$\implies\int_{0}^{T}f_j(t)f_k(t)dt=1,(j=k)$
+\begin{align*}
+Var[x_k|H_0]&=E[n_k^2]=E\left[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du\right]\\
+&=\int_{0}^{T}f_k(t)\left\{\int_{0}^{T}E[n(t)n(u)]f_k(u)du\right\}dt\\
+&=\int_{0}^{T}f_k(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)f_k(u)du\right]dt\\
+&=\int_{0}^{T}f_k(t)\frac{N_0}{2}f_k(t)dt\\
+&=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测$H_1$}
+$x_k=\int_{0}^{T}x(t)dt=\int_{0}^{T}[s(t)+n(t)]dt=\int_{0}^{T}s(t)dt+\int_{0}^{T}n(t)dt=s_k+n_k$\\
+$x_k=s_k+n_k$
+\begin{align*}
+E[x_k|H_1]&=E[s_k+n_k]&\text{by }x_k=s_k+n_k \\
+&=E(s_k)+E(n_k)&\text{by }E(n_k)=0 \\
+&=E(s_k)=s_k&\text{(确知信号展开系数为确定量,其均值就是本身)}\\
+Var[x_k|H_1]&=E[(x_k-E[x_k])^2]&\text{by }x_k=s_k+n_k,E[x_k]=s_k\\
+&=E[(s_k+n_k-s_k)^2]&\\
+&=E[n_k^2]=\frac{N_0}{2}&
+\end{align*}
+或: $E[x_k|H_1]=E\left[\int_{0}^{T}x(t)f_k(t)dt\right]=E\left[\int_{0}^{T}(s(t)+n(t))f_k(t)dt\right]$\\
+$=E\left[\int_{0}^{T}s(t)dt\right]+\int_{0}^{t}E[n(t)])f_k(t)dt=E\left[\int_{0}^{T}s(t)dt\right]=E[s_k]=s_k$
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测-判决式预备公式}
+\[\ln\lambda(\bm{x}_N)=\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}=\frac{2}{N_0}\sum\limits_{k=1}^{N}x_ks_k-\frac{1}{N_0}\sum\limits_{k=1}^{N}s_k^2\mathop{\gtrless}_{H_0}^{H_1}\ln\eta \]
+\begin{align*}
+&x(t)=\lim\limits_{N\to\infty}\sum\limits_{k=1}^Nx_kf_k(t)\\
+&x_k=\int_{0}^{T}x(t)f_k(t)dt, k=1,2,\dots\\
+&s(t)=\lim\limits_{N\to\infty}\sum\limits_{k=1}^Ns_kf_k(t)\\
+&s_k=\int_{0}^{T}s(t)f_k(t)dt, k=1,2,\dots\\
+&E_s=\int_{0}^{T}s^2(t)dt
+\end{align*}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测-判决式推导(1)}
+\begin{align*}
+\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_ks_k&=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_k\right]s_k\\
+&=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_k\right]\int_{0}^{T}s(t)f_k(t)dt\\
+&=\int_{0}^{T}s(t)\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_kf_k(t)\right]dt\\
+&=\int_{0}^{T}s(t)x(t)dt
+\end{align*}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测-判决式推导(2)}
+\begin{align*}
+\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k^2&=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k\right]s_k\\
+&=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k\right]\int_{0}^{T}s(t)f_k(t)dt\\
+&=\int_{0}^{T}s(t)\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_kf_k(t)\right]dt\\
+&=\int_{0}^{T}s(t)s(t)dt=\int_{0}^{T}s^2(t)dt=E_s
+\end{align*}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测-检测性能(1)}
+\textbf{判决表达式：}
+\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
+检验统计量$l[x(t)]$无论在假设$H_0$下，还是在假设$H_1$下，都是由高斯随机过程$x(t)s(t)(0\le t\le T)$经积分得到的，所以\bm{$l[x(t)]$}\textbf{是高斯随机变量}。
+\begin{enumerate}
+	\item 求出检验统计量$l[x(t)]$在两个假设下的均值$E(l|H_j)$和方差$Var(l|H_j),j=0,1$;
+	\item 求各种判决概率$P(H_i|H_j),i,j=0,1$;\\
+	简单二元信号检测与雷达信号检测相对应：$P(H_1|H_0)\mathop{=}\limits^{def}P_F$(称为虚警概率)，$P(H_1|H_1)\mathop{=}\limits^{def}P_D$(称为检测概率)
+	\item 计算检测性能。
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{简单二元信号波形检测-检测性能(2)}
+\begin{enumerate}[1]
+	\item 定义统计量：$l\mathop{=}\limits^{def}\int_{0}^{T}x(t)s(t)dt$
+	\item 假设$H_0,H_1$下检验统计量$l[x(t)]$的均值和方差分别为\\
+	$E[l|H_0]=E\left[\int_{0}^{T}x(t)s(t)dt|H_0\right]=E\left[\int_{0}^{T}n(t)s(t)dt\right]=0$\\ 
+	$Var[l|H_0]=E[((l|H_0)-E(l|H_0))^2]=\frac{N_0}{2}E_s$\\
+	$E[l|H_1]=E\left[\int_{0}^{T}x(t)s(t)dt|H_1\right]=E\left[\int_{0}^{T}(s(t)+n(t))s(t)dt\right]=E_s$\\
+	$Var[l|H_1]=E[((l|H_1)-E(l|H_1))^2]=\frac{N_0}{2}E_s$\\
+	\item 假设$H_0,H_1$下服从高斯分布的检验统计量$l[x(t)]$的概率密度函数分别为\\
+\[p(l|H_0)=\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{l^2}{N_0E_s}\right)\]
+	\[p(l|H_1)=\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{(l-E_s)^2}{N_0E_s}\right)\]
+\end{enumerate}
+\end{frame}
+\begin{frame}{简单二元信号波形检测-检测性能(3)}
+\begin{enumerate}
+	\setcounter{enumi}{3} 
+	\item 求各种判决概率$P(H_i|H_j),i,j=0,1$\\
+	虚警概率：$P(H_1|H_0)\mathop{=}\limits^{def}P_F=Q\left[\frac{\ln\eta}{d}+\frac{d}{2}\right]$\\ 检测概率：$P(H_1|H_1)\mathop{=}\limits^{def}P_D=Q\left[\frac{\ln\eta}{d}-\frac{d}{2}\right]$\\
+	$P(H_0|H_1)=1-P(H_1|H_1)=1-Q\left[\frac{\ln\eta}{d}-\frac{d}{2}\right]$\\
+	$P(H_0|H_0)=1-P(H_1|H_0)=1-Q\left[\frac{\ln\eta}{d}+\frac{d}{2}\right]$\\
+	$d^2\mathop{=}\limits^{def}\frac{(E(l|H_1)-E(l|H_0))^2}{Var(l|H_0)}=\frac{2E_s}{N_0}$ \qquad 偏移系数$d^2$表示功率信噪比\\
+\end{enumerate}
+\begin{block}{结论}
+	对简单二元信号来讲，只要保持确知信号$s(t)$的能量不变，信号波形可以任意设计，检测性能不发生变化。
+\end{block}
+\end{frame}
+
+\begin{frame}{计算$E[l|H_0]$}
+\begin{align*}
+E[l|H_0]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_0\right] &\text{by }H_0: x(t)=n(t)\\
+&=E\left[\int_{0}^{T}n(t)s(t)dt\right]&\\
+&=\int_{0}^{T}E[n(t)]s(t)dt=0 &\text{by }E[n(t)]=0
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$Var[l|H_0]$}
+$H_0:x(t)=n(t), E(l|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
+$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
+\begin{align*}
+Var[l|H_0]&=E[((l|H_0)-E(l|H_0))^2]=E[(l|H_0)^2]=E\left[\left(\int_{0}^{T}x(t)s(t)dt\right)^2\right]\\
+&=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
+&=\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt\\
+&=\frac{N_0}{2}E_s
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$p(l|H_0)$}
+$E[l|H_0]=0,Var[l|H_0]=\frac{N_0}{2}E_s$
+\begin{align*}
+p(l|H_0)&=\left(\frac{1}{2\pi Var[l|H_0]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_0])^2}{2Var[l|H_0]}\right)\\
+&=\frac{1}{\sqrt{\pi N_0E_s}}\exp\left(-\frac{l^2}{N_0E_s}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$E[l|H_1]$}
+\begin{align*}
+E[l|H_1]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_1\right] &\text{by }H_1: x(t)=s(t)+n(t)\\
+&=E\left[\int_{0}^{T}(s(t)+n(t))s(t)dt\right]&\\
+&=E\left[\int_{0}^{T}s^2(t)dt\right]+\int_{0}^{T}E[n(t)]s(t)dt& \text{by } E[n(t)]=0 \\
+&=E\left[\int_{0}^{T}s^2(t)dt\right]& \text{by } E_s=\int_{0}^{T}s^2(t)dt 
+&=E_s
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$Var[l|H_1]$}
+$H_1:x(t)=s(t)+n(t), E(l|H_1)=E_s,E_s=\int_{0}^{T}s^2(t)dt$\\
+$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
+\begin{align*}
+Var[l|H_1]&=E[((l|H_1)-E(l|H_1))^2]=E\left[\left(\int_{0}^{T}(s(t)+n(t))s(t)dt-E_s\right)^2\right]\\
+&=E\left[\left(\int_{0}^{T}(s^2(t)dt+\int_{0}^{T}n(t)s(t)dt-E_s\right)^2\right]=E\left[\left(\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
+&=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
+&=\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
+&=\frac{N_0}{2}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}E_s
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$p(l|H_1)$}
+$E[l|H_1]=E_s,Var[l|H_1]=\frac{N_0}{2}E_s$
+\begin{align*}
+p(l|H_1)&=\left(\frac{1}{2\pi Var[l|H_1]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_1])^2}{2Var[l|H_1]}\right)\\
+&=\frac{1}{\sqrt{\pi N_0E_s}}\exp\left(-\frac{(l-E_s)^2}{N_0E_s}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{计算$P(H_1|H_0)$}
+\begin{align*}
+P(H_1|H_0)&\mathop{=}^{def}P_F=\int_{\gamma}^{\infty}p(l|H_0)dl\\
+&=\int_{\gamma}^{\infty}\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{l^2}{N_0E_s}\right)dl\\
+&\mathop{=}^{u=\frac{l}{\sqrt{N_0E_s/2}}}\int_{\frac{\gamma}{\sqrt{N_0E_s/2}}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=Q\left[\frac{\gamma}{\sqrt{N_0E_s/2}}\right]\mathop{=}^{\gamma=\frac{N_0}{2}\ln\eta+\frac{E_s}{2}}Q\left[\frac{\frac{N_0}{2}\ln\eta+\frac{E_s}{2}}{\sqrt{N_0E_s/2}}\right]\\
+&=Q\left[\frac{\ln\eta}{d}+\frac{d}{2}\right]\qquad d^2=\frac{2E_s}{N_0}
+\end{align*}
+偏移系数$d^2$表示功率信噪比。
+\end{frame}
+
+\begin{frame}{计算$P(H_0|H_1)$}
+\begin{align*}
+P(H_1|H_1)&\mathop{=}^{def}P_D=\int_{\gamma}^{\infty}p(l|H_1)dl\\
+&=\int_{\gamma}^{\infty}\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{(l-E_s)^2}{N_0E_s}\right)dl\\
+&\mathop{=}^{u=\frac{l-E_s}{\sqrt{N_0E_s/2}}}\int_{\frac{\gamma-E_s}{\sqrt{N_0E_s/2}}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=Q\left[\frac{\gamma-E_s}{\sqrt{N_0E_s/2}}\right]\mathop{=}^{\gamma=\frac{N_0}{2}\ln\eta+\frac{E_s}{2}}Q\left[\frac{\frac{N_0}{2}\ln\eta-\frac{E_s}{2}}{\sqrt{N_0E_s/2}}\right]\\
+&=Q\left[\frac{\ln\eta}{d}-\frac{d}{2}\right]\qquad d^2=\frac{2E_s}{N_0}
+\end{align*}
+偏移系数$d^2$表示功率信噪比。
+\end{frame}
+
+\section{简单二元信号波形的检测-充分统计量方法}
+
+\begin{frame}{充分量统计法,巧取$f_1(t)$}
+相互正交的函数集$\{f_k(t)\}(k=1,2,\dots)\implies$
+$\int_{0}^{T}f_j(t)f_k(t)dt=
+\begin{cases}
+1,&j=k\\
+0,&j\ne k
+\end{cases}
+$\\
+设$f_1(t)=\frac{1}{\sqrt{E_s}}s(t)\implies s(t)=\sqrt{E_s}f_1(t)$\\
+由于$f_1(t)$与$f_k(t)(k\ge 2)$正交$\implies s(t)$与$f_k(t)(k\ge 2)$正交\\
+$\implies$确知信号$s(t)$在$f_k(t)(k\ge 2)$上的投影等于0,即$s_k=0,(k\ge 2)$\\
+$s_k=\int_{0}^{T}s(t)f_k(t)dt=\int_{0}^{T}\sqrt{E_s}f_1(t)f_k(t)dt=\sqrt{E_s}f_1(t)f_k(t)$\\
+$k=1,\quad f_1(t)f_k(t)=1\implies s_1=\sqrt{E_s};\qquad k\ge 2,\quad f_1(t)f_k(t)=0\implies s_k=0$\\
+进一步,由于$x(t)=s(t)+n(t),\quad x_k=s_k+n_k,\quad n(t)$是高斯白噪声过程。\\
+\begin{block}{结论}
+	$x_1=s_1+n_1=\sqrt{E_s}+n_1\implies x_1$是高斯随机变量。含有确知信号$s(t)$信息。\\
+	$x_k=s_k+n_k=n_k\quad(k\ge 2)\implies x_k(k\ge 2)$是高斯随机变量,且相互统计独立。不含确知信号$s(t)$信息，对判决没有影响。\\
+\end{block}
+\end{frame}
+
+\begin{frame}{充分量统计法(1)}
+(2)利用构造的正交函数集$f_1(t)$和$\{f_k(t)|k\ge 2\}$,对接收信号进行正交展开
+\begin{block}{假设$H_0:x(t)=n(t)$下,展开系数}	
+	$x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}n(t)f_1(t)dt=n_1$\\
+	
+	$x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}n(t)f_k(t)dt=n_k\qquad k\ge 2$
+\end{block}
+\begin{block}{假设$H_1:x(t)=s(t)+n(t)$下，展开系数}
+	$x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}[s(t)+n(t)]f_1(t)dt=\int_{0}^{T}s(t)f_1(t)dt+\int_{0}^{T}n(t)f_1(t)dt$\\
+	$=\int_{0}^{T}s(t)[\frac{1}{\sqrt{E_s}}s(t)]dt+n_1=\frac{1}{\sqrt{E_s}}\int_{0}^{T}s^2(t)dt+n_1$\\
+	$=\sqrt{E_s}+n_1\qquad (\text{by }f_1(t)=\frac{1}{\sqrt{E_s}}s(t),E_s=\int_{0}^{T}s^2(t)dt)$\\
+	
+	$x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}[s(t)+n(t)]f_k(t)dt=\int_{0}^{T}[\sqrt{E_s}f_1(t)+n(t)]f_k(t)dt$\\
+	$=\int_{0}^{T}n(t)f_k(t)dt=n_k\qquad k\ge 2$\qquad (by\quad $s(t)=\sqrt{E_s}f_1(t), \int_{0}^{T}f_1(t)f_k(t)dt=0,k\ge 2$)
+\end{block}
+\end{frame}
+
+\begin{frame}{充分量统计法(2)}
+(2)利用构造的正交函数集$f_1(t)$和$\{f_k(t)|k\ge 2\}$,对接收信号进行正交展开
+\begin{block}{假设$H_0:x(t)=n(t)$下,展开系数}	
+	$x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}n(t)f_1(t)dt=n_1\implies$不含接收信号信息\\
+	
+	$x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}n(t)f_k(t)dt=n_k\qquad k\ge 2$
+\end{block}
+\begin{block}{假设$H_1:x(t)=s(t)+n(t)$下，展开系数}
+	$x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}[s(t)+n(t)]f_1(t)dt=\sqrt{E_s}+n_1\implies x_1$是高斯随机变量，含有接收信号/确知信号$s(t)$信息 \\
+	$x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}[s(t)+n(t)]f_k(t)dt=n_k\qquad k\ge 2\implies x_k$是高斯随机变量，且相互统计独立。但不含有接收信号/确知信号$s(t)$信息 \\
+\end{block}
+\begin{block}{通过两个假设下的展开系数$x_1$即可判定假设$H_1$为真，还是$H_0$为真。}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{充分量统计法,接收信号$x_1(t)$}
+因为$f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt$\\
+所以充分统计量$x_1$是高斯随机变量,可用假设$H_0$和假设$H_1$下的均值和方差表示。
+\end{frame}
+
+\begin{frame}{充分量统计法,判决表达式}
+\textbf{判决表达式:}
+\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
+~\\
+\begin{block}{结论}
+由任意正交函数集对$x(t)$进行正交级数展开法与由充分统计量法导出的判决表达式是完全一样的，因而也具有相同的检测系统结构和相同的检测性能。
+\end{block}
+\end{frame}
+
+\begin{frame}{推导$E[x_1|H_0]$}
+$f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt$\\
+$E[x_1|H_0]=E[n_1]=0$\\
+或:
+\begin{align*}
+E[x_1|H_0]&=E\left[\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt\right] &\text{by }H_0: x(t)=n(t)\\
+&=E\left[\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right]&\\
+&=\frac{1}{\sqrt{E_s}}\int_{0}^{T}E[n(t)]s(t)dt=0 &\text{by }E[n(t)]=0
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$Vax[x_1|H_0]$(方法1)}
+$H_0:x(t)=n(t), E(x_1|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
+$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
+$f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,x_1|H_0=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
+\begin{align*}
+&Var[x_1|H_0]=E[((x_1|H_0)-E(x_1|H_0))^2]=E[(x_1|H_0)^2]=E\left[\left(\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
+&=\frac{1}{E_s}E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=\frac{1}{E_s}E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
+&=\frac{1}{E_s}\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\frac{1}{E_s}\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
+&=\frac{N_0}{2E_s}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2E_s}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$Vax[x_1|H_0]$(方法2)}
+$H_0:x(t)=n(t), E(x_1|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
+$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
+$f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,x_1|H_0=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
+$n_1=\int_{0}^{T}n(t)f_1(t)dt=\int_{0}^{T}n(t)\frac{1}{\sqrt{E_s}}s(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
+\begin{align*}
+Var[x_1|H_0]&=E[((x_1|H_0)-E(x_1|H_0))^2]=E[(x_1|H_0)^2]=E[n_1^2]\\
+&=E\left[\left(\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right)^2\right]\qquad (\text{以下同方法1})\\
+&=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$p(x_1|H_0)$}
+$E[x_1|H_0]=0,Var[x_1|H_0]=\frac{N_0}{2}$
+\begin{align*}
+p(x_1|H_0)&=\left(\frac{1}{2\pi Var[x_1|H_0]}\right)^{1/2}\exp\left(-\frac{(x_1-E[x_1|H_0])^2}{2Var[x_1|H_0]}\right)\\
+&=\frac{1}{\sqrt{\pi N_0}}\exp\left(-\frac{x_1^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$E[x_1|H_1]$}
+$x_1|H_1=\sqrt{E_s}+n_1$
+\begin{align*}
+E[x|H_1]&=E\left[\sqrt{E_s}+n_1\right]\\
+&=E[\sqrt{E_s}]+E[n_1]\\
+&=E[\sqrt{E_s}]=\sqrt{E_s}
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$Var[x_1|H_1]$}
+$x_1|H_1=\sqrt{E_s}+n_1,E(x_1|H_1)=\sqrt{E_s}$
+\begin{align*}
+Var[x|H_1]&=E[((x|H_1)-E(x|H_1))^2]=E[n_1^2]\\
+&=Var[x_1|H_0]\\
+&=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$p(x_1|H_1)$}
+$E[x_1|H_1]=\sqrt{E_s},Var[x_|H_1]=\frac{N_0}{2}$
+\begin{align*}
+p(x_1|H_1)&=\left(\frac{1}{2\pi Var[x_1|H_1]}\right)^{1/2}\exp\left(-\frac{(x_1-E[x_1|H_1])^2}{2Var[x_1|H_1]}\right)\\
+&=\frac{1}{\sqrt{\pi N_0}}\exp\left(-\frac{(x_1-\sqrt{E_s})^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\section{白噪声参考}
+
+\begin{frame}{高斯噪声/白噪声/高斯白噪声(1)}
+\url{https://blog.csdn.net/hd19890207/article/details/73498251}
+ 白噪声，就是说功率谱为一常数；也就是说，其协方差函数在delay=0时不为0，在delay不等于0时值为零； 换句话说，\textbf{样本点互不相关。（条件：零均值。）}
+ 
+ 当随机的从高斯分布中获取采样值时，采样点所组成的随机过程就是“高斯白噪声”；同理，当随机的从均匀分布中获取采样值时，采样点所组成的随机过程就是“均匀白噪声”。
+\includegraphics[scale=0.2]{nt}
+\end{frame}
+
+\begin{frame}{高斯噪声/白噪声/高斯白噪声(2)}
+\url{https://blog.csdn.net/hd19890207/article/details/73498251}
+白噪声是指功率谱在整个频域内为常数的噪声，其傅氏反变换是单位冲击函数的n倍(n取决于功率谱的大小)，说明噪声自相关函数在t=0时不为零，其他时刻都为0，自相关性最强。
+
+高斯噪声是一种随机噪声，其幅度的统计规律服从高斯分布。高斯白噪声是幅度统计规律服从高斯分布而功率谱为常数的噪声, 如果在系统通带内功率谱为常数，成为带限白噪声“高斯”与“白”没有直接关系，有时人们还会提出高斯型噪声，这指的是噪声功率谱呈高斯分布函数的形状而已。 
+\end{frame}
+
+\begin{frame}{高斯噪声/白噪声/高斯白噪声(3)}
+\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
+
+\textbf{白噪声}
+
+白噪声序列，是指白噪声过程的样本实称，简称白噪声。白噪声是在较宽的频率范围内，各等带宽的频带所含的噪声能量相等的噪声，是一种功率频谱密度为常数的随机信号或随机过程，也就是说，此信号在各个频段上的功率是一样的。
+
+对于一个随机变量$X(t)(t=1,2,3\dots)$，如果是由一个不相关的随机变量的序列构成的，即对于所有$s$不等于$t$，随机变量$X(t)$和$X(s)$的协方差为零，则称其为纯随机过程。对于一个纯随机过程来说，若其期望为0，方差为常数，则称之为白噪声过程。
+\end{frame}
+
+\begin{frame}{高斯噪声/白噪声/高斯白噪声(4)}
+\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
+
+\textbf{白噪声}
+
+理想的白噪声具有无限的带宽，因而其能量无限大，这是不可能实际存在的，所以，我们把有限带宽内的平整讯号视为白噪声，以便我们实际应用当中的分析。一般情况下，若一个噪声过程所具有的频谱宽度远远大于它所作用系统的带宽，并且在该带宽中其功率谱密度基本为一常数，那么就能够把其作为白噪声来对待。
+
+白噪声的功率密度函数恒定，为：\\
+$P_n=\frac{N_0}{2}(-\infty<f<+\infty)$\\
+$P_n=N_0(-\infty<f<+\infty)$\\
+其中$N_0$为常数
+\end{frame}
+
+\begin{frame}{高斯噪声/白噪声/高斯白噪声(5)}
+\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
+
+\textbf{高斯白噪声}
+
+高斯噪声指的是它的概率密度函数服从正态分布的噪声。高斯分布，记为$\mathcal{N}(\mu,\sigma^2)$，其中$\mu$为高斯分布的均值(数学期望)，$\sigma^2$为高斯分布的方差，当$\mu=0,\sigma^2=1$时，该分布称为标准正态分布。高斯分布的一维概率密度可表示为:
+\[P(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp[-\frac{(x-\mu)^2}{2\sigma^2}] \]
+在通信信道中，一般噪声的均值μ=0。那么可以得知当噪声的均值是零的时候，噪声的平均功率等于其方差。
+
+高斯白噪声的高斯指的是概率分布为正态分布，白噪声指的是其二阶矩不相关一阶矩为常数。故把瞬时值的概率分布服从高斯分布，功率谱密度服从均匀分布的噪声称为高斯白噪声。这两个条件是判断高斯白噪声性能的标准。
+
+由于高斯白噪声能够反映实际通信信道中的噪声情况，能够比较真实的反映信道噪声的一些特性，并且可以用具体的数学表达式表示，适合分析、计算系统的抗噪声性能，所以广泛应用于通信系统的理论分析。
 \end{frame}
 
 \section{课件公式}
@@ -315,10 +836,10 @@ E[x_k(t)]&=E\left[\int_{0}^{T}f_k(t)x(t)dt\right]&\\
 \begin{frame}
 $\delta_{jk}=
 \begin{cases}
-	1, & (i=k)\\
-	0, & (i\ne k)
+	1, & (j=k)\\
+	0, & (j\ne k)
 \end{cases}
-$
+$, $k=1,2,\dots$
 \end{frame}
 
 \begin{frame}
@@ -341,14 +862,5 @@ E[\int_{0}^{T}x(t)f_k(t)dt]&=\int_{-\infty}^{\infty}\int_{0}^{T}x(t)f_k(t)dtp(x;
 \end{align*}
 \end{frame}
 
-\begin{frame}
-\begin{align*}
-Var[x_k|H_0]&=E[n_k^2]=E[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du]&\\
-&=\int_{0}^{T}f_k(t)\int_{0}^{T}E[n(t)n(u)]f_k(u)dudt& \text{ by }E[n(t)n(u)]=r_n(t-u)\\
-&=\int_{0}^{T}f_k(t)\int_{0}^{T}\frac{N_0}{2}\delta(t-u)f_k(u)dudt&\text{ by } r_n(t-u)=\frac{N_0}{2}\delta(t-u)\\
-&=\int_{0}^{T}f_k(t)\frac{N_0}{2}f_k(t)dt&\\
-&=\frac{N_0}{2}&
-\end{align*}
-\end{frame}
 
 

@@ -76,6 +76,7 @@
 \usepackage{hyperref}
 
 \usepackage{bm} % 字体加粗的方法
+\usetikzlibrary{arrows,automata,matrix,arrows}
 
 %=================================== 数学符号 =================================%
 \newcommand{\rtn}{\mathrm{\mathbf{R}}}
@@ -293,8 +294,43 @@
 
 % 大括号
 $\left\{ .....  \right\}$
-$\left\[ .....  \right\]$
+$\left[ .....  \right]$
 $\left( ..... \right)$
 $\left\{ .....  \right.$ %有左无右
+
+$\delta_{jk}=
+\begin{cases}
+1, & (i=k)\\
+0, & (i\ne k)
+\end{cases}
+$
+
+\tikzstyle{int}=[draw, fill=blue!20, minimum size=2em]
+\tikzstyle{init} = [pin edge={to-,thin,black}]
+\begin{tikzpicture}[node distance=2.5cm,auto,>=latex']
+\node [int, pin={[init]above:$v_0$}] (a) {$\frac{1}{s}$};
+\node (b) [left of=a,node distance=2cm, coordinate] {a};
+\node [int, pin={[init]above:$p_0$}] (c) [right of=a] {$\frac{1}{s}$};
+\node [coordinate] (end) [right of=c, node distance=2cm]{};
+\path[->] (b) edge node {$a$} (a);
+\path[->] (a) edge node {$v$} (c);
+\draw[->] (c) edge node {$p$} (end) ;
+\end{tikzpicture}
+
+%%%%%%%%%% 上下文字
+$P(H_1|H_0)\mathop{=}\limits^{def}P_F$\\    %上下文字在\[... \]和$...$表现不一致
+\[P(H_1|H_0)\mathop{=}\limits^{def}P_F \]
+\[P(H_1|H_0)\mathop{=}^{def}P_F \]
+\begin{align*}
+P(H_1|H_0)\mathop{=}^{def}P_F
+\end{align*}
+
+\begin{enumerate}
+	\setcounter{enumi}{3} %设定起始编号 
+	\item aaa
+	\item bbb
+\end{enumerate}
+
+~\\ %一行空白
 
 \fi　　　%注释结束
