@@ -4,222 +4,6 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{随机过程的统计平均量(from ch2)}
-
-\begin{frame}
-\begin{block}{随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的理论平均值}
-	\[\mu_x(t)\mathop{=}^{def}E[x(t)]=\int_{-\infty}^{\infty}xp(x;t)dx \]
-	如果$x(t)$是电压或电流，则$\mu_x(t)$可以理解为在$t$时刻的``直流分量''。
-\end{block}
-
-\begin{block}{随机过程的均方值$\varphi_x^2(t)$}
-	\[\varphi_x^2(t)\mathop{=}^{def}E[x^2(t)]=\int_{-\infty}^{\infty}x^2p(x;t)dx \]
-	如果$x(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{随机过程的方差/标准偏差$\delta_x^2(t)$}
-	\[\sigma_x^2(t)\mathop{=}^{def}E[(x(t)-\mu_x(t))^2]=\int_{-\infty}^{\infty}(x-\mu_x(t))^2p(x;t)dx \]
-	方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值偏离其均值$\mu_x(t)$的离散程度。如果$x(t)$是电压或电流，则$\delta_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。
-\end{block}
-\begin{block}{均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系}
-	\[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
-\end{block}
-\includegraphics[scale=0.4]{delta}
-\end{frame}
-
-\begin{frame}
-\begin{block}{随机过程的自相关函数$r_x(t_j,t_k)$}
-	\begin{align*}
-	r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
-	&=\int_{-\infty}^{\infty}	\int_{-\infty}^{\infty}x_jx_kp(x_j,x_k;t_j,t_k)dx_jdx_k
-	\end{align*}
-\end{block}
-随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间含有均值时的相关程度的度量。显然
-\[r_x(t,t)=\varphi_x^2(t)\]
-\end{frame}
-
-\begin{frame}
-\begin{block}{随机过程的自协方差函数$c_x(t_j,t_k)$}
-	\begin{align*}
-	c_x(t_j,t_k)&\mathop{=}^{def}E[((x(t_j)-\mu_x(t_j)(x(t_k)-\mu_x(t_k)]\\
-	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x_j-\mu_x(t_j))(x_k-\mu_x(t_k))p(x_j,x_k;t_j,t_k)dx_idx_k
-	\end{align*}
-\end{block}
-	随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。它们的自相关系数定义为
-\[\rho_x(t_j,t_k)\mathop{=}^{def}\frac{c_x(t_j,t_k)}{\sigma_x(t_j)\sigma_x(t_k)}\]
-易证
-\[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k)\]
-\[c_x(t,t)=\sigma_x^2(t)\]
-\end{frame}
-
-\begin{frame}
-\begin{block}{随机过程的互相关函数$r_{xy}(t_j,t_k)$}
-	\begin{align*}
-	r_{xy}(t_j,t_k) &\mathop{=}^{def}E[x(t_j)y(t_k)]\\
-	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x_jy_kp(x_j,t_j;y_k,t_k)dx_jdy_k
-	\end{align*}
-	式中, $p(x_j,t_j;y_k,t_k)$是$x(t)$与$y(t)$的二维混合概率密度函数。
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{随机过程的互协方差函数$c_{xy}(t_j,t_k)$}
-\begin{align*}
-c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
-&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x_j-\mu_x(t_j))(y_k-\mu_x(t_k))p(x_j,t_j;x_k,t_k)dx_jdy_k
-\end{align*}
-\end{block}
-随机过程$x(t)$和$y(t)$的互协方差函数$c_{xy}(t_j,t_k)$可以理解为它们各自的随机变量$x(t_j)$与$y(t_k)$之间的相关程度, 实际上表示两个随机过程$x(t)$与$y(t)$之间的相关程度。它们的互相关系数定义为
-\[\rho_{xy}(t_j,t_k)\mathop{=}^{def}\frac{c_{xy}(t_j,t_k)}{\sigma_x(t_j)\sigma_x(t_k)}\]
-易证
-\[c_{xy}(t_j,t_k)=r_{xy}(t_j,t_k)-\mu_x(t_j)\mu_y(t_k)\]
-\end{frame}
-
-\section{随机过程的平稳性}
-
-\begin{frame}
-\begin{definition}[广义平稳随机过程,简称平稳随机过程]
-	随机过程$x(t)$的平均统计量满足
-	\begin{enumerate}
-		\item $x(t)$的均值是与时间$t$无关的常数,即
-		\[E[x(t)]=\mu_x\]
-		\item $x(t)$的自相关函数只取决于时间间隔$\tau=t_k-t_j$,而与时间的起始时刻无关,即
-		\[E[x(t_j)x(t_k)]=E[x(t_j)x(t_j+\tau)]=r_x(\tau) \]
-	\end{enumerate}
-\end{definition}
-平稳随机过程$x(t)$自相关函数$r_x(t_k-t_j)$仅取决于时间间隔$(t_k-t_j)$,而与时间的起始时刻无关。$E[x(t_j)x(t_k)]=r_x[t_k-t_j]$
-\end{frame}
-
-\begin{frame}{平稳随机过程的统计平均量之间的关系}
-平稳随机过程x(t)的均值$\mu_x$, 均方值$\varphi_x^2$, 方差$\sigma_x^2$,自相关函数$r_x(\tau)$,自协方差函数$c_x(\tau)$之间的关系
-\begin{align*}
-&\sigma_x^2=\varphi_x^2-\mu_x^2\\
-&r_x(\tau)=r_x(-\tau)\\
-&c_x(\tau)=r_x(\tau)-\mu_x^2\\
-&c_x(\tau)=c_x(-\tau)\\
-&\varphi_x^2=r_x(0)\\
-&\sigma_x^2=c_x(0)\\
-&r_x(0)\ge|r_x(\tau)|, \tau\ne 0\\
-&c_x(0)\ge|c_x(\tau)|, \tau\ne 0
-\end{align*}
-\end{frame}
-
-\begin{frame}
-\begin{definition}[联合平稳随机过程]
-	设$x(t)$和$y(t)$分别是两个平稳的随机过程, 如果对于任意的$\Delta t$, 有$r_{xy}(t_j+\Delta t,t_k+\Delta t)=r_{xy}(t_j,t_k)$, 即互相关函数$r_{xy}(t_j,t_k)=r_{xy}(\tau),(\tau=t_k-t_j)$仅与时间间隔$\tau$有关，而与$t_j$和$t_k$无关，则称过程$x(t)$与$y(t)$是联合平稳的随机过程。
-\end{definition}
-\begin{block}{联合平稳随机过程$x(t)$与$y(t)$的互协方差函数}
-	\[c_{xy}(t_j,t_k)=c_{xy}(\tau)=r_{xy}(\tau)-\mu_x\mu_y, \tau=t_k-t_j\]
-	互相关系数:
-	\[\rho_{xy}(\tau)\mathop{=}^{def}=\frac{c_{xy}(t_j,t_k)}{\sigma_x(t_j)\sigma_y(t_k)}=\frac{c_{xy}(\tau)}{\sigma_x\sigma_y}\]
-	\begin{align*}
-	r_{xy}(\tau)&=r_{yx}(-\tau)\\
-	c_{xy}(\tau)&=c_{yx}(-\tau)
-	\end{align*}
-\end{block}
-\end{frame}
-
-\section{随机过程的正交性、不相关性和统计独立性}
-
-\begin{frame}
-\begin{definition}[]
-	设$x(t_j)$和$x(t_k)$是随机过程$x(t)$的任意两个不同时刻的随机变量，其均值分别为$\mu_x(t_j)$和$\mu_x(t_k)$, 自相关函数$r_x(t_j,t_k)$, 自协方差函数为$c_x(t_j,t_k)$。如果
-	\[r_x(t_j,t_k)=0,j\ne k \]
-	则称$x(t)$是相互正交的随机变量过程。如果
-	\[c_x(t_j,t_k)=0,j\ne k \]
-	则称$x(t)$是互不相关的随机变量过程。等价条件:
-	\[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k), j\ne k \implies r_x(t_j,t_k)=\mu_x(t_j)\mu_x(t_k),j\ne k \]
-\end{definition}
-\end{frame}
-
-\begin{frame}
-\begin{definition}[]
-	如果$x(t)$是平稳随机过程,\\
-	相互正交:
-	\[r_x(\tau)=0,\tau=t_k-t_j\]
-	互不相关:
-	\[c_x(\tau)=0,\tau=t_k-t_j\]
-	互不相关的等价条件
-	\[r_x(\tau)=\mu_x^2,\tau=t_k-t_j\]
-\end{definition}
-\end{frame}
-
-\begin{frame}
-\begin{definition}[]
-	设$x(t_1),x(t_2),\dots,x(t_N)$是随机过程$x(t)$在不同时刻$t_k(k=1,2,\dots,t_N)$的随机变量, 如果其N维联合概率密度函数对于任意的$N\ge 1$和所有时刻$t_k(k=1,2,\dots,N)$都能够表示成各自一维概率密度函数之积的形式，即
-	\begin{align*}
-	p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
-	=p(x_1;t_1)p(x_2;t_2)\cdots p(x_N;t_N)
-	\end{align*}
-	则称$x(t)$是相互统计独立的随机变量过程。
-\end{definition}
-\end{frame}
-
-\begin{frame}{随机过程的正交性、不相关性和统计独立性}
-\begin{enumerate}
-	\item 均值$\mu_x(t_j)=0,\mu_x(t_k)=0$则,相互正交$\Leftrightarrow$互不相关
-	\item 相互统计独立$\Rightarrow$互不相关
-	\item 互不相关$\nRightarrow$相互统计独立。但是若$x(t)$服从联合高斯分布，则互不相关$\Leftrightarrow$相互统计独立
-\end{enumerate}
-\end{frame}
-
-\section{高斯噪声}
-
-\begin{frame}
-\begin{block}{中心极限定理}
-	在一般条件下, $N$个相互统计独立的随机变量$n_i$之和$n=\sum\limits_{k=1}^{N}n_k$, 在$N\to\infty$的极限情况下，其概率密度趋于高斯分布，而不管每个变量$n_k$的具体分布如何。
-\end{block}
-\begin{block}{高斯噪声一维概率密度函数}
-	\[p(n_k;t_k)=(\frac{1}{2\pi\sigma_{n_k}^2})^{1/2}\exp[-\frac{(n_k-\mu_{n_k})^2}{2\sigma_{n_k}^2} \]
-	其中,$\mu_{n_k}$为$n(t_k)$的均值, $\sigma_{n_k}$为$n(t_k)$的方差。
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{高斯噪声N维联合概率密度函数}
-	高斯噪声的N维矢量记为
-	\[(\mathbf{n;t})=(n(t_1),n(t_2),\cdots,n(t_N))^T \]
-	其N维联合概率密度函数为
-	\begin{align*}
-	p(\mathbf{n;t})&=p(n_1,n_2,\cdots,n_N; t_1,t_2,\cdots,t_N)\\
-	&=(\frac{1}{(2\pi)^{N/2}|\mathbf{C}_n|^{1/2}}\exp[-\frac{1}{2}(\mathbf{n-\mu_n})^T\mathbf{C}_n^{-1}(\mathbf{n-\mu_n})]
-	\end{align*}
-	
-	其中,$\mathbf{\mu_{n}}$是高斯随机矢量$(\mathbf{n;t})$的均值矢量,$\mathbf{C}_n$为协方差矩阵。
-\end{block}
-\begin{block}{不相关性与统计独立性}
-	互不相关$\nRightarrow$相互统计独立。但是若$x(t)$服从联合高斯分布，则互不相关$\Leftrightarrow$相互统计独立
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{白噪声的功率谱密度}
-	\[p_n(\omega)=\frac{N_0}{2}\]
-	功率谱密度均匀分布在整个频率轴上
-\end{block}
-\begin{block}{白噪声的自相关函数}
-	\[r_n(\tau)=IFT[\frac{N_0}{2}]=\frac{N_0}{2}\delta(\tau)\]
-	白噪声也可定义为均值为零、自相关函数$r_n(\tau)$为$\delta$的噪声随机过程。
-\end{block}
-\begin{block}{重要特性}
-	白噪声在频域上其功率谱密度是均匀分布的，时域上自相关函数$r_n(\tau)$是$\delta$函数。\\
-	任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的。
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{高斯白噪声}
-	时域的随机变量的概率密度函数是高斯分布的，频域的功率谱密度是均匀分布的噪声过程称为高斯白噪声。
-	高斯白噪声的重要特性：任意两个或两个以上不同时刻$t_1,t_2,\dots,t_N$的随机变量$n(t_k) (k=1,2,\dots,N)$是互不相关且统计独立的。
-\end{block}
-\begin{block}{有色噪声的功率谱密度}
-	\[P_n(f) =P_0\exp[-\frac{(f-f_0)^2}{2\sigma_f^2}]\]
-	均值$f_0$代表频谱的中心频率，方差$\sigma_f^2$反映噪声的谱宽度。$\omega=2\pi f$
-\end{block}
-\end{frame}
-
 \section{信号分解为正交函数}
 
 \begin{frame}
@@ -569,7 +353,7 @@ E[l|H_0]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_0\right] &\text{by }H_0: x(t)=n(t)\\
 
 \begin{frame}{计算$Var[l|H_0]$}
 $H_0:x(t)=n(t), E(l|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
-$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
+$E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
 \begin{align*}
 Var[l|H_0]&=E[((l|H_0)-E(l|H_0))^2]=E[(l|H_0)^2]=E\left[\left(\int_{0}^{T}x(t)s(t)dt\right)^2\right]\\
 &=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
@@ -599,7 +383,7 @@ E[l|H_1]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_1\right] &\text{by }H_1: x(t)=s(t)+n(t
 
 \begin{frame}{计算$Var[l|H_1]$}
 $H_1:x(t)=s(t)+n(t), E(l|H_1)=E_s,E_s=\int_{0}^{T}s^2(t)dt$\\
-$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
+$E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$
 \begin{align*}
 Var[l|H_1]&=E[((l|H_1)-E(l|H_1))^2]=E\left[\left(\int_{0}^{T}(s(t)+n(t))s(t)dt-E_s\right)^2\right]\\
 &=E\left[\left(\int_{0}^{T}(s^2(t)dt+\int_{0}^{T}n(t)s(t)dt-E_s\right)^2\right]=E\left[\left(\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
@@ -721,7 +505,7 @@ E[x_1|H_0]&=E\left[\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt\right] &\text{by }
 
 \begin{frame}{推导$Vax[x_1|H_0]$(方法1)}
 $H_0:x(t)=n(t), E(x_1|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
-$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
+$E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
 $f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,x_1|H_0=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
 \begin{align*}
 &Var[x_1|H_0]=E[((x_1|H_0)-E(x_1|H_0))^2]=E[(x_1|H_0)^2]=E\left[\left(\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
@@ -733,7 +517,7 @@ $f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int
 
 \begin{frame}{推导$Vax[x_1|H_0]$(方法2)}
 $H_0:x(t)=n(t), E(x_1|H_0)=0,E_s=\int_{0}^{T}s^2(t)dt$\\
-$E[n(t)n(u)=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
+$E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
 $f_1(t)=\frac{1}{\sqrt{E_s}}s(t),x_1|H_0=n_1,x_1|H_1=\sqrt{E_s}+n_1$\\ $x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,x_1|H_0=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
 $n_1=\int_{0}^{T}n(t)f_1(t)dt=\int_{0}^{T}n(t)\frac{1}{\sqrt{E_s}}s(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt$
 \begin{align*}
@@ -777,90 +561,99 @@ p(x_1|H_1)&=\left(\frac{1}{2\pi Var[x_1|H_1]}\right)^{1/2}\exp\left(-\frac{(x_1-
 \end{align*}
 \end{frame}
 
-\section{白噪声参考}
+\section{一般二元信号波形检测}
 
-\begin{frame}{高斯噪声/白噪声/高斯白噪声(1)}
-\url{https://blog.csdn.net/hd19890207/article/details/73498251}
- 白噪声，就是说功率谱为一常数；也就是说，其协方差函数在delay=0时不为0，在delay不等于0时值为零； 换句话说，\textbf{样本点互不相关。（条件：零均值。）}
- 
- 当随机的从高斯分布中获取采样值时，采样点所组成的随机过程就是“高斯白噪声”；同理，当随机的从均匀分布中获取采样值时，采样点所组成的随机过程就是“均匀白噪声”。
-\includegraphics[scale=0.2]{nt}
+\begin{frame}{最佳信号波形设计}
+波形相关系数: $\rho\mathop{=}\limits^{def}\frac{1}{\sqrt{E_{0}E_{1}}}\int_{0}^{T}s_0(t)s_1(t)dt,\quad(|\rho|\le 1)$\\
+~\\
+偏移系数: $d^2\mathop{=}\limits^{def}\frac{(E(l|H_1)-E(l|H_0))^2}{Var(l|H_0)}=\frac{2}{N_0}(E_1+E_0-2\rho\sqrt{E_1E_0})$
+\begin{block}{最检波形设计$\rho=-1,s_0(t)=-s_1(t),d^2=\frac{8}{N_0}E_s,E_0=E_1=E_s$}
+	在高斯白噪声条件下，对于确知一般二元信号的波形检测，当两个信号设计成互反信号时，可在信号能量给定的约束下获得最好的检测性能。
+\end{block}
+\begin{block}{正交波形设计$\rho=0,d^2=\frac{4}{N_0}E_s,E_0=E_1=E_s$}
+	信号的检测性能差于同信号能量的反相信号。
+\end{block}
+\begin{block}{不合理波形设计$0<\rho\le 1,E_0=E_1=E_s$}
+	$\frac{4}{N_0}E_s>d^2\ge 0\implies\rho\to 1,d^2\to 0$,检测性能逐步变差。
+\end{block}
 \end{frame}
 
-\begin{frame}{高斯噪声/白噪声/高斯白噪声(2)}
-\url{https://blog.csdn.net/hd19890207/article/details/73498251}
-白噪声是指功率谱在整个频域内为常数的噪声，其傅氏反变换是单位冲击函数的n倍(n取决于功率谱的大小)，说明噪声自相关函数在t=0时不为零，其他时刻都为0，自相关性最强。
-
-高斯噪声是一种随机噪声，其幅度的统计规律服从高斯分布。高斯白噪声是幅度统计规律服从高斯分布而功率谱为常数的噪声, 如果在系统通带内功率谱为常数，成为带限白噪声“高斯”与“白”没有直接关系，有时人们还会提出高斯型噪声，这指的是噪声功率谱呈高斯分布函数的形状而已。 
-\end{frame}
-
-\begin{frame}{高斯噪声/白噪声/高斯白噪声(3)}
-\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
-
-\textbf{白噪声}
-
-白噪声序列，是指白噪声过程的样本实称，简称白噪声。白噪声是在较宽的频率范围内，各等带宽的频带所含的噪声能量相等的噪声，是一种功率频谱密度为常数的随机信号或随机过程，也就是说，此信号在各个频段上的功率是一样的。
-
-对于一个随机变量$X(t)(t=1,2,3\dots)$，如果是由一个不相关的随机变量的序列构成的，即对于所有$s$不等于$t$，随机变量$X(t)$和$X(s)$的协方差为零，则称其为纯随机过程。对于一个纯随机过程来说，若其期望为0，方差为常数，则称之为白噪声过程。
-\end{frame}
-
-\begin{frame}{高斯噪声/白噪声/高斯白噪声(4)}
-\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
-
-\textbf{白噪声}
-
-理想的白噪声具有无限的带宽，因而其能量无限大，这是不可能实际存在的，所以，我们把有限带宽内的平整讯号视为白噪声，以便我们实际应用当中的分析。一般情况下，若一个噪声过程所具有的频谱宽度远远大于它所作用系统的带宽，并且在该带宽中其功率谱密度基本为一常数，那么就能够把其作为白噪声来对待。
-
-白噪声的功率密度函数恒定，为：\\
-$P_n=\frac{N_0}{2}(-\infty<f<+\infty)$\\
-$P_n=N_0(-\infty<f<+\infty)$\\
-其中$N_0$为常数
-\end{frame}
-
-\begin{frame}{高斯噪声/白噪声/高斯白噪声(5)}
-\url{https://blog.csdn.net/z_sweet1996/article/details/79183255}
-
-\textbf{高斯白噪声}
-
-高斯噪声指的是它的概率密度函数服从正态分布的噪声。高斯分布，记为$\mathcal{N}(\mu,\sigma^2)$，其中$\mu$为高斯分布的均值(数学期望)，$\sigma^2$为高斯分布的方差，当$\mu=0,\sigma^2=1$时，该分布称为标准正态分布。高斯分布的一维概率密度可表示为:
-\[P(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp[-\frac{(x-\mu)^2}{2\sigma^2}] \]
-在通信信道中，一般噪声的均值μ=0。那么可以得知当噪声的均值是零的时候，噪声的平均功率等于其方差。
-
-高斯白噪声的高斯指的是概率分布为正态分布，白噪声指的是其二阶矩不相关一阶矩为常数。故把瞬时值的概率分布服从高斯分布，功率谱密度服从均匀分布的噪声称为高斯白噪声。这两个条件是判断高斯白噪声性能的标准。
-
-由于高斯白噪声能够反映实际通信信道中的噪声情况，能够比较真实的反映信道噪声的一些特性，并且可以用具体的数学表达式表示，适合分析、计算系统的抗噪声性能，所以广泛应用于通信系统的理论分析。
+\begin{frame}{检测性能}
+\begin{block}{}
+	简单二元信号，检测性能与$d^2$有关; 一般二元信号，检测性能不但与$d^2$有关，还与相关系数$\rho$有关，$\rho=-1$时，可获得最佳性能。
+\end{block}
 \end{frame}
 
 \section{课件公式}
 
-\begin{frame}
-$\delta_{jk}=
-\begin{cases}
-	1, & (j=k)\\
-	0, & (j\ne k)
-\end{cases}
-$, $k=1,2,\dots$
-\end{frame}
-
-\begin{frame}
+\begin{frame}{积分}
+\[\int \sin^2(x)dx=\frac{x}{2}-\frac{1}{4}sin(2x)+C\]
 \[\int_{0}^{T}a^2\sin^2(\omega t)dt=\frac{a^2T}{2}, T=2\pi/\omega\]
-\[s(t)=\lim\limits_{N\to \infty}\sum_{1}^{N}s_kf_k(t)\]
 \begin{align*}
 E_s&=\int_{0}^{T}s^2(t)dt\\
 &=\int_{0}^{2\pi}(5\sin(t))^2dt\\
 &=25\pi
 \end{align*}
+\[s(t)=\lim\limits_{N\to \infty}\sum_{1}^{N}s_kf_k(t)\]
 \end{frame}
 
-\begin{frame}
+\begin{frame}{$E[n(t)n(u)]$}
+$E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)$\\
+~\\
+$E[n(t)n(u)]=\frac{N_0}{2}$\\
+~\\
+白噪声功率谱密度$P_n(\omega)=\frac{N_0}{2},(N_0$是常数)
+\end{frame}
+
+\begin{frame}{$\delta_{jk}$}
+$\delta_{jk}=
+\begin{cases}
+1, & (j=k)\\
+0, & (j\ne k)
+\end{cases}
+$, $k=1,2,\dots$
+\end{frame}
+
+\begin{frame}{积分均值互换推导}
 \begin{align*}
 \mu_x(t)&\mathop{=}^{def}E[x(t)]=\int_{-\infty}^{\infty}xp(x;t)dx&\\
 E[\int_{0}^{T}x(t)f_k(t)dt]&=\int_{-\infty}^{\infty}\int_{0}^{T}x(t)f_k(t)dtp(x;t)dx\\
 &=\int_{0}^{T}\int_{-\infty}^{\infty}x(t)f_k(t)p(x;t)dxdt\\
 &=\int_{0}^{T}\left(\int_{-\infty}^{\infty}x(t)p(x;t)dx\right)f_k(t)dt\\
-&=\int_{0}^{T}E[x(t)]f_k(t)dt\\
+&=\int_{0}^{T}E[x(t)]f_k(t)dt
 \end{align*}
 \end{frame}
 
+\begin{frame}{$E_{s_0}+E_{s_1}=2E_s$}
+若两个正数之和为$\alpha$常数，则当这两个正数各为$\alpha/2$时其乘积最大。
+\end{frame}
+
+\begin{frame}{正交}
+\begin{theorem}
+	组成三角级数的函数系$\{1,\cos x,\sin x,\cos 2x,\sin 2x,\dots,\cos nx,\sin nx,\dots \}$在$[-\pi,\pi]$上正交，即其中任意两个不同的函数之积在$[-\pi,pi]$上的积分等于0.
+\end{theorem}
+\begin{proof}
+	\begin{align*}
+	&\int_{-\pi}^{\pi}1\cdot\cos nxdx=\int_{-\pi}^{\pi}1\cdot\sin nxdx=0\quad (n=1,2,\dots)\\
+	&\int_{-\pi}^{\pi}\cos kx\cos nxdx=\frac{1}{2}\int_{-\pi}^{\pi}[\cos(k+n)x+cos(k-n)x]dx=0\quad (k\ne n)\\
+	&\text{同理可证:}\\
+	&\int_{-\pi}^{\pi}\sin kx\sin nxdx=0, \int_{-\pi}^{\pi}\cos kx\sin nxdx=0\quad (k\ne n)\\
+	\end{align*}
+\end{proof}
+\end{frame}
+
+\begin{frame}{temp}
+$5\sin(2t)$\\
+~\\
+$n(t)$\\
+~\\
+$x(t)$\\
+~\\
+$\int_{0}^{T}s_{1}(t)x(t)dt$\\
+~\\
+$\int_{0}^{T}s_{0}(t)x(t)dt$\\
+~\\
+$l(x)$
+\end{frame}
 
 

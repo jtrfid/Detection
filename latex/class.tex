@@ -152,9 +152,12 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-%\include{ch2}
+\include{ch2} %概率论简单回顾
+%\include{ch2backup} %概率论回顾全集备份
+%\include{ch2-StochasticProcess} % ch2 随机过程
+%\include{ch2-Example} % ch2习题
 %\include{ch3}
-\include{ch4}
+%\include{ch4}
 
 %%%%%%%%%%%%%%%%%%% last frame
 \begin{frame}[plain]{}
@@ -332,5 +335,18 @@ P(H_1|H_0)\mathop{=}^{def}P_F
 \end{enumerate}
 
 ~\\ %一行空白
+
+%%%%%%%%%%%%%%%% 自动压缩，以显示全部内容
+\begin{frame}[shrink]
+\frametitle{标题} %需要页面标题时，这样设置，而不能\begin{frame}{标题}[shrink]
+\end{frame}
+
+%%%%%%%%%%%% 最后一列左对齐---&&， 单个&分割，则是右对齐
+\begin{align*}
+E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
+&=a(t)\int_{-\infty}^{\infty}p(x)dx &&\text{by $a(t)$是常数}\\
+&=a(t)\cdot 1 &&by \int_{-\infty}^{\infty}p(x)dx=1\\
+&=a(t)
+\end{align*}
 
 \fi　　　%注释结束
