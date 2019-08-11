@@ -26,6 +26,60 @@
 \end{theorem}
 \end{frame}
 
+\section{统计检测基本模型}
+
+\begin{frame}{术语}
+\textcolor{red}{$H_j(j=0,1)$: 信源输出的信号, 称为假设$H_j$}
+
+\bigskip
+
+\textcolor{red}{$P(H_j)(i=0)$: 假设$H_j$为真的先验概率(先验:先于试验)}
+
+
+\bigskip
+$\lambda$
+\textcolor{red}{$(x|H_j)(j=0,1)$: 观测信号是随机变量}
+
+\bigskip
+
+\textcolor{red}{$p(x|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数}
+
+\bigskip
+
+\textcolor{red}{$(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的结果。}\\
+~\\
+\textcolor{red}{$P(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的概率。}\\
+~\\
+\textcolor{red}{$c_{ij}$: 在假设$H_j$为真的条件下，判决假设$H_i$成立所付出的代价。}
+\end{frame}
+
+\begin{frame}{M元信号检测模型}
+\[\bm{R}=\bigcup\limits_{i=0}^{M-1}R_i, \quad R_i\cap R_j=\emptyset,(i\ne j) \]
+
+\bigskip
+
+\colorbox{yellow}{最佳信号检测$\Leftarrow$正确划分观测空间$\bm{R}$中的各个判决域$R_i\Leftarrow$最佳检测准则} 
+
+\end{frame}
+
+\begin{frame}[shrink]
+\begin{block}{思考}
+	如果$n$是均值为零的, 方差为$\sigma_n^2$的高斯随机变量, 两个假设下的观测信号模型\\
+	$H_1: r=1+n$\\
+	$H_0: r=-1+n$\\
+	观测信号$p(r|H_1),p(r|H_0)$应服从何种分布？
+\end{block}
+\begin{block}{}
+	因为高斯随机变量的特点：高斯随机变量的线性组合还是高斯随机变量。\\
+	习题2.7: $x\sim\mathcal{N}(\mu_x,\sigma_x^2)$,则$(y=ax+b)\sim\mathcal{N}(a\mu_x+b,a^2\sigma_x^2)$。\\
+	所以, $p(r|H_1)\sim\mathcal{N}(1,\sigma_n^2)$, $p(r|H_0)\sim\mathcal{N}(-1,\sigma_n^2)$
+\end{block}
+\begin{block}{}
+	直接计算: $E(r|H_0)=E(1+n)=1+E(n)=1,Var(r|H_0)=Var[(r|H_0-E(r|H_0))^2]=E[n^2]=\sigma_n^2\implies r|H_0\sim\mathcal{N}(1,\sigma_n^2)$\\
+	$E(r|H_1)=E(-1+n)=-1+E(n)=-1,Var(r|H_1)=Var[(r|H_1-E(r|H_1))^2]=E[n^2]=\sigma_n^2\implies r|H_1\sim\mathcal{N}(1,\sigma_n^2)$
+\end{block}
+\end{frame}
+
 \begin{frame}
 似然比检验的判别式：
 \[\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]

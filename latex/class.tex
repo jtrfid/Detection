@@ -152,12 +152,12 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-\include{ch2} %概率论简单回顾
+%\include{ch2} %概率论简单回顾
 %\include{ch2backup} %概率论回顾全集备份
 %\include{ch2-StochasticProcess} % ch2 随机过程
 %\include{ch2-Example} % ch2习题
 %\include{ch3}
-%\include{ch4}
+\include{ch4}
 
 %%%%%%%%%%%%%%%%%%% last frame
 \begin{frame}[plain]{}
@@ -334,7 +334,12 @@ P(H_1|H_0)\mathop{=}^{def}P_F
 	\item bbb
 \end{enumerate}
 
+%%%%%%%%%%%
+\\
 ~\\ %一行空白
+%%%%%%%%%%%%
+
+\bigskip
 
 %%%%%%%%%%%%%%%% 自动压缩，以显示全部内容
 \begin{frame}[shrink]
@@ -348,5 +353,24 @@ E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
 &=a(t)\cdot 1 &&by \int_{-\infty}^{\infty}p(x)dx=1\\
 &=a(t)
 \end{align*}
+
+%%%%%%%%%%%%%%%%有色文本
+\textcolor{blue}{This text is in blue} 
+\colorbox{yellow}{This text is highlighted in yellow} 
+\colorbox{yellow}{ 
+	\textcolor{red}{ 
+		\textbf{ 
+			Bold text in red, highlighted in yellow 
+		} 
+	} 
+} 
+
+block 普通环境
+theorem 定理环境
+lemma 引理环境
+proof 证明环境
+corollary 推论环境
+example 示例环境
+alertblock 警示环境
 
 \fi　　　%注释结束
