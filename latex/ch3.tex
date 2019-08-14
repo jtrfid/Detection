@@ -62,6 +62,11 @@ $\lambda$
 
 \bigskip
 
+\textcolor{blue}{\textbf{两种假设先验等概$\implies P(H_0)=P(H_1)=\frac{1}{2}$}}
+
+\bigskip
+
+
 \tiny{
 \colorbox{yellow}{采样样本$x_i(i=1,2,\dots,N)$之间相互统计独立, 因此其$N$维联合概率密度能够表示成各自一维概率密度之积的形式, 即}\\
 }
@@ -159,11 +164,14 @@ l(x)\mathop{=}^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i\mathop{\gtrless}_{H_0}^{H_
 	\begin{align*}
 	&(l|H_0)\sim\mathcal{N}(0,\frac{1}{N}\sigma^2), &(l|H_1)\sim\mathcal{N}(A,\frac{1}{N}\sigma^2)
 	\end{align*}
+	归一化后, $(l|H_j)\sim\mathcal{N}(0,1)$
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{0A}\\
 	\scriptsize
-	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}; \alpha=P(H_1|H_0)$}
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\ln\eta}{d}+\frac{d}{2}; \alpha=P(H_1|H_0)$}
 \end{columns}
+
+\bigskip
 
 判决表达式:
 \[
@@ -182,20 +190,173 @@ l(x)\mathop{=}^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i\mathop{\gtrless}_{H_0}^{H_
 \begin{columns}
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{0A}
+	\scriptsize
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\ln\eta}{d}+\frac{d}{2}; \alpha=P(H_1|H_0)$}
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{Qx}
+	\scriptsize
+	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
+	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
 \end{columns}
 
 \bigskip
 
-Q(x)是单调递减函数,其反函数用$Q^{-1}[\bullet]$表示。 因为
-	\[P(H_1|H_0)=Q(\ln\eta/d+d/2) \implies \ln\eta/d=Q^{-1}[P(H_1|H_0)]-d/2 \]
+ 因为$P(H_1|H_0)=Q(\ln\eta/d+d/2) \implies \ln\eta/d=Q^{-1}[P(H_1|H_0)]-d/2$\\
 这样有:
 \begin{align*}
 P(H_1|H_1)&=Q\left(\ln\eta/d-d/2\right)\\
-&=Q[Q^{-1}[P(H_1|H_0)]-d/2-d/2]=Q[Q^{-1}[P(H_1|H_0)]-d/2-d]
+&=Q[Q^{-1}[P(H_1|H_0)]-d/2-d/2]=Q[Q^{-1}[P(H_1|H_0)]-d]
 \end{align*}
 \colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex4}
+\begin{align*}
+E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}x_i|H_0\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)\right]\\
+&=\frac{1}{N}\sum\limits_{i=1}^{N}E[(1+n)]=\frac{1}{N}\sum\limits_{i=1}^{N}[E(1)+E(n)]\\
+&=\frac{1}{N}\sum\limits_{i=1}^{N}[1+0]=1\\
+Var[l|H_0]&=E\left[(l-E(l))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)-E(l)\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)-1\right)^2\right]\\
+&=E\left[(\frac{1}{N}\sum\limits_{i=1}^{N}n)^2\right]=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex4推导(1)}
+\[l=\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)\]
+其中: $n\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n]=0,Var[n]=E\left[(n-E[n])^2\right]=E[n^2]=\sigma_n^2$
+\begin{align*}
+E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[a+bn]\\
+&=a+\frac{b}{N}\sum\limits_{i=1}^{N}E[n]=a &&\text{by } E[n]=0\\
+Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)-a\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(bn)\right)^2\right]=E\left[\left(\frac{b}{N}\sum\limits_{i=1}^{N}(n)\right)^2\right]\\
+&=(\frac{b}{N})^2\sum\limits_{i=1}^{N}E[n^2]=(\frac{b}{N})N\sigma_n^2=\frac{b^2\sigma_n^2}{N} &&\text{by } E[n^2]=\sigma_n^2\\
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex4推导(2)}
+\[l=\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)\]
+其中: $m$是常数, $n\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n]=0,Var[n]=E\left[(n-E[n])^2\right]=E[n^2]=\sigma_n^2$
+\begin{align*}
+E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[m+n]\\
+&=m+\frac{b}{N}\sum\limits_{i=1}^{N}E[n] &&\text{by } E[n]=0\\
+&=m\\
+Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)-m\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n\right)^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n^2]=\frac{1}{N^2}N\sigma_n^2 &&\text{by } E[n^2]=\sigma_n^2\\
+&=\frac{\sigma_n^2}{N}
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex5推导(1)}
+两个假设下,观测量$x$均服从高斯分布，$(x|H_0)\sim\mathcal{N}(0, \sigma^2), (x|H_1)\sim\mathcal{N}(A, \sigma^2)$.
+\begin{align*}
+p(x|H_0)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma^2}\right)\\
+p(x|H_1)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{(x-A)^2}{2\sigma^2}\right]
+\end{align*}
+两个假设先验概率等概,且$c_{00}=c_{11}=0,c_{10}=c_{01}=1$, 所以似然比检验判别式为:
+\[\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}=\exp\left(\frac{2Ax-A^2}{2\sigma^2}\right)\mathop{\gtrless}_{H_0}^{H_1}\eta=1 \]
+化简得判决表达式:
+\[x\mathop{\gtrless}_{H_0}^{H_1}\frac{A}{2} \]
+由于检验统计量$l(x)=x$，所以
+\begin{align*}
+p(l|H_0)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left(-\frac{l^2}{2\sigma^2}\right)\\
+p(l|H_1)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{(l-A)^2}{2\sigma^2}\right]
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex5推导(2)}
+又因为检测判决门限$\gamma=\frac{A}{2}$, 所以两种错误判决概率分别为
+\begin{align*}
+P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl=\int_{\frac{A}{2}}^{\infty}\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left(-\frac{l^2}{2\sigma^2}\right)dl\\
+&\mathop{=}^{l=\sigma u}\int_{\frac{A}{2\sigma}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=Q[\frac{A}{2\sigma}]=Q[\frac{d}{2}] \qquad \text{ by } d^2\mathop{=}^{def}A^2/\sigma^2
+\end{align*}
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{0A}
+	\scriptsize
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $\alpha=P(H_1|H_0)$}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{Qx}
+	\scriptsize
+	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
+	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex5推导(3)}
+\begin{align*}
+P(H_0|H_1)&=\int_{-\infty}^{\gamma}p(l|H_1)dl=\int_{-\infty}^{\frac{A}{2}}\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left(-\frac{(l-A)^2}{2\sigma^2}\right)dl\\
+&\mathop{=}^{l=A+\sigma u}\int_{-\infty}^{-\frac{A}{2\sigma}}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-\int_{-\frac{A}{2\sigma}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-Q[-\frac{A}{2\sigma}]=1-Q[-\frac{d}{2}]=Q[\frac{d}{2}]\qquad \text{ by } d^2\mathop{=}^{def}A^2/\sigma^2
+\end{align*}
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{0A}
+	\scriptsize
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $\alpha=P(H_1|H_0)$}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{Qx}
+	\scriptsize
+	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
+	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex5推导(4)}
+两种错误判决概率:
+\begin{align*}
+P(H_1|H_0)=Q[\frac{d}{2}],\qquad P(H_0|H_1)=Q[\frac{d}{2}]
+\end{align*}
+其中, $d^2\mathop{=}\limits^{def}A^2/\sigma^2$。所以, 平均错误概率$P_e$为
+\begin{align*}
+P_e&=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)\\
+&=\frac{1}{2}Q[\frac{d}{2}]+\frac{1}{2}Q[\frac{d}{2}]=Q[\frac{d}{2}]
+\end{align*}
+\colorbox{yellow}{$Q(x)$是单调递减函数，信噪比$d$越高, 平均错误概率越小，检测性能越好。}
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{0A}
+	\scriptsize
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $\alpha=P(H_1|H_0)$}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{Qx}
+	\scriptsize
+	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
+	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{最大后验概率准则}
+在贝叶斯准则中, 当代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时 
+\[\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\implies P(H_1)p(\bm{x}|H_1)\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0)p(\bm{x}|H_0)\]
+由条件概率公式,有
+\[P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=\frac{P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)|P(H_1)}{P(\bm{x}\le X\le \bm{x}+d\bm{x})}\]
+当$d\bm{x}$很小时,有$P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)=p(\bm{x}|H_1)d\bm{x},\quad P(\bm{x}\le X\le \bm{x}+d\bm{x})=p(\bm{x})d\bm{x}$\\
+$P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=P(H_1|\bm{x})$, 从而得
+\[P(H_1|\bm{x})=\frac{p(\bm{x}|H_1)d\bm{x}P(H_1)}{p(\bm{x})d\bm{x}}=\frac{p(\bm{x}|H_1)P(H_1)}{p(\bm{x})}\]
+\[\implies P(H_1)p(\bm{x}|H_1)=p(\bm{x})P(H_1|\bm{x}) \]
+类似地，可得
+\[P(H_0)p(\bm{x}|H_0)=p(\bm{x})P(H_0|\bm{x}) \]
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{最大后验概率准则}
+\[P(H_1)p(\bm{x}|H_1)=p(\bm{x})P(H_1|\bm{x}),\quad P(H_0)p(\bm{x}|H_0)=p(\bm{x})P(H_0|\bm{x}) \]
+\[\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\implies P(H_1)p(\bm{x}|H_1)\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0)p(\bm{x}|H_0)\]
+\[p(\bm{x})P(H_1|\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}p(\bm{x})P(H_0|\bm{x}) \]
+\[P(H_1|\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0|\bm{x}) \]
+$P(H_j|\bm{x})(j=0,1)$表示已经获得观测量$\bm{x}$的条件下，假设$H_j$为真时的概率, 称为\textbf{后验概率}。\\
+按照最小平均代价的贝叶斯准则在代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时，就成为\textbf{最大后验概率准则(maximum a posteriori probability criterion)} 
 \end{frame}
 
 \begin{frame}
