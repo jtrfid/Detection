@@ -28,7 +28,7 @@
 
 \section{统计检测基本模型}
 
-\begin{frame}{术语}
+\begin{frame}{术语(1)}
 \textcolor{red}{$H_j(j=0,1)$: 信源输出的信号, 称为假设$H_j$}
 
 \bigskip
@@ -37,8 +37,7 @@
 
 
 \bigskip
-$\lambda$
-\textcolor{red}{$(x|H_j)(j=0,1)$: 观测信号是随机变量}
+\textcolor{red}{$(x|H_j)(j=0,1)$: 假设$H_j$下的观测信号是随机变量}
 
 \bigskip
 
@@ -51,6 +50,25 @@ $\lambda$
 \textcolor{red}{$P(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的概率。}\\
 ~\\
 \textcolor{red}{$c_{ij}$: 在假设$H_j$为真的条件下，判决假设$H_i$成立所付出的代价。}
+\end{frame}
+
+\begin{frame}{贝叶斯判决准则}
+\textcolor{blue}{\textbf{判决表达式}}
+\[
+\lambda(x)\mathop{\gtrless}_{H_0}^{H_1}\eta
+\]
+
+\[ \lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)} \] \textcolor{blue}{定义为\textbf{似然比函数}}
+
+\bigskip
+\[\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \] \textcolor{blue}{定义为\textbf{判决门限}}
+
+\bigskip
+\textcolor{blue}{\textbf{化简}(例如对数似然比检验)}
+\[
+\ln\lambda(x)\mathop{\gtrless}_{H_0}^{H_1}\ln\eta
+\]
+
 \end{frame}
 
 \begin{frame}{M元信号检测模型}
@@ -87,8 +105,8 @@ $\lambda$
 	所以, $p(r|H_1)\sim\mathcal{N}(1,\sigma_n^2)$, $p(r|H_0)\sim\mathcal{N}(-1,\sigma_n^2)$
 \end{block}
 \begin{block}{}
-	直接计算: $E(r|H_0)=E(1+n)=1+E(n)=1,Var(r|H_0)=Var[(r|H_0-E(r|H_0))^2]=E[n^2]=\sigma_n^2\implies r|H_0\sim\mathcal{N}(1,\sigma_n^2)$\\
-	$E(r|H_1)=E(-1+n)=-1+E(n)=-1,Var(r|H_1)=Var[(r|H_1-E(r|H_1))^2]=E[n^2]=\sigma_n^2\implies r|H_1\sim\mathcal{N}(1,\sigma_n^2)$
+	直接计算: $E(r|H_0)=E(1+n)=1+E(n)=1,Var(r|H_0)=E[(r|H_0-E(r|H_0))^2]=E[n^2]=\sigma_n^2\implies r|H_0\sim\mathcal{N}(1,\sigma_n^2)$\\
+	$E(r|H_1)=E(-1+n)=-1+E(n)=-1,Var(r|H_1)=E[(r|H_1-E(r|H_1))^2]=E[n^2]=\sigma_n^2\implies r|H_1\sim\mathcal{N}(-1,\sigma_n^2)$
 \end{block}
 \end{frame}
 
@@ -117,7 +135,7 @@ $\lambda$
 \begin{frame}
 \begin{enumerate}
 	\item $m=0$时: $H_0,H_1$成为一样的信号。
-	\item $m$值越大, $\frac{\sigma^2}{m}\ln\eta$中间值修正量越小，越接近于中间值。
+	\item $m\uparrow\implies$ 中间值修正量$(\frac{\sigma^2}{m}\ln\eta)\downarrow$, $r$越接近于中间值$\frac{m}{2}$。
 	\item $m$值越大, 更易区分两种假设，检测性能越好。
 	\item $m>0$和$m<0$下的判决表达式如下图。
 \end{enumerate}	
@@ -140,11 +158,12 @@ l(x)\mathop{=}^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i\mathop{\gtrless}_{H_0}^{H_
 检验统计量$l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i$是观测信号$x_i(i=1,2,\dots,N)$的求和取平均值的结果, 即它是$x_i(i=1,2,\dots,N)$的函数，是一个随机变量。\\
 而无论是在假设$H_0$下，还是在假设$H_1$下, $(x_i|H_0),(x_i|H_1)$均服从高斯分布，因为高斯随机变量的线性组合还是高斯随机变量, 所以两种假设下的观测量$(l|H_0),(l|H_1)$也是服从高斯分布的随机变量。
 \begin{columns}
-	\column{0.4\textwidth}
+	\column{0.4\textwidth}	
+	$N$次独立采样, 样本为$x_i(i=1,2,\dots,N)$
 	\begin{align*}
-	&&n\sim\mathcal{N}(0,\sigma^2)\\ 
-	H_0 &:x=n   &x\sim\mathcal{N}(0,\sigma^2)\\
-	H_1 &:x=m+n &x\sim\mathcal{N}(m,\sigma^2)\\
+	&&n_i\sim\mathcal{N}(0,\sigma^2)\\ 
+	H_0 &:x_i=n_i   &(l|H_0)\sim\mathcal{N}(0,\frac{\sigma^2}{N})\\
+	H_1 &:x_i=m+n_i &(l|H_1)\sim\mathcal{N}(m,\frac{\sigma^2}{N})
 	\end{align*}
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{mgt0}\\
@@ -186,7 +205,7 @@ l(x)\mathop{=}^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i\mathop{\gtrless}_{H_0}^{H_
 \end{align*}
 \end{frame}
 
-\begin{frame}{贝叶斯检测性能分析小结}
+\begin{frame}{贝叶斯检测性能分析小结(ex3小结2)}
 \begin{columns}
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{0A}
@@ -208,44 +227,164 @@ P(H_1|H_1)&=Q\left(\ln\eta/d-d/2\right)\\
 &=Q[Q^{-1}[P(H_1|H_0)]-d/2-d/2]=Q[Q^{-1}[P(H_1|H_0)]-d]
 \end{align*}
 \colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
+\colorbox{green}{另一方面, 采样次数$N\uparrow\implies d\uparrow$, $p(l|H_0),p(l|H_1)$的间距$d\uparrow$,  检测性能$\uparrow$。} 
 \end{frame}
 
 \begin{frame}[shrink]
-\frametitle{ex4}
+\frametitle{ex3小结(1)}
+\begin{columns}
+	\column{0.4\textwidth}
+	$N$次独立采样, 样本为$x_i(i=1,2,\dots,N)$
+	\begin{align*}
+	&&n_i\sim\mathcal{N}(0,\sigma^2)\\ 
+	H_0 &:x_i=n_i   &(l|H_0)\sim\mathcal{N}(0,\frac{\sigma^2}{N})\\
+	H_1 &:x_i=A+n_i &(l|H_1)\sim\mathcal{N}(m,\frac{\sigma^2}{N})
+	\end{align*}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{0A}\\
+	\scriptsize
+	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\ln\eta}{d}+\frac{d}{2}; \alpha=P(H_1|H_0)$}
+\end{columns}
+
+\bigskip
+
+检验统计量$l(x)$:
 \begin{align*}
-E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}x_i|H_0\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)\right]\\
-&=\frac{1}{N}\sum\limits_{i=1}^{N}E[(1+n)]=\frac{1}{N}\sum\limits_{i=1}^{N}[E(1)+E(n)]\\
-&=\frac{1}{N}\sum\limits_{i=1}^{N}[1+0]=1\\
-Var[l|H_0]&=E\left[(l-E(l))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)-E(l)\right)^2\right]\\
-&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n)-1\right)^2\right]\\
-&=E\left[(\frac{1}{N}\sum\limits_{i=1}^{N}n)^2\right]=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}
+&(l|H_0)\sim\mathcal{N}(0,\frac{1}{N}\sigma^2), &(l|H_1)\sim\mathcal{N}(A,\frac{1}{N}\sigma^2)
+\end{align*}
+归一化后, $(l|H_j)\sim\mathcal{N}(0,1)$
+
+判决表达式:
+\[
+l(x)\mathop{=}^{def}\frac{1}{N}\sum\limits_{i=1}^Nx_i\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma^+
+\]
+
+判决概率:(其中,信噪比$d^2=\frac{NA^2}{\sigma^2}$)
+\begin{align*}
+P(H_1|H_0)&=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right), &P(H_0|H_0)&=1-Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)\\
+P(H_1|H_1)&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right),
+&P(H_0|H_1)&=1-Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)
 \end{align*}
 \end{frame}
 
 \begin{frame}[shrink]
-\frametitle{ex4推导(1)}
-\[l=\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)\]
-其中: $n\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n]=0,Var[n]=E\left[(n-E[n])^2\right]=E[n^2]=\sigma_n^2$
+\frametitle{ex3---观测量$(l|H_0)$}
+\textcolor{blue}{\textbf{性能分析:}}
+\[
+\frac{1}{N}\sum\limits_{i=1}^{N}x_i\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma
+\]
+\textbf{统计量  }\qquad $l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{i=1}^{N}x_i$\\
+\textbf{假设$H_0$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
 \begin{align*}
-E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[a+bn]\\
-&=a+\frac{b}{N}\sum\limits_{i=1}^{N}E[n]=a &&\text{by } E[n]=0\\
-Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn)-a\right)^2\right]\\
-&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(bn)\right)^2\right]=E\left[\left(\frac{b}{N}\sum\limits_{i=1}^{N}(n)\right)^2\right]\\
-&=(\frac{b}{N})^2\sum\limits_{i=1}^{N}E[n^2]=(\frac{b}{N})N\sigma_n^2=\frac{b^2\sigma_n^2}{N} &&\text{by } E[n^2]=\sigma_n^2\\
+E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i|H_0)\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[n_i]=0\\
+Var[l|H_0]&=E\left[(l|H_0-E(l|H_0))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n_i^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}\\
+\textbf{因此, }(l|H_0)\sim\mathcal{N}(0,\frac{\sigma^2}{N})\\
+p(l|H_0)&=\frac{1}{\sqrt{2\pi Var[l|H_0]}}\exp\left[-\frac{(l-E[l|H_0])^2}{2 Var[l|H_0]}\right]=\frac{\sqrt{N}}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{Nl^2}{2\sigma^2}\right]
 \end{align*}
 \end{frame}
 
 \begin{frame}[shrink]
-\frametitle{ex4推导(2)}
-\[l=\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)\]
-其中: $m$是常数, $n\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n]=0,Var[n]=E\left[(n-E[n])^2\right]=E[n^2]=\sigma_n^2$
+\frametitle{ex3---观测量$(l|H_1)$}
+\textcolor{blue}{\textbf{性能分析:}}
+\[
+\frac{1}{N}\sum\limits_{i=1}^{N}x_i\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma
+\]
+\textbf{统计量  }\qquad $l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{i=1}^{N}x_i$\\
+\textbf{假设$H_1$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
 \begin{align*}
-E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[m+n]\\
-&=m+\frac{b}{N}\sum\limits_{i=1}^{N}E[n] &&\text{by } E[n]=0\\
+E[l|H_1]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i|H_1)\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(A+n_i)\right]=A+\frac{1}{N}\sum\limits_{i=1}^{N}E[n_i]=A\\
+Var[l|H_1]&=E\left[(l|H_1-E(l|H_1))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(A+n_i)-A\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n_i^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}\\
+\textbf{因此, }(l|H_1)\sim\mathcal{N}(A,\frac{\sigma^2}{N})\\
+p(l|H_1)&=\frac{1}{\sqrt{2\pi Var[l|H_1]}}\exp\left[-\frac{(l-E[l|H_1])^2}{2 Var[l|H_1]}\right]=\frac{\sqrt{N}}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{N(l-A)^2}{2\sigma^2}\right]
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex4---$l|H_0$}
+\begin{columns}
+	\column{0.4\textwidth}
+	\textcolor{blue}{\textbf{$N$次独立采样，样本为:}}
+	\begin{align*}
+	&H_0: x_i=1+n_i, i=1,2,\dots,N\\
+	&H_1: x_i=-1+n_i, i=1,2,\dots,N
+	\end{align*}
+	\column{0.4\textwidth}
+	\textcolor{blue}{\textbf{计算平均代价:}}
+	\[
+	\frac{1}{N}\sum\limits_{i=1}^{N}x_i\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{2N}=-\frac{\ln 3}{4N}\mathop{=}\limits^{def}\gamma
+	\]
+	\textbf{统计量  }\qquad $l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{i=1}^{N}x_i$\\
+\end{columns}
+\textbf{假设$H_0$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
+\begin{align*}
+E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i|H_0)\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(1+n_i)\right]\\
+&=\frac{1}{N}\sum\limits_{i=1}^{N}E[(1+n_i)]=\frac{1}{N}\sum\limits_{i=1}^{N}[E(1)+E(n_i)]=\frac{1}{N}\sum\limits_{i=1}^{N}[1+0]=1\\
+Var[l|H_0]&=E\left[(l|H_0-E[l|H_0]))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n_i)-E(l)\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(1+n_i)-1\right)^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n_i^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}\\
+\textbf{因此, }(l|H_0)\sim\mathcal{N}(1,\frac{\sigma^2}{N})\\
+p(l|H_0)&=\frac{1}{\sqrt{2\pi Var[l|H_0]}}\exp\left[-\frac{(l-E[l|H_0])^2}{2 Var[l|H_0]}\right]=\frac{\sqrt{N}}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{N(l-1)^2}{2\sigma^2}\right]
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ex4---$l|H_1$}
+\begin{columns}
+	\column{0.4\textwidth}
+	\textcolor{blue}{\textbf{$N$次独立采样，样本为:}}
+	\begin{align*}
+	&H_0: x_i=1+n_i, i=1,2,\dots,N\\
+	&H_1: x_i=-1+n_i, i=1,2,\dots,N
+	\end{align*}
+	\column{0.4\textwidth}
+	\textcolor{blue}{\textbf{计算平均代价:}}
+	\[
+	\frac{1}{N}\sum\limits_{i=1}^{N}x_i\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{2N}=-\frac{\ln 3}{4N}\mathop{=}\limits^{def}\gamma
+	\]
+	\textbf{统计量  }\qquad $l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{i=1}^{N}x_i$\\
+\end{columns}
+\textbf{假设$H_1$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
+\begin{align*}
+E[l|H_1]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(x_i|H_1)\right]=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(-1+n_i)\right]\\
+&=\frac{1}{N}\sum\limits_{i=1}^{N}E[(1+n_i)]=\frac{1}{N}\sum\limits_{i=1}^{N}[E(-1)+E(n_i)]=\frac{1}{N}\sum\limits_{i=1}^{N}[-1+0]=-1\\
+Var[l|H_1]&=E\left[(l|H_1-E[l|H_1]))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(-1+n_i)-E(l)\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(-1+n_i)+1\right)^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n_i^2]=\frac{1}{N^2}\sum\limits_{i=1}^{N}\sigma^2=\frac{\sigma^2}{N}\\
+\textbf{因此, }(l|H_1)\sim\mathcal{N}(-1,\frac{\sigma^2}{N})\\
+p(l|H_1)&=\frac{1}{\sqrt{2\pi Var[l|H_1]}}\exp\left[-\frac{(l-E[l|H_1])^2}{2 Var[l|H_1]}\right]=\frac{\sqrt{N}}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{N(l+1)^2}{2\sigma^2}\right]
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{公式推导练习(1)}
+检验统计量:
+\[l(x)=\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn_i), i=1,2,\dots,N\]
+其中: $n_i\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n_i]=0,Var[n_i]=E\left[(n_i-E[n_i])^2\right]=E[n_i^2]=\sigma_n^2$\\
+\textbf{统计量$l(x)$为高斯分布, 均值和方差分别为}
+\begin{align*}
+E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn_i)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[a+bn_i]\\
+&=a+\frac{b}{N}\sum\limits_{i=1}^{N}E[n_i]=a &&\text{by } E[n_i]=0\\
+Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(a+bn_i)-a\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(bn_i)\right)^2\right]=E\left[\left(\frac{b}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]\\
+&=\left(\frac{b}{N}\right)^2\sum\limits_{i=1}^{N}E[n_i^2]=(\frac{b}{N})N\sigma_n^2=\frac{b^2\sigma_n^2}{N} &&\text{by } E[n_i^2]=\sigma_n^2\\
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{公式推导练习(2)}
+检验统计量:
+\[l(x)=\frac{1}{N}\sum\limits_{i=1}^{N}(m+n_i),i=1,2,\dots,N\]
+其中: $m$是常数, $n_i\sim\mathcal{N}(0,\sigma_n^2)$, 即$E[n_i]=0,Var[n_i]=E\left[(n_i-E[n_i])^2\right]=E[n_i^2]=\sigma_n^2$\\
+\textbf{统计量$l(x)$为高斯分布, 均值和方差分别为}
+\begin{align*}
+E[l]&=E\left[\frac{1}{N}\sum\limits_{i=1}^{N}(m+n_i)\right]=\frac{1}{N}\sum\limits_{i=1}^{N}E[m+n_i]\\
+&=m+\frac{1}{N}\sum\limits_{i=1}^{N}E[n_i] &&\text{by } E[n_i]=0\\
 &=m\\
-Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(m+n)-m\right)^2\right]\\
-&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n\right)^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n\right)^2\right]\\
-&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n^2]=\frac{1}{N^2}N\sigma_n^2 &&\text{by } E[n^2]=\sigma_n^2\\
+Var[l]&=E[(l-E(l))^2]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}(m+n_i)-m\right)^2\right]\\
+&=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{i=1}^{N}n_i\right)^2\right]\\
+&=\frac{1}{N^2}\sum\limits_{i=1}^{N}E[n_i^2]=\frac{1}{N^2}N\sigma_n^2 &&\text{by } E[n_i^2]=\sigma_n^2\\
 &=\frac{\sigma_n^2}{N}
 \end{align*}
 \end{frame}
@@ -340,7 +479,7 @@ P_e&=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)\\
 在贝叶斯准则中, 当代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时 
 \[\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\implies P(H_1)p(\bm{x}|H_1)\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0)p(\bm{x}|H_0)\]
 由条件概率公式,有
-\[P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=\frac{P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)|P(H_1)}{P(\bm{x}\le X\le \bm{x}+d\bm{x})}\]
+\[P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=\frac{P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)P(H_1)}{P(\bm{x}\le X\le \bm{x}+d\bm{x})}\]
 当$d\bm{x}$很小时,有$P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)=p(\bm{x}|H_1)d\bm{x},\quad P(\bm{x}\le X\le \bm{x}+d\bm{x})=p(\bm{x})d\bm{x}$\\
 $P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=P(H_1|\bm{x})$, 从而得
 \[P(H_1|\bm{x})=\frac{p(\bm{x}|H_1)d\bm{x}P(H_1)}{p(\bm{x})d\bm{x}}=\frac{p(\bm{x}|H_1)P(H_1)}{p(\bm{x})}\]
@@ -359,9 +498,56 @@ $P(H_j|\bm{x})(j=0,1)$表示已经获得观测量$\bm{x}$的条件下，假设$H
 按照最小平均代价的贝叶斯准则在代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时，就成为\textbf{最大后验概率准则(maximum a posteriori probability criterion)} 
 \end{frame}
 
+\begin{frame}{平均代价}
+假设$H_j$为真，判决所付出的平均代价为:
+\[C(H_j)=\sum\limits_{i=0}^{1}c_{ij}P(H_i|H_j) \]
+\begin{align*}
+&\text{判决$H_0$成立的代价} &C(H_0)=c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)\\
+&\text{判决$H_1$成立的代价} &C(H_1)=c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)\\
+&\text{总代价:} &C=P(H_0)C(H_0)+P(H_1)C(H_1)
+\end{align*}
+\end{frame}
+
+\begin{frame}{$P_F,P_M,P_D$ (1)}
+\includegraphics[scale=0.25]{R0R1}
+\includegraphics[scale=0.25]{C-P1}
+\begin{align*}
+&\eta\mathop{=}^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}=\frac{(1-P_1)(c_{10}-c_{00})}{P_1(c_{01}-c_{11})}=\frac{1}{P_1(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\\
+&C(P_1)=c_{00}+(c_{10}-c_{00})P_F(P_1)+\\
+&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_1)-(c_{10}-c_{00})P_F(P_1)]\qquad \text{凸函数}
+\end{align*}
+$P_1\uparrow\implies \eta\downarrow, P_M\downarrow, P_F\uparrow, P_D\uparrow, C\uparrow\sim\downarrow$
+\end{frame}
+
+\begin{frame}{极小极大化准则}
+\textbf{目的: 避免产生过分大的代价, 使极大可能代价极小化。}
+\begin{enumerate}
+	\item 猜测一个先验概率$P_{1g}$, 以$\eta(P_{1g})$为门限进行判决。
+	\item $P_{1g}$确定, $P_M(P_{1g})$和$P_F(P_{1g})$即可确定。
+	\item $C(P_1,P_{1g})$是一条与曲线$a$相且的直线$b$, 切点在$C(P_1=P_{1g})$处。
+	\item 如果猜测的先验概率为$P_{1g}^{\ast}$,则无论实际的先验概率$P_1$为多大，平均代价都等于$C_{minmax}$, 而不会产生过分大的代价。
+\end{enumerate}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&\eta=\eta(P_{1g})=\frac{1}{P_{1g}(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\\
+	&C(P_1,P_{1g})=c_{00}+(c_{10}-c_{00})P_F(P_{1g})+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g})-(c_{10}-c_{00})P_F(P_{1g})]
+	\end{align*}
+	\column{0.3\textwidth}
+	\includegraphics[scale=0.25]{C-P1}
+\end{columns}
+\end{frame}
+
 \begin{frame}
+此时，极小化极大代价就是平均错误概率$P_F(P_{1g})$
+
+\bigskip
+
 似然比检验的判别式：
 \[\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\[\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}\mathop{=}^{def}\eta \]
+\[\eta\mathop{=}^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}=\frac{(1-P_1)(c_{10}-c_{00})}{P_1(c_{01}-c_{11})}=\frac{1}{P_1(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\]
 判决概率:
 \[P_F=P(H_1|H_0)=\int_{\eta}^{\infty}p(\lambda|H_0)d\lambda \]
 \[P_D=P(H_1|H_1)=\int_{\eta}^{\infty}p(\lambda|H_1)d\lambda \]
@@ -466,5 +652,25 @@ $p(m)$未知
 \end{align*}
 这正是前面讨论过的双边检验。只是前面是从奈曼-皮尔逊准则出发推导得到。而这里是从似然比检验的概念导出的，似然函数$p(x|m;H_1)$中的信号参量$m$由其最大似然估计量$\widehat{m}_{ml}$代换，所以是广义似然比检验。
 \end{frame}
+
+\begin{frame}{title}
+\begin{align*}
+H_0&=-A+n\\
+H_1&=A+n\\
+p(n)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{n^2}{2\sigma^2}\right]\\
+p(x|H_0)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{(x+A)^2}{2\sigma^2}\right]\\
+p(x|H_1)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{(x-A)^2}{2\sigma^2}\right]
+\end{align*}
+\end{frame}
+
+\begin{frame}{title}
+\begin{itemize}
+	\item 目标: 正确判决概率$P(H_j|H_j)$尽可能大，错误判决概率$P(H_i|H_j)(i\ne j)$尽可能小。
+	\item $x_0\downarrow\implies P(H_1|H_1)\uparrow$, 但$P(H_0|H_1)\downarrow$。如果$x_0\uparrow$,结果相反。
+	\item 因此需要最佳划分判决域
+\end{itemize}
+\end{frame}
+
+
 
 
