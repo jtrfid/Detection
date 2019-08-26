@@ -351,31 +351,31 @@ F(100)&=P\{x(\xi)\le 100 \}=P(\Omega)=1\\
 F(35)&=P\{x(\xi)\le 35 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
 F(30.01)&=P\{x(\xi)\le 30.01 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
 F(30)&=P\{x(\xi)\le 30 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
-F(29.9)&=P\{x(\xi)\le 35 \}=P\{f_1,f_2 \}=\frac{2}{6} \\
+F(29.9)&=P\{x(\xi)\le 29.9 \}=P\{f_1,f_2 \}=\frac{2}{6} \\
 \end{align*}
 \end{frame}
 
 \begin{frame}
 \begin{columns}
-	\column{0.5\textwidth}
+	\column{0.6\textwidth}
 	均匀分布随机变量$x(t)=t,0<t<T$\\
 	$P\{t_1\le t\le t_2\}=\frac{t_2-t_1}{T},0<t_1<t_2<T$\\
 	如果$x> T$, 有
-	\[F(x)=P\{x(t)\le x \}=P\{0\le t\le T \}=P(\Omega)= 1\qquad x> 1 \] 
+	\[F(x)=P\{x(t)\le x \}=P\{0\le t\le T \}=P(\Omega)= 1 \] 
 	如果$0\le x\le T$, 有
-	\[F(x)=P\{x(t)\le x \}=P\{0\ge t\le x\}=\frac{x}{T} \qquad 0\le x\le 1 \] 
+	\[F(x)=P\{x(t)\le x \}=P\{0\ge t\le x\}=\frac{x}{T}  \] 
 	如果$x<0$, 有
-	\[F(x)=P\{x(t)\le x \}=P\{\emptyset\}=0 \qquad x<0 \] 
-	\column{0.4\textwidth}
-	\includegraphics[scale=0.4]{xt}
+	\[F(x)=P\{x(t)\le x \}=P\{\emptyset\}=0 \] 
+	\column{0.3\textwidth}
+	\includegraphics[scale=0.3]{xt}
 \end{columns}
 \end{frame}
 
 \begin{frame}
 \begin{columns}
 	\column{0.5\textwidth}
-	定义随机变量$x(\xi)$, 满足$\forall xi\in\Omega, x(\xi)=a$\\
-	如果$x\ge a$, 则,$\forall \xi\in\Omega, x{\xi}=a\le x$,有
+	定义随机变量$x(\xi)$, 满足$\forall \xi\in\Omega, x(\xi)=a$\\
+	如果$x\ge a$, 则,$\forall \xi\in\Omega, x(\xi)=a\le x$,有
 	\[F(x)=P\{x(\xi)\le x \}=P(\Omega)= 1\qquad x\ge a \] 
 	如果$x<a$, 有
 	\[F(x)=P\{x(t)\le x \}=P\{\emptyset\}=0 \qquad x<a \] 

@@ -81,7 +81,7 @@
 
 \begin{frame}
 用映射表示随机过程: 
-\[x(t,\xi): T\times\Omega->\mathbb{R} \]
+\[x(t,\xi): T\times\Omega\to\mathbb{R} \]
 \begin{enumerate}
 	\item $x(t,\xi)$实质是定义在$T\times\Omega$上的二元单值函数;
 	\item 固定$t\in T,x(t,\cdot)$是样本空间$\Omega$上的函数,即为一随机变量;
@@ -354,7 +354,7 @@ $$
 
 \begin{frame}{狄拉克函数(Dirac函数/$\delta$---函数)}
 \begin{definition}[$\delta$---函数]
-	对于任意的无穷此可维的函数$f(t)$, 如果满足:
+	对于任意的无穷次可微的函数$f(t)$, 如果满足:
 	$$\int_{-\infty}^{\infty}\delta (t)f(t)dt=\lim\limits_{\varepsilon\to 0}\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)f(t)dt $$
 	其中:
 	\[
