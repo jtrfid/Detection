@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%% ch1
+\begin{frame}
+  \frametitle{主要内容}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{信号的随机性}
+\begin{frame}
+\begin{itemize}
+	\item \textcolor{blue}{\textbf{信号分类}}
+	\begin{itemize}
+		\item[-] \textbf{确知信号}: 可以用一个确定的时间函数来表示的信号。\textcolor{red}{$s(t)(0\le t\le T)$}
+		\item[-] \textbf{随机未知参量信号}：也表示为时间的函数，但信号中含有一个或一个以上的参量是随机(未知)的。\textcolor{red}{$s(t;\bm{\theta})(0\le t\le T)$}, 其中$\bm{\theta}=(\theta_1,\theta_2,\dots,\theta_M)^T$, 表示信号中含有$M$个随机(未知)参量。
+	\end{itemize}
+    \item \textcolor{blue}{\textbf{考虑加性噪声$n(t)$下的待处理信号(称作接收信号或观测信号)$x(t)$}}
+    \begin{align*}
+    \textbf{确知信号: }\qquad &x(t)=s(t)+n(t), &&(0\le t\le T)\\
+    \textbf{随机(未知)参量信号: }\qquad &x(t)=s(t;\bm{\theta})+n(t), &&(0\le t\le T)
+    \end{align*}
+    \item \textcolor{blue}{\textbf{信号的随机性}}\\
+    由于噪声$n(t)$是具有随机特性的随机过程, 即使信号是确知信号$s(t)$, 其接收信号$x(t)$也具有随机特性的信号。对于随机(未知)参量信号$s(t;\bm{\theta})$,其接收信号$x(t)$更是一随机信号。
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\[R=\frac{1}{2}ct_d \]
+\end{frame}
+
+

@@ -16,13 +16,13 @@
 \begin{frame}{均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$}
 解: 随机变量$x$的概率密度函数$p(x)$为
 \[p(x)=\begin{cases}
-\frac{1}{b-1}, &a\le x\le b\\
+\frac{1}{b-a}, &a\le x\le b\\
 0, &\text{其他}
 \end{cases} \]
 
 	根据随机变量均值的定义，有
 	\begin{align*}
-	\mu_x=E(x)&=\int_{-\infty}^{\infty}xp(x)dx=\int_{a}^{b}\frac{1}{b-1}p(x)dx =\frac{a+b}{2}
+	\mu_x=E(x)&=\int_{-\infty}^{\infty}xp(x)dx=\int_{a}^{b}\frac{1}{b-a}xdx =\frac{a+b}{2}
 	\end{align*}
 	根据随机变量方差的定义，有
 	\begin{align*}
@@ -105,13 +105,13 @@ p(x;t)&=p[\tau=h(x)]\left|\frac{d\tau}{dx}\right|\\
 \end{align*}
 \end{frame}
 
-\begin{frame}{确知函数$a(t)$的均值$E[a(t)]=a(t)$}
+\begin{frame}
 \begin{example}
-设随机过程$x(t)$的均值为$\mu_x(t)$,自相关函数为$r_x(t_j,t_k)$。若有随机过程$y(t)=a(t)x(t)x(t)+b(t)$, 其中$a(t),b(t)$是确知函数。求随机过程$y(t)$的均值和自相关函数。
+设随机过程$x(t)$的均值为$\mu_x(t)$,自相关函数为$r_x(t_j,t_k)$。若有随机过程$y(t)=a(t)x(t)+b(t)$, 其中$a(t),b(t)$是确知函数。求随机过程$y(t)$的均值和自相关函数。
 \end{example}
 \end{frame}
 
-\begin{frame}{确知函数$a(t)$的均值$E[a(t)]=a(t)$}
+\begin{frame}
 解：\\
 由均值定义$E[x(\xi)]\mathop{=}\limits^{def}\mu_x=\int_{-\infty}^{\infty}xp(x)dx$知：\\
 确知函数$a(t)$的均值:
@@ -121,9 +121,10 @@ E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
 &=a(t)\cdot 1 &&by \int_{-\infty}^{\infty}p(x)dx=1\\
 &=a(t)
 \end{align*}
+\textcolor{blue}{结论: 确知函数$a(t)$的均值$E[a(t)]=a(t)$}
 \end{frame}
 
-\begin{frame}{确知函数$a(t)$的均值$E[a(t)]=a(t)$}
+\begin{frame}
 解(续)：随机过程$y(t)$的均值为:
 \begin{align*}
 \mu_y&=E[y(t)]=E[a(t)x(t)+b(t)]=E[a(t)x(t)]+E[b(t)]\\
@@ -131,12 +132,13 @@ E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
 \end{align*}
 随机过程$y(t)$的自相关函数为:
 \begin{align*}
-\r_y(t_j,t_k)&=E[y(t_j)y(t_k)]\\
-&=E[(a(t_j)x(t_j)]+b(t_j))(a(t_k)x(t_k)+b(t_k))]\\
-&=a(t_j)a(t_k)E[x(t_j)]x(t_k)]+a(t_j)b(t_k)E[x(t_j)]+b(t_j)a(t_k)E[x(t_k)]+b(t_j)b(t_k)\\
+r_y(t_j,t_k)&=E[y(t_j)y(t_k)]\\
+&=E[(a(t_j)x(t_j)+b(t_j))(a(t_k)x(t_k)+b(t_k))]\\
+&=a(t_j)a(t_k)E[x(t_j)x(t_k)]+a(t_j)b(t_k)E[x(t_j)]\\
+&+b(t_j)a(t_k)E[x(t_k)]+b(t_j)b(t_k)\\
 &=a(t_j)a(t_k)r_x(t_j,t_k)+a(t_j)b(t_k)\mu_x(t_j)+b(t_j)a(t_k)\mu_x(t_k)+b(t_j)b(t_k)
 \end{align*}
-其中: $\mu_x(t_k)=E[x(t_k)],r_x(t_j,t_k)=E[x(t_j)x(t_k)]$
+其中: $,r_x(t_j,t_k)=E[x(t_j)x(t_k)],\mu_x(t_j)=E[x(t_j)], \mu_x(t_k)=E[x(t_k)]$
 \end{frame}
 
 \begin{frame}{平稳随机过程随着间隔的增大,采样之间的相关性减小}
@@ -166,16 +168,7 @@ E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
 \end{proof}
 \end{frame}
 
-\begin{frame}{周期性平稳过程的自相关函数也是周期性,且周期相同}
-\begin{example}
-	假定平稳随机过程$x(t)$是周期的, 周期为$T$, 即
-	\[x(t)=x(t+T) \]
-	证明其自相关函数$r_x(\tau)$也是以$T$为周期的, 即
-	\[r_x(\tau)=r_x(\tau+T) \]
-\end{example}
-\end{frame}
-
-\begin{frame}{周期性平稳过程的自相关函数也是周期性,且周期相同}
+\begin{frame}[shrink]
 \begin{example}
 	假定平稳随机过程$x(t)$是周期的, 周期为$T$, 即
 	\[x(t)=x(t+T) \]
@@ -189,6 +182,7 @@ r_x(\tau)&=E[x(t)x(t+\tau)]\\
 &=E[x(t)x(t+\tau+T)]&& \text{by } x(t+\tau)=x(t+\tau+T)\\
 &=r_x(\tau+T)
 \end{align*}
+所以, 自相关函数$r_x(\tau)$也是以$T$为周期的。
 \end{proof}
 \end{frame}
 
@@ -243,8 +237,8 @@ r_x(\tau)&=E[x(t)x(t+\tau)]\\
 	设$s(t)$是雷达的发射信号, 遇到目标后的反射信号为$as(t-t_0), t_0$是信号返回的延迟时间。如果回波信号中伴有加性噪声$n(t)$, 则接收到的信号为
 	\[x(t)=as(t-t_0)+n(t) \]
 	\begin{enumerate}
-		\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_sx(\tau)$。
-		\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_sx(\tau)$。
+		\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_{sx}(\tau)$。
+		\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_{sx}(\tau)$。
 	\end{enumerate}
 \end{example}
 \end{frame}
@@ -252,19 +246,20 @@ r_x(\tau)&=E[x(t)x(t+\tau)]\\
 \begin{frame}[shrink]
 解:
 	\begin{enumerate}
-		\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_sx(\tau)$。\begin{align*}
-		r_{xy}(\tau)&=E[s(t)x(t+\tau)] \\
+		\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_{sx}(\tau)$。\begin{align*}
+		r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
 		&=E[s(t)(as(t-t_0+\tau)+n(t+\tau)))] &&\text{by } x(t)=as(t-t_0)+n(t)\\
 		&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)]\\
 		&=ar_{s}(\tau-t_0)+r_{sn}(\tau)
 		\end{align*}
-		\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_sx(\tau)$。
+		\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_{sx}(\tau)$。
 		\begin{align*}
-		r_{xy}(\tau)&=E[s(t)x(t+\tau)] \\
+		r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
 		&=E[s(t)(as(t-t_0+\tau)+n(t+\tau)))] &&\text{by } x(t)=as(t-t_0)+n(t)\\
-		&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)] &&\text{确知信号$s(t)$看作常数}\\ 
+		&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)] &&\text{相互统计独立}\\ 
+		&=aE[s(t)s(t-t_0+\tau)]+E[s(t)]E[n(t+\tau)] &&\text{确知信号$s(t)$看作常数,$E[s(t)]=s(t)$}\\ 
 		&=aE[s(t)s(t-t_0+\tau)]+s(t)E[n(t+\tau)] &&\text{by }E[n(t)]=0 \\
-		&=ar_{s}(\tau-t_0)+r_{sn}(\tau)
+		&=ar_{s}(\tau-t_0)
 		\end{align*}
 	\end{enumerate}
 \end{frame}

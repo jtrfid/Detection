@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%% ch2
+%%%%%%%%%%%%%%%%%%%%%%%%%% ch2 %概率论回顾全集备份
 \begin{frame}
   \frametitle{主要内容}
   \tableofcontents[hideallsubsections]
@@ -631,7 +631,7 @@ F(29.9)&=P\{x(\xi)\le 35 \}=P\{f_1,f_2 \}=\frac{2}{6} \\
 	如果$x> T$, 有
 	\[F(x)=P\{x(t)\le x \}=P\{0\le t\le T \}=P(\Omega)= 1\qquad x> 1 \] 
 	如果$0\le x\le T$, 有
-	\[F(x)=P\{x(t)\le x \}=P\{0\ge t\le x\}=\frac{x}{T} \qquad 0\le x\le 1 \] 
+	\[F(x)=P\{x(t)\le x \}=P\{0\le t\le x\}=\frac{x}{T} \qquad 0\le x\le 1 \] 
 	如果$x<0$, 有
 	\[F(x)=P\{x(t)\le x \}=P\{\emptyset\}=0 \qquad x<0 \] 
 	\column{0.4\textwidth}
@@ -809,7 +809,7 @@ F(x)=P\{x(\xi)\le x\}=\sum\limits_{k=1}^{i}p_k \qquad x_i\le x<x_{i+1}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 注释的内容
-\iffalse　　%注释开始
+%%%%%%%%\iffalse　　%注释开始
 
 \begin{frame}
 n重伯努利试验k次成功的概率(二项分布):
@@ -898,4 +898,123 @@ n重伯努利试验k次成功的概率(二项分布):
 \end{example}
 \end{frame}
 
-\fi　　　%注释结束
+\begin{frame}
+\begin{example}
+	设随机相位正弦信号$s(t; \theta)=a\cos(\omega_0 t+\theta)$, 其中振幅$a$和$\omega_0$为常数, 相位$\theta$是一随机变量，它服从$[-\pi,\pi]$上的均匀分布。
+	\begin{enumerate}
+		\item 求该过程的均值$E[s(t; \theta)]$和自相关函数$E[s(t_j; \theta)s(t_k; \theta)]$。
+		\item 写出$s(t;\theta)$的样本函数。
+		\item 求$s(t;\theta)$的概率密度函数。
+	\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}
+解:
+\begin{enumerate}
+\item 因为相位$\theta$服从$[-\pi,\pi]$上的均匀分布,所以，
+$$p(\theta)=\begin{cases}
+\frac{1}{2\pi}, & -\pi\le\theta\le\pi\\
+0， &\text{其它}
+\end{cases} $$ 
+该随机过程的均值为:
+\begin{align*}
+\mu_{\theta}(t)&=E[s(t; \theta)]=E[a\cos(\omega_0t+\theta)]\\
+&=\int_{-\infty}^{\infty}a\cos(\omega_0t+\theta)p(\theta)d\theta\\
+&=\int_{-\pi}^{\pi}a\cos(\omega_0t+\theta)\frac{1}{2\pi}d\theta\\
+&=\frac{a}{2\pi}\int_{-\pi}^{\pi}\cos(\omega_0t+\theta)d\theta\\
+&=0
+\end{align*}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+解(续): \footnote{$\cos A\cos B=\frac{1}{2}\cos (A+B)\cos(A-B)$}
+\begin{enumerate}
+\item (续) 该随机过程的自相关函数为:
+\begin{align*}
+r_x(t_j,t_k)&=E[s(t_j)s(t_k)]\\
+&=\int_{-\infty}^{\infty}a\cos(\omega_0t_j+\theta)a\cos(\omega_0t_k+\theta)p(\theta)d\theta\\
+&=\frac{a^2}{4\pi}\int_{-\pi}^{\pi}[\cos(\omega_0t_j+\omega_0t_k+2\theta)+\cos\omega_0(t_k-t_j)]d\theta\\
+&=\frac{a^2}{2}\cos\omega_0\tau,\qquad(\tau=t_k-t_j)
+\end{align*}
+\item 当$\theta$在$[-\pi,\pi]$内任取定值时，如$\theta=0$, 则样本函数为
+$$s_1(t; \theta=0)=a\cos\omega_0t$$
+当$\theta=\frac{\pi}{2}$, 则样本函数为
+$$s_2(t; \theta=\frac{\pi}{2})=a\cos(\omega_0t+\frac{\pi}{2})=-a\sin\omega_0t$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+解(续):
+\begin{enumerate}
+\setcounter{enumi}{2} %设定起始编号 
+\item 求$s(t;\theta)$的概率密度函数。\\
+固定时刻$t$, 则随机变量$s(t;\theta)=a\cos(\omega_0t+\theta)$是随机变量$\theta$的函数。
+由分布函数的定义:
+$$F_{s(t)}(y)=P\{s(t)\le y\}=P\{a\cos(\omega_0t+\theta)\le y \}$$
+当$y<-a$时，$F_{x(t)}(y)=0$; 当$y\ge +a$时, $F_{x(t)}(y)=1$\\
+当$-a<y\le +a$时，我们有:
+\begin{align*}
+F_{s(t)}(y) &=P\{x(y)\le y \}=P\{a\cos(\omega_0t+\theta)\le y \}\\
+&=P(\{-\pi<\theta\le\omega_0t-\arccos\frac{y}{a} \} \cup \{\arccos\frac{y}{a}-\omega_0t<\theta\le\pi \})\\
+&=\frac{1}{2\pi}\left[\int_{-\pi}^{\omega_0t-\arccos\frac{y}{a}}dx+\int_{\arccos\frac{y}{a}-\omega_0t}^{\pi}dx\right]\\
+&=\frac{1}{\pi}[\omega_0t+\pi-\arccos\frac{y}{a}]
+\end{align*}	
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+解(续):
+\begin{enumerate}
+\setcounter{enumi}{2} %设定起始编号 
+\item (续)求$x(t;\theta)$的概率密度函数。\\
+当$-a<y\le +a$时, 有: $F_{x(t)}(y)=\frac{1}{\pi}[\omega_0t+\pi-\arccos\frac{y}{a}]$\\
+此时, $x(t;\theta)$的概率密度函数为:
+$$p_{x(t)}(y)=F_{x(t)}^\prime(y)=\frac{1}{\pi\sqrt{a^2-y^2}} $$
+最终得到$x(t;\theta)$的概率密度函数为:
+$$ p(\theta;t)=
+\begin{cases}
+\frac{1}{\pi\sqrt{a^2-x^2}}, &-a<x\le +a \\
+0,&\text{其它}
+\end{cases}
+$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	考察一随机过程，它在$t_0+nT_0$时刻具有宽度为b的矩形脉冲波，脉冲幅度为一等概率$(p)$,取值$\pm a$的随机变量，且$b<T_0,T_0$是在$(0,T_0)$上服从均匀分布的随机变量，并且脉冲幅度$A$与$t_0$独立, 试求该过程的自相关函数和方差。
+\end{example}
+解: 由给定的随机过程，我们有,均值: 
+$$\mu_x(t)=E\{x(t)\}=a\times p+(-a)\times p + 0\times(1-2p)=0$$
+下面求自相关函数:\\
+任取$t_1,t_2$,且$t_1<t_2$,当$|t_1-t_2|>T_0$时, $t_1,t_2$位于不同的周期内，此时有:
+$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=E\{x(t_1)\}E\{x(t_2)\}=0$$
+
+当$|t_1-t_2|\le T_0$, 且$t_1,t_2$位于两个不同的周期内时，此时有:
+$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=E\{x(t_1)\}E\{x(t_2)\}=0$$
+\end{frame}
+
+\begin{frame}
+当$|t_1-t_2|\le T_0$, 且$t_1,t_2$位于同一周期内时，假设$\theta$为$t_1$所在的脉冲的起始时刻，只有当$t_2<\theta+b$时, $x(t_1)和x(t_2)$取到不为0的值, 此时的概率为:
+$$P\{t_2<\theta+b \}=1-P\{t_2>\theta+b\}=1-\frac{1}{T_0}\int_{t_1-T_0}^{t_2-b}d\theta=\frac{b-(t_2-t_1)}{T_0}$$
+由此，我们有:
+$$r_x(t_1,t_2)=E\{x(t_1)\}E\{x(t_2)\}=a^2\cdot\frac{b-(t_2-t_1)}{T_0}$$
+同理，当$t_1>t_2$时，我们有:
+$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=a^2\cdot\frac{b-(t_1-t_2)}{T_0}$$
+因此,最终得到自相关函数和方差:
+$$r_x(\tau)=\frac{a^(b-|\tau|)}{T_0},\tau=t_2-t_1,\qquad \sigma_x^2(t)=r_x(0)=\frac{a^2b}{T_0}$$
+\end{frame}
+
+\begin{frame}{中心极限定理}
+\begin{block}{高斯噪声的数学模型---中心极限定理}
+	在一般条件下, $N$个相互\textbf{统计独立}的随机变量$n_i$之和$n=\sum\limits_{k=1}^{N}n_k$, 在$N\to\infty$的极限情况下，其概率密度趋于高斯分布，而不管每个变量$n_k$的具体分布如何。
+\end{block}
+\begin{block}{注}
+	(1) 实际上，只要$N$足够大，每个分量之间也不一定完全统计独立，但不存在占统治地位的若干分量，则它们和的分布就可以近似为高斯分布。\\
+	(2) 无限多的、相互独立的、各自作用有限的系统干扰分量叠加形成噪声干扰，并且服从高斯分布。
+\end{block}
+\end{frame}
+
+%%%%%%%%%%\fi　　　%注释结束

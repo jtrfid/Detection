@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% ch2-StochasticProcess
 \begin{frame}[shrink]
 \frametitle{ch2.信号检测与估计理论的基础知识}
+\framesubtitle{随机过程}
 \tableofcontents[hideallsubsections]
 \end{frame}
 
@@ -16,7 +17,7 @@
 \end{example}
 \end{frame}
 
-\begin{frame}{随机过程引例(1)}
+\begin{frame}{随机过程引例(2)}
 \begin{example}
 	具有随机初位相的简谐波
 	\[X(t)=A\cos(\omega t+\Phi)\]
@@ -29,18 +30,18 @@
 \end{example}
 \end{frame}
 
-\begin{frame}{随机过程引例(2)}
+\begin{frame}{随机过程引例(3)}
 \begin{columns}
 	\column{0.6\textwidth}
 	\begin{example}
 		三次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; 无限个$t$，则无限个电压---时间的函数族构成一随机过程。
 	\end{example}
 	\column{0.4\textwidth}
-	\includegraphics[scale=0.4]{vt}
+	\includegraphics[scale=0.3]{vt}
 \end{columns}
 \end{frame}
 
-\begin{frame}{随机过程引例(3)}
+\begin{frame}{随机过程引例(4)}
 \begin{example}
 	生物群体的增长问题.以$X_t$表示在时刻$t$某种生物群体的个数,则对每一个固定的$t,X_t$是一个随机变量。　
 	\begin{itemize}
@@ -52,7 +53,7 @@
 \end{frame}
 
 \begin{frame}{随机过程引例特点}
-\begin{block}{以上例子的共同特点---随机现象在时间上的延展$\implies$随机过程}
+\begin{block}{以上例子的共同特点---随机现象在时间上的延展$\implies$\textbf{随机过程}}
 	\begin{itemize}
 		\item 给定一个$t$,就有一个随机变量$X(t)$与之对应。
 		\item 概率论主要是以\textbf{一个或有限个随机变量}为研究对象的.
@@ -63,13 +64,13 @@
 
 \begin{frame}%{随机过程的定义}
 \begin{definition}[随机过程]
-	设$(\Omega,\mathcal{F},P$是一概率空间, $T$是一实参数集，定义在$\Omega$和$T$上的二元函数$x(t,\xi)$
+	设$(\Omega,\mathcal{F},P)$是一概率空间, $T$是一实参数集，定义在$\Omega$和$T$上的二元函数$X(t,\xi)$
 	\begin{enumerate}
-		\item 固定$t_k\in T,x(t_k,\xi)$是概率空间上的随机变量;
-		\item 固定$\xi_i\in\Omega,x(t,\xi_i)$是概率空间上的随机函数(或称$x(t,\xi_i)$是对应于$\xi_i$的样本函数)
+		\item 固定$t_k\in T,X(t_k,\xi)$是概率空间上的\textbf{随机变量};
+		\item 固定$\xi_i\in\Omega,X(t,\xi_i)$是概率空间上的\textbf{随机函数}(或称$X(t,\xi_i)$是对应于$\xi_i$的\textbf{样本函数})
 	\end{enumerate}
-    则称$\{x(t,\xi),t\in T,\xi\in \Omega \}$为一随机过程,简记为$x(t)$,其中$t$和$\xi$均是变量。\\
-	随机过程的定义域是实参数集$T$和样本空间$\Omega$。值域是$\mathbb{R}$.
+    则称$\{X(t,\xi),t\in T,\xi\in \Omega \}$为一\textbf{随机过程},简记为$X(t)$,其中$t$和$\xi$均是变量。\\
+	随机过程的定义域是实参数集$T$和样本空间$\Omega$。值域是实数集$\mathbb{R}$.
 	\begin{itemize}
 		\item 样本空间$\Omega$：一个随机试验所有可能出现的结果的全体，称为随机事件的样本空间。\\
 		\item 事件域$\mathcal{F}$: 样本空间中的某些子集。
@@ -79,27 +80,38 @@
 	\end{definition}
 \end{frame}
 
-\begin{frame}
-用映射表示随机过程: 
-\[x(t,\xi): T\times\Omega\to\mathbb{R} \]
+\begin{frame}{用映射表示随机过程} 
+\[X(t,\xi): T\times\Omega\to\mathbb{R} \]
 \begin{enumerate}
-	\item $x(t,\xi)$实质是定义在$T\times\Omega$上的二元单值函数;
-	\item 固定$t\in T,x(t,\cdot)$是样本空间$\Omega$上的函数,即为一随机变量;
-	\item 固定$\xi_i\in\Omega,x(\cdot,\xi_i)$是一个关于$t\in T$的函数，通常称为样本函数,或称随机过程的一次实现，所有样本函数的集合确定一随机过程。
-	\item 随机过程$\{x(t,\xi)\}$可能取值的全体所构成的集合称为此随机过程的状态空间，记作$S$。$S$中的元素称为状态。状态空间可以由复数、实数或更一般的抽象空间构成。
+	\item $X(\bullet,\bullet)$实质是定义在$T\times\Omega$上的二元单值函数;
+	\item 固定$t\in T,X(t,\bullet)$是样本空间$\Omega$上的函数,即$X(t,\bullet)$为一\textbf{随机变量};
+	\item 固定$\xi\in\Omega,X(\bullet,\xi)$是一个关于$t\in T$的函数，通常称为\textbf{样本函数},或称随机过程的\textbf{一次实现}，所有样本函数的集合确定一随机过程。
+	\item 随机过程$\{X(t,\xi)\}$可能取值的全体所构成的集合称为此随机过程的\textbf{状态空间}，记作$S$。$S$中的元素称为\textbf{状态}。状态空间可以由复数、实数或更一般的抽象空间构成。
 \end{enumerate}
+
+记号$X(t,\xi)$有时记为$X_t(\xi)$或简记为$X(t)$。
 \end{frame}
 
 \begin{frame}
 \begin{example}[随机过程示例]
 	抛掷硬币的试验，样本空间$\Omega=\{H,T\}$, 定义
-	\[x(t)=\begin{cases}
+	\[X(t)=\begin{cases}
 	\cos\pi t, &\text{当出现$H$}\\
 	t, &\text{当出现$T$}\\ 
 	\end{cases}, t\in(-\infty,\infty)\]
-	其中$P(H)=P(T)=1/2$
+	其中$P(H)=P(T)=1/2$, 则$\{X(t), t\in (-\infty, +\infty)\}$是一随机过程。试考察其样本函数和状态空间。
 \end{example}
-\includegraphics[scale=0.5]{sin_t}
+
+\medskip
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.32]{sin_t}
+	\column{0.6\textwidth}
+	样本函数: $X(\bullet,\xi)=\{\cos\pi t, t\}, \xi\in \Omega$\\
+	状态空间: $S=\{\cos\pi t_0, t_0\}, \forall t_0\in (-\infty, +\infty)$\\
+	每次试验的结果是下列事件集合之一:
+	\[ \{(H,T),(T,H),(H,H),(T,T)\} \]
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -129,15 +141,15 @@
 
 \begin{frame}
 \begin{columns}
-\column{0.6\textwidth}
+\column{0.7\textwidth}
 \begin{example}
 三次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; \\
 无限个$t$，则无限个电压---时间的函数族构成一随机过程。\\
-~\\
-样本函数$\implies$
 \end{example}
-\column{0.4\textwidth}
-\includegraphics[scale=0.4]{vt}
+样本函数: $X(\bullet,\xi)=\{v_k(t)\}, k=1,2,\dots, \xi\in \Omega$\\
+状态空间: $S=\{v_k(t_0)\}, k=1,2,\dots, \forall t_0\in (-\infty, +\infty)$
+\column{0.3\textwidth}
+\includegraphics[scale=0.3]{vt}
 \end{columns}
 \end{frame}
 
@@ -153,61 +165,83 @@
 \includegraphics[scale=0.15]{sampleFun3}	
 \end{frame}
 
+\begin{frame}
+\begin{example}
+	设随机相位正弦信号$s(t; \theta)=a\cos(\omega_0 t+\theta)$, 其中振幅$a$和$\omega_0$为常数, 相位$\theta$是一随机变量，它服从$[-\pi,\pi]$上的均匀分布。写出$s(t;\theta)$的样本函数。
+\end{example}
+解: \\
+当$\theta$在$[-\pi,\pi]$内任取定值时，如\\
+当$\theta=0$, 则样本函数为
+$$s_1(t; \theta=0)=a\cos\omega_0t$$
+当$\theta=\frac{\pi}{2}$, 则样本函数为
+$$s_2(t; \theta=\frac{\pi}{2})=a\cos(\omega_0t+\frac{\pi}{2})=-a\sin\omega_0t$$
+\end{frame}
+
 \section{随机过程的统计描述}
 
-\begin{frame}
-连续随机过程$\{x(t,\xi),t\in T,\xi\in\Omega \}$的$M$个样本函数如图。通常用有限维概率密度函数来描述随机过程。
-\includegraphics[scale=0.5]{sampleFun}
+\begin{frame}{一维概率密度函数}
+连续随机过程$\{X(t,\xi),t\in T,\xi\in\Omega \}$的$M$个样本函数如图。通常用\textbf{有限维概率密度函数}来描述随机过程。
+
+\medskip
+\begin{columns}
+	\column{0.6\textwidth}
+	\begin{block}{}
+		设$\{X(t,\xi),t\in T,\xi\in\Omega \}$是一随机过程，对于任意固定的时刻$t,X(t,\xi)$是一随机变量，称
+		\[F(x;t)=P\{X(t,\xi)\le x\},x\in\mathbb{R},t\in T \]
+		为该随机过程的\textbf{一维累积分布函数}。\\
+		如果$F(x;t)$对$x$的一阶导数存在，则有
+		\[p(x;t)=\frac{dF(x;t)}{dx}\]
+		$p(x;t)$称为随机过程$X(t,\xi)$的\textbf{一维概率密度函数}。
+	\end{block}
+	\column{0.3\textwidth}
+	\includegraphics[scale=0.25]{sampleFun4}
+\end{columns}
 \end{frame}
 
-\begin{frame}
-设$\{x(t,\xi),t\in T,\xi\in\Omega \}$是一随机过程，对于任意固定的时刻$t,x(t,\xi)$是一随机变量，称
-\[F(x;t)=P\{x(t,\xi)\le x\},x\in\mathbb{R},t\in T \]
-为该随机过程的一维累积分布函数。如果$F(x;t)$对$x$的一阶导数存在，则有
-\[p(x;t)=\frac{dF(x;t)}{dx}\]
-$p(x;t)$称为随机过程$x(t,\xi)$的一维概率密度函数。
-\end{frame}
-
-\begin{frame}
-对于任意固定的时刻$t_1,t_2\in T$, 随机变量$x(t_1,\xi),x(t_2,\xi)$构成二维矢量$[x(t_1,\xi),x(t_2,\xi)]^T$，称
-\[F(x_1,x_2;t_1,t_2)=P\{x(t_1,\xi)\le x_1,x(t_2,\xi)\le x_2\},x_1,x_2\in\mathbb{R},t_1,t_2\in T \]
-为该随机过程的二维累积分布函数。如果$F(x_1,x_2;t_1,t_2)\in T$对$x_1,x_2$的二阶混合偏导数存在，则有
+\begin{frame}{二维联合概率密度函数}
+对于任意固定的时刻$t_1,t_2\in T$, 随机变量$X(t_1,\xi),X(t_2,\xi)$构成二维矢量$[X(t_1,\xi),X(t_2,\xi)]^T$，称
+\[F(x_1,x_2;t_1,t_2)=P\{X(t_1,\xi)\le x_1,X(t_2,\xi)\le x_2\},x_1,x_2\in\mathbb{R},t_1,t_2\in T \]
+为该随机过程的\textbf{二维累积分布函数}。\\
+如果$F(x_1,x_2;t_1,t_2)\in T$对$x_1,x_2$的二阶混合偏导数存在，则有
 \[p(x_1,x_2;t_1,t_2)=\frac{\partial^2 F(x_1,x_2;t_1,t_2)}{\partial x_1\partial x_2}\]
-$p(x;t)$称为随机过程$x(t,\xi)$的二维联合概率密度函数。
+$p(x;t)$称为随机过程$X(t,\xi)$的\textbf{二维联合概率密度函数}。
 \end{frame}
 
-\begin{frame}
+\begin{frame}{N维联合概率密度函数}
 推广至N维随机矢量的情况\\
-随机过程的N维累积分布函数
+随机过程的\textbf{N维累积分布函数}
 \begin{align*}
 F(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
-&P\{x(t_1,\xi)\le x_1,x(t_2,\xi),\cdots,x(t_N,\xi)\le x_N\},&\\
+&P\{X(t_1,\xi)\le x_1,X(t_2,\xi),\cdots,X(t_N,\xi)\le x_N\},&\\
 &x_1,x_2,\cdots,x_N\in\mathbb{R},t_1,t_2,\cdots,t_N\in T
 \end{align*}
-随机过程的N维联合概率密度函数
+随机过程的\textbf{N维联合概率密度函数}
 \begin{align*}
 p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 &\frac{\partial^N F(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)}{\partial x_1\partial x_2\cdots\partial x_N}
 \end{align*}
 \end{frame}
 
-\begin{frame}{雅可比变换法}
-设一维随机变量为$x(\xi)$,它的概率密度函数$p(x)$已知,若$x(\xi)$的一个函数为
-\[y(\xi)=g(x(\xi)) \]
+\begin{frame}{一维雅可比变换法}
+设一维随机变量为$X(\xi)$,它的概率密度函数为$p(x)$已知,若$X(\xi)$的一个函数为
+\[Y(\xi)=g(X(\xi)) \]
 该函数也是一维随机变量。若它的反函数存在，即有
-\[x(\xi)=h(y(\xi)) \]
-且连续可导,则$y(\xi)$的概率密度函数为
+\[X(\xi)=h(Y(\xi)) \]
+且连续可导,则$Y(\xi)$的概率密度函数为
 \[p(y)=p[x=h(y)]|J| \]
-这种变换称为一维雅可比变换,其中雅可比$J=\frac{dh(y)}{dy}$, $|\bullet|$是绝对值符号。
+这种变换称为\textbf{一维雅可比变换},其中\textbf{雅可比}$J=\frac{dh(Y)}{dY}$, $|\bullet|$是绝对值符号。
+\begin{block}{Notes}
+	雅可比变换法的意义在于: $Y(\xi)$的概率密度函数$p(y)$可以通过它的反函数$X(\xi)$的概率密度函数$p(x)$与雅可比的乘积得到。进而, 由$X(\xi)$的数学期望值可以通过$Y(\xi)$的数学期望值。
+\end{block}
 \end{frame}
 
 \begin{frame}
 \begin{example}
-	设随机过程$x(t)=V\cos\omega t,t\in(-\infty,+\infty)$, 其中$\omega$为常数, $V$服从$[0,1]$上的均匀分布。
+	设随机过程$X(t)=V\cos\omega t,t\in(-\infty,+\infty)$, 其中$\omega$为常数, $V$服从$[0,1]$上的均匀分布。
 	\begin{enumerate}
-		\item 确定$\{x(t),t\in(-\infty,+\infty)\}$的两个样本函数。
-		\item 求$t=0,t=3\pi/4\omega$时,随机变量的概率密度函数。
-		\item 求$t=\pi/2\omega$时, $x(t)$的分布函数。
+		\item 确定$\{X(t),t\in(-\infty,+\infty)\}$的两个样本函数。
+		\item 求$t=0,t=3\pi/4\omega$时,随机变量$X(t)$的概率密度函数。
+		\item 求$t=\pi/2\omega$时, $X(t)$的分布函数。
 	\end{enumerate}
 \end{example}
 \end{frame}
@@ -215,9 +249,9 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \begin{frame}
 解:
 \begin{enumerate}
-	\item 取$V=1/2,1/3$分别得到两个样本函数
-	\[x_1(t)=\frac{1}{2}\cos\omega t,x_2(t)=\frac{1}{3}\cos\omega t\]
-	\item $t=0$时,$x(t)=V\cos\omega 0=V$,而$V$为$[0,1]$上的均匀分布,则
+	\item $V$服从$[0,1]$上的均匀分布, 取$V=1/2,1/3$分别得到两个样本函数
+	\[X_1(t)=\frac{1}{2}\cos\omega t,X_2(t)=\frac{1}{3}\cos\omega t\]
+	\item $t=0$时, $x(t)=V\cos\omega 0=V$,而$V$为$[0,1]$上的均匀分布,则
 	$$
 	p(x;t=0)=\begin{cases}
 	1 & 0\le x\le 1\\
@@ -232,7 +266,7 @@ $$
 解(续):
 \begin{enumerate}
 	\setcounter{enumi}{1} %设定起始编号 
-	\item (续) 当$t=\frac{3\pi}{4\omega}$时，$x(t)=V\cos\omega\frac{3\pi}{4\omega}=-\frac{\sqrt{2}}{2}V$
+	\item (续) 当$t=\frac{3\pi}{4\omega}$时，$X(t)=V\cos\omega\frac{3\pi}{4\omega}=-\frac{\sqrt{2}}{2}V$\\
 	由于函数$x=-\frac{\sqrt{2}}{2}V$的反函数为$V=h(x)=-\sqrt{2}x$,其导数为$h^\prime(x)=-\sqrt{2}$,则利用一维雅可比变换公式，求得
 	\begin{align*}
 		p(x,t=\frac{3\pi}{4\omega}) &=\begin{cases}
@@ -255,151 +289,15 @@ $$
 解(续):
 \begin{enumerate}
 	\setcounter{enumi}{2} %设定起始编号 
-	\item $t=\frac{\pi}{2\omega}$时，$x(t)=V\cos\omega\frac{pi}{2\omega}=0$, 此时$x(t=\frac{\pi}{2\omega})$是单点分布，则
+	\item $t=\frac{\pi}{2\omega}$时，$X(t)=V\cos\omega\frac{pi}{2\omega}=0$, 此时$X(t=\frac{\pi}{2\omega})$是单点分布，则
 	\begin{align*}
-	F(x,t=\frac{\pi}{2\omega}) &=P\{x(t)\le x \}\\
+	F(x,t=\frac{\pi}{2\omega}) &=P\{X(t)\le x \}\\
 	&=\begin{cases}
 	1 &x\ge 0\\
 	0 &x<0
 	\end{cases}
 	\end{align*}
 \end{enumerate}
-\end{frame}
-
-\begin{frame}
-\begin{example}
-	设随机相位正弦信号$s(t;\theta)=a\cos(\omega_0 t+\theta)$, 其中振幅$a$和$\omega_0$为常数, 相位$\theta$是一随机变量，它服从$(-\pi,\pi)$上的均匀分布。
-	\begin{enumerate}
-		\item 求该过程的均值和自相关函数。
-		\item 写出$x(t;\theta)$的样本函数。
-		\item 求$x(t;\theta)$的概率密度函数。
-	\end{enumerate}
-\end{example}
-\end{frame}
-
-\begin{frame}
-解:
-\begin{enumerate}
-	\item 因为相位$\theta$服从$(-\pi,\pi)$上的均匀分布,所以，
-	$$p(\theta)=\begin{cases}
-	\frac{1}{2\pi}, & -\pi\le\theta\le\pi\\
-	0， &\text{其它}
-	\end{cases} $$ 
-	该随机过程的均值为:
-	\begin{align*}
-	\mu_x(t)&=E[s(t;\theta)]=E[a\cos(\omega_0t+\theta)]\\
-	&=\int_{-\infty}^{\infty}a\cos(\omega_0t+\theta)p(\theta)d\theta\\
-	&=\int_{-\pi}^{\pi}a\cos(\omega_0t+\theta)\frac{1}{2\pi}d\theta\\
-	&=\frac{a}{2\pi}\int_{-\pi}^{\pi}\cos(\omega_0t+\theta)d\theta\\
-	&=0
-	\end{align*}
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-解(续):
-\begin{enumerate}
-	\item (续) 该随机过程的自相关函数为:
-	\begin{align*}
-	\r_x(t_j,t_k)&=E[x(t_j)x(t_k)]\\
-	&=\int_{-\infty}^{\infty}a\cos(\omega_0t_j+\theta)a\cos(\omega_0t_k+\theta)p(\theta)d\theta\\
-	&=\frac{a^2}{4\pi}\int_{-\pi}^{\pi}[\cos(\omega_0t_j+\omega_0t_k+2\theta)+\cos\omega_0(t_k-t_j)]d\theta\\
-	&=\frac{a^2}{2}\cos\omega_0\tau,\qquad(\tau=t_k-t_j)
-	\end{align*}
-	\item 当$\theta$在$(-\pi,\pi)$内任取定值时，如$\theta=0$, 则样本函数为
-	$$x(t;\theta=0)=a\cos\omega_0t$$
-	当$\theta=\frac{\pi}{2}$, 则样本函数为
-	$$x(t;\theta=\frac{\pi}{2})=a\cos(\omega_0t+\frac{\pi}{2})=-a\sin\omega_0t$$
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-解(续):
-\begin{enumerate}
-	\setcounter{enumi}{2} %设定起始编号 
-	\item 求$x(t;\theta)$的概率密度函数。\\
-	固定时刻$t$, 则随机变量$x(t;\theta)=a\cos(\omega_0t+\theta)$是随机变量$\theta$的函数。
-	由分布函数的定义:
-	$$F_{x(t)(y)}=P\{x(t)\le y\}=P\{a\cos(\omega_0t+\theta)\le y \}$$
-	当$y<-a$时，$F_{x(t)(y)}=0$; 当$y\ge +a$时, $F_{x(t)}(y)=1$\\
-	当$-a<y\le +a$时，我们有:
-	\begin{align*}
-	F_{x(t)}(y) &=P\{x(y)\le y \}=P\{a\cos(\omega_0t+\theta)\le y \}\\
-	&=P(\{-\pi<\theta\le\omega_0t-\arccos\frac{y}{a} \} \cup \{\arccos\frac{y}{a}-\omega_0t<\theta\le\pi \})\\
-	&=\frac{1}{2\pi}\left[\int_{-\pi}^{\omega_0t-\arccos\frac{y}{a}}dx+\int_{\arccos\frac{y}{a}-\omega_0t}^{\pi}dx\right]\\
-	&=\frac{1}{\pi}[\omega_0t+\pi-\arccos\frac{y}{a}]
-	\end{align*}	
-\end{enumerate}
-\end{frame}
-
-\begin{frame}
-解(续):
-\begin{enumerate}
-	\setcounter{enumi}{2} %设定起始编号 
-	\item 求$x(t;\theta)$的概率密度函数。\\
-	当$-a<y\le +a$时, 有: $F_{x(t)}(y)=\frac{1}{\pi}[\omega_0t+\pi-\arccos\frac{y}{a}]$\\
-	此时, $x(t;\theta)$的概率密度函数为:
-	$$p_{x(t)}(y)=F_{x(t)}^\prime(y)=\frac{1}{\pi\sqrt{a^2-y^2}} $$
-	最终得到$x(t;\theta)$的概率密度函数为:
-	$$ p(\theta;t)=
-	\begin{cases}
-		\frac{1}{\pi\sqrt{a^2-x^2}}, &-a<x\le +a \\
-		0,&\text{其它}
-	\end{cases}
-	$$
-\end{enumerate}
-\end{frame}
-
-\section{狄拉克函数(Dirac函数/$\delta$函数)}
-
-\begin{frame}{狄拉克函数(Dirac函数/$\delta$---函数)}
-\begin{definition}[$\delta$---函数]
-	对于任意的无穷次可微的函数$f(t)$, 如果满足:
-	$$\int_{-\infty}^{\infty}\delta (t)f(t)dt=\lim\limits_{\varepsilon\to 0}\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)f(t)dt $$
-	其中:
-	\[
-	\delta_{\varepsilon}(t)=\begin{cases}
-	0,&t<0\\
-	\frac{1}{\varepsilon}, & 0\ge t<\varepsilon\\
-	0, &t>\varepsilon
-	\end{cases}
-	\]
-	则称$\delta_\varepsilon(t)$的弱极限为$\delta$函数，记为$\delta(t)$
-	显然, 对于任意的$\varepsilon>0$, 有:
-	$$\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)dt=\int_{-\infty}^\infty\frac{1}{\varepsilon}dt=1\implies \int_{-\infty}^\infty\delta(t)dt=1$$
-\end{definition}
-\end{frame}
-
-\begin{frame}{狄拉克函数(Dirac函数/$\delta$---函数)}
-\begin{block}{注}
-	\begin{enumerate}
-		\item $\delta(t)$在$t=0$点的取值为$\infty$, 在$t\ne 0$点的取值为0, 并且满足$\int_{-\infty}^{\infty}\delta(t)dt=1$。
-		\item 工程(信号处理等)上$\delta$---函数也称为单位脉冲或单位冲激函数。
-	\end{enumerate}
-\end{block}
-\begin{block}{$\delta$---函数的筛选性质}
-	若$f(t)$为无穷此可微的函数,则有:$\int_{I}\delta(t)f(t)dt=f(0) $\\
-	其中$I$是包含点$t=0$的任意区间。特殊地, 有:$\int_{-\infty}^{\infty}\delta(t)f(t)dt=f(0) $\\
-	更一般地，我们有:
-	$$\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0) $$
-\end{block}
-\end{frame}
-
-\begin{frame}[shrink]
-\frametitle{离散型随机变量分布列的$\delta$---函数表示}
-设离散型随机变量$X$的分布列为: $P\{X=x_i\}=p_i,i=1,2,\dots$, 则由$\delta$---函数的筛选性质可以定义离散型随机变量$X$的概率密度函数为:
-$$p(x)=\sum\limits_{i=0}^{\infty}p_i\delta(x-x_i)$$
-因为，由$\delta$---函数的筛选性质，离散型随机变量$X$的分布函数可以表示为:
-$$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}^{\infty}p_i\delta(u-x_i)du$$
-\begin{columns}
-	\column{0.6\textwidth}
-	\begin{block}{}
-		工程上，常用离散型随机变量分布列的$\delta$---函数表示法，将离散型随机变量的分布列表示成概率密度函数的形式，因此与连续型随机变量的概率分布密度函数一样进行统一处理。
-	\end{block}
-	\column{0.3\textwidth}
-	\includegraphics[scale=0.15]{pi}\\
-	\includegraphics[scale=0.15]{Fx-px}
-\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -412,13 +310,13 @@ $$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}
 \end{example}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[shrink]
 \begin{example}[解]
 	因为脉冲的重复周期为$T$,所以只需求出一个周期的概率密度函数。\\
 	在一个周期内，随机信号为
 	\[
 	x(t)=\begin{cases}
-	A,&t\le\tau\\
+	A,&0\le t\le\tau\\
 	0,&\tau<t\le T
 	\end{cases} 
 	\]
@@ -426,13 +324,16 @@ $$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}
 	\[
 	F(x;t)=\begin{cases}
 	0,&x<0\\
-	\frac{t}{T},&0\ge x<A\\
+	\frac{t}{T},&0\le x<A\\
 	1,&x\ge A
 	\end{cases} 
 	\]
 	所以，它的一维概率密度函数为:
 	\[p(x;t)=\frac{t}{T}\delta(x)+(1-\frac{t}{T})\delta(x-A) \]
 \end{example}
+\small
+由$\delta$函数性质, 当$x=0$时, $\delta(x)=\infty$; 其它, $\delta(x)=0$. 并且$\int_{-\infty}^{\infty}\delta(x)dx=1$\\
+可以验证以上分布函数的正确性.  $F(x; t)=P\{x(t)\le x\}=\int_{-\infty}^{x}p(u)du$
 \end{frame}
 
 %\section{随机过程的统计平均量}
@@ -440,7 +341,9 @@ $$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}
 \begin{frame}
 函数的均值
 \[\bar{y}=\frac{1}{b-a}\lim\limits_{\Delta x\to 0}\sum\limits_{i=1}^{n}f(x_{i-1})\Delta x=\frac{1}{b-a}\int_{a}^{b}f(x)dx \]
-交流电$i=I_m\sin\omega t$,电压$u=iR=I_mR\sin\omega t$,功率$p=ui=I_m^2R\sin^2\omega t$\\
+交流电$i=I_m\sin\omega t$,\\
+电压$u=iR=I_mR\sin\omega t$,\\
+功率$p=ui=I_m^2R\sin^2\omega t$\\
 此功率在长度为一个周期的区间$[0,\frac{2\pi}{\omega}]$上的平均值
 \[\bar{p}=\frac{1}{\frac{2\pi}{\omega}}\int_{0}^{\frac{2\pi}{\omega}}I_m^2R\sin^2\omega tdt=\frac{I_m^2R}{2}=\frac{I_mU_m}{2},(U_m=I_mR) \]
 $I_m,U_m$为交流电电流、电压的最大值，$\omega$为交流电的角频率。
@@ -454,19 +357,45 @@ $I_m,U_m$为交流电电流、电压的最大值，$\omega$为交流电的角频
 
 \begin{block}{随机过程的均方值$\varphi_x^2(t)$}
 	\[\varphi_x^2(t)\mathop{=}^{def}E[x^2(t)]=\int_{-\infty}^{\infty}x^2p(x;t)dx \]
-	如果$x(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
+	如果$X(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
 \end{block}
 \end{frame}
 
 \begin{frame}
 \begin{block}{随机过程的方差/标准偏差$\delta_x^2(t)$}
 \[\sigma_x^2(t)\mathop{=}^{def}E[(x(t)-\mu_x(t))^2]=\int_{-\infty}^{\infty}(x-\mu_x(t))^2p(x;t)dx \]
-方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值偏离其均值$\mu_x(t)$的离散程度。如果$x(t)$是电压或电流，则$\delta_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。
+方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。\\
+如果$x(t)$是电压或电流，则$\delta_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。
 \end{block}
 \begin{block}{均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系}
 \[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
 \end{block}
 \includegraphics[scale=0.4]{delta}
+\end{frame}
+
+\begin{frame}{均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$}
+\begin{example}
+	求如图均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$。
+	\includegraphics[scale=0.3]{ex2-1}
+\end{example}
+\end{frame}
+
+\begin{frame}{均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$}
+解: 随机变量$x$的概率密度函数$p(x)$为
+\[p(x)=\begin{cases}
+\frac{1}{b-a}, &a\le x\le b\\
+0, &\text{其他}
+\end{cases} \]
+
+根据随机变量均值的定义，有
+\begin{align*}
+\mu_x=E(x)&=\int_{-\infty}^{\infty}xp(x)dx=\int_{a}^{b}\frac{1}{b-a}xdx =\frac{a+b}{2}
+\end{align*}
+根据随机变量方差的定义，有
+\begin{align*}
+\sigma_x^2=E[(x-\mu_x)^2]&=\int_{-\infty}^{\infty}(x-\mu_x)^2p(x)dx=\int_{a}^{b}\left(x-\frac{a+b}{2}\right)^2\frac{1}{b-a}dx \\
+&=\frac{(b-a)^2}{12}
+\end{align*}	
 \end{frame}
 
 \begin{frame}
@@ -476,8 +405,87 @@ r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
 &=\int_{-\infty}^{\infty}	\int_{-\infty}^{\infty}x_jx_kp(x_j,x_k;t_j,t_k)dx_jdx_k
 \end{align*}
 \end{block}
-随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间含有均值时的相关程度的度量。显然
+随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。显然
 \[r_x(t,t)=\varphi_x^2(t)\]
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	设随机过程$x(t)$的均值为$\mu_x(t)$,自相关函数为$r_x(t_j,t_k)$。若有随机过程$y(t)=a(t)x(t)+b(t)$, 其中$a(t),b(t)$是确知函数。求随机过程$y(t)$的均值和自相关函数。
+\end{example}
+\end{frame}
+
+\begin{frame}
+解：\\
+由均值定义$E[x(\xi)]\mathop{=}\limits^{def}\mu_x=\int_{-\infty}^{\infty}xp(x)dx$知：\\
+确知函数$a(t)$的均值:
+\begin{align*}
+E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
+&=a(t)\int_{-\infty}^{\infty}p(x)dx &&\text{by $a(t)$是常数}\\
+&=a(t)\cdot 1 &&by \int_{-\infty}^{\infty}p(x)dx=1\\
+&=a(t)
+\end{align*}
+\textcolor{blue}{结论: 确知函数$a(t)$的均值$E[a(t)]=a(t)$}
+\end{frame}
+
+\begin{frame}
+解(续)：随机过程$y(t)$的均值为:
+\begin{align*}
+\mu_y&=E[y(t)]=E[a(t)x(t)+b(t)]=E[a(t)x(t)]+E[b(t)]\\
+&=a(t)E[x(t)]+b(t)=a(t)\mu_x+b(t)
+\end{align*}
+随机过程$y(t)$的自相关函数为:
+\begin{align*}
+r_y(t_j,t_k)&=E[y(t_j)y(t_k)]\\
+&=E[(a(t_j)x(t_j)+b(t_j))(a(t_k)x(t_k)+b(t_k))]\\
+&=a(t_j)a(t_k)E[x(t_j)x(t_k)]+a(t_j)b(t_k)E[x(t_j)]\\
+&+b(t_j)a(t_k)E[x(t_k)]+b(t_j)b(t_k)\\
+&=a(t_j)a(t_k)r_x(t_j,t_k)+a(t_j)b(t_k)\mu_x(t_j)+b(t_j)a(t_k)\mu_x(t_k)+b(t_j)b(t_k)
+\end{align*}
+其中: $,r_x(t_j,t_k)=E[x(t_j)x(t_k)],\mu_x(t_j)=E[x(t_j)], \mu_x(t_k)=E[x(t_k)]$
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	设随机相位正弦信号$s(t; \theta)=a\cos(\omega_0 t+\theta)$, 其中振幅$a$和$\omega_0$为常数, 相位$\theta$是一随机变量，它服从$[-\pi,\pi]$上的均匀分布。
+	\begin{enumerate}
+		\item 求该过程的均值$E[s(t; \theta)]$
+		\item 自相关函数$E[s(t_j; \theta)s(t_k; \theta)]$。
+	\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}
+解:
+\begin{enumerate}
+\item 因为相位$\theta$服从$[-\pi,\pi]$上的均匀分布,所以，
+$$p(\theta)=\begin{cases}
+\frac{1}{2\pi}, & -\pi\le\theta\le\pi\\
+0， &\text{其它}
+\end{cases} $$ 
+该随机过程的均值为:
+\begin{align*}
+\mu_{x}(t)&=E[s(t; \theta)]=E[a\cos(\omega_0t+\theta)]\\
+&=\int_{-\infty}^{\infty}a\cos(\omega_0t+\theta)p(\theta)d\theta\\
+&=\int_{-\pi}^{\pi}a\cos(\omega_0t+\theta)\frac{1}{2\pi}d\theta\\
+&=\frac{a}{2\pi}\int_{-\pi}^{\pi}\cos(\omega_0t+\theta)d\theta\\
+&=0
+\end{align*}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+解(续): \footnote{$\cos A\cos B=\frac{1}{2}\cos (A+B)\cos(A-B)$}
+\begin{enumerate}
+\setcounter{enumi}{1} %设定起始编号 
+\item 该随机过程的自相关函数为:
+\begin{align*}
+r_x(t_j,t_k)&=E[s(t_j)s(t_k)]\\
+&=\int_{-\infty}^{\infty}a\cos(\omega_0t_j+\theta)a\cos(\omega_0t_k+\theta)p(\theta)d\theta\\
+&=\frac{a^2}{4\pi}\int_{-\pi}^{\pi}[\cos(\omega_0t_j+\omega_0t_k+2\theta)+\cos\omega_0(t_k-t_j)]d\theta\\
+&=\frac{a^2}{2}\cos\omega_0\tau,\qquad(\tau=t_k-t_j)
+\end{align*}
+\end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -487,40 +495,35 @@ c_x(t_j,t_k)&\mathop{=}^{def}E[((x(t_j)-\mu_x(t_j)(x(t_k)-\mu_x(t_k)]\\
 &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x_j-\mu_x(t_j))(x_k-\mu_x(t_k))p(x_j,x_k;t_j,t_k)dx_idx_k
 \end{align*}
 \end{block}
-随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。它们的自相关系数定义为
+随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。\\
+而随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。\\
+它们的自相关系数定义为
 \[\rho_x(t_j,t_k)\mathop{=}^{def}\frac{c_x(t_j,t_k)}{\sigma_x(t_j)\sigma_x(t_k)}\]
 易证
-\[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k)\]
-\[c_x(t,t)=\sigma_x^2(t)\]
+\[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k),\quad c_x(t,t)=\sigma_x^2(t)\]
 \end{frame}
 
-\begin{frame}
-\begin{example}
-	考察一随机过程，它在$t_0+nT_0$时刻具有宽度为b的矩形脉冲波，脉冲幅度为一等概率$(p)$,取值$\pm a$的随机变量，且$b<T_0,T_0$是在$(0,T_0)$上服从均匀分布的随机变量，并且脉冲幅度$A$与$t_0$独立, 试求该过程的自相关函数和方差。
-\end{example}
-解: 由给定的随机过程，我们有,均值: 
-$$\mu_x(t)=E\{x(t)\}=a\times p+(-a)\times p + 0\times(1-2p)=0$$
-下面求自相关函数:\\
-任取$t_1,t_2$,且$t_1<t_2$,当$|t_1-t_2|>T_0$时, $t_1,t_2$位于不同的周期内，此时有:
-$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=E\{x(t_1)\}E\{x(t_2)\}=0$$
-
-当$|t_1-t_2|\le T_0$, 且$t_1,t_2$位于两个不同的周期内时，此时有:
-$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=E\{x(t_1)\}E\{x(t_2)\}=0$$
-\end{frame}
-
-\begin{frame}
-当$|t_1-t_2|\le T_0$, 且$t_1,t_2$位于同一周期内时，假设$\theta$为$t_1$所在的脉冲的起始时刻，只有当$t_2<\theta+b$时, $x(t_1)和x(t_2)$取到不为0的值, 此时的概率为:
-$$P\{t_2<\theta+b \}=1-P\{t_2>\theta+b\}=1-\frac{1}{T_0}\int_{t_1-T_0}^{t_2-b}d\theta=\frac{b-(t_2-t_1)}{T_0}$$
-由此，我们有:
-$$r_x(t_1,t_2)=E\{x(t_1)\}E\{x(t_2)\}=a^2\cdot\frac{b-(t_2-t_1)}{T_0}$$
-同理，当$t_1>t_2$时，我们有:
-$$r_x(t_1,t_2)=E\{x(t_1)x(t_2)\}=a^2\cdot\frac{b-(t_1-t_2)}{T_0}$$
-因此,最终得到自相关函数和方差:
-$$r_x(\tau)=\frac{a^(b-|\tau|)}{T_0},\tau=t_2-t_1,\qquad \sigma_x^2(t)=r_x(0)=\frac{a^2b}{T_0}$$
+\begin{frame}{随机过程的统计平均量之间的关系}
+\begin{itemize}
+	\item 随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的\textbf{理论平均值}。
+	\item 方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。
+	\item 随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。
+	\item 随机过程的自协方差函数$c_x(t_j,t_k)$
+	随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。
+\end{itemize}
+\[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k),\quad c_x(t,t)=\sigma_x^2(t)\]
+\begin{columns}
+	\column{0.6\textwidth}
+	均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系:
+	\[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
+	\column{0.3\textwidth}
+	\includegraphics[scale=0.4]{delta}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \begin{block}{随机过程的互相关函数$r_{xy}(t_j,t_k)$}
+对于两个随机过程$x(t)$和$y(t)$, 其互相关函数定义为
 \begin{align*}
 r_{xy}(t_j,t_k) &\mathop{=}^{def}E[x(t_j)y(t_k)]\\
 &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x_jy_kp(x_j,t_j;y_k,t_k)dx_jdy_k
@@ -569,6 +572,24 @@ c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
 &r_x(0)\ge|r_x(\tau)|, \tau\ne 0\\
 &c_x(0)\ge|c_x(\tau)|, \tau\ne 0
 \end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\begin{example}
+	假定平稳随机过程$x(t)$是周期的, 周期为$T$, 即
+	\[x(t)=x(t+T) \]
+	证明其自相关函数$r_x(\tau)$也是以$T$为周期的, 即
+	\[r_x(\tau)=r_x(\tau+T) \]
+\end{example}
+\begin{proof}
+	因为
+	\begin{align*}
+	r_x(\tau)&=E[x(t)x(t+\tau)]\\
+	&=E[x(t)x(t+\tau+T)]&& \text{by } x(t+\tau)=x(t+\tau+T)\\
+	&=r_x(\tau+T)
+	\end{align*}
+	所以, 自相关函数$r_x(\tau)$也是以$T$为周期的。
+\end{proof}
 \end{frame}
 
 \begin{frame}
@@ -654,7 +675,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \end{proof}
 \end{frame}
 
-\begin{frame}{$x(t), y(t)$的正交性与互不相关性}
+\begin{frame}{两个随机过程$x(t), y(t)$的正交性与互不相关性}
 设$x(t_j)$是$x(t)$在$t_j$时刻的随机变量, $y(t_k)$是$y(t)$在$t_k$时刻的随机变量。
 \begin{definition}
 	$x(t)$在$t_j$, $y(t)$在$t_k$的均值分别为$\mu_x(t_j)$和$\mu_y(t_k)$, 互相关函数为$r_{xy}(t_j,t_k)$, 互协方差函数为$c_{xy}(t_j,t_k)$。
@@ -669,7 +690,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \end{definition}
 \end{frame}
 
-\begin{frame}{平稳随机过程$x(t), y(t)$的正交性与互相关性}
+\begin{frame}{两个平稳随机过程$x(t), y(t)$的正交性与互相关性}
 \begin{definition}[]
 	如果$x(t), y(t)$是联合平稳的随机过程,
 	\begin{enumerate}
@@ -684,7 +705,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \end{definition}
 \end{frame}
 
-\begin{frame}{$x(t), y(t)$的统计独立性}
+\begin{frame}{两个随机过程$x(t), y(t)$的统计独立性}
 \begin{definition}
 	如果随机过程$x(t)$和$y(t)$对任意的$N\ge 1, M\ge 1$和所有时刻$t_k(k=1,2,\dots,t_N)$与$t_k^\prime(k=1,2,\dots,M)$, 其$N+M$维联合概率密度表示为
 	\begin{align*}
@@ -700,6 +721,38 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 	\item 均值之一或同时为零, 则$x(t), y(t)$相互正交$\Leftrightarrow$互不相关\\
 	\item $x(t), y(t)$相互统计独立$\Rightarrow$互不相关
 	\item $x(t), y(t)$互不相关$\nRightarrow$相互统计独立。但是若$x(t), y(t)$服从联合高斯分布，则互不相关$\Leftrightarrow$相互统计独立
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{雷达回波信号}
+\begin{example}
+	设$s(t)$是雷达的发射信号, 遇到目标后的反射信号为$as(t-t_0), t_0$是信号返回的延迟时间。如果回波信号中伴有加性噪声$n(t)$, 则接收到的信号为
+	\[x(t)=as(t-t_0)+n(t) \]
+	\begin{enumerate}
+		\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_{sx}(\tau)$。
+		\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_{sx}(\tau)$。
+	\end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}[shrink]
+解:
+\begin{enumerate}
+\item 假定$s(t)$和$n(t)$是平稳相关的, 试求互相关函数$r_{sx}(\tau)$。\begin{align*}
+r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
+&=E[s(t)(as(t-t_0+\tau)+n(t+\tau)))] &&\text{by } x(t)=as(t-t_0)+n(t)\\
+&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)]\\
+&=ar_{s}(\tau-t_0)+r_{sn}(\tau)
+\end{align*}
+\item 如果噪声$n(t)$的均值为零, 且与$s(t)$相互统计独立, 试求互相关函数$r_{sx}(\tau)$。
+\begin{align*}
+r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
+&=E[s(t)(as(t-t_0+\tau)+n(t+\tau)))] &&\text{by } x(t)=as(t-t_0)+n(t)\\
+&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)] &&\text{相互统计独立}\\ 
+&=aE[s(t)s(t-t_0+\tau)]+E[s(t)]E[n(t+\tau)] &&\text{确知信号$s(t)$看作常数,$E[s(t)]=s(t)$}\\ 
+&=aE[s(t)s(t-t_0+\tau)]+s(t)E[n(t+\tau)] &&\text{by }E[n(t)]=0 \\
+&=ar_{s}(\tau-t_0)
+\end{align*}
 \end{enumerate}
 \end{frame}
 
@@ -729,7 +782,7 @@ $P_x(\omega)$与$r_x(\tau)$构成傅里叶变换对
 \end{block}
 \end{frame}
 
-\section{高斯噪声、白噪声和有色噪声}
+\section{高斯噪声、白噪声、高斯白噪声和有色噪声}
 
 \begin{frame}{高斯(正态)分布随机变量}
 均值$\mu_x$,方差为$\sigma_x^2$的高斯分布随机变量$x(\xi)$概率密度函数$p(x)$表示为
@@ -742,7 +795,7 @@ $P_x(\omega)$与$r_x(\tau)$构成傅里叶变换对
 	\column{0.4\textwidth}
 	\begin{figure}[!h]
 		\centering
-		\includegraphics[width=4cm]{Gaussian}\\
+		\includegraphics[width=4cm]{Gaussian}
 		\caption{高斯(正态)分布随机变量的PDF曲线$\mu_x>0$}
 	\end{figure}
     \tiny PDF---概率密度函数(Probability Density Function)
@@ -758,14 +811,14 @@ $P_x(\omega)$与$r_x(\tau)$构成傅里叶变换对
 \column{0.4\textwidth}%<1->
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=4cm]{Gaussian}\\
+	\includegraphics[width=4cm]{Gaussian}
 	\caption{高斯(正态)分布随机变量的PDF曲线$\mu_x>0$}
 \end{figure}
 \column{0.4\textwidth}
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=4cm]{GaussianN}\\
-	\caption{标准高斯(正态)分布随机变量的PDF曲线$\mu_x>0$}
+	\includegraphics[width=4cm]{GaussianN}
+	\caption{标准高斯(正态)分布随机变量的PDF曲线$\mu_x=0$}
 \end{figure}
 \end{columns}
 \end{frame}
@@ -780,21 +833,10 @@ $P_x(\omega)$与$r_x(\tau)$构成傅里叶变换对
 \column{0.4\textwidth}
 \begin{figure}[!h]
 \centering
-\includegraphics[width=4cm]{GaussianNQ}\\
-\caption{标准高斯(正态)分布随机变量的PDF曲线$\mu_x>0$}
+\includegraphics[width=4cm]{Qx}\\
+\caption{标准高斯(正态)分布的右尾积分$Q(x)$}
 \end{figure}
 \end{columns}
-\end{frame}
-
-
-\begin{frame}{中心极限定理}
-\begin{block}{高斯噪声的数学模型---中心极限定理}
-在一般条件下, $N$个相互\textbf{统计独立}的随机变量$n_i$之和$n=\sum\limits_{k=1}^{N}n_k$, 在$N\to\infty$的极限情况下，其概率密度趋于高斯分布，而不管每个变量$n_k$的具体分布如何。
-\end{block}
-\begin{block}{注}
-	(1) 实际上，只要$N$足够大，每个分量之间也不一定完全统计独立，但不存在占统治地位的若干分量，则它们和的分布就可以近似为高斯分布。\\
-	(2) 无限多的、相互独立的、各自作用有限的系统干扰分量叠加形成噪声干扰，并且服从高斯分布。
-\end{block}
 \end{frame}
 
 \begin{frame}{高斯噪声的统计描述(1)}
@@ -880,11 +922,11 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式,$\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 	&=\prod\limits_{k=1}^{N}\left(\frac{1}{2\pi\sigma_{n_k}}\right)^{1/2}\exp\left[-\frac{(n_k-\mu_{n_k})^2}{2\sigma_{n_k}^2}\right]\\
 	&=p(x_1;t_1)p(x_2;t_2)\cdots p(x_N;t_N)
 	\end{align*}
-	表明$n(t)$的N维联合概率密度函数表示成各自一维概率密度函数之积的形式，即是统计独立性的定义。因此，N个高斯随机变量$n(t_k)(k=1,2,\dots,t_N)$互不相关$\Rightarrow$相互统计独立; 结合之前的结论``相互统计独立的随机变量$\Rightarrow$互不相关''。所以, \textbf{
+	表明$n(t)$的N维联合概率密度函数表示成各自一维概率密度函数之积的形式，即是统计独立性的定义。因此，\textbf{N个高斯随机变量$n(t_k)(k=1,2,\dots,t_N)$互不相关$\Rightarrow$相互统计独立}; 结合之前的结论``相互统计独立的随机变量$\Rightarrow$互不相关''。所以, \textbf{
 	N个高斯随机变量$n(t_k)(k=1,2,\dots,t_N)$互不相关$\Leftrightarrow$相互统计独立}。
 \end{frame}
 
-\begin{frame}{高斯随机变量的线性组合}
+\begin{frame}{高斯随机变量的线性组合仍然是高斯随机变量}
 \begin{enumerate}
 	\item 若$x_k(\xi)\sim\mathcal{N}(\mu_{x_k},\sigma_{x_k}^2)(k=1,2,\dots,N)$,且它们相互统计独立，则它们的和
 	\[x(\xi)=\sum\limits_{k=1}^{N}x_k(\xi) \]
@@ -896,6 +938,46 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式,$\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 	$\mu_x=\sum\limits_{k=1}^Na_k\mu_{x_k},\sigma_x^2=\sum\limits_{j=1}^N\sum\limits_{k=1}^Na_ja_kc_{x_kx_j}$\\
 	式中,协方差函数$c_{x_jx_k}=E[(x_j(\xi)-\mu_{x_j})(x_k(\xi)-\mu_{x_k})]=c_{x_kx_j},\mu_{x_k}=E[x_k(\xi)]$
 \end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{example}
+	设随机变量$y$与$x$之间为线性关系$y=ax+b,a,b$为常数,且$a\ne 0$。已知随机变量$x$服从高斯分布,即
+	\[p(x)=\left(\frac{1}{2\pi\sigma_x^2}\right)^{1/2}\exp\left[-\frac{(x-\mu_x)^2}{2\sigma_x^2}\right] \]
+	证明随机变量$y$是服从均值为$a\mu_x+b$, 方差为$a^2\sigma_x^2$的高斯分布。
+\end{example}
+\end{frame}
+
+\begin{frame}
+\begin{proof}
+证法I: 雅可比变换法
+\begin{align*}
+&\text{因为}\qquad  y=ax+b \\
+&\text{所以,反函数为}\qquad  x=\frac{y-b}{a} \\
+&\text{且有}\qquad  \frac{dx}{dy}=\frac{1}{a} \\
+&\text{于是，由一维雅可比变换,得}  \\
+&p(y)=\left(\frac{1}{2\pi\sigma_x^2}\right)^{1/2}\exp\left[-\frac{(\frac{y-b}{a}-\mu_x)^2}{2\sigma_x^2}\right]\left|\frac{1}{a}\right| \\
+&=\left(\frac{1}{2\pi  a^2\sigma_x^2}\right)^{1/2}\exp\left[-\frac{(y-(a\mu_x+b))^2}{2a^2\sigma_x^2}\right]  
+\end{align*}
+所以,随机变量$y$是服从均值为$a\mu_x+b$, 方差为$a^2\sigma_x^2$的高斯分布。
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}
+证法II: 利用高斯随机变量的特性来证明\\
+因为  $y=ax+b$ \\
+是高斯随机变量$x$的线性变换，所以$y$仍然是高斯随机变量。\\
+其均值$\mu_y$和方差$\sigma_y^2$分别为
+\begin{align*}
+\mu_y&=E(y)=E(ax+b)=aE(x)+b\\
+&=a\mu_x+b\\
+\sigma_y^2&=E[(y-\mu_y)^2]=E[(ax+b-a\mu_x-b)^2]\\
+&=a^2E[(x-\mu_x)^2]\\
+&=a^2\sigma_x^2
+\end{align*}
+所以,随机变量$y$是服从均值为$a\mu_x+b$, 方差为$a^2\sigma_x^2$的高斯分布。
+\end{proof}
 \end{frame}
 
 \begin{frame}{白噪声}
