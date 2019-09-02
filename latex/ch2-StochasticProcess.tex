@@ -231,7 +231,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \[p(y)=p[x=h(y)]|J| \]
 这种变换称为\textbf{一维雅可比变换},其中\textbf{雅可比}$J=\frac{dh(Y)}{dY}$, $|\bullet|$是绝对值符号。
 \begin{block}{Notes}
-	雅可比变换法的意义在于: $Y(\xi)$的概率密度函数$p(y)$可以通过它的反函数$X(\xi)$的概率密度函数$p(x)$与雅可比的乘积得到。进而, 由$X(\xi)$的数学期望值可以通过$Y(\xi)$的数学期望值。
+	$Y(\xi)$的概率密度函数$p(y)$可以通过它的反函数$X(\xi)$的概率密度函数$p(x)$与雅可比的乘积得到。进而, $E(Y)=E[g(X)]=\int_{-\infty}^{\infty}g(x)p(x)dx$。
 \end{block}
 \end{frame}
 
@@ -673,6 +673,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 	\end{align*}
 	这正是$x(t)$互不相关的等价条件$r_x(t_j,t_k)=\mu_x(t_j)\mu_x(t_k),j\ne k $,所以$x(t)$统计独立$\implies$ 互不相关
 \end{proof}
+由证明过程，可以得到: \textcolor{blue}{$x(t)$相互统计独立，则，$E[x(t_j)x(t_k)]=E[x(t_j)]E[x(t_k)]$}
 \end{frame}
 
 \begin{frame}{两个随机过程$x(t), y(t)$的正交性与互不相关性}
@@ -716,6 +717,22 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \end{definition}
 \end{frame}
 
+\begin{frame}{相互独立的随机过程$E[x(t)y(t)]=E[x(t)]E[y(t)]$}
+\begin{block}{}
+	设$x(t), y(t)$是相互独立的随机过程, 则有
+	\[ E[x(t)y(t)]=E[x(t)]E[y(t)]\]
+	这一性质可以推广至任一两个有限个相互独立的随机变量之积的情况。
+\end{block}
+\begin{proof}
+	\begin{align*}
+	E[x(t)y(t)]&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyp(x,y)dxdy\\
+	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyp_x(x)p_ydxdy\\
+	&=\left[\int_{-\infty}^{\infty}xp_x(x)dx\right]\left[\int_{-\infty}^{\infty}yp_y(y)dy\right]\\
+	&=E[x(t)]E[y(t)]
+	\end{align*}
+\end{proof}
+\end{frame}
+
 \begin{frame}{$x(t),y(t)$的正交性,不相关性以及统计独立性之间的关系}
 \begin{enumerate}
 	\item 均值之一或同时为零, 则$x(t), y(t)$相互正交$\Leftrightarrow$互不相关\\
@@ -748,7 +765,7 @@ r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
 \begin{align*}
 r_{sx}(\tau)&=E[s(t)x(t+\tau)] \\
 &=E[s(t)(as(t-t_0+\tau)+n(t+\tau)))] &&\text{by } x(t)=as(t-t_0)+n(t)\\
-&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)] &&\text{相互统计独立}\\ 
+&=aE[s(t)s(t-t_0+\tau)]+E[s(t)n(t+\tau)] &&\text{相互统计独立E[XY]=E[X]E[Y]}\\ 
 &=aE[s(t)s(t-t_0+\tau)]+E[s(t)]E[n(t+\tau)] &&\text{确知信号$s(t)$看作常数,$E[s(t)]=s(t)$}\\ 
 &=aE[s(t)s(t-t_0+\tau)]+s(t)E[n(t+\tau)] &&\text{by }E[n(t)]=0 \\
 &=ar_{s}(\tau-t_0)

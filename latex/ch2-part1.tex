@@ -48,7 +48,7 @@
 
 \begin{frame}
 \begin{example}
-	一个盒子中有10个相同的球，5各白色，5个黑色，搅匀后从中任意摸取一球。\\
+	一个盒子中有10个相同的球，5个 白色，5个黑色，搅匀后从中任意摸取一球。\\
 	~\\
 	样本点: $\xi_1=\{\text{取得白球} \}$, $\xi_2=\{\text{取得黑球} \}$\\
 	样本空间: $\Omega=\{\xi_1,\xi_2\}$
@@ -209,7 +209,7 @@ P(A)&=\sum\limits_{i=1}^4P(B_i)P(A|B_i)=0.15\times 0.05+0.20\times 0.04+0.30\tim
 &=0.0315=3.15\%
 \end{align*}
 实际上，$P(A|B_i)$可以从过去生产的产品中统计出来，称为\textbf{先验概率}。\\
-(2) 从概率论的角度考虑可以按$P(B_i|A)$的大小来追究第$i$条$i=1,2,3,4$流水线的责任。\\
+(2) 从概率论的角度考虑可以按$P(A|B_i)$的大小来追究第$i$条$i=1,2,3,4$流水线的责任。\\
 $P(AB_4)=P(B_4)P(A|B_4)=0.35\times 0.02=0.007$\\
 由条件概率的定义知
 \begin{align*}
@@ -332,9 +332,9 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 
 \begin{frame}{随机变量的概率密度函数$p(x)$}
 \begin{definition}
-	设连续随机变量$X$的一维累积分布函数为$F(x)$, 如果$F(x)$对$x$的一阶导数存在，则有
+	设连续随机变量$X$的\textbf{一维累积分布函数}为$F(x)$, 如果$F(x)$对$x$的一阶导数存在，则有
 	\[p(x)\mathop{=}^{def}\frac{dF(x)}{dx}\]
-	式中, $p(x)$称为随机变量$X=X(\xi)$的一维概率密度函数, 简称概率密度函数(probability density function, p.d.f)
+	式中, $p(x)$称为随机变量$X=X(\xi)$的\textbf{一维概率密度函数}, 简称概率密度函数(probability density function, p.d.f)
 \end{definition}
 \includegraphics[scale=0.4]{pi}
 \end{frame}
@@ -439,7 +439,7 @@ P(X \ge x) &= 1-F(x-0)
 \end{block}
 \end{columns}
 \begin{block}{}
-$F(x)$全面地描述了随机变量$X$地统计规律。既然分布函数能够描述一般的随机变量的统计规律，因而分布函数这个概念比分布列更重要。只不过对离散型随机变量来说，分布列比较方便。
+\textcolor{blue}{$F(x)$全面地描述了随机变量$X$的统计规律。}
 \end{block}
 \end{frame}
 
