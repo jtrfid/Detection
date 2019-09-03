@@ -34,7 +34,8 @@
 \begin{columns}
 	\column{0.6\textwidth}
 	\begin{example}
-		三次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; 无限个$t$，则无限个电压---时间的函数族构成一随机过程。
+		每次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; \\
+		无限个$t$，则无限个电压---时间的函数族构成一随机过程。
 	\end{example}
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.3]{vt}
@@ -53,13 +54,24 @@
 \end{frame}
 
 \begin{frame}{随机过程引例特点}
-\begin{block}{以上例子的共同特点---随机现象在时间上的延展$\implies$\textbf{随机过程}}
+\begin{block}{以上例子的共同特点---随机现象在时间上的延展$\implies$\textbf{随机过程$\{X(t,\xi),t\in T,\xi\in \Omega\}$}}
 	\begin{itemize}
-		\item 给定一个$t$,就有一个随机变量$X(t)$与之对应。
+		\item 给定一个$t$,就有\textbf{一个随机变量$X(t)$}与之对应。
 		\item 概率论主要是以\textbf{一个或有限个随机变量}为研究对象的.
 		\item 随机过程是概率论的``动力学''部分，研究对象为随时间演变的随机现象,通常会有\textbf{无穷多个随机变量}。
-	\end{itemize}	
+	\end{itemize}
 \end{block}
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{sampleFun}
+	\column{0.6\textwidth}
+	\small
+	$X(t_1)=\{X(t_1,\xi_1), X(t_1,\xi_2),\cdots, X(t_1,\xi_M)\}$	\\
+	$X(t_2)=\{X(t_2,\xi_1), X(t_2,\xi_2),\cdots, X(t_2,\xi_M)\}$	\\
+	$\qquad\qquad\vdots\qquad\qquad\qquad\vdots$\\
+	$X(t_N)=\{X(t_N,\xi_1), X(t_N,\xi_2),\cdots, X(t_N,\xi_M)\}$\\
+	\textcolor{blue}{$M$次试验, 每次进行$N$次采样, $N$个随机变量$X_{t}$。}
+\end{columns}	
 \end{frame}
 
 \begin{frame}%{随机过程的定义}
@@ -72,24 +84,35 @@
     则称$\{X(t,\xi),t\in T,\xi\in \Omega \}$为一\textbf{随机过程},简记为$X(t)$,其中$t$和$\xi$均是变量。\\
 	随机过程的定义域是实参数集$T$和样本空间$\Omega$。值域是实数集$\mathbb{R}$.
 	\begin{itemize}
-		\item 样本空间$\Omega$：一个随机试验所有可能出现的结果的全体，称为随机事件的样本空间。\\
+		\item \textbf{样本空间$\Omega$}：一个随机试验所有可能出现的结果的全体，称为随机事件的样本空间。\\
 		\item 事件域$\mathcal{F}$: 样本空间中的某些子集。
 		\item
-		参数集$T$表示时间或空间，通常的形式: $T=\{0,1,2,\dots \}$或$T=[a,b],T=[-\infty,\infty]$
+		\textbf{参数集$T$}: 表示时间或空间，通常的形式: $T=\{0,1,2,\dots \}$或$T=[a,b],T=(-\infty,\infty)$
 	\end{itemize}
 	\end{definition}
 \end{frame}
 
 \begin{frame}{用映射表示随机过程} 
-\[X(t,\xi): T\times\Omega\to\mathbb{R} \]
+\begin{columns}
+	\column{0.2\textwidth}
+	\small
+	\[X(t,\xi): T\times\Omega\to\mathbb{R} \]
+	\column{0.25\textwidth}
+	\includegraphics[scale=0.15]{sampleFun}
+	\column{0.55\textwidth}
+	\small
+	$X(t_1,\bullet)=\{X(t_1,\xi_1), X(t_1,\xi_2),\cdots, X(t_1,\xi_M)\}$	\\
+	$X(t_2,\bullet)=\{X(t_2,\xi_1), X(t_2,\xi_2),\cdots, X(t_2,\xi_M)\}$	\\
+	$\qquad\qquad\vdots\qquad\qquad\qquad\vdots$\\
+	$X(t_N,\bullet)=\{X(t_N,\xi_1), X(t_N,\xi_2),\cdots, X(t_N,\xi_M)\}$
+\end{columns}
 \begin{enumerate}
 	\item $X(\bullet,\bullet)$实质是定义在$T\times\Omega$上的二元单值函数;
 	\item 固定$t\in T,X(t,\bullet)$是样本空间$\Omega$上的函数,即$X(t,\bullet)$为一\textbf{随机变量};
 	\item 固定$\xi\in\Omega,X(\bullet,\xi)$是一个关于$t\in T$的函数，通常称为\textbf{样本函数},或称随机过程的\textbf{一次实现}，所有样本函数的集合确定一随机过程。
 	\item 随机过程$\{X(t,\xi)\}$可能取值的全体所构成的集合称为此随机过程的\textbf{状态空间}，记作$S$。$S$中的元素称为\textbf{状态}。状态空间可以由复数、实数或更一般的抽象空间构成。
 \end{enumerate}
-
-记号$X(t,\xi)$有时记为$X_t(\xi)$或简记为$X(t)$。
+\textcolor{blue}{记号$X(t,\xi)$有时记为$X_t(\xi)$或简记为$X(t)$。}
 \end{frame}
 
 \begin{frame}
@@ -119,7 +142,7 @@
 	考察$[0,t_0]$时间内某网站收到的访问次数$X(t_0)$, $X(t_0)$则是一个随机变量。
 	\begin{itemize}
 		\item 如果要长时间内该网站的访问次数,则需要让$t$变化起来,即$t$趋于无穷大,则$X(t)$是一簇随机变量．
-		\item 此时$X(t)$是与时间有关系的随机变量, 称$\{X(t),t\in[0,\infty]\}$是随机过程。
+		\item 此时$X(t)$是与时间有关系的随机变量, 称$\{X(t),t\in[0,\infty)\}$是随机过程。
 	\end{itemize}
 \end{example}
 \includegraphics[scale=0.2]{sampleFun1}	
@@ -133,7 +156,7 @@
 \begin{itemize}
 	\item 由于初位相的随机性，在某时刻$t=t_0,X(t)$是一个随机变量．
 	\item 若要观察任一时刻$t$的波形，则需要用一簇随机变量$X(t)$描述. 
-	\item 称$\{X(t),t\in[0,\infty]\}$是随机过程。
+	\item 称$\{X(t),t\in[0,\infty)\}$是随机过程。
 \end{itemize}	
 \end{example}
 \includegraphics[scale=0.2]{sampleFun2}	
@@ -143,9 +166,12 @@
 \begin{columns}
 \column{0.7\textwidth}
 \begin{example}
-三次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; \\
-无限个$t$，则无限个电压---时间的函数族构成一随机过程。\\
+每次热噪声电压测量结果：固定$t$时刻电压,对应一个随机变量$v(t)$; \\
+无限个$t$，则无限个电压---时间的函数族$\{v(t),t\in[0,\infty)\}$构成一随机过程。\\
 \end{example}
+对某种装置做一次试验，便得到一个电压---时间函数$v_1(t)$。这个电压---时间函数是不可能预先确知的，只有通过测量才能得到，如果在相同的条件下独立地再进行一次测量，则得到的记录是不同的。\\
+
+\medskip
 样本函数: $X(\bullet,\xi)=\{v_k(t)\}, k=1,2,\dots, \xi\in \Omega$\\
 状态空间: $S=\{v_k(t_0)\}, k=1,2,\dots, \forall t_0\in (-\infty, +\infty)$
 \column{0.3\textwidth}
@@ -186,15 +212,16 @@ $$s_2(t; \theta=\frac{\pi}{2})=a\cos(\omega_0t+\frac{\pi}{2})=-a\sin\omega_0t$$
 \begin{columns}
 	\column{0.6\textwidth}
 	\begin{block}{}
+		%\small
 		设$\{X(t,\xi),t\in T,\xi\in\Omega \}$是一随机过程，对于任意固定的时刻$t,X(t,\xi)$是一随机变量，称
 		\[F(x;t)=P\{X(t,\xi)\le x\},x\in\mathbb{R},t\in T \]
 		为该随机过程的\textbf{一维累积分布函数}。\\
 		如果$F(x;t)$对$x$的一阶导数存在，则有
 		\[p(x;t)=\frac{dF(x;t)}{dx}\]
-		$p(x;t)$称为随机过程$X(t,\xi)$的\textbf{一维概率密度函数}。
+		$p(x;t)$为随机过程$X(t,\xi)$的\textbf{一维概率密度函数}。
 	\end{block}
-	\column{0.3\textwidth}
-	\includegraphics[scale=0.25]{sampleFun4}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.3]{sampleFun4}
 \end{columns}
 \end{frame}
 
@@ -205,6 +232,7 @@ $$s_2(t; \theta=\frac{\pi}{2})=a\cos(\omega_0t+\frac{\pi}{2})=-a\sin\omega_0t$$
 如果$F(x_1,x_2;t_1,t_2)\in T$对$x_1,x_2$的二阶混合偏导数存在，则有
 \[p(x_1,x_2;t_1,t_2)=\frac{\partial^2 F(x_1,x_2;t_1,t_2)}{\partial x_1\partial x_2}\]
 $p(x;t)$称为随机过程$X(t,\xi)$的\textbf{二维联合概率密度函数}。
+\includegraphics[scale=0.23]{sampleFun4-2}
 \end{frame}
 
 \begin{frame}{N维联合概率密度函数}
@@ -249,16 +277,15 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \begin{frame}
 解:
 \begin{enumerate}
-	\item $V$服从$[0,1]$上的均匀分布, 取$V=1/2,1/3$分别得到两个样本函数
-	\[X_1(t)=\frac{1}{2}\cos\omega t,X_2(t)=\frac{1}{3}\cos\omega t\]
+	\item $V\sim U(0,1)$, 取$V=1/2,1/3$分别得到两个样本函数
+	\[X_1(t)=\frac{1}{2}\cos\omega t,\qquad X_2(t)=\frac{1}{3}\cos\omega t\]
 	\item $t=0$时, $x(t)=V\cos\omega 0=V$,而$V$为$[0,1]$上的均匀分布,则
 	$$
 	p(x;t=0)=\begin{cases}
 	1 & 0\le x\le 1\\
-	0 &\text{其它}
-	
-\end{cases}
-$$
+	0 &\text{其它}	
+    \end{cases}
+    $$
 \end{enumerate}
 \end{frame}
 
@@ -339,7 +366,7 @@ $$
 %\section{随机过程的统计平均量}
 
 \begin{frame}
-函数的均值
+连续函数$f(x)$在区间$[a,b]$的均值
 \[\bar{y}=\frac{1}{b-a}\lim\limits_{\Delta x\to 0}\sum\limits_{i=1}^{n}f(x_{i-1})\Delta x=\frac{1}{b-a}\int_{a}^{b}f(x)dx \]
 交流电$i=I_m\sin\omega t$,\\
 电压$u=iR=I_mR\sin\omega t$,\\
@@ -350,14 +377,15 @@ $I_m,U_m$为交流电电流、电压的最大值，$\omega$为交流电的角频
 \end{frame}
 
 \begin{frame}
-\begin{block}{随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的理论平均值}
+\begin{block}{随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的\textbf{理论平均值}}
 	\[\mu_x(t)\mathop{=}^{def}E[x(t)]=\int_{-\infty}^{\infty}xp(x;t)dx \]
-	如果$x(t)$是电压或电流，则$\mu_x(t)$可以理解为在$t$时刻的``直流分量''。
+	如果$x(t)$是电压或电流，则$\mu_x(t)$可以理解为在$t$时刻的``直流分量''。\\
+	随机过程$x(t)$的均值又称作数学期望(Expectation)。
 \end{block}
 
 \begin{block}{随机过程的均方值$\varphi_x^2(t)$}
 	\[\varphi_x^2(t)\mathop{=}^{def}E[x^2(t)]=\int_{-\infty}^{\infty}x^2p(x;t)dx \]
-	如果$X(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
+	如果$x(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
 \end{block}
 \end{frame}
 
@@ -365,7 +393,8 @@ $I_m,U_m$为交流电电流、电压的最大值，$\omega$为交流电的角频
 \begin{block}{随机过程的方差/标准偏差$\delta_x^2(t)$}
 \[\sigma_x^2(t)\mathop{=}^{def}E[(x(t)-\mu_x(t))^2]=\int_{-\infty}^{\infty}(x-\mu_x(t))^2p(x;t)dx \]
 方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。\\
-如果$x(t)$是电压或电流，则$\delta_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。
+如果$x(t)$是电压或电流，$\delta_x^2(t)$表示在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。\\
+随机过程$x(t)$的方差(Variance)有时用$Var[x(t)]$表示。
 \end{block}
 \begin{block}{均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系}
 \[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
@@ -421,7 +450,7 @@ r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
 确知函数$a(t)$的均值:
 \begin{align*}
 E[a(t)]&=\int_{-\infty}^{\infty}a(t)p(x)dx\\
-&=a(t)\int_{-\infty}^{\infty}p(x)dx &&\text{by $a(t)$是常数}\\
+&=a(t)\int_{-\infty}^{\infty}p(x)dx &&\text{by 确知函数$a(t)$看作常数}\\
 &=a(t)\cdot 1 &&by \int_{-\infty}^{\infty}p(x)dx=1\\
 &=a(t)
 \end{align*}
@@ -458,7 +487,7 @@ r_y(t_j,t_k)&=E[y(t_j)y(t_k)]\\
 \begin{frame}
 解:
 \begin{enumerate}
-\item 因为相位$\theta$服从$[-\pi,\pi]$上的均匀分布,所以，
+\item 因为相位$\theta\sim U(-\pi,\pi)$,所以，
 $$p(\theta)=\begin{cases}
 \frac{1}{2\pi}, & -\pi\le\theta\le\pi\\
 0， &\text{其它}
@@ -486,6 +515,12 @@ r_x(t_j,t_k)&=E[s(t_j)s(t_k)]\\
 &=\frac{a^2}{2}\cos\omega_0\tau,\qquad(\tau=t_k-t_j)
 \end{align*}
 \end{enumerate}
+\begin{columns}
+	\column{0.6\textwidth}
+	\includegraphics[scale=0.25]{sampleFun2-2}
+	\column{0.4\textwidth}
+	由于$a,\omega_0$为常数, 因此$r_x(t_j,t_k)$仅与采样间隔$\tau=t_j-t_k$有关, 与$\theta$无关。$\tau=0$时, 自相关函数值达到最大$\frac{a^2}{2}$。
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -667,7 +702,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 	设$x(t_j)$与$x(t_k)$是相互统计独立的, 则其自相关函数为
 	\begin{align*}
 	r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
-	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x_jx_kp(x_j,x_k;t_j,t_k)dx_jd_k\\
+	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x_jx_kp(x_j,x_k;t_j,t_k)dx_jdx_k\\
 	&=\int_{-\infty}^{\infty}x_jp(x_j;t_j)dx_j\int_{-\infty}^{\infty}x_jp(x_k;t_k)dx_k\\
 	&=\mu_x(t_j)\mu_x(t_k)
 	\end{align*}
