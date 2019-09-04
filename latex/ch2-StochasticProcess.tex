@@ -259,7 +259,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \[p(y)=p[x=h(y)]|J| \]
 这种变换称为\textbf{一维雅可比变换},其中\textbf{雅可比}$J=\frac{dh(Y)}{dY}$, $|\bullet|$是绝对值符号。
 \begin{block}{Notes}
-	$Y(\xi)$的概率密度函数$p(y)$可以通过它的反函数$X(\xi)$的概率密度函数$p(x)$与雅可比的乘积得到。进而, $E(Y)=E[g(X)]=\int_{-\infty}^{\infty}g(x)p(x)dx$。
+	$Y(\xi)$的概率密度函数$p(y)$可以通过它的反函数$X(\xi)$的概率密度函数$p(x)$与雅可比的乘积得到。
 \end{block}
 \end{frame}
 
@@ -316,7 +316,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 解(续):
 \begin{enumerate}
 	\setcounter{enumi}{2} %设定起始编号 
-	\item $t=\frac{\pi}{2\omega}$时，$X(t)=V\cos\omega\frac{pi}{2\omega}=0$, 此时$X(t=\frac{\pi}{2\omega})$是单点分布，则
+	\item $t=\frac{\pi}{2\omega}$时，$X(t)=V\cos\omega\frac{\pi}{2\omega}=0$, 此时$X(t=\frac{\pi}{2\omega})$是单点分布，则
 	\begin{align*}
 	F(x,t=\frac{\pi}{2\omega}) &=P\{X(t)\le x \}\\
 	&=\begin{cases}
@@ -330,11 +330,11 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \begin{frame}
 \begin{example}
 设有一采用脉宽调制以传输信息的通信系统。脉冲的重复周期为$T$,每个周期传输一个值, 脉冲宽度收到随机信息的调制，使每个脉冲的宽度$\tau$服从$(0,T)$上的均匀分布，而且不同周期的脉宽是相互统计独立的随机变量。脉冲的幅度为常数$A$。 也就是说，这个通信系统传送的信号是随机脉宽等幅度的周期信号，它是一个随机过程。下图画出了它的一个样本函数。试求该随机过程$x(t)$的一维概率密度函数。
+\end{example}
 \begin{figure}
 	\includegraphics[scale=0.3]{2_10SampleFun}
 	\caption {脉宽调制信号的一个样本函数}
 \end{figure}
-\end{example}
 \end{frame}
 
 \begin{frame}[shrink]
@@ -366,47 +366,50 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 %\section{随机过程的统计平均量}
 
 \begin{frame}
-连续函数$f(x)$在区间$[a,b]$的均值
+连续函数$f(x)$在区间$[a,b]$的均值:
 \[\bar{y}=\frac{1}{b-a}\lim\limits_{\Delta x\to 0}\sum\limits_{i=1}^{n}f(x_{i-1})\Delta x=\frac{1}{b-a}\int_{a}^{b}f(x)dx \]
-交流电$i=I_m\sin\omega t$,\\
-电压$u=iR=I_mR\sin\omega t$,\\
-功率$p=ui=I_m^2R\sin^2\omega t$\\
-此功率在长度为一个周期的区间$[0,\frac{2\pi}{\omega}]$上的平均值
+交流电$I(t)=I_m\sin\omega t$, 其平均值表示它的直流分量: $\overline{I}=\frac{1}{T}\int_{0}^{T}I(t)dt$\\
+电压$U(t)=iR=I_mR\sin\omega t$, , 其平均值表示它的直流分量: $\overline{U}=\frac{1}{T}\int_{0}^{T}U(t)dt$\\
+功率$p=U(t)I(t)=I_m^2R\sin^2\omega t$\\
+此功率在长度为一个周期的区间$[0,\frac{2\pi}{\omega}]$上的平均值:
 \[\bar{p}=\frac{1}{\frac{2\pi}{\omega}}\int_{0}^{\frac{2\pi}{\omega}}I_m^2R\sin^2\omega tdt=\frac{I_m^2R}{2}=\frac{I_mU_m}{2},(U_m=I_mR) \]
 $I_m,U_m$为交流电电流、电压的最大值，$\omega$为交流电的角频率。
 \end{frame}
 
 \begin{frame}
+以下用记号$\{x(t),t\in T\}$表示随机过程, 固定$t\in T, x(t)$是一随机变量。
 \begin{block}{随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的\textbf{理论平均值}}
 	\[\mu_x(t)\mathop{=}^{def}E[x(t)]=\int_{-\infty}^{\infty}xp(x;t)dx \]
 	如果$x(t)$是电压或电流，则$\mu_x(t)$可以理解为在$t$时刻的``直流分量''。\\
-	随机过程$x(t)$的均值又称作数学期望(Expectation)。
+	随机过程$x(t)$的均值又称作数学期望(Expectation)。$\mu_x(t)$是随机过程的\textbf{所有样本函数}在时刻$t$的函数值的统计平均值。$\mu_x(t)$表示了随机过程$x(t)$在各个时刻的摆动中心。
 \end{block}
 
-\begin{block}{随机过程的均方值$\varphi_x^2(t)$}
-	\[\varphi_x^2(t)\mathop{=}^{def}E[x^2(t)]=\int_{-\infty}^{\infty}x^2p(x;t)dx \]
-	如果$x(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
+\begin{block}{Notes}
+	\begin{itemize}
+		\item 如果$y(t)=g(x(t))$, 则$\mu_y(t)=E[g(x(t))]=\int_{-\infty}^{\infty}g(x)p_x(x)dx$
+		\item 均值的线性特性: $y(t)=ax(t)+b$, \quad $a,b$为常数, 则$\mu_y(t)=E[y(t)]=E[ax(t)+b]=aE[x(t)]+b=a\mu_x(t)+b$
+	\end{itemize}
 \end{block}
 \end{frame}
 
 \begin{frame}
+\begin{block}{随机过程的均方值$\varphi_x^2(t)$}
+	\[\varphi_x^2(t)\mathop{=}^{def}E[x^2(t)]=\int_{-\infty}^{\infty}x^2p(x;t)dx \]
+	如果$x(t)$是电压或电流，则$\varphi_x^2(t)$可以理解在$t$时刻它在$1\Omega$电阻上消耗的``平均功率''。
+\end{block}
 \begin{block}{随机过程的方差/标准偏差$\delta_x^2(t)$}
 \[\sigma_x^2(t)\mathop{=}^{def}E[(x(t)-\mu_x(t))^2]=\int_{-\infty}^{\infty}(x-\mu_x(t))^2p(x;t)dx \]
 方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。\\
 如果$x(t)$是电压或电流，$\delta_x^2(t)$表示在$t$时刻它在$1\Omega$电阻上消耗的``交流功率''。\\
 随机过程$x(t)$的方差(Variance)有时用$Var[x(t)]$表示。
 \end{block}
-\begin{block}{均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系}
-\[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
-\end{block}
-\includegraphics[scale=0.4]{delta}
 \end{frame}
 
 \begin{frame}{均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$}
 \begin{example}
 	求如图均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$。
-	\includegraphics[scale=0.3]{ex2-1}
 \end{example}
+\includegraphics[scale=0.3]{ex2-1}
 \end{frame}
 
 \begin{frame}{均匀分布随机变量$x$的均值$\mu_x$和方差$\sigma_x^2$}
@@ -436,6 +439,7 @@ r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
 \end{block}
 随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。显然
 \[r_x(t,t)=\varphi_x^2(t)\]
+\includegraphics[scale=0.23]{sampleFun4-2}
 \end{frame}
 
 \begin{frame}
@@ -504,7 +508,7 @@ $$p(\theta)=\begin{cases}
 \end{frame}
 
 \begin{frame}
-解(续): \footnote{$\cos A\cos B=\frac{1}{2}\cos (A+B)\cos(A-B)$}
+解(续): \footnote{$\cos A\cos B=\frac{1}{2}\cos (A+B)+\cos(A-B)$}
 \begin{enumerate}
 \setcounter{enumi}{1} %设定起始编号 
 \item 该随机过程的自相关函数为:
@@ -539,8 +543,9 @@ c_x(t_j,t_k)&\mathop{=}^{def}E[((x(t_j)-\mu_x(t_j)(x(t_k)-\mu_x(t_k)]\\
 \end{frame}
 
 \begin{frame}{随机过程的统计平均量之间的关系}
+\small
 \begin{itemize}
-	\item 随机过程的均值$\mu_x(t)$: 表示随机过程在$t$时刻状态取值的\textbf{理论平均值}。
+	\item 随机过程的均值$\mu_x(t)$: 是随机过程的\textbf{所有样本函数}在时刻$t$的函数值的统计平均值。$\mu_x(t)$表示了随机过程$x(t)$在各个时刻的摆动中心。
 	\item 方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。
 	\item 随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。
 	\item 随机过程的自协方差函数$c_x(t_j,t_k)$
@@ -552,7 +557,7 @@ c_x(t_j,t_k)&\mathop{=}^{def}E[((x(t_j)-\mu_x(t_j)(x(t_k)-\mu_x(t_k)]\\
 	均值$\mu_x(t)$,均方值$\varphi_x^2(t)$,方差$\delta_x^2(t)$之间的关系:
 	\[\sigma_x^2(t)=\varphi_x^2(t)-\mu_x^2(t)\]
 	\column{0.3\textwidth}
-	\includegraphics[scale=0.4]{delta}
+	\includegraphics[scale=0.35]{delta}
 \end{columns}
 \end{frame}
 
@@ -684,6 +689,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \end{align*}
 则称$x(t)$是相互统计独立的随机变量过程。
 \end{definition}
+\includegraphics[scale=0.23]{sampleFun4-2}
 \end{frame}
 
 \begin{frame}{$x(t)$的正交性,不相关性以及统计独立性之间的关系}
