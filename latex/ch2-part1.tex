@@ -268,7 +268,7 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{geometry}
 	\column{0.5\textwidth}
-	\includegraphics[scale=0.15]{die1}
+	\includegraphics[scale=0.15]{die2}
 \end{columns}
 \end{frame}
 
@@ -560,15 +560,35 @@ X\end{frame}
 \end{frame}
 
 \begin{frame}[shrink]
-掷一枚骰子: 样本空间: $\Omega=\{f_1,f_2,f_3,f_4,f_5,f_6\}$。定义随机变量$X=X(\xi),\xi\in \Omega$满足:$X(f_i)=10i$
+掷一枚骰子, 样本空间: $\Omega=\{\xi_1,\xi_2,\xi_3,\xi_4,\xi_5,\xi_6\}$。定义随机变量$X=X(\xi),\xi\in \Omega$满足:$X(\xi_i)=10i$
+求$F(x)$和$p(x)$,其中: $-\infty<x<\infty$.\\
+\begin{columns}
+	\column{0.6\textwidth}
+	\includegraphics[scale=0.3]{die}
+	\column{0.3\textwidth}
+	\includegraphics[scale=0.4]{p-u}
+\end{columns}
+
+\begin{align*}
+&\text{边缘概率分布: } P\{X(\xi)=10\}=P\{X(\xi)=20\}=\cdots=p_i=\frac{1}{6} \qquad i=\{1,2,3,4,5,6\}\\
+&\text{概率密度函数: } p(x)=\sum_{i=1}^{x}p_i\delta(x-X(\xi_i)) 
+\end{align*}
+对于离散型随机变量$X(\xi)$: 
+\[ F(x)=P\{X(\xi)\le x \}=\sum\limits_{i=1}^{x}p_i \]
+离散型随机变量$X(\xi)$和连续性随机变量$X(\xi)$的完美统一:
+\[ F(x)=P\{X(\xi)\le x\}=\int_{-\infty}^{x}p(u)du=\int_{1}^{x}\sum\limits_{i=1}^{x}p_i\delta(x-X(\xi_i))du \]
+\end{frame}
+
+\begin{frame}[shrink]
+掷一枚骰子, 样本空间: $\Omega=\{\xi_1,\xi_2,\xi_3,\xi_4,\xi_5,\xi_6\}$。定义随机变量$X=X(\xi),\xi\in \Omega$满足:$X(\xi_i)=10i$
 求$F(x)$和$p(x)$,其中: $-\infty<x<\infty$.\\
 \includegraphics[scale=0.4]{die}
 \begin{align*}
 F(100)&=P\{X(\xi)\ge 60 \}=P(\Omega)=1\\
-F(35)&=P\{X(\xi)\le 35 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
-F(30.01)&=P\{X(\xi)\le 30.01 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
-F(30)&=P\{X(\xi)\le 30 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
-F(29.9)&=P\{X(\xi)\le 29.9 \}=P\{f_1,f_2 \}=\frac{2}{6} \\
+F(35)&=P\{X(\xi)\le 35 \}=P\{\xi_1,\xi_2,\xi_3 \}=\frac{3}{6} \\
+F(30.01)&=P\{X(\xi)\le 30.01 \}=P\{\xi_1,\xi_2,\xi_3 \}=\frac{3}{6} \\
+F(30)&=P\{X(\xi)\le 30 \}=P\{\xi_1,\xi_2,\xi_3 \}=\frac{3}{6} \\
+F(29.9)&=P\{X(\xi)\le 29.9 \}=P\{\xi_1,\xi_2 \}=\frac{2}{6} \\
 \end{align*}
 \end{frame}
 
