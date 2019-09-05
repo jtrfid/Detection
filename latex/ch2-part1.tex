@@ -203,7 +203,7 @@
 A&=\{\text{任取一件，恰好抽到不合格品} \}\\
 B&=\{\text{任取一件，恰好抽到第$i$条流水线的产品}, (i=1,2,3,4) \}
 \end{align*}
-于是由全概率公式可得
+则, $B_i\cap B_j=\emptyset, i\ne j$, $\bigcup\limits_{i=1}^4B_i=\Omega, P(B_i)>0$, 于是由全概率公式可得
 \begin{align*}
 P(A)&=\sum\limits_{i=1}^4P(B_i)P(A|B_i)=0.15\times 0.05+0.20\times 0.04+0.30\times 0.03+0.35\times 0.02\\
 &=0.0315=3.15\%
@@ -218,7 +218,7 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 \end{frame}
 
 \begin{frame}{相互独立事件}
-条件概率: $P(B|A)=\frac{P(AB)}{P(A)}$\\
+条件概率: 已知事件A发生的条件下, 事件B发生的概率为$P(B|A)=\frac{P(AB)}{P(A)}$\\
 一般的概率乘法公式: $P(AB)=P(A)P(B|A)$\\
 如果``事件B发生与否不受事件A的影响'': $P(B)=P(B|A)$\\
 乘法公式变为: $P(AB)=P(A)P(B)$
@@ -239,7 +239,7 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 		\end{align*}
 		验证事件$A,B$是相互独立的。
  \begin{proof}
-			$$\text{样本空间}=\{\text{(正，正),(正,反),(反,正),(反，反)}\} $$
+			$$\text{样本空间}\Omega=\{\text{(正，正),(正,反),(反,正),(反，反)}\} $$
 			共还有4个基本事件,它们是等可能的，各有概率为1/4,而
 			\begin{align*}
 			A&=\{\text{(正,正),(正, 反)}\} \\
@@ -258,13 +258,18 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 \begin{definition}
 	设$(\Omega,\mathcal{F},P)$是一概率空间，$X=X(\xi),\xi\in\Omega$是定义在$\Omega$上的单值实函数，如果对任一实数$x$, 集合$\{\xi|X(\xi)\le x\}\in\mathcal{F}$ 则称$X=X(\xi)$为$(\Omega,\mathcal{F},P)$上的一个\textbf{随机变量}。
 	
-	随机变量$X(\xi)$的定义域为样本空间$\Omega$,它的值域是实数R。所以,随机变量$X(\xi)$实际上是一个映射，这个映射为每个来自概率空间的结果(样本点)$\xi$赋予一个实数$x$。这种映射必须满足条件:
+	随机变量$X(\xi)$的定义域为样本空间$\Omega$,它的值域是实数域$\mathbb{R}$。所以,随机变量$X(\xi)$实际上是一个映射，这个映射为每个来自概率空间的结果(样本点)$\xi$赋予一个实数$x$。这种映射必须满足条件:
 	\begin{itemize}
 		\item[(1)] 对任一$x$,集合$\{\xi|X(\xi)\le x\}\in\mathcal{F}$(即,使得$X(\xi)\le x$的所有样本点$\xi$所组成的集合)是这个概率空间中的一个事件，并有确定的概率$P\{X(\xi)\le x\}$;
 		\item[(2)] $P\{X(\xi)=\infty \}=0$, $P\{X(\xi)=-\infty \}=0$
 	\end{itemize}
 \end{definition}
-\includegraphics[scale=0.2]{geometry}
+\begin{columns}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.2]{geometry}
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.15]{die1}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -301,7 +306,7 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 \begin{definition}
 	设$X$是随机变量, 对$\forall x\in\mathbb{R}$, 称函数
 	\[F(x)=P\{X\le x\}, -\infty<x<\infty\]
-	为随机变量$X$的一维(累积)分布函数[(cumulative) distribution function]。
+	为随机变量$X$的\textbf{一维(累积)分布函数}[(cumulative) distribution function]。
 \end{definition}
 对于任意实数$x_1,x_2(x_1<x_2)$,有
 \[P\{x_1<X\le x_2\}=P\{X\le x_2\}-P\{X\le x_1\}=F(x_2)-F(x_1) \]
@@ -342,14 +347,14 @@ P(B_4|A)=\frac{P(AB_4)}{P(A)}=\frac{P(B_4)P(A|B_4)}{\sum\limits_{i=1}^4P(B_i)P(A
 \begin{frame}[shrink]
 \frametitle{随机变量概率密度函数$p(x)$的性质}
 \begin{enumerate}
-	\item 根据随机变量$x(\xi)$的$p(x)$与$F(x)$的关系, 有
+	\item 根据随机变量$X(\xi)$的$p(x)$与$F(x)$的关系, 有
 	\[F(x)=\int_{-\infty}^{x}p(u)du\]
 	\item 对所有$x$, p(x)是非负函数,即
 	\[p(x)\ge 0,\quad -\infty<x<+\infty \]
 	\item $p(x)$对$x$的全域积分结果等于1, 一般表示为
 	\[\int_{-\infty}^{\infty}p(x)dx=1\]
-	\item 随机变量$x(\xi)$落在区间$[x_1,x_2]$内的概率为
-	\[P\{x_1\le x(\xi)\le x_2\}=F(x_2)-F(x_1)=\int_{x_1}^{x_2}p(x)dx\]
+	\item 随机变量$X(\xi)$落在区间$[x_1,x_2]$内的概率为
+	\[P\{x_1<x(\xi)\le x_2\}=F(x_2)-F(x_1)=\int_{x_1}^{x_2}p(x)dx\]
 \end{enumerate}
 \includegraphics[scale=0.3]{Fx-px2}
 \end{frame}
@@ -459,7 +464,7 @@ P(X \ge x) &= 1-F(x-0)
 	\]
 	则称$\delta_\varepsilon(t)$的弱极限为$\delta$函数，记为$\delta(t)$
 	显然, 对于任意的$\varepsilon>0$, 有:
-	$$\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)dt=\int_{-\infty}^\infty\frac{1}{\varepsilon}dt=1\implies \int_{-\infty}^\infty\delta(t)dt=1$$
+	$$\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)dt=\int_{0}^{\varepsilon}\frac{1}{\varepsilon}dt=1\implies \int_{-\infty}^\infty\delta(t)dt=1$$
 \end{definition}
 \end{frame}
 
@@ -467,11 +472,11 @@ P(X \ge x) &= 1-F(x-0)
 \begin{block}{注}
 \begin{enumerate}
 	\item $\delta(t)$在$t=0$点的取值为$\infty$, 在$t\ne 0$点的取值为0, 并且满足$\int_{-\infty}^{\infty}\delta(t)dt=1$。
-	\item 工程(信号处理等)上$\delta$---函数也称为单位脉冲或单位冲激函数。
+	\item 工程(信号处理等)上$\delta$---函数也称为\textbf{单位脉冲或单位冲激函数}。
 \end{enumerate}
 \end{block}
 \begin{block}{$\delta$---函数的筛选性质}
-若$f(t)$为无穷此可微的函数,则有:$\int_{I}\delta(t)f(t)dt=f(0) $\\
+若$f(t)$为无穷次可微的函数,则有:$\int_{I}\delta(t)f(t)dt=f(0) $\\
 其中$I$是包含点$t=0$的任意区间。特殊地, 有:$\int_{-\infty}^{\infty}\delta(t)f(t)dt=f(0) $\\
 更一般地，我们有:
 $$\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0) $$
@@ -498,7 +503,7 @@ $$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}
 \begin{block}{}
 	工程上，常用离散型随机变量分布律的$\delta$---函数表示法，将离散型随机变量的分布律表示成概率密度函数的形式，因此与连续型随机变量的概率密度函数$p(x)$一样进行统一处理。
 \end{block}
-$$P\{x_1\le X\le x_2\}=\int_{x_1}^{x_2}p(x)dx$$
+$$P\{x_1< X\le x_2\}=\int_{x_1}^{x_2}p(x)dx$$
 离散型随机变量:
 	$$F(x)=P\{X\le x\}=\sum\limits_{x_i\le x}p_i=\int_{-\infty}^{x}\sum\limits_{i=1}^{\infty}p_i\delta(u-x_i)du$$
 	$$p(x)=\sum\limits_{i=0}^{\infty}p_i\delta(x-x_i)$$
@@ -565,6 +570,12 @@ F(30.01)&=P\{X(\xi)\le 30.01 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
 F(30)&=P\{X(\xi)\le 30 \}=P\{f_1,f_2,f_3 \}=\frac{3}{6} \\
 F(29.9)&=P\{X(\xi)\le 29.9 \}=P\{f_1,f_2 \}=\frac{2}{6} \\
 \end{align*}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{ch2.信号检测与估计理论的基础知识}
+\framesubtitle{概率论简单回顾}
+\tableofcontents[hideallsubsections]
 \end{frame}
 
 
