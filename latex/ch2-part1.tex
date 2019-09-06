@@ -560,6 +560,26 @@ X\end{frame}
 \end{frame}
 
 \begin{frame}[shrink]
+\small
+掷一枚骰子, 样本空间: $\Omega=\{\xi_1,\xi_2,\xi_3,\xi_4,\xi_5,\xi_6\}$。定义随机变量$X=X(\xi),\xi\in \Omega$满足:$X(\xi_i)=10i$
+求$F(x)$和$p(x)$,其中: $-\infty<x<\infty$.\\
+\includegraphics[scale=0.35]{die}\\
+由分布函数定义得: 
+$F(x)=P\{X(\xi)\le x\} =
+\begin{cases}
+0,      & x<10 \\
+P\{\xi_1 \}=\frac{1}{6}, & 10\le x<20 \\
+P\{\xi_1,\xi_2 \}=\frac{2}{6}, & 20\le x<30 \\
+P\{\xi_1,\xi_2,\xi_3 \}=\frac{3}{6}, & 30\le x<40 \\
+P\{\xi_1,\xi_2,\xi_3,\xi_4 \}=\frac{4}{6}, & 40\le x<50 \\
+P\{\xi_1,\xi_2,\xi_3,\xi_4,\xi_5 \}=\frac{5}{6}, & 50\le x<60 \\
+1,      & x\ge 60
+\end{cases} $\\
+\textcolor{blue}{记号: 随机变量$X=X(\xi)$, 等效表示为$X$或$X(\xi)$}\\ 
+\textcolor{blue}{随机事件等效表示为$\{X(\xi)\le x\}=\{\xi|X(\xi)\le x \}=\{X \le x\}\subseteq\Omega, \xi\in\Omega, \forall x\in\mathbb{R}$}
+\end{frame}
+
+\begin{frame}[shrink]
 掷一枚骰子, 样本空间: $\Omega=\{\xi_1,\xi_2,\xi_3,\xi_4,\xi_5,\xi_6\}$。定义随机变量$X=X(\xi),\xi\in \Omega$满足:$X(\xi_i)=10i$
 求$F(x)$和$p(x)$,其中: $-\infty<x<\infty$.\\
 \begin{columns}
