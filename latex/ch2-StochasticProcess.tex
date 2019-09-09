@@ -240,7 +240,7 @@ $p(x;t)$称为随机过程$X(t,\xi)$的\textbf{二维联合概率密度函数}�
 随机过程的\textbf{N维累积分布函数}
 \begin{align*}
 F(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
-&P\{X(t_1,\xi)\le x_1,X(t_2,\xi),\cdots,X(t_N,\xi)\le x_N\},&\\
+&P\{X(t_1,\xi)\le x_1,X(t_2,\xi)\le x_2,\cdots,X(t_N,\xi)\le x_N\},&\\
 &x_1,x_2,\cdots,x_N\in\mathbb{R},t_1,t_2,\cdots,t_N\in T
 \end{align*}
 随机过程的\textbf{N维联合概率密度函数}
@@ -251,7 +251,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \end{frame}
 
 \begin{frame}{一维雅可比变换法}
-设一维随机变量为$X(\xi)$,它的概率密度函数为$p(x)$已知,若$X(\xi)$的一个函数为
+设一维随机变量为$X(\xi)$,它的概率密度函数为$p_x(x)$已知,若$X(\xi)$的一个函数为
 \[Y(\xi)=g(X(\xi)) \]
 该函数也是一维随机变量。若它的反函数存在，即有
 \[X(\xi)=h(Y(\xi)) \]
@@ -275,7 +275,8 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \end{frame}
 
 \begin{frame}
-解:
+设随机过程$X(t)=V\cos\omega t,t\in(-\infty,+\infty)$, 其中$\omega$为常数, $V$服从$[0,1]$上的均匀分布。\\
+解: 
 \begin{enumerate}
 	\item $V\sim U(0,1)$, 取$V=1/2,1/3$分别得到两个样本函数
 	\[X_1(t)=\frac{1}{2}\cos\omega t,\qquad X_2(t)=\frac{1}{3}\cos\omega t\]
@@ -329,7 +330,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 
 \begin{frame}
 \begin{example}
-设有一采用脉宽调制以传输信息的通信系统。脉冲的重复周期为$T$,每个周期传输一个值, 脉冲宽度收到随机信息的调制，使每个脉冲的宽度$\tau$服从$(0,T)$上的均匀分布，而且不同周期的脉宽是相互统计独立的随机变量。脉冲的幅度为常数$A$。 也就是说，这个通信系统传送的信号是随机脉宽等幅度的周期信号，它是一个随机过程。下图画出了它的一个样本函数。试求该随机过程$x(t)$的一维概率密度函数。
+设有一采用脉宽调制以传输信息的通信系统。脉冲的重复周期为$T$,每个周期传输一个值, 脉冲宽度收到随机信息的调制，使每个脉冲的宽度$\tau$服从$(0,T)$上的均匀分布，而且不同周期的脉宽是相互统计独立的随机变量。脉冲的幅度为常数$A$。 也就是说，这个通信系统传送的信号是随机脉宽等幅度的周期信号，它是一个随机过程。下图画出了它的一个样本函数。试求该随机过程$X(t)$的一维概率密度函数。
 \end{example}
 \begin{figure}
 	\includegraphics[scale=0.3]{2_10SampleFun}
@@ -342,14 +343,14 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 	因为脉冲的重复周期为$T$,所以只需求出一个周期的概率密度函数。\\
 	在一个周期内，随机信号为
 	\[
-	x(t)=\begin{cases}
+	X(t)=\begin{cases}
 	A,&0\le t\le\tau\\
 	0,&\tau<t\le T
 	\end{cases} 
 	\]
-	$x(t)$的分布函数为
+	$X(t)$的分布函数为
 	\[
-	F(x;t)=\begin{cases}
+	F(x;t)=P\{X(t)\le x \}=\begin{cases}
 	0,&x<0\\
 	\frac{t}{T},&0\le x<A\\
 	1,&x\ge A
@@ -360,7 +361,7 @@ p(x_1,x_2,\cdots,x_N;t_1,t_2,\cdots,t_N)&=\\
 \end{example}
 \small
 由$\delta$函数性质, 当$x=0$时, $\delta(x)=\infty$; 其它, $\delta(x)=0$. 并且$\int_{-\infty}^{\infty}\delta(x)dx=1$\\
-可以验证以上分布函数的正确性.  $F(x; t)=P\{x(t)\le x\}=\int_{-\infty}^{x}p(u)du$
+可以验证以上分布函数的正确性.  $F(x; t)=P\{X(t)\le x\}=\int_{-\infty}^{x}p(u)du$
 \end{frame}
 
 %\section{随机过程的统计平均量}
@@ -482,8 +483,8 @@ r_y(t_j,t_k)&=E[y(t_j)y(t_k)]\\
 \begin{example}
 	设随机相位正弦信号$s(t; \theta)=a\cos(\omega_0 t+\theta)$, 其中振幅$a$和$\omega_0$为常数, 相位$\theta$是一随机变量，它服从$[-\pi,\pi]$上的均匀分布。
 	\begin{enumerate}
-		\item 求该过程的均值$E[s(t; \theta)]$
-		\item 自相关函数$E[s(t_j; \theta)s(t_k; \theta)]$。
+		\item 求该随机过程的均值$E[s(t; \theta)]$;
+		\item 求该随机过程的自相关函数$E[s(t_j; \theta)s(t_k; \theta)]$。
 	\end{enumerate}
 \end{example}
 \end{frame}
@@ -508,7 +509,7 @@ $$p(\theta)=\begin{cases}
 \end{frame}
 
 \begin{frame}
-解(续): \footnote{$\cos A\cos B=\frac{1}{2}\cos (A+B)+\cos(A-B)$}
+解(续): \footnote{$\cos A\cos B=\frac{1}{2}[\cos (A+B)+\cos(A-B)]$}
 \begin{enumerate}
 \setcounter{enumi}{1} %设定起始编号 
 \item 该随机过程的自相关函数为:
@@ -548,8 +549,7 @@ c_x(t_j,t_k)&\mathop{=}^{def}E[((x(t_j)-\mu_x(t_j)(x(t_k)-\mu_x(t_k)]\\
 	\item 随机过程的均值$\mu_x(t)$: 是随机过程的\textbf{所有样本函数}在时刻$t$的函数值的统计平均值。$\mu_x(t)$表示了随机过程$x(t)$在各个时刻的摆动中心。
 	\item 方差$\sigma_x^2(t)$表示随机过程在$t$时刻取其值\textbf{偏离其均值}$\mu_x(t)$的离散程度。
 	\item 随机过程的自相关函数$r_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间\textbf{含有均值}时的相关程度的度量。
-	\item 随机过程的自协方差函数$c_x(t_j,t_k)$
-	随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。
+	\item 随机过程的自协方差函数$c_x(t_j,t_k)$可以理解为它的两个随机变量$x(t_j)$与$x(t_k)$之间的相关程度的度量。
 \end{itemize}
 \[c_x(t_j,t_k)=r_x(t_j,t_k)-\mu_x(t_j)\mu_x(t_k),\quad c_x(t,t)=\sigma_x^2(t)\]
 \begin{columns}
@@ -575,12 +575,12 @@ r_{xy}(t_j,t_k) &\mathop{=}^{def}E[x(t_j)y(t_k)]\\
 \begin{frame}
 \begin{block}{随机过程的互协方差函数$c_{xy}(t_j,t_k)$}
 \begin{align*}
-c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_x(t_k))]\\
+c_{xy}(t_j,t_k)&\mathop{=}^{def}E[(x(t_j)-\mu_x(t_j))(y(t_k)-\mu_y(t_k))]\\
 &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}(x_j-\mu_x(t_j))(y_k-\mu_x(t_k))p(x_j,t_j;x_k,t_k)dx_jdy_k
 \end{align*}
 \end{block}
 随机过程$x(t)$和$y(t)$的互协方差函数$c_{xy}(t_j,t_k)$可以理解为它们各自的随机变量$x(t_j)$与$y(t_k)$之间的相关程度, 实际上表示两个随机过程$x(t)$与$y(t)$之间的相关程度。它们的互相关系数定义为
-\[\rho_{xy}(t_j,t_k)\mathop{=}^{def}\frac{c_{xy}(t_j,t_k)}{\sigma_x(t_j)\sigma_x(t_k)}\]
+\[\rho_{xy}(t_j,t_k)\mathop{=}^{def}\frac{c_{xy}(t_j,t_k)}{\sigma_x(t_j)\sigma_y(t_k)}\]
 易证
 \[c_{xy}(t_j,t_k)=r_{xy}(t_j,t_k)-\mu_x(t_j)\mu_y(t_k)\]
 \end{frame}
@@ -1071,7 +1071,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式,$\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 		\item 白噪声在频域上其功率谱密度是均匀分布的;
 		\item 时域上自相关函数$r_n(\tau)$是$\delta$函数: $r_n(\tau)=IFT[\frac{N_0}{2}]=\frac{N_0}{2}\delta(\tau)$
 		\item 任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的：\\
-		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
+		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=E[n(t_j)]E[n_k]=0,(\tau=t_j-t_k\ne 0)$。
 		\item 由于$\delta$---函数的筛选性: $\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0)$,有\\
 		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=f(t_0)=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
 	\end{itemize}	
