@@ -1071,7 +1071,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式,$\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 		\item 白噪声在频域上其功率谱密度是均匀分布的;
 		\item 时域上自相关函数$r_n(\tau)$是$\delta$函数: $r_n(\tau)=IFT[\frac{N_0}{2}]=\frac{N_0}{2}\delta(\tau)$
 		\item 任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的：\\
-		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=E[n(t_j)]E[n_k]=0,(\tau=t_j-t_k\ne 0)$。
+		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
 		\item 由于$\delta$---函数的筛选性: $\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0)$,有\\
 		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=f(t_0)=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
 	\end{itemize}	
@@ -1085,7 +1085,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式,$\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 		\item \textbf{时域上概率密度函数是高斯分布的。(白噪声对此没有明确限制)}
 		\item 时域上自相关函数$r_n(\tau)$是$\delta$函数: $r_n(\tau)=IFT[\frac{N_0}{2}]=\frac{N_0}{2}\delta(\tau)$
 		\item 任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的,\textbf{并且是统计独立的}：\\
-		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
+		$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=E[n(t_j)]E[n_k(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
 		\item 由$\delta$---函数的筛选性: $\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0)$,有\\
 		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=f(t_0)=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
 	\end{itemize}	
