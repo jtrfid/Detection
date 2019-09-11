@@ -50,6 +50,7 @@
 \textcolor{red}{$P(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的概率。}\\
 ~\\
 \textcolor{red}{$c_{ij}$: 在假设$H_j$为真的条件下，判决假设$H_i$成立所付出的代价。}
+ 
 \end{frame}
 
 \begin{frame}{贝叶斯判决准则}
@@ -496,6 +497,16 @@ $P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=P(H_1|\bm{x})$, 从而得
 \[P(H_1|\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0|\bm{x}) \]
 $P(H_j|\bm{x})(j=0,1)$表示已经获得观测量$\bm{x}$的条件下，假设$H_j$为真时的概率, 称为\textbf{后验概率}。\\
 按照最小平均代价的贝叶斯准则在代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时，就成为\textbf{最大后验概率准则(maximum a posteriori probability criterion)} 
+\end{frame}
+
+\begin{frame}{术语}
+\begin{itemize}
+	\item $H_1: A+n$代表雷达检测有回波信号, $H_0: x=n$仅含噪声信号。
+	\item 虚警概率$P_F\mathop{=}\limits^{def}P(H_1|H_0)$: False alarm, 假设$H_0$为真的条件下，判决$H_1$成立的概率。是个假判决。
+	\item 漏警概率$P_M\mathop{=}\limits^{def}P(H_0|H_1)$: Miss alarm, 假设$H_1$为真的条件下, 判决$H_0$成立的概率。是个遗漏的判决。
+	\item 漏警概率$P_D\mathop{=}\limits^{def}P(H_1|H_1)$: Ditection alarm, 假设$H_1$为真的条件下, 判决$H_1$成立的概率。是个正确检测的判决。
+\end{itemize}
+\includegraphics[scale=0.25]{R0R1}
 \end{frame}
 
 \begin{frame}{平均代价}
