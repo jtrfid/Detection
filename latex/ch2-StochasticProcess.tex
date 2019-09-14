@@ -709,7 +709,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 	\begin{align*}
 	r_x(t_j,t_k)&\mathop{=}^{def}E[x(t_j)x(t_k)]\\
 	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}x_jx_kp(x_j,x_k;t_j,t_k)dx_jdx_k\\
-	&=\int_{-\infty}^{\infty}x_jp(x_j;t_j)dx_j\int_{-\infty}^{\infty}x_jp(x_k;t_k)dx_k\\
+	&=\int_{-\infty}^{\infty}x_jp(x_j;t_j)dx_j\int_{-\infty}^{\infty}x_kp(x_k;t_k)dx_k\\
 	&=\mu_x(t_j)\mu_x(t_k)
 	\end{align*}
 	这正是$x(t)$互不相关的等价条件$r_x(t_j,t_k)=\mu_x(t_j)\mu_x(t_k),j\ne k $,所以$x(t)$统计独立$\implies$ 互不相关
@@ -767,7 +767,7 @@ p(x_1,x_2,\dots,x_N; t_1,t_2,\dots,t_N)\\
 \begin{proof}
 	\begin{align*}
 	E[x(t)y(t)]&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyp(x,y)dxdy\\
-	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyp_x(x)p_ydxdy\\
+	&=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}xyp_x(x)p_y(y)dxdy\\
 	&=\left[\int_{-\infty}^{\infty}xp_x(x)dx\right]\left[\int_{-\infty}^{\infty}yp_y(y)dy\right]\\
 	&=E[x(t)]E[y(t)]
 	\end{align*}
