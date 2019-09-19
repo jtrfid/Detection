@@ -932,15 +932,15 @@ $\bm{C_n}$是高斯随机矢量$\bm{(n;t)}$的协方差矩阵
 $$
 \bm{C_n}=\left[
 \begin{matrix}
-C_{n_1n_1} & C_{n_1n_2} & \cdots &C_{n_1n_N} \\
-C_{n_2n_1} & C_{n_2n_2} & \cdots &C_{n_2n_N} \\
+c_{n_1n_1} & c_{n_1n_2} & \cdots &c_{n_1n_N} \\
+c_{n_2n_1} & c_{n_2n_2} & \cdots &c_{n_2n_N} \\
 \vdots     &  \vdots    &        &\vdots \\
-C_{n_Nn_1} & C_{n_Nn_2} & \cdots &C_{n_Nn_N} \\
+c_{n_Nn_1} & c_{n_Nn_2} & \cdots &c_{n_Nn_N} \\
 \end{matrix}
 \right]
 $$
 其中，\\
-$C_{n_jn_k}=E[(n(t_j)-\mu_{n_j})(n(t_k)-\mu_{n_k})]=c_{n_k}c_{n_j}$\\
+$c_{n_jn_k}=E[(n(t_j)-\mu_{n_j})(n(t_k)-\mu_{n_k})]=c_{n_k}c_{n_j}$\\
 $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵。
 \end{frame}
 
@@ -948,7 +948,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 	\begin{block}{不相关性与统计独立性}
 		互不相关$\nRightarrow$相互统计独立。但是若$x(t)$服从联合高斯分布，则互不相关$\Leftrightarrow$相互统计独立
 	\end{block}
-\textbf{证明:} 设高斯随机矢量$\bm{(n;t)}$中的$n(t_j)$与$n(t_k)(j\ne k)$互不相关,即$C_{n_jn_k}=C_{n_kn_j}=0(j\ne k)$, 若记$\sigma_{n_k}^2\mathop{=}\limits^{def}c_{n_kn_k}$,则协方差矩阵$\bm{C_n}$和$\bm{C_n^{-1}}$分别为
+\textbf{证明:} 设高斯随机矢量$\bm{(n;t)}$中的$n(t_j)$与$n(t_k)(j\ne k)$互不相关,即$c_{n_jn_k}=c_{n_kn_j}=0(j\ne k)$, 若记$\sigma_{n_k}^2\mathop{=}\limits^{def}c_{n_kn_k}$,则协方差矩阵$\bm{C_n}$和$\bm{C_n^{-1}}$分别为
 	\begin{columns}
 		\column{0.5\textwidth}
 		$$
@@ -982,7 +982,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 	&=\frac{1}{(2\pi)^{N/2}|\bm{C_n}|^{1/2}}\exp\left[-\frac{1}{2}(\bm{n-\mu_n})^T\bm{C_n}^{-1}(\bm{n-\mu_n})\right]\\
 	&=\frac{1}{(2\pi)^{N/2}|\prod\limits_{k=1}^{N}\sigma_{n_k}}\exp\left[-\sum\limits_{k=1}^{N}\frac{(n_k-\mu_{n_k})^2}{2\sigma_{n_k}^2}\right]\\
 	&=\prod\limits_{k=1}^{N}\left(\frac{1}{2\pi\sigma_{n_k}^2}\right)^{1/2}\exp\left[-\frac{(n_k-\mu_{n_k})^2}{2\sigma_{n_k}^2}\right]\\
-	&=p(x_1;t_1)p(x_2;t_2)\cdots p(x_N;t_N)
+	&=p(n_1;t_1)p(n_2;t_2)\cdots p(n_N;t_N)
 	\end{align*}
 	表明$n(t)$的N维联合概率密度函数表示成各自一维概率密度函数之积的形式，即是统计独立性的定义。因此，\textbf{N个高斯随机变量$n(t_k)(k=1,2,\dots,t_N)$互不相关$\Rightarrow$相互统计独立}; 结合之前的结论``相互统计独立的随机变量$\Rightarrow$互不相关''。所以, \textbf{
 	N个高斯随机变量$n(t_k)(k=1,2,\dots,t_N)$互不相关$\Leftrightarrow$相互统计独立}。
@@ -1077,7 +1077,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 		\item 任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的：\\
 		%$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
 		\item 由于$\delta$---函数的筛选性: $\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0)$,有\\
-		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=f(t_0)=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
+		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
 	\end{itemize}	
 \end{block}
 \end{frame}
@@ -1091,7 +1091,7 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 		\item 任意两个不同时刻的随机变量$n(t_j)$与$n(t_k),(\tau=t_j-t_k\ne 0)$是不相关的,\textbf{并且是统计独立的}：\\
 		%$r_n(t_j,t_k)=r_n(\tau)=E[n(t_j)n(t_k)]=E[n(t_j)]E[n_k(t_k)]=0,(\tau=t_j-t_k\ne 0)$。
 		\item 由$\delta$---函数的筛选性: $\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0)$,有\\
-		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=f(t_0)=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
+		$\int_{-\infty}^{\infty}r_n(t-t_0)f(t)dt=\frac{N_0}{2}\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=\frac{N_0}{2}f(t_0)$
 	\end{itemize}	
 \end{block}
 \includegraphics[scale=0.4]{WhiteGaussianNoise}
