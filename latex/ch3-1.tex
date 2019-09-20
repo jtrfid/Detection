@@ -286,7 +286,7 @@ p(\bm{x}|H_1)&=\left(\frac{1}{2\pi\sigma^2}\right)^{1/2}\exp\left[-\frac{(x-A)^2
 
 \bigskip
 
-\textcolor{blue}{$P(H_j)(i=0)$: 假设$H_j$为真的先验概率(先验:先于试验)}
+\textcolor{blue}{$P(H_j)(j=0,1)$: 假设$H_j$为真的先验概率(先验:先于试验)}
 
 
 \bigskip
@@ -505,79 +505,8 @@ C=&c_{10}P(H_0)+c_{11}P(H_1)+\\
 \end{align*}
 \end{frame}
 
-\begin{frame}{解决方案}
-\begin{enumerate}
-	\item 代价因子如何定义? \\
-	$c_{ij}$表示假设$H_j$为真时, 判决假设$H_i$成立所付出的代价。\\
-	$c_{00}, c_{10}, c_{11}, c_{01}$
-	\item 平均代价如何计算?
-	\begin{align*}
-	C=&P(H_0)C(H_0)+P(H_1)C(H_1)\\
-	&c_{10}P(H_0)+c_{11}P(H_1)+\\
-	&\left(\int_{R_0}\left[P({H_1})(c_{01}-c_{11})p(x|H_1)-P(H_0)(c_{10}-c_{00})p(x|H_0)\right]dx \right)
-	\end{align*}
-	\item 如何获得最小的平均代价?
-	\begin{align*}
-	&P({H_1})(c_{01}-c_{11})p(x|H_1)< P(H_0)(c_{10}-c_{00})p(x|H_0)&\textbf{判决$H_0$假设成立}\\
-	&P({H_1})(c_{01}-c_{11})p(x|H_1)\ge P(H_0)(c_{10}-c_{00})p(x|H_0)&\textbf{判决$H_1$假设成立}
-	\end{align*}
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯判决准则}
-\begin{columns}%[t]
-	\column{0.25\textwidth}
-	\textbf{二元信号检测模型:}
-	\column{0.2\textwidth}
-	\begin{align*}
-	H_0: &x=-A+n\\
-	H_1: &x=A+n
-	\end{align*}
-	\column{0.35\textwidth}
-	\includegraphics[scale=0.3]{detectionA}
-\end{columns}
-\begin{align*}
-&P({H_1})(c_{01}-c_{11})p(x|H_1)< P(H_0)(c_{10}-c_{00})p(x|H_0)&\textbf{判决$H_0$假设成立}\\
-&P({H_1})(c_{01}-c_{11})p(x|H_1)\ge P(H_0)(c_{10}-c_{00})p(x|H_0)&\textbf{判决$H_1$假设成立}
-\end{align*}
-\begin{block}{贝叶斯判决准则}
-	\begin{align*}
-	\frac{p(x|H_1)}{p(x|H_0)}&<\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}&\textbf{判决$H_0$假设成立}\\
-	\frac{p(x|H_1)}{p(x|H_0)}&\ge\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}&\textbf{判决$H_1$假设成立}
-	\end{align*}
-\end{block}
-\end{frame}
-
-\begin{frame}{贝叶斯判决准则}
-\begin{block}{贝叶斯判决准则}
-	\begin{align*}
-	\frac{p(x|H_1)}{p(x|H_0)}&<\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}&\textbf{判决$H_0$假设成立}\\
-	\frac{p(x|H_1)}{p(x|H_0)}&\ge\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}&\textbf{判决$H_1$假设成立}
-	\end{align*}
-	$\implies$
-	\[ \frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
-	$\implies$
-	\[\lambda(x)\mathop{\gtrless}_{H_0}^{H_1}\eta \]
-\end{block}
-\end{frame}
-
-\begin{frame}{贝叶斯判决准则}
-\begin{block}{贝叶斯判决准则}
-	\[ \frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \implies \lambda(x)\mathop{\gtrless}_{H_0}^{H_1}\eta \]
-	\begin{align*}
-	&\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)} &&\textbf{定义为}\textcolor{blue}{\textbf{似然比函数}}\\
-	&\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} &&\textbf{定义为}\textcolor{blue}{定义为\textbf{判决门限}}
-	\end{align*}
-\end{block}
-\textbf{$\lambda(x)$是一维随机变量, 称为\textcolor{blue}{检验统计量}}\\
-\textbf{$\lambda(x)$不依赖于假设的先验概率$[P(H_0), P(H_1)]$, 也与代价因子无关。\textcolor{blue}{适用于不同先验概率和不同代价因子的最佳信号检测。}}
-\end{frame}
-
 \begin{frame}[shrink]
 \frametitle{ch3.信号检测与估计理论的基础知识}
 \framesubtitle{ch3-1. 统计检测理论基本概念及贝叶斯准则}
 \tableofcontents[hideallsubsections]
 \end{frame}
-
-
-

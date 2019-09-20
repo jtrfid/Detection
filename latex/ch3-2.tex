@@ -7,6 +7,27 @@
 
 \section{贝叶斯准则}
 
+\begin{frame}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&H_0: x=-A+n,\quad H_1: x=A+n\\
+	&H_0: x_k=-A+n_k,\quad H_1: x_k=A+n_k\\
+	&k=1,2,\dots,N,\quad \bm{x}=(x_1,x_2,\dots,x_N)^{T}\\
+	&P(H_i|H_j)=\int_{R_i}p(\bm{x}|H_j)d\bm{x}
+	\end{align*}
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.4]{detectionA}
+\end{columns}
+\begin{align*}
+&P(H_0|H_0)=\int_{R_0}p(\bm{x}|H_0)d\bm{x},\qquad P(H_1|H_0)=\int_{R_1}p(\bm{x}|H_0)d\bm{x}\\
+&P(H_0|H_1)=\int_{R_0}p(\bm{x}|H_1)d\bm{x},\qquad P(H_1|H_1)=\int_{R_1}p(\bm{x}|H_1)d\bm{x}\\
+&\bm{R}=R_0\cup R_1,\quad R_0\cap R_1=\emptyset, \quad \int_{\bm{R}}p(\bm{x}|H_j)d\bm{x}=1\\
+&P(H_0|H_0)+P(H_1|H_0)=\int_{R_0}p(\bm{x}|H_0)d\bm{x}+\int_{R_1}p(\bm{x}|H_0)d\bm{x}=\int_{\bm{R}}p(\bm{x}|H_0)d\bm{x}=1\\
+&P(H_0|H_1)+P(H_1|H_1)=\int_{R_0}p(\bm{x}|H_1)d\bm{x}+\int_{R_1}p(\bm{x}|H_1)d\bm{x}=\int_{\bm{R}}p(\bm{x}|H_1)d\bm{x}=1
+\end{align*}
+\end{frame}
+
 \begin{frame}{贝叶斯准则---基本要求}
 \begin{itemize}
 	\item 充分理解平均代价(Average risk)的概念
@@ -215,7 +236,7 @@ C=&c_{10}P(H_0)+c_{11}P(H_1)+\\
 	\item 平均代价如何计算?
 	\begin{align*}
 	C=&P(H_0)C(H_0)+P(H_1)C(H_1)\\
-	&c_{10}P(H_0)+c_{11}P(H_1)+\\
+	=&c_{10}P(H_0)+c_{11}P(H_1)+\\
 	&\left(\int_{R_0}\left[P({H_1})(c_{01}-c_{11})p(x|H_1)-P(H_0)(c_{10}-c_{00})p(x|H_0)\right]dx \right)
 	\end{align*}
 	\item 如何获得最小的平均代价?
@@ -295,7 +316,7 @@ $\Downarrow$\\
 	\item 计算两个似然函数, 构建似然比$\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}$
 	\item 根据两个假设的先验概率和代价因子, 计算判决门限$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$
 	\item 利用上式, 形成贝叶斯检测基本表达式$\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$
-	\item 化简, 如对数似然比检验$\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$
+	\item 化简, 形成贝叶斯检测判决表达式。 如对数似然比检验$\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$
 \end{enumerate}
 \end{frame}
 
@@ -307,6 +328,30 @@ $\Downarrow$\\
 \begin{frame}{二元信号检测系统: $\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$}
 \centering
 \includegraphics[scale=0.5]{2D2}
+\end{frame}
+
+\begin{frame}{术语}
+\textcolor{blue}{$H_j(j=0,1)$: 信源输出的信号, 称为假设$H_j$}
+
+\bigskip
+
+\textcolor{blue}{$P(H_j)(j=0,1)$: 假设$H_j$为真的先验概率(先验:先于试验)}
+
+
+\bigskip
+\textcolor{blue}{$(x|H_j)(j=0,1)$: 假设$H_j$下的观测信号是随机变量}
+
+\bigskip
+
+\textcolor{blue}{$p(x|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数}
+
+\bigskip
+
+\textcolor{blue}{$(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的结果。}\\
+~\\
+\textcolor{blue}{$P(H_i|H_j)(i,j=0,1)$: 在假设$H_j$为真的条件下，判决假设$H_i$成立的概率。}\\
+~\\
+$c_{ij}(i,j=0,1)$: 假设$H_j$为真时, 判决假设$H_i$成立所付出的代价
 \end{frame}
 
 \section{贝叶斯准则小结}
@@ -380,7 +425,7 @@ C=&c_{10}P(H_0)+c_{11}P(H_1)+\\
 \item 计算两个似然函数, 构建似然比$\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}$
 \item 根据两个假设的先验概率和代价因子, 计算判决门限$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$
 \item 利用上式, 形成贝叶斯检测基本表达式$\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$
-\item 化简, 如对数似然比检验$\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$
+\item 化简, 形成贝叶斯检测判决表达式。 如对数似然比检验$\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$
 \end{enumerate}
 \end{frame}
 
@@ -401,7 +446,7 @@ C=&c_{10}P(H_0)+c_{11}P(H_1)+\\
 H_0: x&=n\\
 H_1: x&=m+n
 \end{align*}
-步骤1: 计算两个似然函数, 构建似然比\\
+\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
 由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 观测信号$x$也服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 观测信号$x$服从均值为$m$, 方差为$\sigma_n^2$的高斯分布。
 \begin{align*}
 p(x|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)\\
@@ -411,14 +456,14 @@ p(x|H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-m)^2}{2
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题1: 解续(1)}
-步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限
+\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}
 \[\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
-步骤3: 形成贝叶斯检测基本表达式
+\textbf{步骤3: 形成贝叶斯检测基本表达式}
 \begin{align*}
-\lambda(x)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
+\lambda(x)=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
 \exp\left(\frac{m}{\sigma_n^2}x-\frac{m^2}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta
 \end{align*} 
-步骤4: 化简
+\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
 \begin{align*}
 %\exp\left(\frac{m}{\sigma_n^2}x-\frac{m^2}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
 \left(\frac{m}{\sigma_n^2}x-\frac{m^2}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\\
@@ -468,27 +513,27 @@ l(x)\mathop{=}^{def}x&\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2}{m}\l
 \begin{frame}[shrink]{贝叶斯准则例题1: 解续(4)}
 解: $N$次独立采样, 样本为$x_k(k=1,2,\cdots,N)$:
 \begin{align*}
-H_0: x_k&=n_k && x_k(k=1,2,\cdots,N)\\
-H_1: x_k&=m+n_k && x_k(k=1,2,\cdots,N)
+H_0: x_k&=n_k && k=1,2,\cdots,N\\
+H_1: x_k&=m+n_k && k=1,2,\cdots,N
 \end{align*}
-步骤1: 计算两个似然函数, 构建似然比\\
+\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
 由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 第$k$次采样值$x_k$服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 第$k$次采样值$x_k$服从均值为$m$, 方差为$\sigma_n^2$的高斯分布。
 \begin{align*}
 p(x_k|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)\implies p(\bm{x}|H_0)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)\\
-p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-m)^2}{2\sigma_n^2}\right)\implies p(\bm{x}|H_1)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-m)^2}{2\sigma_n^2}\right)\\
+p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-m)^2}{2\sigma_n^2}\right)\implies p(\bm{x}|H_1)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-m)^2}{2\sigma_n^2}\right)\\
 \lambda(\bm{x})&=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}=\exp\left(\frac{\sum\limits_{k=1}^{N}(x_k^2-(x_k-m)^2)}{2\sigma_n^2}\right)
 \end{align*} 
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题1: 解续(5)}
-步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限
+\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}
 \[\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
-步骤3: 形成贝叶斯检测基本表达式
+\textbf{步骤3: 形成贝叶斯检测基本表达式}
 \begin{align*}
-\lambda(x)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
+\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
 \exp\left(\frac{\sum\limits_{k=1}^{N}(x_k^2-(x_k-m)^2)}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta
 \end{align*} 
-步骤4: 化简
+\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
 \begin{align*}
 -Nm^2+\sum\limits_{k=1}^{N}2mx_k&\mathop{\gtrless}\limits_{H_0}^{H_1}2\sigma_n^2\ln\eta\implies \sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2}{m}\ln\eta+\frac{Nm}{2}\\
 l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k&\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2}{Nm}\ln\eta+\frac{m}{2}\mathop{=}^{def}\gamma\\
