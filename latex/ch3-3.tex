@@ -230,9 +230,15 @@ l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\li
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
+\begin{columns}
+	\column{0.21\textwidth}
+	$H_0:x_k=n_k$\\
+	$H_1:x_k=A+n_k$
+	\column{0.79\textwidth}
+	\[
+	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
+	\]
+\end{columns}
 \textbf{假设$H_0$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
 \begin{align*}
 E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(x_k|H_0)\right]=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}n_k\right]=\frac{1}{N}\sum\limits_{k=1}^{N}E[n_k]=0\\
@@ -246,9 +252,15 @@ p(l|H_0)=\left(\frac{1}{2\pi Var[l|H_0]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_0
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
+\begin{columns}
+	\column{0.21\textwidth}
+	$H_0:x_k=n_k$\\
+	$H_1:x_k=A+n_k$
+	\column{0.79\textwidth}
+	\[
+	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
+	\]
+\end{columns}
 \begin{align*}
 p(l|H_0)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)
 \end{align*}
@@ -261,9 +273,15 @@ P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(u)=\int_{x}^{\infty}\left
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
+\begin{columns}
+	\column{0.21\textwidth}
+	$H_0:x_k=n_k$\\
+	$H_1:x_k=A+n_k$
+	\column{0.79\textwidth}
+	\[
+	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
+	\]
+\end{columns}
 \begin{align*}
 P(H_1|H_0)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\right)}{\sigma_n}\right)\\
 &=Q\left(\frac{\sigma_n\ln\eta}{\sqrt{N}A}+\frac{\sqrt{N}A}{2\sigma_n}\right)&& \text{by }d^2=\frac{NA^2}{\sigma_n^2}\\
@@ -272,9 +290,15 @@ P(H_1|H_0)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
+\begin{columns}
+	\column{0.21\textwidth}
+	$H_0:x_k=n_k$\\
+	$H_1:x_k=A+n_k$
+	\column{0.79\textwidth}
+	\[
+	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
+	\]
+\end{columns}
 \textbf{假设$H_1$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
 \begin{align*}
 E[l|H_1]&=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(x_k|H_1)\right]=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(A+n_k)\right]=A+\frac{1}{N}\sum\limits_{k=1}^{N}E[n_k]=A\\
@@ -288,9 +312,15 @@ p(l|H_1)=\left(\frac{1}{2\pi Var[l|H_1]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_1
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
+\begin{columns}
+	\column{0.21\textwidth}
+	$H_0:x_k=n_k$\\
+	$H_1:x_k=A+n_k$
+	\column{0.79\textwidth}
+	\[
+	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
+	\]
+\end{columns}
 \begin{align*}
 p(l|H_1)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)
 \end{align*}
@@ -303,9 +333,15 @@ P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(u)=\int_{x}^{\infty}\left
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
+\begin{columns}
+\column{0.21\textwidth}
+$H_0:x_k=n_k$\\
+$H_1:x_k=A+n_k$
+\column{0.79\textwidth}
 \[
 \frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
 \]
+\end{columns}
 \begin{align*}
 P(H_1|H_1)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}-\frac{A}{2}\right)}{\sigma_n}\right)\\
 &=Q\left(\frac{\sigma_n\ln\eta}{\sqrt{N}A}-\frac{\sqrt{N}A}{2\sigma_n}\right)&& \text{by }d^2=\frac{NA^2}{\sigma_n^2}\\
@@ -332,7 +368,7 @@ P(H_1|H_1)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}-\frac{A}{2}\
 \textbf{判决表达式: }\qquad l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^Nx_k\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma
 \]
 
-\textbf{判决概率:} (式中, 信噪比$d^2=\frac{NA^2}{\sigma^2}$)
+\textbf{判决概率:} (式中, 信噪比$d^2=\frac{NA^2}{\sigma_n^2}$)
 \begin{align*}
 P(H_1|H_0)&=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right), &P(H_0|H_0)&=1-Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)\\
 P(H_1|H_1)&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right),
@@ -363,6 +399,31 @@ P(H_1|H_1)&=Q\left(\ln\eta/d-d/2\right)\\
 \end{align*}
 \colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
 \colorbox{green}{另一方面, 采样次数$N\uparrow\implies d\uparrow$, $p(l|H_0),p(l|H_1)$的间距$d\uparrow$,  检测性能$\uparrow$。} 
+\end{frame}
+
+\begin{frame}{贝叶斯准则例题4}
+考虑以下信号检测问题：
+\begin{align*}
+H_0: x_k&=1+n_{k},   & k=1,2,\dots,N\\
+H_1: x_k&=-1+n_{k}, & k=1,2,\dots,N
+\end{align*}
+其中$n_{k}$是均值为零,方差为$\sigma_n^2=1/2$的高斯随机变量,  且不同采样时刻的加性噪声之间是相互统计独立的。\\
+若两种假设先验等概的,且代价因子为$c_{00}=1, c_{10}=4, c_{11}=2, c_{01}=3$。\\
+请给出上述问题的贝叶斯检测准则和平均代价$C$。
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题4: 解}
+\textbf{步骤1: 计算两个似然函数, 构建似然比}$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}$
+\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$\\
+\textbf{步骤3: 形成贝叶斯检测基本表达式}
+$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$\\
+\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
+$l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\mathop{=}\limits^{def}\gamma$\\
+\textbf{步骤5: 性能分析}\\
+计算判决概率: $P(H_1|H_0),P(H_0|H_0),P(H_0|H_1),P(H_1|H_1)$, 其中,\\
+\[\text{信噪比: }d^2=\frac{4N}{\sigma_n^2},\quad Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\]
+计算平均代价:\\
+$C=P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)$
 \end{frame}
 
 
