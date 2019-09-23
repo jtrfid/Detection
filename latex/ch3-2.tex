@@ -55,7 +55,7 @@
 	\item 目标: 正确判决概率$P(H_j|H_j)$尽可能大，错误判决概率$P(H_i|H_j)(i\ne j)$尽可能小。
 	\item 判决域的划分影响判决概率$P(H_i|H_j)$, 因此\textbf{需要最佳划分判决域}。
 	\item $p(\bm{x}|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数。它描述观测(接收)信号的统计特性。
-	\item 按照一定的准则，将观察空间$\bm{R}$分别划分为$R_0$和$R_1$两个子空间。
+	\item 按照一定的准则，将观测空间$\bm{R}$分别划分为$R_0$和$R_1$两个子空间。
 	计算判决概率$P(H_i|H_j)(i,j=0,1)$。	
 \end{itemize}
 \end{frame}
@@ -64,7 +64,7 @@
 通信系统中, 二元信号的平均解调错误概率(由全概率公式得出):
 \[ P_e=P(0)P(1|0)+P(1)P(0|1)\]
 可以看出, 检测性能不仅与两种错误判决概率$[P(1|0),P(0|1)]$有关, 还与信源发送的0和1的先验概率$[P(0),P(1)]$有关。\\
-另外, 没做出一种判断, 人们要付出的代价也是不同的。\\
+另外, 每做出一种判断, 人们要付出的代价也是不同的。\\
 如何综合考虑上述因素来设计好的检测方法?
 \begin{block}{贝叶斯检测}
 	给定各种判决代价因子, 且已知各假设的先验概率条件下，使\textbf{平均代价最小}的检测准则。
@@ -99,7 +99,7 @@ $c_{ij}$表示假设$H_j$为真时, 判决假设$H_i$成立所付出的代价
 \begin{block}{平均代价$C$由两部分构成}
 	\begin{enumerate}
 		\item 信源发送$H_0$假设时, 判决所付出的代价$C(H_0)$
-		\item 信源发送$H_1$假设时, 判决所付出的代价$C(H_0)$
+		\item 信源发送$H_1$假设时, 判决所付出的代价$C(H_1)$
 	\end{enumerate}
     \[C=P(H_0)C(H_0)+P(H_1)C(H_1)\]
 \end{block}
@@ -168,7 +168,7 @@ C=&P(H_0)\left(c_{00}\int_{R_0}p(x|H_0)dx+c_{10}\int_{R_1}p(x|H_0)dx\right)+\\
 	C=&P(H_0)\left(c_{00}\int_{R_0}p(x|H_0)dx+c_{10}\int_{R_1}p(x|H_0)dx\right)+\\
 	&P(H_1)\left(c_{01}\int_{R_0}p(x|H_1)dx+c_{11}\int_{R_1}p(x|H_1)dx\right)
 	\end{align*}
-	\[\int_{R}p(x|H_j)dx=1 \implies \int_{R_1}p(x|H_j)dx=1-\int_{R_0}p(x|H_0)dx \]
+	\[\int_{R}p(x|H_j)dx=1 \implies \int_{R_1}p(x|H_j)dx=1-\int_{R_0}p(x|H_j)dx \]
 	\column{0.3\textwidth}
 	\includegraphics[scale=0.27]{detectionA}
 \end{columns}

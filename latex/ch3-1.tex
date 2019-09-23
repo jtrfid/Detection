@@ -80,7 +80,7 @@
 \begin{columns}
 	\column{0.5\textwidth}
 	二元信号的检测问题，可归结为\textcolor{blue}{\textbf{对观察空间的划分问题。}}\\
-	即按照一定的准则，将观察空间$\bm{R}$分别划分为$R_0$和$R_1$两个子空间。\\
+	即按照一定的准则，将观测空间$\bm{R}$分别划分为$R_0$和$R_1$两个子空间。\\
 	\[\bm{R}=R_0\cup R_1,\quad R_0\cap R_1=\emptyset \]
 	\column{0.5\textwidth}
 	\includegraphics[scale=0.45]{R}\\
@@ -376,7 +376,7 @@ $c_{ij}$表示假设$H_j$为真时, 判决假设$H_i$成立所付出的代价
 \begin{block}{平均代价$C$由两部分构成}
 	\begin{enumerate}
 		\item 信源发送$H_0$假设时, 判决所付出的代价$C(H_0)$
-		\item 信源发送$H_1$假设时, 判决所付出的代价$C(H_0)$
+		\item 信源发送$H_1$假设时, 判决所付出的代价$C(H_1)$
 	\end{enumerate}
     \[C=P(H_0)C(H_0)+P(H_1)C(H_1)\]
 \end{block}
@@ -445,7 +445,7 @@ C=&P(H_0)\left(c_{00}\int_{R_0}p(x|H_0)dx+c_{10}\int_{R_1}p(x|H_0)dx\right)+\\
 	C=&P(H_0)\left(c_{00}\int_{R_0}p(x|H_0)dx+c_{10}\int_{R_1}p(x|H_0)dx\right)+\\
 	&P(H_1)\left(c_{01}\int_{R_0}p(x|H_1)dx+c_{11}\int_{R_1}p(x|H_1)dx\right)
 	\end{align*}
-	\[\int_{R}p(x|H_j)dx=1 \implies \int_{R_1}p(x|H_j)dx=1-\int_{R_0}p(x|H_0)dx \]
+	\[\int_{R}p(x|H_j)dx=1 \implies \int_{R_1}p(x|H_j)dx=1-\int_{R_0}p(x|H_j)dx \]
 	\column{0.3\textwidth}
 	\includegraphics[scale=0.27]{detectionA}
 \end{columns}
