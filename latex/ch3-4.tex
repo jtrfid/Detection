@@ -5,426 +5,735 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{派生贝叶斯准则}
-
-\begin{frame}
-\begin{columns}
-	\column{0.5\textwidth}
-	\begin{align*}
-	&H_0: x=-A+n,\quad H_1: x=A+n\\
-	&H_0: x_k=-A+n_k,\quad H_1: x_k=A+n_k\\
-	&k=1,2,\dots,N,\quad \bm{x}=(x_1,x_2,\dots,x_N)^{T}\\
-	&P(H_i|H_j)=\int_{R_i}p(\bm{x}|H_j)d\bm{x}
-	\end{align*}
-	\column{0.5\textwidth}
-	\includegraphics[scale=0.4]{detectionA}
-\end{columns}
-\begin{align*}
-&P(H_0|H_0)=\int_{R_0}p(\bm{x}|H_0)d\bm{x},\qquad P(H_1|H_0)=\int_{R_1}p(\bm{x}|H_0)d\bm{x}\\
-&P(H_0|H_1)=\int_{R_0}p(\bm{x}|H_1)d\bm{x},\qquad P(H_1|H_1)=\int_{R_1}p(\bm{x}|H_1)d\bm{x}\\
-&\bm{R}=R_0\cup R_1,\quad R_0\cap R_1=\emptyset, \quad \int_{\bm{R}}p(\bm{x}|H_j)d\bm{x}=1\\
-&P(H_0|H_0)+P(H_1|H_0)=\int_{R_0}p(\bm{x}|H_0)d\bm{x}+\int_{R_1}p(\bm{x}|H_0)d\bm{x}=\int_{\bm{R}}p(\bm{x}|H_0)d\bm{x}=1\\
-&P(H_0|H_1)+P(H_1|H_1)=\int_{R_0}p(\bm{x}|H_1)d\bm{x}+\int_{R_1}p(\bm{x}|H_1)d\bm{x}=\int_{\bm{R}}p(\bm{x}|H_1)d\bm{x}=1
-\end{align*}
+\begin{frame}{派生贝叶斯准则}
+\begin{block}{基本要求}
+	\begin{itemize} \setstretch{2.5}
+		\item 掌握最小平均错误概率准则和最大后验概率准则
+		\item 理解极小化极大准则和奈曼-皮尔逊准则的应用范围和基本原理
+	\end{itemize}
+\end{block}
 \end{frame}
 
-\begin{frame}{贝叶斯检测步骤}
+\section{最小平均错误概率准则}
+
+\begin{frame}{最小平均错误概率准则}
 \begin{block}{贝叶斯判决准则}
-\[ \frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \implies \lambda(x)\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \implies \lambda(\bm{x})\mathop{\gtrless}_{H_0}^{H_1}\eta \]
 \end{block}
-利用贝叶斯判决准则进行检测的基本步骤:
-\begin{enumerate}
-\item 计算两个似然函数, 构建似然比$\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}$
-\item 根据两个假设的先验概率和代价因子, 计算判决门限$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$
-\item 利用上式, 形成贝叶斯检测基本表达式$\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$
-\item 化简, 形成贝叶斯检测判决表达式。 如对数似然比检验$\ln\lambda(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\implies l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$
-\end{enumerate}
+\begin{block}{最小平均错误概率准则}
+	正确判决不付出代价, 错误判决代价相同。
+	\[c_{01}=c_{10}=1, c_{00}=c_{11}=0\]
+\end{block}
 \end{frame}
 
-\section{贝叶斯准则例题}
-
-\begin{frame}{贝叶斯准则例题2}
-考虑以下信号检测问题：
+\begin{frame}[shrink]{最小平均错误概率准则---判决域划分}
+\begin{block}{最小平均错误概率准则}
+	正确判决不付出代价, 错误判决代价相同。
+	\[c_{01}=c_{10}=1, c_{00}=c_{11}=0\]
+\end{block}
 \begin{align*}
-H_0: x_k=n_{0k}, \qquad k=1,2,\dots,N\\
-H_1: x_k=n_{1k}, \qquad k=1,2,\dots,N
+&C(H_0)=c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)=P(H_1|H_0)\\
+&C(H_1)=c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)=P(H_0|H_1)\\
+&\textbf{最小平均错误概率准则, 平均代价$C$}\Leftrightarrow\textbf{平均错误概率$P_e$}\\
+C&=P(H_0)C(H_0)+P(H_1)C(H_1)\\
+&=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)
 \end{align*}
-其中$n_{0k}$是均值为零,方差为$\sigma_0^2$的高斯随机变量, $n_{1k}$是均值为零,方差为$\sigma_1^2$的高斯随机变量,  且不同采样时刻的加性噪声之间是相互统计独立的。\\
-~\\
-求: 请给出上述问题的贝叶斯检测准则。
 \end{frame}
 
-\begin{frame}[shrink]{贝叶斯准则例题2: 解}
-解: $N$次独立采样, 样本为$x_k(k=1,2,\cdots,N)$:
-\begin{align*}
-H_0: x_k&=n_{0k} && k=1,2,\cdots,N\\
-H_1: x_k&=n_{1k} && k=1,2,\cdots,N
-\end{align*}
-\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
-由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 第$k$次采样值$x_k$服从高斯分布，且均值为0, 方差为$\sigma_0^2$; 在$H_1$假设下, 第$k$次采样值$x_k$服从均值为0, 方差为$\sigma_1^2$的高斯分布。
-\begin{align*}
-p(x_k|H_0)&=\left(\frac{1}{2\pi\sigma_0^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_0^2}\right)\implies p(\bm{x}|H_0)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_0^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_0^2}\right)\\
-p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_1^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_1^2}\right)\implies p(\bm{x}|H_1)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_1^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_1^2}\right)\\
-\lambda(\bm{x})&=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}=\left(\frac{\sigma_0}{\sigma_1}\right)^N\exp\left(\left(\frac{1}{2\sigma_0}-\frac{1}{2\sigma_1}\right)\sum\limits_{k=1}^{N}x_k^2\right)
-\end{align*} 
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题2: 解续(1)}
-\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}
-\[\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
-\textbf{步骤3: 形成贝叶斯检测基本表达式}
-\begin{align*}
-\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
-\left(\frac{\sigma_0}{\sigma_1}\right)^N\exp\left(\left(\frac{1}{2\sigma_0}-\frac{1}{2\sigma_1}\right)\sum\limits_{k=1}^{N}x_k^2\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta
-\end{align*} 
-\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
-\begin{align*}
-\left(\frac{1}{2\sigma_0}-\frac{1}{2\sigma_1}\right)\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}\implies 
-\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
-\end{align*} 
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题2: 解续(2)}
-\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
-\begin{align*}
-\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
-\end{align*}
-经过上述化简, 信号检测的判决式由似然比检验的形式, 简化为检验统计量$l(x)$与检测门限$\gamma$相比较的形式, 形成贝叶斯检测判决表达式:
-\begin{align*}
-\textbf{如果}\quad\sigma_1^2>\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{1}{N}\ln\eta-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma\\
-\textbf{如果}\quad\sigma_1^2<\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{1}{N}\ln\eta-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma
-\end{align*}
-检验统计量$l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^Nx_k$是观测信号$x_k(k=1,2,\dots,N)$的求和取平均值的结果, 即它是$x_k(k=1,2,\dots,N)$的函数，是一个随机变量。\\
-两种假设下的观测量$(l|H_0),(l|H_1)$也是服从高斯分布的随机变量。 
-\end{frame}
-
-\section{贝叶斯检测性能分析}
-
-\begin{frame}{贝叶斯检测性能分析}
-\begin{block}{问题}
-	\textbf{问题1:} 贝叶斯检测准则是一种平均代价最小的判决准则，按照贝叶斯检测准则，能获得平均代价到底等于多少？
+\begin{frame}[shrink]{最小平均错误概率准则---判决域划分}
+\textbf{最小平均错误概率准则, 平均代价$C$}$\Leftrightarrow$\textbf{平均错误概率$P_e$}
+\begin{columns}
+	\column{0.5\textwidth}
+	\small
 	\begin{align*}
-	C=&P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+\\
-	&P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)
+	C&=P(H_0)C(H_0)+P(H_1)C(H_1)\\
+	&=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)\\
+	&=P(H_0)+\left(\int_{R_0}\left[P({H_1})p(\bm{x}|H_1)-P(H_0)p(\bm{x}|H_0)\right]dx \right)
 	\end{align*}
-	\textbf{问题2:} 利用贝叶斯检测准则进行检测，平均检测错误概率如何计算？
+    \scriptsize
+	\textbf{把被积函数取负值的观测值$x$划分给$R_0$区域, 而把其余的观测值$x$划分给$R_1$, 即可保证平均代价最小。}
+	\column{0.4\textwidth}
+	\centering
+	\includegraphics[scale=0.3]{detectionA}
+	\scriptsize
+	\begin{align*}
+	P(H_1|H_0)&=1-\int_{R_0}p(x|H_0)dx\\ 
+	P(H_0|H_1)&=\int_{R_0}p(x|H_1)dx
+	\end{align*}
+\end{columns}
+\begin{align*}
+&P({H_1})p(\bm{x}|H_1)< P(H_0)p(x|H_0)&\textbf{判决$H_0$假设成立}\\
+&P({H_1})p(\bm{x}|H_1)\ge P(H_0)p(x|H_0)&\textbf{判决$H_1$假设成立}
+\end{align*}
+\end{frame}
+
+\begin{frame}{最小平均错误概率准则}
+\begin{block}{最小平均错误概率准则}
+	\begin{align*}
+	\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&<\frac{P(H_0)}{P(H_1)}&\textbf{判决$H_0$假设成立}\\
+	\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&\ge\frac{P(H_0)}{P(H_1))}&\textbf{判决$H_1$假设成立}
+	\end{align*}
+	$\implies$
+	\[ \lambda(\bm{x})\mathop{=}^{def}\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\mathop{=}^{def}\eta \]
+	$\implies$
+	\[\ln\lambda(\bm{x})\mathop{\gtrless}_{H_0}^{H_1}\ln\eta \]
+	$\implies$
+	\[l(\bm{x})\mathop{\gtrless}_{H_0}^{H_1}\gamma \]
 \end{block}
-\textbf{\textcolor{blue}{上述两个问题的关键在于，如何计算四种事件的检测概率？}}
-\begin{columns}
-	\column{0.5\textwidth}
-	正确判决概率$\uparrow$: $P(H_1|H_1), P(H_0|H_0)$\\
-	错误判决概率$\downarrow$: $P(H_0|H_1), P(H_1|H_0)$\\
-	\column{0.5\textwidth}
-	\includegraphics[scale=0.28]{detectionL}
-\end{columns}
 \end{frame}
 
-\begin{frame}{判决概率的计算}
+\begin{frame}{最大似然检测准则}
+\begin{block}{最小平均错误概率准则}
+	\[ \lambda(\bm{x})\mathop{=}^{def}\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\mathop{=}^{def}\eta \]
+\end{block}
+\begin{block}{最大似然检测准则}
+	$c_{00}=c_{11}=0, c_{01}=c_{10}=1$, 且两个假设的先验概率等概, 则最小平均错误准则转化为最大似然检测准则。
+	\[ p(\bm{x}|H_1)\mathop{\gtrless}_{H_0}^{H_1}p(\bm{x}|H_0) \]
+\end{block}
+\textbf{\textcolor{blue}{先验概率等概的最小平均错误概率准则为最大似然准则(maximum likelihood criterion)。}}
+\end{frame}
+
+\begin{frame}{贝叶斯准则例题5}
+在闭启键控通信系统中，两个假设下的观测信号模型为:
 \begin{align*}
-\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\qquad \text{or}\qquad \lambda(\bm{\overline{x}})=\frac{p(\bm{\overline{x}}|H_1)}{p(\bm{\overline{x}}|H_0)}
+H_0: x&=n  \\
+H_1: x&=A+n
 \end{align*}
-\centering $\Downarrow$
-\begin{align*}
-\ln(\lambda(\bm{x}))=\ln\left(\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\right)\qquad \text{or}\qquad \ln(\lambda(\bm{\overline{x}}))=\ln\left(\frac{p(\bm{\overline{x}}|H_1)}{p(\bm{\overline{x}}|H_0)}\right)
-\end{align*}
-\centering $\Downarrow$
-\begin{align*}
-\textbf{最终统计量}\qquad l(\bm{x})\quad \text{or}\quad l(\bm{\overline{x}})
-\end{align*}\\
+其中, 噪声$n$是均值为零,方差为$\sigma_n^2$的高斯噪声,  若两个假设的先验概率相等, 且$c_{00}=c_{11}=0, c_{01}=c_{10}=1$。\\
 ~\\
-\textbf{\textcolor{blue}{根据最终的统计量来计算各种判决概率}}
+采用最小平均错误概率准则, 试确定判决表示式, 并求最小平均错误概率。
 \end{frame}
 
-\begin{frame}[shrink]{判决概率的计算步骤}
-\textbf{\textcolor{blue}{计算基本原则: 根据化简后的最简判决表达式进行计算。}} 计算步骤如下:
-\begin{enumerate}
-	\item 推导贝叶斯检测准则的最简判决表达式。 \[l(\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma \]
-	\item 根据最简判决表达式, 计算各种假设下, 统计量的概率密度函数。
-	\[p(l|H_0)\qquad p(l|H_1)\]
-	\item 计算判决概率
-	\begin{columns}
-		\column{0.5\textwidth}
-		\begin{align*}
-		P(H_0|H_1)=\int_{-\infty}^{\gamma}p(l|H_1)dl\\
-		P(H_1|H_0)=\int_{\gamma}^{\infty}p(l|H_0)dl\\
-		P(H_1|H_1)=1-P(H_0|H_1)\\
-		P(H_0|H_0)=1-P(H_1|H_0)
-		\end{align*}
-		\column{0.5\textwidth}
-		\includegraphics[scale=0.3]{detectionL}
-	\end{columns}
-\end{enumerate}
-\end{frame}
-
-\begin{frame}{贝叶斯准则例题3}
-考虑以下信号检测问题：
+\begin{frame}[shrink]{贝叶斯准则例题5: 解}
+解: 观测信号模型为:
 \begin{align*}
-H_0: x_k&=n_{k},   & k=1,2,\dots,N\\
-H_1: x_k&=A+n_{k}, & k=1,2,\dots,N
+H_0: x&=n  \\
+H_1: x&=A+n
 \end{align*}
-其中$n_{k}$是均值为零,方差为$\sigma_n^2$的高斯随机变量,  且不同采样时刻的加性噪声之间是相互统计独立的。请\\
-\begin{enumerate}
-	\item 请给出上述问题的贝叶斯检测准则。
-	\item 当$N=1$时, 计算判决概率$P(H_1|H_1)$和$P(H_1|H_0)$。
-	\item 当$N>1$时, 计算判决概率$P(H_1|H_1)$和$P(H_1|H_0)$。
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 解}
-解: $N$次独立采样, 样本为$x_k(k=1,2,\cdots,N)$:
+由于, 先验概率等概的最小平均错误概率准则就是最大似然准则。 因此, 贝叶斯检测判别式为: 
+	\[ p(x|H_1)\mathop{\gtrless}_{H_0}^{H_1}p(x|H_0)\implies \lambda(x)\mathop{=}^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}1\mathop{=}^{def}\eta\]
+由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 检测统计量$x$服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 检测统计量$x$服从均值为$A$, 方差为$\sigma_n^2$的高斯分布。
 \begin{align*}
-H_0: x_k&=n_k && k=1,2,\cdots,N\\
-H_1: x_k&=A+n_k && k=1,2,\cdots,N
-\end{align*}
-\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
-由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 第$k$次采样值$x_k$服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 第$k$次采样值$x_k$服从均值为$A$, 方差为$\sigma_n^2$的高斯分布。
-\begin{align*}
-p(x_k|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)\implies p(\bm{x}|H_0)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)\\
-p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^2}{2\sigma_n^2}\right)\implies p(\bm{x}|H_1)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^2}{2\sigma_n^2}\right)\\
-\lambda(\bm{x})&=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}=\exp\left(\frac{\sum\limits_{k=1}^{N}(x_k^2-(x_k-A)^2)}{2\sigma_n^2}\right)
+&p(x|H_0)=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right) \qquad p(x|H_1)=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-A)^2}{2\sigma_n^2}\right)\\
+&\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}=\exp\left(\frac{(x^2-(x-A)^2)}{2\sigma_n^2}\right)=\exp\left(\frac{A}{\sigma_n^2}x-\frac{A^2}{2\sigma_n^2}\right)
 \end{align*} 
 \end{frame}
 
-\begin{frame}[shrink]{贝叶斯准则例题3: 解续(1)}
-\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}
-\[\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
-\textbf{步骤3: 形成贝叶斯检测基本表达式}
-\begin{align*}
-\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
-\exp\left(\frac{\sum\limits_{k=1}^{N}(x_k^2-(x_k-A)^2)}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta
-\end{align*} 
-\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
-\begin{align*}
--NA^2+\sum\limits_{k=1}^{N}2Ax_k&\mathop{\gtrless}\limits_{H_0}^{H_1}2\sigma_n^2\ln\eta\implies \sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{A}+\frac{NA}{2}\\
-l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k&\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma\\
-\end{align*} 
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 解续(2)}
-经过上述化简, 信号检测的判决式由似然比检验的形式, 简化为检验统计量$l(x)$与检测门限$\gamma$相比较的形式, 形成贝叶斯检测判决表达式:
-\[
-l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma
-\]
-检验统计量$l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^Nx_k$是观测信号$x_k(k=1,2,\dots,N)$的求和取平均值的结果, 即它是$x_k(k=1,2,\dots,N)$的函数，是一个随机变量。\\
-因为高斯随机变量的线性组合还是高斯随机变量,  所以两种假设下的观测量$(l|H_0),(l|H_1)$也是服从高斯分布的随机变量。
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 解续(3)}
-$N$次独立采样, 样本为$x_k(k=1,2,\dots,N)$
-\begin{align*}
-&&n_k\sim\mathcal{N}(0,\sigma_n^2)\\ 
-H_0 &:x_k=n_k   &(l|H_0)\sim\mathcal{N}(0,\frac{\sigma_n^2}{N})\\
-H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
-\end{align*}
+\begin{frame}[shrink]{贝叶斯准则例题5: 解(续1)}
 \begin{columns}
-\column{0.4\textwidth}	
-\textbf{贝叶斯检测判决表达式:}\\
-\[
-l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma
-\]
-\column{0.4\textwidth}
-\includegraphics[scale=0.25]{mgt0}\\
-\scriptsize
-\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\sigma^2\ln\eta}{Nm}+\frac{m}{2}; \alpha=P(H_1|H_0)$}
-\end{columns}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\begin{columns}
-	\column{0.21\textwidth}
-	$H_0:x_k=n_k$\\
-	$H_1:x_k=A+n_k$
-	\column{0.79\textwidth}
-	\[
-	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-	\]
-\end{columns}
-\textbf{假设$H_0$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
-\begin{align*}
-E[l|H_0]&=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(x_k|H_0)\right]=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}n_k\right]=\frac{1}{N}\sum\limits_{k=1}^{N}E[n_k]=0\\
-Var[l|H_0]&=E\left[(l|H_0-E(l|H_0))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{k=1}^{N}n_k\right)^2\right]\\
-&=\frac{1}{N^2}\sum\limits_{k=1}^{N}E[n_k^2]=\frac{1}{N^2}\sum\limits_{k=1}^{N}\sigma_n^2=\frac{\sigma_n^2}{N}
-\end{align*}
-\textbf{因此, }$(l|H_0)\sim\mathcal{N}(0,\frac{\sigma_n^2}{N})$
-\begin{align*}
-p(l|H_0)=\left(\frac{1}{2\pi Var[l|H_0]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_0])^2}{2 Var[l|H_0]}\right)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)
-\end{align*}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\begin{columns}
-	\column{0.21\textwidth}
-	$H_0:x_k=n_k$\\
-	$H_1:x_k=A+n_k$
-	\column{0.79\textwidth}
-	\[
-	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-	\]
+	\column{0.5\textwidth}
+	\begin{align*}
+	&\lambda(x)\mathop{=}^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}1\mathop{=}^{def}\eta\\
+	&\lambda(x)=\exp\left(\frac{A}{\sigma_n^2}x-\frac{A^2}{2\sigma_n^2}\right)\\
+	&x\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{A}+\frac{A}{2}\mathop{=}^{def}\gamma
+	\end{align*} 
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.3]{0Ax}
 \end{columns}
 \begin{align*}
-p(l|H_0)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)
-\end{align*}
-\begin{align*}
-P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
-&=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}\\
-&=\int_{\frac{\sqrt{N}\gamma}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
-&=Q\left(\frac{\sqrt{N}\gamma}{\sigma_n}\right)=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\right)}{\sigma_n}\right)
-\end{align*}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_0)$}
-\begin{columns}
-	\column{0.21\textwidth}
-	$H_0:x_k=n_k$\\
-	$H_1:x_k=A+n_k$
-	\column{0.79\textwidth}
-	\[
-	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-	\]
-\end{columns}
-\begin{align*}
-P(H_1|H_0)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\right)}{\sigma_n}\right)\\
-&=Q\left(\frac{\sigma_n\ln\eta}{\sqrt{N}A}+\frac{\sqrt{N}A}{2\sigma_n}\right)&& \text{by }d^2=\frac{NA^2}{\sigma_n^2}\\
+P(H_1|H_0)&=\int_{\gamma}^{\infty}p(x|H_0)dx\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=\int_{\gamma}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)dx\qquad 
+&&\text{by } x=\sigma_nu\\
+&=\int_{\frac{\gamma}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\qquad &&\text{by } \gamma=\frac{\sigma_n^2\ln\eta}{A}+\frac{A}{2}\\
+&=\int_{\frac{\sigma_n\ln\eta}{A}+\frac{A}{2\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\qquad &&\text{by } d^2=\frac{A^2}{\sigma_n^2}\\
 &=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
+\begin{frame}[shrink]{贝叶斯准则例题5: 解(续2)}
 \begin{columns}
-	\column{0.21\textwidth}
-	$H_0:x_k=n_k$\\
-	$H_1:x_k=A+n_k$
-	\column{0.79\textwidth}
-	\[
-	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-	\]
-\end{columns}
-\textbf{假设$H_1$条件下, 统计量$l(x)$为高斯分布, 均值和方差分别为}
-\begin{align*}
-E[l|H_1]&=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(x_k|H_1)\right]=E\left[\frac{1}{N}\sum\limits_{k=1}^{N}(A+n_k)\right]=A+\frac{1}{N}\sum\limits_{k=1}^{N}E[n_k]=A\\
-Var[l|H_1]&=E\left[(l|H_1-E(l|H_1))^2\right]=E\left[\left(\frac{1}{N}\sum\limits_{k=1}^{N}(A+n_k)-A\right)^2\right]\\
-&=\frac{1}{N^2}\sum\limits_{k=1}^{N}E[n_k^2]=\frac{1}{N^2}\sum\limits_{k=1}^{N}\sigma_n^2=\frac{\sigma_n^2}{N}
-\end{align*}
-\textbf{因此, }$(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})$
-\begin{align*}
-p(l|H_1)=\left(\frac{1}{2\pi Var[l|H_1]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_1])^2}{2 Var[l|H_1]}\right)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)
-\end{align*}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
-\begin{columns}
-	\column{0.21\textwidth}
-	$H_0:x_k=n_k$\\
-	$H_1:x_k=A+n_k$
-	\column{0.79\textwidth}
-	\[
-	\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-	\]
-\end{columns}
-\begin{align*}
-p(l|H_1)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)
-\end{align*}
-\begin{align*}
-P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
-&=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}+A\\
-&=\int_{\frac{\sqrt{N}(\gamma-A)}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
-&=Q\left(\frac{\sqrt{N}(\gamma-A}{\sigma_n}\right)=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}-\frac{A}{2}\right)}{\sigma_n}\right)
-\end{align*}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3: 性能分析---观测量$(l|H_1)$}
-\begin{columns}
-\column{0.21\textwidth}
-$H_0:x_k=n_k$\\
-$H_1:x_k=A+n_k$
-\column{0.79\textwidth}
-\[
-\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}\limits^{def}\gamma \qquad \textbf{统计量: }l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k
-\]
-\end{columns}
-\begin{align*}
-P(H_1|H_1)&=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}-\frac{A}{2}\right)}{\sigma_n}\right)\\
-&=Q\left(\frac{\sigma_n\ln\eta}{\sqrt{N}A}-\frac{\sqrt{N}A}{2\sigma_n}\right)&& \text{by }d^2=\frac{NA^2}{\sigma_n^2}\\
-&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)
-\end{align*}
-\end{frame}
-
-\begin{frame}[shrink]{贝叶斯准则例题3(小结1)}
-\begin{columns}
-	\column{0.6\textwidth}
-	$N$次独立采样, 样本为$x_k(k=1,2,\dots,N)$
+	\column{0.5\textwidth}
 	\begin{align*}
-	&&n_k\sim\mathcal{N}(0,\sigma_n^2)\\ 
-	H_0 &:x_k=n_k   &(l|H_0)\sim\mathcal{N}(0,\frac{\sigma_n^2}{N})\\
-	H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
-	\end{align*}
-	检验统计量$l(\bm{x})$, 归一化后, $(l|H_j)\sim\mathcal{N}(0,1)$
-	\column{0.4\textwidth}
-	\includegraphics[scale=0.3]{0A}\\
-	\scriptsize
-	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\ln\eta}{d}+\frac{d}{2}; \alpha=P(H_1|H_0)$}
+	&\lambda(x)\mathop{=}^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}1\mathop{=}^{def}\eta\\
+	&\lambda(x)=\exp\left(\frac{A}{\sigma_n^2}x-\frac{A^2}{2\sigma_n^2}\right)\\
+	&x\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{A}+\frac{A}{2}\mathop{=}^{def}\gamma
+	\end{align*} 
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.3]{0Ax}
 \end{columns}
-\[
-\textbf{判决表达式: }\qquad l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^Nx_k\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma
-\]
-
-\textbf{判决概率:} (式中, 信噪比$d^2=\frac{NA^2}{\sigma_n^2}$)
 \begin{align*}
-P(H_1|H_0)&=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right), &P(H_0|H_0)&=1-Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)\\
-P(H_1|H_1)&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right),
-&P(H_0|H_1)&=1-Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)
+P(H_0|H_1)&=1-\int_{\gamma}^{\infty}p(x|H_1)dx\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-\int_{\gamma}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-A)^2}{2\sigma_n^2}\right)dx\qquad 
+&&\text{by } x=\sigma_nu+A\\
+&=1-\int_{\frac{\gamma-A}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\qquad &&\text{by } \gamma=\frac{\sigma_n^2\ln\eta}{A}+\frac{A}{2}\\
+&=1-\int_{\frac{\sigma_n\ln\eta}{A}-\frac{A}{2\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\qquad &&\text{by } d^2=\frac{A^2}{\sigma_n^2}\\
+&=1-Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)
 \end{align*}
 \end{frame}
 
-\begin{frame}{贝叶斯准则例题3(小结2)}
+\begin{frame}[shrink]{贝叶斯准则例题5: 解(续3)}
+\begin{columns}
+	\column{0.55\textwidth}
+	\[\lambda(x)\mathop{=}^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}1\mathop{=}^{def}\eta\implies\ln\eta=0\]
+	\begin{align*}
+	P(H_1|H_0)&=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)=Q\left(\frac{d}{2}\right)\\
+	P(H_0|H_1)&=1-Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)\\
+	&=1-Q\left(-\frac{d}{2}\right)=Q\left(\frac{d}{2}\right)
+	\end{align*}
+	\column{0.45\textwidth}
+	\includegraphics[scale=0.25]{0Ax}
+\end{columns}
+~\\
+\textbf{最小平均错误概率准则, 平均代价$C$}$\Leftrightarrow$\textbf{平均错误概率$P_e$}, $P(H_0)=P(H_1)=\frac{1}{2}$
+\begin{align*}
+P_e=C&=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)\\
+&=\frac{1}{2}Q\left(\frac{d}{2}\right)+\frac{1}{2}Q\left(\frac{d}{2}\right)=Q\left(\frac{d}{2}\right)\qquad d^2=\frac{A^2}{\sigma_n^2}
+\end{align*}
+\textbf{\textcolor{blue}{$Q(x)$是单调递减函数, 信噪比d越高, 平均错误概率越小, 检测性能越好。
+}}
+\end{frame}
+
+\begin{frame}[shrink]{标准高斯分布的右尾积分}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+	&Q\left(\frac{d}{2}\right) = 1-Q\left(-\frac{d}{2}\right)
+	\end{align*}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[scale=0.4]{Qdd}
+\end{columns}
+\end{frame}
+
+\section{最大后验概率准则}
+
+\begin{frame}[shrink]{最大后验概率准则}
+\begin{block}{贝叶斯判决准则}
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \implies \lambda(\bm{x})\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\end{block}
+\begin{block}{最大后验概率准则}
+	代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$\\
+	判决表示式
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)} \]
+\end{block}
+\begin{block}{Notes}
+	\small
+	\begin{itemize}
+		\item 最大后验概率准则形式上与最小平均错误概率准则相同
+		\item 问题: 可写成上述判决表达式形式的, 是否一定可以获得
+		最小平均错误概率?
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{最大后验概率准则不一定能获得最小平均错误概率}
+\begin{block}{最大后验概率准则}
+	代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$\\
+	判决表示式
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)} \]
+\end{block}
+\begin{block}{Notes}
+	最小平均错误概率准则: $c_{01}=c_{10}=1, c_{00}=c_{11}=0$。\\ 
+	可得到最小平均错误概率:
+	\begin{align*}
+	P_e=C=P(H_0)C(H_0)+P(H_1)C(H_1)=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)
+	\end{align*}
+	因此, 虽然最大后验概率准则形式上与最小平均错误概率准则相同。但是不一定能获得最小平均错误概率?
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{最大后验概率准则}
+在贝叶斯准则中, 当代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时 
+\[\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\implies P(H_1)p(\bm{x}|H_1)\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0)p(\bm{x}|H_0)\]
+由条件概率公式$P(A|B)=\frac{P(AB)}{P(B)}$,有
+\[P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=\frac{P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)P(H_1)}{P(\bm{x}\le X\le \bm{x}+d\bm{x})}\]
+当$d\bm{x}$很小时,有$P(H_1|(\bm{x}\le X\le \bm{x}+d\bm{x}))=P(H_1|\bm{x})$, $P((\bm{x}\le X\le \bm{x}+d\bm{x})|H_1)=p(\bm{x}|H_1)d\bm{x},\quad P(\bm{x}\le X\le \bm{x}+d\bm{x})=p(\bm{x})d\bm{x}$\\
+从而得
+\[P(H_1|\bm{x})=\frac{p(\bm{x}|H_1)d\bm{x}P(H_1)}{p(\bm{x})d\bm{x}}=\frac{p(\bm{x}|H_1)P(H_1)}{p(\bm{x})}\]
+\[\implies P(H_1)p(\bm{x}|H_1)=p(\bm{x})P(H_1|\bm{x}) \]
+类似地，可得
+\[P(H_0)p(\bm{x}|H_0)=p(\bm{x})P(H_0|\bm{x}) \]
+\end{frame}
+
+\begin{frame}[shrink]{最大后验概率准则}
+\[P(H_1)p(\bm{x}|H_1)=p(\bm{x})P(H_1|\bm{x}),\quad P(H_0)p(\bm{x}|H_0)=p(\bm{x})P(H_0|\bm{x}) \]
+\[\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{P(H_0)}{P(H_1)}\implies P(H_1)p(\bm{x}|H_1)\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0)p(\bm{x}|H_0)\]
+\[p(\bm{x})P(H_1|\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}p(\bm{x})P(H_0|\bm{x}) \]
+\[P(H_1|\bm{x})\mathop{\gtrless}\limits_{H_0}^{H_1}P(H_0|\bm{x}) \]
+$P(H_j|\bm{x})(j=0,1)$表示已经获得观测量$\bm{x}$的条件下，假设$H_j$为真时的概率, 称为\textbf{后验概率}。\\
+按照最小平均代价的贝叶斯准则在代价因子满足: $c_{10}-c_{00}=c_{01}-c_{11}$时，就成为\textbf{最大后验概率准则(maximum a posteriori probability criterion)} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则以及派生贝叶斯准则}
+\includegraphics[scale=0.5]{bys}
+\end{frame}
+
+\section{极小极大化准则和奈曼皮尔逊准则}
+
+\begin{frame}[shrink]{极小极大化准则和奈曼皮尔逊准则}
+\includegraphics[scale=0.5]{minimax-NP}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+\begin{block}{贝叶斯判决准则}
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \implies \lambda(\bm{x})\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\end{block}
+\begin{block}{极小极大化准则}
+	\begin{itemize}
+		\setlength{\itemsep}{.5cm}
+		\item 应用范围：\\
+		假设的先验概率未知，判决代价因子给定
+		\item 目的：\\
+		尽可能避免产生过分大的代价，使极大可能代价最小化
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+\begin{itemize} 
+	\setlength{\itemsep}{.5cm}
+	\item 在先验概率未知的情况下, 平均代价的性质?\\
+	\textbf{\textcolor{blue}{平均代价是先验概率的函数}}
+	\[C=P(H_0)C(H_0)+P(H_1)C(H_1)\]
+	\item 在先验概率未知的情况下, 进行检测的方法是:\\
+	\textbf{\textcolor{blue}{先假设一个先验概率$P_{1g}$, 然后按照贝叶斯准则进行检测。}}
+	\item 为尽可能降低代价, 需设计一种先验概率的假设方法, 使由此得到的检测准则的带价值与先验概率无关。\\
+	\textbf{\textcolor{blue}{尽可能避免产生过分大的代价, 使极大可能代价最小化。}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{几种符号定义}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&H_0: x=n &&\text{仅含噪声信号}\\
+	&H_1: x=A+n &&\text{雷达检测回波信号}
+	\end{align*}
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.25]{R0R1}
+\end{columns}
+\begin{itemize}
+	\setlength{\itemsep}{.2cm}
+	\item \textbf{\textcolor{blue}{虚警概率}}$P_F\mathop{=}\limits^{def}P(H_1|H_0)$: False alarm, 假设$H_0$为真的条件下，判决$H_1$成立的概率。是个假判决。
+	\item \textbf{\textcolor{blue}{漏警概率}}$P_M\mathop{=}\limits^{def}P(H_0|H_1)$: Miss alarm, 假设$H_1$为真的条件下, 判决$H_0$成立的概率。是个遗漏的判决。
+	\item \textbf{\textcolor{blue}{检测概率}}$P_D\mathop{=}\limits^{def}P(H_1|H_1)$: Ditection alarm, 假设$H_1$为真的条件下, 判决$H_1$成立的概率。是个正确检测的判决。
+\end{itemize}
+\end{frame}
+
+\begin{frame}{几种符号定义(续)}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&H_0: x=n &&\text{仅含噪声信号}\\
+	&H_1: x=A+n &&\text{雷达检测回波信号}
+	\end{align*}
+	\column{0.5\textwidth}
+	\includegraphics[scale=0.25]{R0R1}
+\end{columns}
+\begin{align*}
+&\textbf{\textcolor{blue}{虚警概率}}
+&&P_F\mathop{=}\limits^{def}P(H_1|H_0)=\int_{R_1}p(\bm{x}|H_0)d\bm{x}=1-\int_{R_0}p(\bm{x}|H_0)d\bm{x}\\
+&\textbf{\textcolor{blue}{漏警概率}}
+&&P_M\mathop{=}\limits^{def}P(H_0|H_1)=\int_{R_0}p(\bm{x}|H_1)d\bm{x}\\
+&\textbf{\textcolor{blue}{检测概率}}
+&&P_D\mathop{=}\limits^{def}P(H_1|H_1)=\int_{R_1}p(\bm{x}|H_1)d\bm{x}\\
+&\textbf{\textcolor{blue}{先验概率}}
+&&P_1\mathop{=}^{def}P(H_1)=1-P(H_0)\mathop{=}^{def}=1-P_0
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则---先验概率未知, 平均代价的性质}
+\begin{itemize} 
+	%\setlength{\itemsep}{.5cm}
+	\item 先验概率和代价因子已知时, 平均代价为
+	\begin{align*}
+	C&=P(H_0)C(H_0)+P(H_1)C(H_1)\\
+	&=P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))
+	\end{align*}
+	\item 代价因子已知, 先验概率未知时，\textbf{\textcolor{blue}{平均代价是先验概率的函数。}} $P_1\mathop{=}\limits^{def}P(H_1)$
+    \begin{align*}
+    C(P_1)&=(1-P(H_1))(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))\\
+    &=(1-P_1)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P_1(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))
+    \end{align*}
+	\item 先验概率未知时，由于贝叶斯判决门限是先验概率$P_1$的函数, 因此\textbf{\textcolor{blue}{漏警概率$P_M$和虚警概率$P_F$也是先验概率$P_1$的函数。}}
+\end{itemize}
+\begin{align*}
+&\eta\mathop{=}^{def}\eta(P_1)=\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}=\frac{(1-P_1)(c_{10}-c_{00})}{P_1(c_{01}-c_{11})}=\frac{1}{P_1(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\\
+&P_M(P_1)\mathop{=}^{def}P(H_0|H_1)=\int_{R_0}p(x|H_1)dx,\quad P_F(P_1)\mathop{=}^{def}P(H_1|H_0)=\int_{R_1}p(x|H_0)dx
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则---先验概率未知, 平均代价的性质}
+\small
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&P_1\mathop{=}\limits^{def}P(H_1),\quad P_M(P_1)\mathop{=}^{def}P(H_0|H_1),\quad P_F(P_1)\mathop{=}^{def}P(H_1|H_0)\\
+	&P(H_1|H_1)=1-P(H_0|H_1)=1-P_M(P_1)\\
+	&P(H_0|H_0)=1-P(H_1|H_0)=1-P_F(P_1)
+	\end{align*}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.22]{R0R1}
+\end{columns}
+\begin{align*}
+	C(P_1)&=(1-P(H_1))(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))\\
+	&=(1-P_1)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P_1(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))\\
+	&=(1-P_1)(c_{00}(1-P_F(P_1))+c_{10}P_F(P_1))+P_1(c_{01}P_M(P_1)+c_{11}(1-P_M(P_1))\\
+	&=(1-P_1)c_{00}+(1-P_1)(c_{10}-c_{00})P_F(P_1)+P_1c_{11}+P_1(c_{01}-c_{11})P_M(P_1)\\
+	&=c_{00}-P_1c_{00}+(c_{10}-c_{00})P_F(P_1)-P_1(c_{10}-c_{00})P_F(P_1)+P_1c_{11}+P_1(c_{01}-c_{11})P_M(P_1)\\
+	&=c_{00}+(c_{10}-c_{00})P_F(P_1)\\
+	&+P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_1)-(c_{10}-c_{00})P_F(P_1)]
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则---先验概率未知, 平均代价的性质}
+\begin{columns}
+	\small
+	\column{0.5\textwidth}
+	\begin{align*}
+	&P_1\mathop{=}\limits^{def}P(H_1),\quad P_M(P_1)\mathop{=}^{def}P(H_0|H_1),\quad P_F(P_1)\mathop{=}^{def}P(H_1|H_0)\\
+	&P(H_1|H_1)=1-P(H_0|H_1)=1-P_M(P_1)\\
+	&P(H_0|H_0)=1-P(H_1|H_0)=1-P_F(P_1)\\
+	&\eta\mathop{=}^{def}\eta(P_1)=\frac{1}{P_1(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}
+	\end{align*}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.22]{R0R1}
+\end{columns}
+~\\
+\textbf{\textcolor{blue}{当$\lambda(\bm{x})$是严格单调的概率分布随机变量时，平均代价$C(P_1)$是先验概念率$P_1$的严格上凸函数。}}
+\begin{columns}
+	\column{0.7\textwidth}
+	\begin{align*}
+	C(P_1)&=c_{00}+(c_{10}-c_{00})P_F(P_1)\\
+	&+P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_1)-(c_{10}-c_{00})P_F(P_1)]\\
+	&P_1\uparrow\implies \eta\downarrow, P_M\downarrow, P_F\uparrow, P_D\uparrow, C\uparrow\sim C_{minmax}\sim\downarrow
+	\end{align*}
+	~\\
+	\column{0.3\textwidth}
+	\centering
+	\includegraphics[scale=0.22]{C-P1}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+\textbf{目的: 尽可能避免产生过分大的代价，使极大可能代价最小化。}
+\begin{enumerate}
+	\item 猜测一个先验概率$P_{1g}$, 以$\eta(P_{1g})$为门限进行判决。
+	\item $P_{1g}$确定, $P_M(P_{1g})$和$P_F(P_{1g})$即可确定。
+	\item $P_{1g}$确定，则$C(P_1,P_{1g})$表示与上凸函数曲线$C(P_1)$的切线，如图中的直线$b$, $c$。
+\end{enumerate}
+\begin{columns}
+	\column{0.7\textwidth}
+	\begin{align*}
+	&\eta\mathop{=}^{def}\eta(P_{1g})=\frac{1}{P_{1g}(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\\
+	&C(P_1)=c_{00}+(c_{10}-c_{00})P_F(P_1)+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_1)-(c_{10}-c_{00})P_F(P_1)]\\
+	&C(P_1,P_{1g})=c_{00}+(c_{10}-c_{00})P_F(P_{1g})+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g})-(c_{10}-c_{00})P_F(P_{1g})]
+	\end{align*}
+	\column{0.3\textwidth}
+	\centering
+	\includegraphics[scale=0.25]{C-P1}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+\textbf{目的: 尽可能避免产生过分大的代价，使极大可能代价最小化。}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item 如果实际$P_1=P_{1g}$, 平均代价最小, 在直线$b$与$C(P_1)$的切点处, $C(P_1=P_{1g},P(_{1g}))$。
+\item 如果实际$P_1\ne P_{1g}$, 比如$P_1=P_{11}$, 则平均代价远大于$C(P_1=P_{1g},P(_{1g}))$, 在直线$P_1=P_{11}$与直线$b$的交点处。
+\item 如果猜测的先验概率为$P_{1g}^{\ast}$,则无论实际的先验概率$P_1$为多大，平均代价都等于$C_{minmax}$, 而不会产生过分大的代价。\textbf{\textcolor{blue}{产生的代价与先验概率$P_1$无关。$P_{1g}^{\ast}$即是先验概率$P_1$最理想的猜测值。}}
+\end{enumerate}
+\begin{columns}
+\column{0.7\textwidth}
+\begin{align*}
+&C(P_1,P_{1g})=c_{00}+(c_{10}-c_{00})P_F(P_{1g})+\\
+&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g})-(c_{10}-c_{00})P_F(P_{1g})]
+\end{align*}
+~\\
+\column{0.3\textwidth}
+\centering
+\includegraphics[scale=0.18]{C-P1}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+先验概率未知的情况下, 可猜测一个先验概率$P_{1g}$, 然后利用贝叶斯准则进行检测。
+判决门限是$P_{1g}$的函数,判决区域$R_0$是$P_{1g}$的函数, 判决区域$R_1$是$P_{1g}$的函数
+\begin{columns}
+	\column{0.7\textwidth}
+	\begin{align*}
+	&\eta\mathop{=}^{def}\eta(P_{1g})=\frac{1}{P_{1g}(c_{01}-c_{11})}-\frac{c_{10}-c_{00}}{c_{01}-c_{11}}\\
+	&P_M=\int_{R_0}p(x|H_1)dx\mathop{=}^{def}P_M(P_{1g}), P_F=\int_{R_1}p(x|H_0)dx\mathop{=}^{def}P_F(P_{1g})\\
+	&C(P_1)=c_{00}+(c_{10}-c_{00})P_F(P_1)+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_1)-(c_{10}-c_{00})P_F(P_1)]\\
+	&C(P_1,P_{1g})=c_{00}+(c_{10}-c_{00})P_F(P_{1g})+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g})-(c_{10}-c_{00})P_F(P_{1g})]
+	\end{align*}
+	\column{0.3\textwidth}
+	\centering
+	\includegraphics[scale=0.18]{R0R1}\\
+	\includegraphics[scale=0.25]{C-P1}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+给定$P_{1g}$的条件下, 平均代价$C(P_1,P_{1g})$是先验概率$P_1$的线性函数, 若$P_{1g}\ne P_1$, 平均代价$C(P_1,P_{1g})$大于最小平均代价。\\
+为避免产生过分大的代价, 需要猜测一种先验概率$P_{1g}^\ast$, 使得平均代价$C(P_1,P_{1g}^\ast)$不依赖于信源的先验概率$P_1$。
+\begin{columns}
+	\column{0.7\textwidth}
+	\begin{align*}
+	&C(P_1,P_{1g})=c_{00}+(c_{10}-c_{00})P_F(P_{1g})+\\
+	&P_1[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g})-(c_{10}-c_{00})P_F(P_{1g})]\\
+	&\frac{\partial C(P_1,P_{1g})}{\partial P_1}\left|_{P_{1g}=P_{1g}^\ast}\right.=0\\
+	&\textbf{\textcolor{blue}{极小化极大方程}}\\
+	&(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g}^\ast)-(c_{10}-c_{00})P_F(P_{1g}^\ast)=0
+	\end{align*}
+	\column{0.3\textwidth}
+	\centering
+	\includegraphics[scale=0.25]{C-P1}
+\end{columns}
+~\\
+\textbf{\textcolor{blue}{平均代价: }} $C(P_{1g}^\ast)=c_{00}+(c_{10}-c_{00})P_F(P_{1g}^\ast)$
+\end{frame}
+
+\begin{frame}[shrink]{极小极大化准则}
+\textbf{\textcolor{blue}{极小化极大方程}}
+\[(c_{11}-c_{00})+(c_{01}-c_{11})P_M(P_{1g}^\ast)-(c_{10}-c_{00})P_F(P_{1g}^\ast)=0 \]
+\textbf{\textcolor{blue}{平均代价: }} \[C(P_{1g}^\ast)=c_{00}+(c_{10}-c_{00})P_F(P_{1g}^\ast) \]
+\begin{block}{正确判决不付出代价}
+	\begin{columns}
+		\column{0.3\textwidth}
+		$c_{11}=c_{00}=0$
+		\column{0.5\textwidth}
+		$c_{01}P_M(P_{1g}^\ast)=c_{10}P_F(P_{1g}^\ast)$ 
+	\end{columns}
+\end{block}
+\begin{block}{正确判决不付出代价, 错误判决代价因子相同}
+\begin{columns}
+	\column{0.3\textwidth}
+	$c_{11}=c_{00}=0$\\
+	$c_{10}=c_{01}=1$
+	\column{0.5\textwidth}
+	$P_M(P_{1g}^\ast)=P_F(P_{1g}^\ast)$ 
+\end{columns}
+\end{block}
+\end{frame}
+
+\begin{frame}{极小化极大准则的基本步骤}
+\begin{enumerate}
+	\setlength{\itemsep}{.5cm}
+	\item 计算两个似然函数, 构建似然比$\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}$
+	\item 假设判决门限$\eta$, 构建贝叶斯检测基本表达式
+	\item 化简成最简形式$l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma(\eta)$
+	\item 利用极小化极大准则, 确定最终判决门限$\gamma(\eta)$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{贝叶斯准则例题6}
+在闭启键控通信系统中，两个假设下的观测信号模型为:
+\begin{align*}
+H_0: x&=n  \\
+H_1: x&=A+n
+\end{align*}
+其中, 噪声$n$是均值为零,方差为$\sigma_n^2$的高斯噪声,  若两个假设的先验概率未知, 且$c_{00}=c_{11}=0, c_{01}=c_{10}=1$。\\
+~\\
+采用极小化极大准则，试确定检测门限, 并求最小平均错误概率。
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解}
+解: 观测信号模型为:
+\begin{align*}
+H_0: x&=n  \\
+H_1: x&=A+n
+\end{align*}
+\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
+由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 检测统计量$x$服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 检测统计量$x$服从均值为$A$, 方差为$\sigma_n^2$的高斯分布。
+\begin{align*}
+&p(x|H_0)=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right) \qquad p(x|H_1)=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-A)^2}{2\sigma_n^2}\right)\\
+&\lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}=\exp\left(\frac{(x^2-(x-A)^2)}{2\sigma_n^2}\right)=\exp\left(\frac{A}{\sigma_n^2}x-\frac{A^2}{2\sigma_n^2}\right)
+\end{align*} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续1)}
+\textbf{步骤2: 假设判决门限$\eta$, 构建贝叶斯检测基本表达式}
+\begin{align*}
+&\lambda(x)\mathop{=}^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\mathop{=}^{def}\eta\\
+&\lambda(x)=\exp\left(\frac{A}{\sigma_n^2}x-\frac{A^2}{2\sigma_n^2}\right)
+\end{align*} 
+\textbf{步骤3: 化简成最简形式}
+\begin{align*}
+&x\mathop{\gtrless}_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{A}+\frac{A}{2}\mathop{=}^{def}\gamma
+\end{align*} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续2)}
+\textbf{步骤4: 利用极小化极大准则, 确定最终判决门限$\gamma$}
+\includegraphics[scale=0.3]{0Ax}
+\begin{align*}
+P_F\mathop{=}^{def}P(H_1|H_0)&=\int_{\gamma}^{\infty}p(x|H_0)dx\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=\int_{\gamma}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)dx\qquad \text{by } x=\sigma_nu\\
+&=\int_{\frac{\gamma}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=Q\left(\frac{\gamma}{\sigma_n}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续3)}
+\includegraphics[scale=0.3]{0Ax}
+\begin{align*}
+P_M\mathop{=}^{def}P(H_0|H_1)&=1-\int_{\gamma}^{\infty}p(x|H_1)dx\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-\int_{\gamma}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-A)^2}{2\sigma_n^2}\right)dx\qquad \text{by } x=\sigma_nu+A\\
+&=1-\int_{\frac{\gamma-A}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-Q\left(\frac{\gamma-A}{\sigma_n}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续3)}
+\includegraphics[scale=0.3]{0Ax}
+\begin{align*}
+P_M\mathop{=}^{def}P(H_0|H_1)&=1-\int_{\gamma}^{\infty}p(x|H_1)dx\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-\int_{\gamma}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-A)^2}{2\sigma_n^2}\right)dx\qquad \text{by } x=\sigma_nu+A\\
+&=1-\int_{\frac{\gamma-A}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+&=1-Q\left(\frac{\gamma-A}{\sigma_n}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续4)}
+\begin{block}{正确判决不付出代价, 错误判决代价因子相同时的极小化极大方程}
+	\begin{columns}
+		\column{0.3\textwidth}
+		$c_{11}=c_{00}=0$\\
+		$c_{10}=c_{01}=1$
+		\column{0.5\textwidth}
+		$P_M(P_{1g}^\ast)=P_F(P_{1g}^\ast)$ 
+	\end{columns}
+\end{block}
+\begin{columns}[T]
+	\column{0.5\textwidth}
+	\small
+	\begin{align*}
+	P_F\mathop{=}^{def}P(H_1|H_0)&=Q\left(\frac{\gamma}{\sigma_n}\right)\\
+	P_M\mathop{=}^{def}P(H_0|H_1)&=1-Q\left(\frac{\gamma-A}{\sigma_n}\right)\\
+	&=Q\left(-\frac{\gamma-A}{\sigma_n}\right)
+	\end{align*}
+	根据上述极小化极大方程，有
+	\begin{align*}
+	Q\left(\frac{\gamma}{\sigma_n}\right)=Q\left(-\frac{\gamma-A}{\sigma_n}\right)\implies \gamma=\frac{A}{2}
+	\end{align*}
+	\column{0.5\textwidth}
+	\small
+	\begin{align*}
+	&Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+	&Q\left(\frac{d}{2}\right) = 1-Q\left(-\frac{d}{2}\right)
+	\end{align*}
+	\centering
+	\includegraphics[scale=0.25]{Qdd}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题6: 解(续5)}
+\textbf{本例, 按照极小化极大准则，平均错误概率为:}
+\begin{align*}
+P_e&=P(H_1)P(H_0|H_1)+P(H_0)P(H_1|H_0)\\
+&=P(H_1)P_M+P(H_0)P_F\\
+&=[P(H_1)+P(H_0)]P_F &&\text{by 本例的极小化极大方程}P_M(P_{1g}^\ast)=P_F(P_{1g}^\ast)\\
+&=P_F=P(H_1|H_0) &&\text{by }P(H_1)+P(H_0)=1, P_F\mathop{=}^{def}P(H_1|H_0)\\
+&=Q(\frac{\gamma}{\sigma})=Q\left(\frac{A}{2\sigma}\right) && \text{by }\gamma=\frac{A}{2}\\
+&=Q(\frac{d}{2}) &&\text{by 功率信噪比}d^2=\frac{A^2}{\sigma^2}
+\end{align*}
+\textbf{例题5, 按照按照平均错误概率准则，平均错误概率同上。}\\
+因此, \textbf{\textcolor{blue}{先验等概条件下的最小平均错误准则等价于正确判决为0, 错误判决代价为1时的极小化极大准则。}}
+\end{frame}
+
+\section{奈曼---皮尔逊准则}
+
+\begin{frame}[shrink]{奈曼---皮尔逊准则(Neyman-Pearson criterion)}
+\begin{columns}
+	\column{0.72\textwidth}
+	\begin{itemize}
+		%\setlength{\itemsep}{.5cm}
+		\item \textbf{\textcolor{blue}{应用范围}}\\
+		假设的先验概率未知, 判决代价未知(雷达信号检测)
+		\item \textbf{\textcolor{blue}{目标}}\\
+		错误判决概率尽可能小, 正确判决概率尽可能大
+		\item \textbf{\textcolor{blue}{实际情况}}\\
+		$P(H_1|H_0)$减小时, $P(H_1|H_1)$也相应减小;\\
+		增加$P(H_1|H_1)$, $P(H_1|H_0)$也随之增加。
+		\item \textbf{\textcolor{blue}{奈曼皮尔逊检测}}\\
+		在虚警概率$P_F\mathop{=}\limits^{def}P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率(检测概率)$P_D\mathop{=}\limits^{def}P(H_1|H_1)$最大的准则。
+	\end{itemize}
+	\column{0.28\textwidth}
+	\leftline{\includegraphics[scale=0.17]{R0R1}}
+\end{columns}
+\end{frame}
+
+\begin{frame}{奈曼---皮尔逊准则的存在性}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{enumerate}
+		\item 图中,三个判决域$(R_{0i},R_{1i})$均满足错误判决概率$P_i(H_1|H_0)=\alpha(i=0,1,2)$。
+		\item 原则上判决域$R_0$和$R_1$有无限多种划分方法，均可以保证错误判决概率$P(H_1|H_0)=\alpha$, 但是正确判决概率$P(H_1|H_1)$一般是不一样的。
+		\item 至少有一种判决域划分能使$P(H_1|H_0)=\alpha$,又能使$P(H_1|H_1)$到达最大。
+	\end{enumerate}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.45]{Neyman-Pearson}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{奈曼---皮尔逊准则的推导}
+在$P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率$P(H_1|H_1)$最大的准则\\
+\qquad 等价于(由于$P(H_0|H_1)+P(H_1|H_1)=1$)\\
+在$P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率$P(H_0|H_1)$最小的准则\\
+利用拉格朗日乘子$\mu(\mu\ge 0)$, 构建目标函数
+\[ J=P(H_0|H_1)+\mu\left[P(H_1|H_0)-\alpha\right]\]
+若$P(H_1|H_0)=\alpha, J$达到最小时, $P(H_0|H_1)$也达到最小。
+\begin{columns}
+	\scriptsize
+	\column{0.4\textwidth}
+	漏警概率$P(H_0|H_1)+$检测概率$P(H_1|H_1)=1$,\\ 虚警概率$P(H_1|H_0)=\alpha$\\
+	当$J$最小$\implies$漏警概率$(P(H_0|H_1)$最小\\
+	$\implies$检测概率$P(H_1|H_1)$最大。
+	\column{0.4\textwidth}
+	\leftline{\includegraphics[scale=0.25]{R0R1}}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{奈曼---皮尔逊准则的推导(续)}
 \begin{columns}
 	\column{0.4\textwidth}
-	\includegraphics[scale=0.2]{0A}
-	\scriptsize
-	\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\ln\eta}{d}+\frac{d}{2}; \alpha=P(H_1|H_0)$}
+	\begin{align*}
+	J&=P(H_0|H_1)+\mu[P(H_1|H_0)-\alpha]\\
+	&=\int_{R_0}p(x|H_1)dx+\mu\left[\int_{R_1}p(x|H_0)dx-\alpha\right]\\
+	&=\int_{R_0}p(x|H_1)dx+\mu\left[1-\int_{R_0}p(x|H_0)dx-\alpha\right]\\
+	&=\mu(1-\alpha)+\int_{R_0}\left[p(x|H_1)-\mu p(x|H_0)\right]dx \\
+	\end{align*}
 	\column{0.4\textwidth}
-	\includegraphics[scale=0.2]{Qx}
-	\scriptsize
-	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
-	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
+	\leftline{\includegraphics[scale=0.23]{R0R1}}
 \end{columns}
-
-\bigskip
-
-因为$P(H_1|H_0)=Q(\ln\eta/d+d/2) \implies \ln\eta/d=Q^{-1}[P(H_1|H_0)]-d/2$\\
-这样有:
+\textbf{\textcolor{blue}{把使被积函数取负值的观测值$x$值划分给$R_0$区域, 而把其余的观测值$x$值划分给$R_1$, 即可保证平均代价最小, 从而使$J$值最小。}}
 \begin{align*}
-P(H_1|H_1)&=Q\left(\ln\eta/d-d/2\right)\\
-&=Q[Q^{-1}[P(H_1|H_0)]-d/2-d/2]=Q[Q^{-1}[P(H_1|H_0)]-d]
+&p(x|H_1)< \mu p(x|H_0)&\textbf{判决$H_0$假设成立}\\
+&p(x|H_1)\ge \mu p(x|H_0)&\textbf{判决$H_1$假设成立}
 \end{align*}
-\colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
-\colorbox{green}{另一方面, 采样次数$N\uparrow\implies d\uparrow$, $p(l|H_0),p(l|H_1)$的间距$d\uparrow$,  检测性能$\uparrow$。} 
 \end{frame}
 
-\begin{frame}{贝叶斯准则例题4}
-考虑以下信号检测问题：
+\begin{frame}[shrink]{奈曼---皮尔逊准则}
+\begin{block}{奈曼---皮尔逊准则}
+	\[ \lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\mu \]
+其中, 判决门限有下式确定
 \begin{align*}
-H_0: x_k&=1+n_{k},   & k=1,2,\dots,N\\
-H_1: x_k&=-1+n_{k}, & k=1,2,\dots,N
+P(H_1|H_0)=\int_{R_1}p(x|H_0)dx=\int_{\mu}^{\infty}p(\lambda|H_0)d\lambda=\alpha\
 \end{align*}
-其中$n_{k}$是均值为零,方差为$\sigma_n^2=1/2$的高斯随机变量,  且不同采样时刻的加性噪声之间是相互统计独立的。\\
-若两种假设先验等概的,且代价因子为$c_{00}=1, c_{10}=4, c_{11}=2, c_{01}=3$。\\
-请给出上述问题的贝叶斯检测准则和平均代价$C$。
+求出的$\mu$必满足$\mu\ge 0$
+\end{block}
+\begin{block}{贝叶斯判决准则}
+	\[ \lambda(x)=\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}\mathop{=}^{def}\eta \]
+\end{block}
+贝叶斯准则的特例, 当$P(H_1)(c_{01}-c_{11})=1, P(H_0)(c_{10}-c_{00})=\mu$时, 就成为奈曼---皮尔逊准则。
 \end{frame}
 
-\begin{frame}[shrink]{贝叶斯准则例题4: 解}
-\textbf{步骤1: 计算两个似然函数, 构建似然比}$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}$
-\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$\\
-\textbf{步骤3: 形成贝叶斯检测基本表达式}
-$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$\\
-\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
-$l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\mathop{=}\limits^{def}\gamma$\\
-\textbf{步骤5: 性能分析}\\
-计算判决概率: $P(H_1|H_0),P(H_0|H_0),P(H_0|H_1),P(H_1|H_1)$, 其中,\\
-\[\text{信噪比: }d^2=\frac{4N}{\sigma_n^2},\quad Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\]
-计算平均代价:\\
-$C=P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)$
+\begin{frame}[shrink]{奈曼---皮尔逊准则的求解步骤}
+\begin{enumerate}
+	\setlength{\itemsep}{.5cm}
+	\item 计算两个似然函数, 构建似然比$\lambda(x)\mathop{=}\limits^{def}\frac{p(x|H_1)}{p(x|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\mu$
+	\item 化简
+	\item 根据统计量计算$p(l|H_0)$和$p(l|H_1)$
+	\item 在$P(H_1|H_0)=\int_{R_1}p(l|H_0)dl=\alpha$约束下, 计算判决门限
+\end{enumerate}
 \end{frame}
+
 
 
 

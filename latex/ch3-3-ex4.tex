@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%ch3-3
 \begin{frame}[shrink]
   \frametitle{ch3.信号检测与估计理论的基础知识}
-  \framesubtitle{ch3-3. 贝叶斯准则---例题(续)及性能分析}
+  \framesubtitle{ch3-3. 贝叶斯准则例题4}
   \tableofcontents[hideallsubsections]
 \end{frame}
 
@@ -16,6 +16,20 @@ H_1: x_k&=-1+n_{k}, & k=1,2,\dots,N
 其中$n_{k}$是均值为零,方差为$\sigma_n^2=1/2$的高斯随机变量,  且不同采样时刻的加性噪声之间是相互统计独立的。\\
 若两种假设先验等概的,且代价因子为$c_{00}=1, c_{10}=4, c_{11}=2, c_{01}=3$。\\
 请给出上述问题的贝叶斯检测准则和平均代价$C$。
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则例题4: 解}
+\textbf{步骤1: 计算两个似然函数, 构建似然比}$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}$\\
+\textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$\\
+\textbf{步骤3: 形成贝叶斯检测基本表达式}
+$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$\\
+\textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
+$l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\mathop{=}\limits^{def}\gamma$\\
+\textbf{步骤5: 性能分析}\\
+计算判决概率: $P(H_1|H_0),P(H_0|H_0),P(H_0|H_1),P(H_1|H_1)$, 其中,\\
+\[\text{信噪比: }d^2=\frac{4N}{\sigma_n^2},\quad Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\]
+计算平均代价:\\
+$C=P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))$
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题4: 判决概率分布分析}
@@ -113,7 +127,7 @@ p(l|H_0)=\left(\frac{1}{2\pi Var[l|H_0]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_0
 p(l|H_0)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-1)^2}{2\sigma_n^2}\right)
 \end{align*}
 \begin{align*}
-P(H_1|H_0)&=1-\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+P(H_1|H_0)&=1-\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=1-\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-1)^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}+1\\
 &=1-\int_{\frac{\sqrt{N}(\gamma-1)}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=1-Q\left(\frac{\sqrt{N}(\gamma-1)}{\sigma_n}\right)=1-Q\left(\frac{\sqrt{N}\left(-\frac{\sigma_n^2\ln\eta}{2N}-1\right)}{\sigma_n}\right)
@@ -174,7 +188,7 @@ p(l|H_1)=\left(\frac{1}{2\pi Var[l|H_1]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_1
 p(l|H_1)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l+1)^2}{2\sigma_n^2}\right)
 \end{align*}
 \begin{align*}
-P(H_0|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+P(H_0|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l+1)^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}-1\\
 &=\int_{\frac{\sqrt{N}(\gamma+1)}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=Q\left(\frac{\sqrt{N}(\gamma+1)}{\sigma_n}\right)=Q\left(\frac{\sqrt{N}\left(-\frac{\sigma_n^2\ln\eta}{2N}+1\right)}{\sigma_n}\right)
@@ -213,16 +227,34 @@ P(H_1|H_1)&=1-P(H_0|H_1)
 \textbf{判决概率:} (式中, 信噪比$d^2=\frac{4N}{\sigma_n^2}$)
 \begin{align*}
 P(H_1|H_0)&=1-Q\left(-\frac{\ln\eta}{d}-\frac{d}{2}\right), &P(H_0|H_0)&=1-P(H_1|H_0)\\
-P(H_0|H_1)&=Q\left(\frac{-\ln\eta}{d}+\frac{d}{2}\right),
+P(H_0|H_1)&=Q\left(-\frac{\ln\eta}{d}+\frac{d}{2}\right),
 &P(H_1|H_1)&=1-P(H_0|H_1)
 \end{align*}
 \textbf{两种假设先验等概$\implies P(H_0)=P(H_1)=\frac{1}{2}$}\\
 \textbf{代价因子为$c_{00}=1, c_{10}=4, c_{11}=2, c_{01}=3$}\\
 \textbf{平均代价:}
 \begin{align*}
-C=P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)
+C=P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))
 \end{align*}
 \textbf{\textcolor{blue}{四个判决概率与信噪比d有关，只需要设计信噪比，可得到所需性能。}}
+\end{frame}
+
+\begin{frame}[shrink]{标准高斯分布的右尾积分}
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{align*}
+	&Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+	&Q\left(\frac{d}{2}\right) = 1-Q\left(-\frac{d}{2}\right)
+	\end{align*}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[scale=0.4]{Qdd}
+\end{columns}
+因此, 
+\begin{align*}
+P(H_1|H_0)&=1-Q\left(-\frac{\ln\eta}{d}-\frac{d}{2}\right)\\
+&=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)
+\end{align*}
 \end{frame}
 
 

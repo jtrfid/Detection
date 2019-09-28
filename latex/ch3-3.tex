@@ -41,7 +41,7 @@
 \end{enumerate}
 \end{frame}
 
-\section{贝叶斯准则例题}
+\section{贝叶斯准则例题2}
 
 \begin{frame}{贝叶斯准则例题2}
 考虑以下信号检测问题：
@@ -79,20 +79,20 @@ p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_1^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2
 \end{align*} 
 \textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
 \begin{align*}
-\left(\frac{1}{2\sigma_0}-\frac{1}{2\sigma_1}\right)\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}\implies 
-\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
+\left(\frac{1}{2\sigma_0}-\frac{1}{2\sigma_1}\right)\sum\limits_{k=1}^{N}x_k^2\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}\implies 
+\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
 \end{align*} 
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题2: 解续(2)}
 \textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
 \begin{align*}
-\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
+\frac{\sigma_1^2-\sigma_0^2}{2\sigma_1^2\sigma_0^2}\sum\limits_{k=1}^{N}x_k^2\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta-N\ln\frac{\sigma_0}{\sigma_1}
 \end{align*}
 经过上述化简, 信号检测的判决式由似然比检验的形式, 简化为检验统计量$l(x)$与检测门限$\gamma$相比较的形式, 形成贝叶斯检测判决表达式:
 \begin{align*}
-\textbf{如果}\quad\sigma_1^2>\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{1}{N}\ln\eta-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma\\
-\textbf{如果}\quad\sigma_1^2<\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{1}{N}\ln\eta-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma
+\textbf{如果}\quad\sigma_1^2>\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{\ln\eta}{N}-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma\\
+\textbf{如果}\quad\sigma_1^2<\sigma_0^2 &&l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\frac{2\sigma_1^2\sigma_0^2}{\sigma_1^2-\sigma_0^2}(\frac{\ln\eta}{N}-\ln\frac{\sigma_0}{\sigma_1})\mathop{=}^{def}\gamma
 \end{align*}
 检验统计量$l(x)\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^Nx_k$是观测信号$x_k(k=1,2,\dots,N)$的求和取平均值的结果, 即它是$x_k(k=1,2,\dots,N)$的函数，是一个随机变量。\\
 两种假设下的观测量$(l|H_0),(l|H_1)$也是服从高斯分布的随机变量。 
@@ -102,20 +102,29 @@ p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_1^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2
 
 \begin{frame}{贝叶斯检测性能分析}
 \begin{block}{问题}
+	\textbf{问题1:} 贝叶斯检测准则是一种平均代价最小的判决准则，按照贝叶斯检测准则，能获得平均代价到底等于多少？\\
+	~\\
+	\textbf{问题2:} 利用贝叶斯检测准则进行检测，平均检测错误概率如何计算？
+\end{block}
+\end{frame}
+
+\begin{frame}{贝叶斯检测性能分析}
+\begin{block}{问题}
 	\textbf{问题1:} 贝叶斯检测准则是一种平均代价最小的判决准则，按照贝叶斯检测准则，能获得平均代价到底等于多少？
 	\begin{align*}
-	C=&P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+\\
-	&P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)
+	C=P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))
 	\end{align*}
 	\textbf{问题2:} 利用贝叶斯检测准则进行检测，平均检测错误概率如何计算？
+	\[P_e=P(H_0)P(H_1|H_0)+P(H_1)P(H_0|H_1)\]
 \end{block}
 \textbf{\textcolor{blue}{上述两个问题的关键在于，如何计算四种事件的检测概率？}}
 \begin{columns}
 	\column{0.5\textwidth}
 	正确判决概率$\uparrow$: $P(H_1|H_1), P(H_0|H_0)$\\
 	错误判决概率$\downarrow$: $P(H_0|H_1), P(H_1|H_0)$\\
+	~\\
 	\column{0.5\textwidth}
-	\includegraphics[scale=0.28]{detectionL}
+	\includegraphics[scale=0.25]{detectionL}
 \end{columns}
 \end{frame}
 
@@ -155,6 +164,8 @@ p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_1^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2
 	\end{columns}
 \end{enumerate}
 \end{frame}
+
+\section{贝叶斯准则例题3,4}
 
 \begin{frame}{贝叶斯准则例题3}
 考虑以下信号检测问题：
@@ -223,9 +234,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 l(\bm{x})\mathop{=}^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\mathop{=}^{def}\gamma
 \]
 \column{0.4\textwidth}
-\includegraphics[scale=0.25]{mgt0}\\
-\scriptsize
-\textcolor{blue}{$p(l|H_j)(j=0,1)$: 假设$H_j$下观测信号的概率密度函数; $r^+=\frac{\sigma^2\ln\eta}{Nm}+\frac{m}{2}; \alpha=P(H_1|H_0)$}
+\includegraphics[scale=0.25]{0AL}
 \end{columns}
 \end{frame}
 
@@ -265,7 +274,7 @@ p(l|H_0)=\left(\frac{1}{2\pi Var[l|H_0]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_0
 p(l|H_0)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)
 \end{align*}
 \begin{align*}
-P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}\\
 &=\int_{\frac{\sqrt{N}\gamma}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=Q\left(\frac{\sqrt{N}\gamma}{\sigma_n}\right)=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}+\frac{A}{2}\right)}{\sigma_n}\right)
@@ -325,7 +334,7 @@ p(l|H_1)=\left(\frac{1}{2\pi Var[l|H_1]}\right)^{1/2}\exp\left(-\frac{(l-E[l|H_1
 p(l|H_1)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)
 \end{align*}
 \begin{align*}
-P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
+P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}+A\\
 &=\int_{\frac{\sqrt{N}(\gamma-A)}{\sigma_n}}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=Q\left(\frac{\sqrt{N}(\gamma-A}{\sigma_n}\right)=Q\left(\frac{\sqrt{N}\left(\frac{\sigma_n^2\ln\eta}{NA}-\frac{A}{2}\right)}{\sigma_n}\right)
@@ -385,7 +394,7 @@ P(H_1|H_1)&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right),
 	\column{0.4\textwidth}
 	\includegraphics[scale=0.2]{Qx}
 	\scriptsize
-	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{u^2}{2})du$.}\\
+	\textcolor{red}{$Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du$.}\\
 	\textcolor{red}{$Q(x)$是单调递减函数, 其反函数: $Q^{-1}[\bullet]$}
 \end{columns}
 
@@ -397,7 +406,7 @@ P(H_1|H_1)&=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right),
 P(H_1|H_1)&=Q\left(\ln\eta/d-d/2\right)\\
 &=Q[Q^{-1}[P(H_1|H_0)]-d/2-d/2]=Q[Q^{-1}[P(H_1|H_0)]-d]
 \end{align*}
-\colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
+\colorbox{yellow}{这说明, 当给定$P(H_1|H_0)$时, $P(H_1|H_1)$随功率信噪比$(d^2=NA^2/\sigma_n^2)$单调增加。} 
 \colorbox{green}{另一方面, 采样次数$N\uparrow\implies d\uparrow$, $p(l|H_0),p(l|H_1)$的间距$d\uparrow$,  检测性能$\uparrow$。} 
 \end{frame}
 
@@ -413,18 +422,19 @@ H_1: x_k&=-1+n_{k}, & k=1,2,\dots,N
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则例题4: 解}
-\textbf{步骤1: 计算两个似然函数, 构建似然比}$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}$
+\textbf{步骤1: 计算两个似然函数, 构建似然比}$\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}$\\
 \textbf{步骤2: 根据两个假设的先验概率和代价因子, 计算判决门限}$\eta\mathop{=}\limits^{def}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})}$\\
 \textbf{步骤3: 形成贝叶斯检测基本表达式}
 $\lambda(\bm{x})=\frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$\\
 \textbf{步骤4: 化简, 形成贝叶斯检测判决表达式}
-$l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_1}^{H_0}\mathop{=}\limits^{def}\gamma$\\
+$l(\bm{x})\mathop{=}\limits^{def}\frac{1}{N}\sum\limits_{k=1}^{N}x_k\mathop{\gtrless}\limits_{H_0}^{H_1}\mathop{=}\limits^{def}\gamma$\\
 \textbf{步骤5: 性能分析}\\
 计算判决概率: $P(H_1|H_0),P(H_0|H_0),P(H_0|H_1),P(H_1|H_1)$, 其中,\\
-\[\text{信噪比: }d^2=\frac{4N}{\sigma_n^2},\quad Q(u)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\]
+\[\text{信噪比: }d^2=\frac{4N}{\sigma_n^2},\quad Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\]
 计算平均代价:\\
-$C=P(H_0)c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)+P(H_1)c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)$
+$C=P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))$
 \end{frame}
+
 
 
 
