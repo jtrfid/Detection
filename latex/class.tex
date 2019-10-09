@@ -6,6 +6,8 @@
 \useoutertheme{infolines}
 \usetheme{Darmstadt}
 \setbeamercovered{transparent}
+%\setbeamercovered{dynamic}  % translucent when using \pause 或itemize等
+%\setbeamercovered{invisible} % 本页不显示\pause后的内容
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=true]
@@ -166,14 +168,16 @@
 %%%%%%%%%%%%%%%%%%%% ch1,ch2共5次课，第5次课后45分钟作业: 雷达回波信号, y=ax+b
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ch3
 %\include{ch3}  % 部分公式
-%\include{ch3-1} % 第6次课
-%\include{ch3-2}
-%\include{ch3-3}
-%\include{ch3-3-ex4} %ch3习题4, 随堂作业
-%\include{ch3-4} % 第9次课, 国庆节前最后一次课
-\include{ch3-5}
+%\include{ch3-1} %统计检测概论，判决域, 贝叶斯准则(部分),第6次课
+%\include{ch3-2} %贝叶斯准则(续)，例题1
+%\include{ch3-3} %贝叶斯例题2,性能分析,例题3
+%\include{ch3-3-ex4} %例题4, 随堂作业
+%\include{ch3-4} %例题4讲解，最小平均错误概率，最大后验概率, 极小极大化准则(部分)。第9次课, 国庆节前最后一次课
+%\include{ch3-5} %极小极大化准则(续)，奈曼皮尔逊准则，性能，特性，M元检测
+%\include{ch3-6} %参量信号检测
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ch4
-%\include{ch4}
+%\include{ch4}  % 部分公式
+\include{ch4-1}
 
 %%%%%%%%%%%%%%%%%%% last frame
 \begin{frame}[plain]{}
@@ -411,5 +415,15 @@ alertblock 警示环境
 
 % 水平空格大小，\hfill 不计大小
 \hspace{1cm} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\columnseprule=1pt %插入分栏线
+\begin{multicols}{3}
+	aa\\
+	cd\\
+	dd
+\end{multicols}
+
+\rule{\textwidth}{1pt} %水平线
 
 \fi　　　%注释结束

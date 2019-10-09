@@ -1,0 +1,351 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%ch3-3
+\begin{frame}[shrink]
+  \frametitle{ch3.信号检测与估计理论的基础知识}
+  \framesubtitle{ch3-3. 参量信号的统计检测}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{参量信号检测的基本概念}
+
+\begin{frame}{参量信号的统计检测}
+\begin{block}{基本要求}
+	\begin{itemize}
+		\setlength{\itemsep}{.5cm}
+		\item 理解参量信号检测的基本概念
+		\item 掌握两种检测方法：广义似然比检验和贝叶斯方法		
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{参量信号检测的基本概念}
+参量信号的检测中, 信源在假设$H_j$下输出含有未知参量$\theta_j$, 因此, 在假设$H_j$下, 观察信号表示为
+\[ H_j: x_k=s_{jk|\bm{\theta}_j} + n_k,\quad k=1,2,\cdots,N \]
+$N$维观测矢量$\bm{x}=(x_1,x_2,\cdots,x_N)^T$的统计特性不仅与观测噪声$n_k(k=1,2,\cdots,N)$的统计特性有关, 而且受未知参量$\bm{\theta}_j$的控制。\\
+~\\
+假设$H_j$下观测矢量的概率密度函数是未知参量$\bm{\theta}_j$的函数：
+\[ p(\bm{x|\theta}_j; H_j)\]
+\end{frame}
+
+\begin{frame}[shrink]{参量信号检测的基本概念}
+例如, 如果我们希望在均值为零, 方差为$\sigma_n$的高斯白噪声中检测具有未知幅度$A$的信号, 观测次数为$N$, 则假设$H_1$下的概率密度函数可表示为
+\begin{align*}
+ p(\bm{x}|A;H_1)&=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^2}{2\sigma_n^2}\right)\\
+ &=\left(\frac{1}{2\pi\sigma_n^2}\right)^{N/2}\exp\left(-\sum_{i=1}^{N}\frac{(x_k-A)^2}{2\sigma_n^2}\right)
+\end{align*}
+由于幅度$A$是未知的, 且概率密度函数以$A$为参数, 因此概率密度函数没有完全给定。\\
+~\\
+因此, 我们需要在确知信号统计检测的基础上, 研究如何处理参量信号的统计检测问题, 这就是\textbf{复合假设检验问题}。
+\end{frame}
+
+\section{广义似然比检验}
+
+\begin{frame}[shrink]{广义似然比检验}
+先利用最大似然方法对未知参量进行估计，然后利用得到的估计量按照确知信号的检测方法进行。
+\begin{itemize}
+	\setlength{\itemsep}{.2cm}
+	\item 最大似然估计\\
+	使似然函数$p(\bm{x|\theta}_j; H_j)$达最大的$\bm{\theta}_j$作为该参量的估计量记为$\bm{\hat{\theta}}_{jml}$
+	\item 广义似然比检验为
+	\[\lambda(\bm{x})=\frac{p(\bm{x|\hat{\theta}}_{1ml}; H_1)}{p(\bm{x|\hat{\theta}}_{0ml}; H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+	如果假设$H_0$是简单的, 而假设$H_1$是复合的, 则广义似然比检验为
+	\[\lambda(\bm{x})=\frac{p(\bm{x|\hat{\theta}}_{1ml}; H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\end{itemize}
+关于参量的最大似然估计, 将在第5章中详细讨论。
+\end{frame}
+
+\section{贝叶斯方法}
+
+\begin{frame}{贝叶斯方法}
+\begin{itemize}
+	\setlength{\itemsep}{.5cm}
+	\item 概率密度函数已知的情况
+	\item 猜测概率密度函数的情况
+	\item 未知参量的奈曼---皮尔逊检测	
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]{概率密度函数已知的情况}
+\begin{block}{贝叶斯判决准则}
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
+\end{block}
+参量信号的检测中, 信源在假设$H_j$下的\textbf{条件概率密度函数}为
+\[ p(\bm{x|\theta}_j; H_j)\]
+如何由条件似然函数$p(\bm{x|\theta}_j; H_j)$和未知参量$p(\bm{\theta}_j)$的概率密度函数的到似然函数$p(\bm{x}|H_j)$?
+\end{frame}
+
+\begin{frame}[shrink]{概率密度函数已知的情况}
+\[ p(\bm{x}|H_j)=\int_{\bm{\theta}_j}p(\bm{x|\theta}_j; H_j)p(\bm{\theta}_j)d\bm{\theta}_j   \]
+\begin{block}{参量检测中, 贝叶斯判决准则}
+	\[ \frac{p(\bm{x}|H_1)}{p(\bm{x}|H_0)}=\frac{\int_{\bm{\theta}_1}p(\bm{x|\theta}_1; H_1)p(\bm{\theta}_1)d\bm{\theta}_1}{\int_{\bm{\theta}_0}p(\bm{x|\theta}_0; H_0)p(\bm{\theta}_0)d\bm{\theta}_0}\mathop{\gtrless}_{H_0}^{H_1}\frac{P(H_0)(c_{10}-c_{00})}{P(H_1)(c_{01}-c_{11})} \]
+\end{block}
+\end{frame}
+
+\section{贝叶斯准则方法例题10}
+
+\begin{frame}{贝叶斯准则方法例题10}
+在二元参量信号的统计检测中，两个假设下的信号分别为:
+\begin{align*}
+H_0: x&=n  \\
+H_1: x&=m+n
+\end{align*}
+其中, $m$是信号的参量, 且是均值为零, 方差为$\sigma_m^2$的\textcolor{blue}{高斯随机变量}, $n$是均值为零,方差为$\sigma_n^2$的高斯白噪声,  试给出贝叶斯检测准则。\\
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题10: 解}
+解: 
+\begin{align*}
+H_0: x&=n\\
+H_1: x&=m+n
+\end{align*}
+\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
+由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 观测信号$x$也服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$和给定$m$条件下, 观测信号$x$服从均值为$m$, 方差为$\sigma_n^2$的高斯分布。
+\begin{align*}
+p(x|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)\\
+p(x|m; H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-m)^2}{2\sigma_n^2}\right)
+\end{align*} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题10: 解续(1)}
+\textbf{步骤2: 计算$H_1$假设下的似然函数}\\
+由于$m\sim\mathcal{N}(0, \sigma_m)$是一高斯随机变量, 有
+\begin{align*}
+p(m)=\left(\frac{1}{2\pi\sigma_m^2}\right)^{1/2}\exp\left(-\frac{m^2}{2\sigma_m^2}\right)
+\end{align*}
+因此, 
+\begin{align*}
+p(x|H_1)&=\int_{-\infty}^{\infty}p(x|m; H_1)p(m)dm\\
+&=\int_{-\infty}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-m)^2}{2\sigma_n^2}\right)\left(\frac{1}{2\pi\sigma_m^2}\right)^{1/2}\exp\left(-\frac{m^2}{2\sigma_m^2}\right)dm\\
+&=\int_{-\infty}^{\infty}\left(\frac{1}{2\pi\sigma_n\sigma_m}\right)\exp\left(-\frac{\sigma_m^2(x-m)^2+\sigma_n^2m^2}{2\sigma_n^2\sigma_m^2}\right)dm\\
+&=\int_{-\infty}^{\infty}\left(\frac{1}{2\pi\sigma_n\sigma_m}\right)\exp\left(-\frac{\sigma_m^2x^2+(\sigma_n^2+\sigma_m^2)m^2-2\sigma_m^2mx}{2\sigma_n^2\sigma_m^2}\right)dm
+\end{align*} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题10: 解续(2)}
+利用积分公式
+\[ \int_{-\infty}^{\infty}\exp(-At^2\pm 2Bt-C)dt=\left(\frac{\pi}{A}\right)^{1/2}\exp\left(-\frac{AC-B^2}{A} \right) \]
+\begin{align*}
+p(x|H_1)&=\int_{-\infty}^{\infty}\left(\frac{1}{2\pi\sigma_n\sigma_m}\right)\exp\left(-\frac{\sigma_m^2x^2+(\sigma_n^2+\sigma_m^2)m^2-2\sigma_m^2mx}{2\sigma_n^2\sigma_m^2}\right)dm\\
+&=\left(\frac{1}{2\pi(\sigma_n^2+\sigma_m^2)}\right)^{1/2}\exp\left(-\frac{x^2}{2(\sigma_n^2+\sigma_m^2)}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题10: 解续(3)}
+\begin{align*}
+p(x|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)\\
+p(x|H_1)&=\left(\frac{1}{2\pi(\sigma_n^2+\sigma_m^2)}\right)^{1/2}\exp\left(-\frac{x^2}{2(\sigma_n^2+\sigma_m^2)}\right)
+\end{align*}
+\textbf{步骤3: 构建贝叶斯检测基本表达式}
+\begin{align*}
+\frac{p(x|H_1)}{p(x|H_0)}&\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+\left(\frac{\sigma_n^2}{\sigma_n^2+\sigma_m^2}\right)^{1/2}\exp\left(\frac{x^2}{2\sigma_n^2}-\frac{x^2}{2(\sigma_n^2+\sigma_m^2)}\right)&\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+\left(\frac{\sigma_n^2}{\sigma_n^2+\sigma_m^2}\right)^{1/2}\exp\left(\frac{\sigma_m^2x^2}{2\sigma_n^2(\sigma_n^2+\sigma_m^2)}\right)&\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+x^2&\mathop{\gtrless}_{H_0}^{H_1}\frac{2\sigma_n^2(\sigma_n^2+\sigma_m^2)}{\sigma_m^2}\left(\ln\eta+\frac{1}{2}\ln\left(1+\frac{\sigma_m^2}{\sigma_n^2}\right)\right)
+\end{align*}
+\textbf{判决准则确定后，似然比检测门限$\eta$就确定了，于是上式可完成是假设$H_1$成立，还是假设$H_2$成立的判决。}
+\end{frame}
+
+\begin{frame}[shrink]{猜测概率密度的情况}
+随机参量的概率密度函数未知时，可以利用常识猜测一个概率分布，然后按照前述方法进行检测。\\
+~\\
+$H_1$含随机变量$m$的似然比检验的判别式:\\
+\[\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}=\frac{\int_{-\infty}^{\infty}p(x|m,H_1)p(m)dm}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta \]
+\end{frame}
+
+\begin{frame}[shrink]{未知参量的奈曼---皮尔逊检测}
+未知参量的概率密度函数未知时, 或未知参量非随机的情况下, 可采用奈曼---皮尔逊准则进行检测。\\
+~\\
+
+在给定参量$\theta$为某个值和$P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率$P(H_1|H_1)$最大的准则。\\
+\begin{columns}
+	\column{0.6\textwidth}
+	\textcolor{blue}{注: 在参量$\theta$随机或未知的条件下，$P(H_1|H_1)$往往是参量的函数。只有对任意$\theta$, $P(H_1|H_1)$都获得最大值时，该类方法才可适用。}
+	\column{0.4\textwidth}
+	\includegraphics[scale=0.3]{mgt0}
+\end{columns}
+\end{frame}
+
+\section{贝叶斯准则方法例题11}
+
+\begin{frame}{贝叶斯准则方法例题11}
+在二元参量信号的统计检测中，两个假设下的信号分别为:
+\begin{align*}
+H_0: x&=n  \\
+H_1: x&=m+n
+\end{align*}
+其中, $m$是未知参量, $n$是均值为零,方差为$\sigma_n^2$的高斯白噪声,  试给$m$不同特性参量情况下的最佳信号检测方法。
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解}
+解: 
+\begin{align*}
+H_0: x&=n\\
+H_1: x&=m+n
+\end{align*}
+\textbf{步骤1: 计算两个似然函数, 构建似然比}\\
+由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 观测信号$x$也服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$和给定$m$条件下, 观测信号$x$服从均值为$m$, 方差为$\sigma_n^2$的高斯分布。。
+\begin{align*}
+p(x|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x^2}{2\sigma_n^2}\right)\\
+p(x|m; H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x-m)^2}{2\sigma_n^2}\right)
+\end{align*} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(1)}
+\textbf{步骤2: 形成贝叶斯检测基本表达式}
+\begin{align*}
+\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta\\
+\exp\left(\frac{m}{\sigma_n^2}x-\frac{m^2}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\eta
+\end{align*} 
+\textbf{步骤3: 化简, 形成贝叶斯检测判决表达式}
+\begin{align*}
+\left(\frac{m}{\sigma_n^2}x-\frac{m^2}{2\sigma_n^2}\right)&\mathop{\gtrless}\limits_{H_0}^{H_1}\ln\eta\\
+mx&\mathop{\gtrless}\limits_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\mathop{=}^{def}\gamma
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(2)}
+\begin{align*}
+mx&\mathop{\gtrless}\limits_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\mathop{=}^{def}\gamma
+\end{align*}
+\begin{enumerate}
+	\item 当$m>0$, 且为确知信号参量时, 似然比检验为
+	\[ x\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2}{m}\ln\eta+\frac{m}{2}\mathop{=}^{def}\gamma^{+} \]
+	\item 当$m<0$, 且为确知信号参量时, 似然比检验为
+	\[ x\mathop{\gtrless}\limits_{H_1}^{H_0}-\frac{\sigma_n^2}{|m|}\ln\eta-\frac{|m|}{2}\mathop{=}^{def}\gamma^{-} \]
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(2)}
+\begin{enumerate}
+	\setcounter{enumi}{2} %设定起始编号 
+	\item 当$m$是随机参量, 且$m\sim\mathcal{N}(0, \sigma_m)$, 其概率密度函数为
+	\begin{align*}
+	p(m)=\left(\frac{1}{2\pi\sigma_m^2}\right)^{1/2}\exp\left(-\frac{m^2}{2\sigma_m^2}\right)
+	\end{align*}
+	由例题10得到:
+	\begin{align*}
+	x^2\mathop{\gtrless}_{H_0}^{H_1}\frac{2\sigma_n^2(\sigma_n^2+\sigma_m^2)}{\sigma_m^2}\left(\ln\eta+\frac{1}{2}\ln\left(1+\frac{\sigma_m^2}{\sigma_n^2}\right)\right)
+	\end{align*}
+	\item 假设$m_0\le m\le m_1$，其概率密度函数p(m)未知
+	似然比检验为:
+	\begin{align*}
+	mx\mathop{\gtrless}\limits_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}
+	\end{align*}
+	在$m(m_0\le m\le m_1)$取某个值的条件下，采用奈曼-皮尔逊准则来建立判决表达式。
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(3)}
+在$m(m_0\le m\le m_1)$取某个值的条件下，采用奈曼-皮尔逊准则来建立判决表达式。
+\begin{enumerate}
+	\item[4.1] 若$m_0>0$,判决表示式为
+	\begin{align*}
+	mx&\mathop{\gtrless}\limits_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\\
+    l(x)=x&\mathop{\gtrless}\limits_{H_0}^{H_1}\frac{\sigma_n^2}{m}\ln\eta+\frac{m}{2}\mathop{=}^{def}\gamma^{+} 
+	\end{align*}
+	\begin{columns}
+		\column{0.7\textwidth}
+		在$P(H_1|H_0)=\alpha$约束条件下, $\gamma^{+}$由下式确定：
+		\[ P(H_1|H_0)=\int_{\gamma^{+}}^{\infty}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{l^2}{2\sigma_n^2}\right)dl=\alpha \]
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.3]{mgt0}
+	\end{columns}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(4)}
+在$m(m_0\le m\le m_1)$取某个值的条件下，采用奈曼-皮尔逊准则来建立判决表达式。
+\begin{enumerate}
+	\item[4.2] 若$m_1<0$,判决表示式为
+	\begin{align*}
+	mx&\mathop{\gtrless}\limits_{H_0}^{H_1}\sigma_n^2\ln\eta+\frac{m^2}{2}\\
+	l(x)=x&\mathop{\gtrless}\limits_{H_1}^{H_0}-\frac{\sigma_n^2}{|m|}\ln\eta-\frac{|m|}{2}\mathop{=}^{def}\gamma^{-}
+	\end{align*}
+	\begin{columns}
+		\column{0.7\textwidth}
+		在$P(H_1|H_0)=\alpha$约束条件下, $\gamma^{-}$由下式确定：
+		\[ P(H_1|H_0)=\int_{-\infty}^{\gamma^{-}}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{l^2}{2\sigma_n^2}\right)dl=\alpha \]
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.3]{mle0}
+	\end{columns}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(5)}
+在$m(m_0\le m\le m_1)$取某个值的条件下，采用奈曼-皮尔逊准则来建立判决表达式。
+\begin{enumerate}
+	\item[4.3] 若$m_0>0$或$m_1<0$小结
+	\begin{enumerate}
+		\item 若$m_0>0$, $m$仅取正值, 则在$P(H_1|H_0)=\alpha$的约束下, $P^{(m)}(H_1|H_1)$是最大的,其一致最大功效检验成立;
+		\item 若$m_1<0$, $m$仅取负值, 则在$P(H_1|H_0)=\alpha$的约束下, $P^{(m)}(H_1|H_1)$也是最大的。
+	\end{enumerate}
+	\begin{columns}
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.4]{mle0}
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.28]{mgt0}
+	\end{columns}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(6)}
+在$m(m_0\le m\le m_1)$取某个值的条件下，采用奈曼-皮尔逊准则来建立判决表达式。
+\begin{enumerate}
+	\item[4.4] 若$m_0<0,m_1>0$, 即$m$取值可能为正或可能为负的情况下, 无论参量信号的统计检测，按$m$仅取正值设计，还是按$m$仅取负值设计，都有可能在某些$m$值下,   $P^{(m)}(H_1|H_1)$不满足最大的要求。\\
+	例如，按$m$取正设计信号检测系统，当$m$为正时，$P^{(m)}(H_1|H_1)$最大, 但当$m$为负时, $P^{(m)}(H_1|H_1)$可能最小。\\
+	因此, 这种情况下不能采用奈曼-皮尔逊准则来实际最佳检测系统。
+	\begin{columns}
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.4]{mle0}
+		\column{0.4\textwidth}
+		\includegraphics[scale=0.28]{mgt0}
+	\end{columns}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(6)}
+\begin{enumerate}
+	\setcounter{enumi}{4} %设定起始编号 
+	\item 双边检验\\
+	若$m_0<0,m_1>0$, 即$m$取值可能为正或可能为负,奈曼-皮尔逊准则不能保证$P^{(m)}(H_1|H_1)$最大要求。考虑把约束条件$P(H_1|H_0)=\alpha$分成两个$\alpha/2$, 假设$H_1成立$的判决域由两部分组成。判决表示式为
+	\[|x|\mathop{\gtrless}_{H_0}^{H_1}\gamma \]
+	\begin{columns}
+		\column{0.6\textwidth}
+		\textcolor{blue}{虽然双边检验比均值$m$假定为正确时的单边检验性能差，但是比均值$m$假定为错误时的单边检验性能要好的多。因此不失为一种好的折中方法。}
+		\column{0.3\textwidth}
+		\includegraphics[scale=0.5]{Qd}
+	\end{columns}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(7)}
+\begin{enumerate}
+	\setcounter{enumi}{5} %设定起始编号 
+	\item 广义似然比检验\\
+	\begin{align*}
+	&\text{似然函数}\\
+	&p(x|m;H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{(x-m)^2}{2\sigma_n^2})\\
+	&\text{对$m$求偏导,令结果等于零，即} \\
+	&\frac{\partial\ln p(x|m;H_1)}{\partial m}|_{m=\widehat{m}_{ml}}=0\\
+	&\text{解得单次观测时, $m$的最大似然估计量$\widehat{m}_{ml}=x$, 于是有 }\\
+	&p(x|\widehat{m}_{ml};H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{(x-\widehat{m}_{ml})^2}{2\sigma_n^2})|_{\widehat{m}_{ml}=x}=(\frac{1}{2\pi\sigma_n^2})^{1/2}\\
+	\end{align*}
+\end{enumerate} 
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则方法例题11: 解续(8)}
+\begin{enumerate}
+	\setcounter{enumi}{5} %设定起始编号 
+	\item 广义似然比检验\\
+	\begin{align*}
+	&p(x|H_0)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{x^2}{2\sigma_n^2})
+	&p(x|\widehat{m}_{ml};H_1)=(\frac{1}{2\pi\sigma_n^2})^{1/2}\\
+	&\text{代入广义似然比检验中, 有}\\
+	&\lambda(x)=\frac{p(x|m; H_1)}{p(x|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+	&\lambda(x)=\frac{(\frac{1}{2\pi\sigma_n^2})^{1/2}}{(\frac{1}{2\pi\sigma_n^2})^{1/2}\exp(-\frac{x^2}{2\sigma_n^2})}\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+	&\text{化简得判决表示式}
+	&x^2\mathop{\gtrless}_{H_0}^{H_1}2\sigma_n^2\ln\eta\mathop{=}^{def}\gamma^2 \implies |x|\mathop{\gtrless}_{H_0}^{H_1}\gamma
+	\end{align*}
+	\textcolor{blue}{这正是前面讨论过的双边检验。只是前面是从奈曼-皮尔逊准则出发推导得到。而这里是从似然比检验的概念导出的，似然函数$p(x|m;H_1)$中的信号参量$m$由其最大似然估计量$\widehat{m}_{ml}$代换，所以是广义似然比检验。}
+\end{enumerate} 
+\end{frame}
+

@@ -5,7 +5,7 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{极小极大化准则}
+\section{极小极大化准则(续)}
 
 \begin{frame}[shrink]{极小极大化准则}
 给定$P_{1g}$的条件下, 平均代价$C(P_1,P_{1g})$是先验概率$P_1$的线性函数, 若$P_{1g}\ne P_1$, 平均代价$C(P_1,P_{1g})$大于最小平均代价。\\
@@ -203,18 +203,19 @@ $P(H_1|H_0)$减小时, $P(H_1|H_1)$也相应减小;\\
 
 \begin{frame}[shrink]{奈曼---皮尔逊准则的推导}
 在$P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率$P(H_1|H_1)$最大的准则\\
-\qquad 等价于(由于$P(H_0|H_1)+P(H_1|H_1)=1$)\\
-在$P(H_1|H_0)=\alpha$约束条件下, 使正确判决概率$P(H_0|H_1)$最小的准则\\
+\qquad\qquad\qquad $\Updownarrow$\quad(由于$P(H_0|H_1)+P(H_1|H_1)=1$)\\
+在$P(H_1|H_0)=\alpha$约束条件下, 使错误判决概率$P(H_0|H_1)$最小的准则
+\rule{\textwidth}{1pt} %水平线
 利用拉格朗日乘子$\mu(\mu\ge 0)$, 构建目标函数
 \[ J=P(H_0|H_1)+\mu\left[P(H_1|H_0)-\alpha\right]\]
 若$P(H_1|H_0)=\alpha, J$达到最小时, $P(H_0|H_1)$也达到最小。
 \begin{columns}
 \scriptsize
-\column{0.4\textwidth}
+\column{0.5\textwidth}
 漏警概率$P(H_0|H_1)+$检测概率$P(H_1|H_1)=1$,\\ 虚警概率$P(H_1|H_0)=\alpha$\\
 当$J$最小$\implies$漏警概率$(P(H_0|H_1)$最小\\
 $\implies$检测概率$P(H_1|H_1)$最大。
-\column{0.4\textwidth}
+\column{0.5 \textwidth}
 \leftline{\includegraphics[scale=0.25]{R0R1}}
 \end{columns}
 \end{frame}
@@ -279,7 +280,7 @@ H_1: x&=1+n
 解: 观测信号模型为:
 \begin{align*}
 H_0: x&=n  \\
-H_1: x&=A+n
+H_1: x&=1+n
 \end{align*}
 \textbf{步骤1: 计算两个似然函数, 构建似然比}\\
 由于$n$是高斯分布随机变量, 因此在$H_0$假设下, 检测统计量$x$服从高斯分布，且均值为0, 方差为$\sigma_n^2$; 在$H_1$假设下, 检测统计量$x$服从均值为$1$, 方差为$\sigma_n^2$的高斯分布。
@@ -416,7 +417,7 @@ p(l|H_1)=\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{$P_F=P(H_1|H_0)$}
+\begin{frame}[shrink]{虚警概率$P_F=P(H_1|H_0)$}
 \begin{align*}
 P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{Nl^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}\\
@@ -428,7 +429,7 @@ P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl\implies Q(x)=\int_{x}^{\infty}\left
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{{$P_D=P(H_1|H_1)$}}
+\begin{frame}[shrink]{检测概率$P_D=P(H_1|H_1)$}
 \begin{align*}
 P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl\implies Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
 &=\int_{\gamma}^{\infty}\left(\frac{N}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{N(l-A)^2}{2\sigma_n^2}\right)dl\qquad \text{by } l=\frac{\sigma_nu}{\sqrt{N}}+A\\
@@ -520,7 +521,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 
 \medskip
 
-\colorbox{yellow}{$Q(x)$是递减函数, 当给定$P_F$时, $P_D$随功率信噪比$(d^2=NA^2/\sigma^2)$单调增加。} 
+\colorbox{yellow}{$Q(x)$是递减函数, 当给定$P_F$时, $P_D$随功率信噪比$(d^2=NA^2/\sigma_n^2)$单调增加。} 
 \end{frame}
 
 \begin{frame}[shrink]{工作特性某点上的斜率等于该点$P_D$和$P_F$所要求的检测门限值$\eta$}
@@ -564,7 +565,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 	\column{0.5\textwidth}
 		\begin{itemize}
 		\item 根据先验概率和代价因子, 求得判决门限$\eta$
-		\item 以$\eta$为斜率, 可找到一条直线, 与在给定信噪比$d$下的$P_D-P_F$曲线相切;
+		\item 以$\eta$为斜率, 可找到一条直线, 与在给定信噪比$d$下的$P_D-P_F$曲线相切; 如, $d=d_1$, 切点$u$
 		\item 切点对应的$P_D$和$P_F$值，就是在给定信噪比下的两种判决概率。
 	\end{itemize}
 	\column{0.5\textwidth}
@@ -597,7 +598,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 \begin{columns}[T]
 	\column{0.5\textwidth}
 	\begin{itemize}
-		\item 按照满足极小化极大方程的关系公式，画出一条$P_D-P_F$直线, 该直线与给定信噪比下的$P_D-P_F$工作特性曲线相交。
+		\item 按照满足极小化极大方程的关系公式，画出一条$P_D-P_F$直线, 该直线与给定信噪比下的$P_D-P_F$工作特性曲线相交。如, $d=d_1$, 交点$b$
 		\item 交点即是在极小化极大准则条件下的两种判决概率。
 	\end{itemize}
 	\column{0.5\textwidth}
@@ -614,7 +615,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 	\column{0.5\textwidth}
 	\begin{itemize}
 		\item 由$P_F=\alpha$画一条直线
-		\item 该直线与给定信噪比下的$P_D-P_F$工作特性曲线相交。
+		\item 该直线与给定信噪比下的$P_D-P_F$工作特性曲线相交。如, $d=d_1$, 交点$c$
 		\item 交点即是在奈曼---皮尔逊准则下的两种判决概率。
 	\end{itemize}
 	\column{0.5\textwidth}
@@ -646,7 +647,7 @@ H_1 &:x_k=A+n_k &(l|H_1)\sim\mathcal{N}(A,\frac{\sigma_n^2}{N})
 \end{frame}
 
 \begin{frame}[shrink]{贝叶斯准则}
-给定各假设先验概率及各判决代价因子。问题：寻找一种判决空间的划分方法,使平均代价最小。\\
+给定各假设先验概率及各判决代价因子。问题: 寻找一种判决空间的划分方法, 使平均代价最小。\\
 \textbf{平均代价: }
 \begin{align*}
 C&=P(H_0)C(H_0)+P(H_1)C(H_1)\\
@@ -850,7 +851,7 @@ p(x_k|H_2)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^
 	&\text{因此, 判决规则转化为使}\\
 	&\left(\sum_{i=1}^{N}2x_ks_i\right)-Ns_i^2\\
     &\text{最大时，判决$H_i$假设成立}\\
-	&\text{令 }\quad \bm{\hat{x}}=\frac{1}{N}\sum_{i=1}^{N}2x_k, \text{使}\\
+	&\text{令 }\quad \bm{\hat{x}}=\frac{1}{N}\sum_{i=1}^{N}x_k, \text{使}\\
 	&2s_i\bm{\hat{x}}-s_i^2\\
 	&\text{最大时，判决$H_i$假设成立}
 	\end{align*}
@@ -906,7 +907,7 @@ p(x_k|H_2)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^
 	\column{0.4\textwidth}
 	$$
 	\begin{cases}
-	0&\ge -2A\bm{\hat{x}}-A^2\\
+	0&> -2A\bm{\hat{x}}-A^2\\
 	0&\ge 2A\bm{\hat{x}}-A^2
 	\end{cases}
 	$$
@@ -920,7 +921,7 @@ p(x_k|H_2)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^
 	\end{cases}
 	$$
 \end{columns}
-合并得到, \textbf{当$-\frac{1}{2}\bm{\hat{x}}\le -\frac{A}{2}$时，判决$H_1$假设成立。}
+合并得到, \textbf{当$-\frac{A}{2}<\bm{\hat{x}}\le \frac{A}{2}$时，判决$H_1$假设成立。}
 \end{frame}
 
 \begin{frame}[shrink]{M元信号检测例题9: 解续(5)}
