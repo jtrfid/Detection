@@ -1,0 +1,245 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%ch4-3
+\begin{frame}[shrink]
+  \frametitle{ch4.信号波形的检测}
+  \framesubtitle{ch4-3. 充分统计量的方法}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{充分统计量的方法}
+
+\begin{frame}{充分统计量的方法}
+\begin{itemize}
+	\setlength{\itemsep}{.5cm}
+	\item \textbf{条件: }功率谱密度为$P_n(\omega)=N_0/2$的高斯白噪声背景中简单二元信号波形检测
+	\item \textbf{正交级数展开法: }信道噪声是白噪声，正交函数集可任意选取。
+	\item \textbf{充分统计量法: }\textcolor{blue}{选取特定的正交函数集}，使得有关发送信号的信息只包含在有限的展开系数中。	
+\end{itemize}
+\end{frame}
+
+\begin{frame}{充分统计量的方法}
+信号模型
+\begin{align*}
+&H_0: x(t)=n(t), 0\le t\le T\\
+&H_1: x(t)=s(t)+n(t), 0\le t\le T
+\end{align*}
+$n(t)$为零均值高斯白噪声\\
+\textbf{\textcolor{blue}{(1) 选择一组完备正交函数集，第一个坐标函数满足：}}
+\[f_1(t)=\frac{1}{\sqrt{E_s}}s(t)\]
+$f_1(t)$为确知信号$s(t)$的归一化函数\\
+其余坐标函数$f_k(t), k\ge 2$是与$f_1(t)$正交, 且两两正交的任意归一化函数, 即
+\[f_j(t)\text{和}f_k(t)\text{是正交的}, k\ge 1, j\ge 1, k\ne j \]
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法---巧取$f_1(t)$}
+相互正交的函数集$\{f_k(t)\}(k=1,2,\dots)$
+\[
+\int_{0}^{T}f_j(t)f_k(t)dt=
+\begin{cases}
+1,&j=k\\
+0,&j\ne k
+\end{cases}
+\]
+设
+\[ f_1(t)=\frac{1}{\sqrt{E_s}}s(t)\implies s(t)=\sqrt{E_s}f_1(t) \]
+由于$f_1(t)$与$f_k(t)(k\ge 2)$正交$\implies s(t)$与$f_k(t)(k\ge 2)$正交\\
+$\implies$确知信号$s(t)$在$f_k(t)(k\ge 2)$上的投影等于0,即$s_k=0,(k\ge 2)$\\
+\[s_k=\int_{0}^{T}s(t)f_k(t)dt=\int_{0}^{T}\sqrt{E_s}f_1(t)f_k(t)dt=\sqrt{E_s}f_1(t)f_k(t) \]
+$k=1,\quad f_1(t)f_k(t)=1\implies s_1=\sqrt{E_s};\qquad k\ge 2,\quad f_1(t)f_k(t)=0\implies s_k=0$\\
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法---巧取$f_1(t)$}
+\begin{align*}
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t)\implies s(t)=\sqrt{E_s}f_1(t)\\
+&k=1,\quad f_1(t)f_k(t)=1\implies s_1=\sqrt{E_s}\\
+&k\ge 2,\quad f_1(t)f_k(t)=0\implies s_k=0
+\end{align*}
+进一步,由于$x(t)=s(t)+n(t),\quad x_k=s_k+n_k,\quad n(t)$是高斯白噪声过程。
+\begin{block}{结论}
+	$x_1=s_1+n_1=\sqrt{E_s}+n_1\implies x_1$是高斯随机变量, 含有确知信号$s(t)$信息。\\
+	$x_k=s_k+n_k=n_k\quad(k\ge 2)\implies x_k(k\ge 2)$是高斯随机变量,  且相互统计独立。不含确知信号$s(t)$信息, 对判决没有影响。\\
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法(1)}
+\textbf{\textcolor{blue}{(2)利用构造的正交函数集$f_1(t)$和$\{f_k(t)|k\ge 2\}$,对接收信号进行正交展开}}
+\begin{block}{假设$H_0:x(t)=n(t)$下,展开系数}
+\begin{align*}	
+&x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}n(t)f_1(t)dt=n_1\\
+&x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}n(t)f_k(t)dt=n_k\qquad k\ge 2
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法(2)}
+\textbf{\textcolor{blue}{(2)利用构造的正交函数集$f_1(t)$和$\{f_k(t)|k\ge 2\}$,对接收信号进行正交展开}}
+\begin{block}{假设$H_1:x(t)=s(t)+n(t)$下，展开系数}
+\begin{align*}
+	x_1&=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}[s(t)+n(t)]f_1(t)dt=\int_{0}^{T}s(t)f_1(t)dt+\int_{0}^{T}n(t)f_1(t)dt\\
+	&=\int_{0}^{T}s(t)[\frac{1}{\sqrt{E_s}}s(t)]dt+n_1=\frac{1}{\sqrt{E_s}}\int_{0}^{T}s^2(t)dt+n_1\\
+	&=\sqrt{E_s}+n_1\quad (\text{by }f_1(t)=\frac{1}{\sqrt{E_s}}s(t),E_s=\int_{0}^{T}s^2(t)dt)\\
+	x_k&=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}[s(t)+n(t)]f_k(t)dt=\int_{0}^{T}[\sqrt{E_s}f_1(t)+n(t)]f_k(t)dt\\
+	&=\int_{0}^{T}n(t)f_k(t)dt=n_k\quad k\ge 2\quad (by\quad s(t)=\sqrt{E_s}f_1(t), \int_{0}^{T}f_1(t)f_k(t)dt=0,k\ge 2)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法(3)}
+\textbf{\textcolor{blue}{(2)利用构造的正交函数集$f_1(t)$和$\{f_k(t)|k\ge 2\}$,对接收信号进行正交展开}}
+\begin{block}{假设$H_0:x(t)=n(t)$下,展开系数}
+\begin{align*}
+&x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}n(t)f_1(t)dt=n_1\implies\text{不含接收信号信息}\\
+&x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}n(t)f_k(t)dt=n_k\qquad k\ge 2
+\end{align*}
+\end{block}
+\begin{block}{假设$H_1:x(t)=s(t)+n(t)$下，展开系数}
+\begin{align*}
+&x_1=\int_{0}^{T}x(t)f_1(t)dt=\int_{0}^{T}[s(t)+n(t)]f_1(t)dt=\sqrt{E_s}+n_1\\
+&x_k=\int_{0}^{T}x(t)f_k(t)dt=\int_{0}^{T}[s(t)+n(t)]f_k(t)dt=n_k\qquad k\ge 2
+\end{align*}
+$x_1$是高斯随机变量, 含有接收信号/确知信号$s(t)$信息。\\
+$x_k$是高斯随机变量, 且相互统计独立。但不含有接收信号/确知信号$s(t)$信息。
+\end{block}
+\textbf{\textcolor{blue}{通过两个假设下的展开系数$x_1$即可判定假设$H_1$为真，还是$H_0$为真。}}
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法---接收信号$x_1(t)$}
+\textbf{\textcolor{blue}{(3)利用得到的展开系数，构建似然比表达式
+}}\\
+展开系数中只有$x_1$含有接收信号的信息，因此展开系数$x_1$是一个充分统计量。利用$x_1$构成的似然比检验，表示为
+\[\lambda(x_1)=\frac{p(x_1|H_1)}{x_1|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta\]
+因为
+\begin{align*}
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t),\quad (x_1|H_0)=n_1,\quad (x_1|H_1)=\sqrt{E_s}+n_1\\ &x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt
+\end{align*}
+~\\
+所以充分统计量$x_1$是高斯随机变量,可用假设$H_0$和假设$H_1$下的均值和方差表示。
+\end{frame}
+
+\begin{frame}[shrink]{充分量统计法---接收信号$x_1(t)$}
+\textbf{\textcolor{blue}{(3)利用得到的展开系数，构建似然比表达式
+}}\\
+展开系数中只有$x_1$含有接收信号的信息，因此展开系数$x_1$是一个充分统计量。利用$x_1$构成的似然比检验，表示为
+\[\lambda(x_1)=\frac{p(x_1|H_1)}{x_1|H_0)}\mathop{\gtrless}_{H_0}^{H_1}\eta\]
+因为
+\begin{align*}
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t),\quad (x_1|H_0)=n_1,\quad (x_1|H_1)=\sqrt{E_s}+n_1\\ &x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt
+\end{align*}
+~\\
+所以充分统计量$x_1$是高斯随机变量,可用假设$H_0$和假设$H_1$下的均值和方差表示。
+\end{frame}
+
+\begin{frame}{充分量统计法---$x_1$}
+$x_1$是高斯变量, 均值和方差
+\begin{align*}
+&E[x_1|H_0]=0,&Var[x_1|H_0]=\frac{N_0}{2}\\
+&E[x_1|H_1]=\sqrt{E_s},&Var[x_1|H_1]=\frac{N_0}{2}
+\end{align*}
+概率密度函数
+\begin{align*}
+p(x_1|H_0)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_1^2}{N_0}\right)\\
+p(x_1|H_1)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_1-\sqrt{E_s})^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{推导$E[x_1|H_0]$}
+\begin{align*}
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t),\quad (x_1|H_0)=n_1,\quad (x_1|H_1)=\sqrt{E_s}+n_1\\ &x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt\\
+&E[x_1|H_0]=E[n_1]=0
+\end{align*}
+或:
+\begin{align*}
+E[x_1|H_0]&=E\left[\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt\right] &\text{by }H_0: x(t)=n(t)\\
+&=E\left[\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right]&\\
+&=\frac{1}{\sqrt{E_s}}\int_{0}^{T}E[n(t)]s(t)dt=0 &\text{by }E[n(t)]=0
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{推导$Vax[x_1|H_0]$(方法1)}
+\begin{align*}
+&H_0:x(t)=n(t),\quad E(x_1|H_0)=0,\quad E_s=\int_{0}^{T}s^2(t)dt\\
+&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)\\
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t),\quad (x_1|H_0)=n_1,\quad (x_1|H_1)=\sqrt{E_s}+n_1\\ &x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,\quad (x_1|H_0)=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt
+\end{align*}
+\begin{align*}
+&Var[x_1|H_0]=E[((x_1|H_0)-E(x_1|H_0))^2]=E[(x_1|H_0)^2]=E\left[\left(\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
+&=\frac{1}{E_s}E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=\frac{1}{E_s}E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
+&=\frac{1}{E_s}\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\frac{1}{E_s}\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
+&=\frac{N_0}{2E_s}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2E_s}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{推导$Vax[x_1|H_0]$(方法2)}
+\begin{align*}
+&H_0: x(t)=n(t),\quad E(x_1|H_0)=0,\quad E_s=\int_{0}^{T}s^2(t)dt\\
+&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)\\
+&f_1(t)=\frac{1}{\sqrt{E_s}}s(t),\quad (x_1|H_0)=n_1,\quad (x_1|H_1)=\sqrt{E_s}+n_1\\ &x_1=\int_{0}^{T}x(t)f_1(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}x(t)s(t)dt,\quad (x_1|H_0)=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\\
+&n_1=\int_{0}^{T}n(t)f_1(t)dt=\int_{0}^{T}n(t)\frac{1}{\sqrt{E_s}}s(t)dt=\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt
+\end{align*}
+\begin{align*}
+Var[x_1|H_0]&=E[((x_1|H_0)-E(x_1|H_0))^2]=E[(x_1|H_0)^2]=E[n_1^2]\\
+&=E\left[\left(\frac{1}{\sqrt{E_s}}\int_{0}^{T}n(t)s(t)dt\right)^2\right]=\frac{N_0}{2}\qquad (\text{同方法1})
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$p(x_1|H_0)$}
+\[ E[x_1|H_0]=0,\quad Var[x_1|H_0]=\frac{N_0}{2}\]
+\begin{align*}
+p(x_1|H_0)&=\left(\frac{1}{2\pi Var[x_1|H_0]}\right)^{1/2}\exp\left(-\frac{(x_1-E[x_1|H_0])^2}{2Var[x_1|H_0]}\right)\\
+&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_1^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$E[x_1|H_1]$和$Var[x_1|H_1]$}
+\[(x_1|H_1)=\sqrt{E_s}+n_1\]
+\begin{align*}
+E[x|H_1]&=E\left[\sqrt{E_s}+n_1\right]\\
+&=E[\sqrt{E_s}]+E[n_1]\\
+&=E[\sqrt{E_s}]=\sqrt{E_s}\\
+Var[x_1|H_1]&=E[((x|H_1)-E(x|H_1))^2]=E[n_1^2]\\
+&=Var[x_1|H_0]\\
+&=\frac{N_0}{2}
+\end{align*}
+\end{frame}
+
+\begin{frame}{推导$p(x_1|H_1)$}
+\[ E[x_1|H_1]=\sqrt{E_s},\quad Var[x_1|H_1]=\frac{N_0}{2}\]
+\begin{align*}
+p(x_1|H_1)&=\left(\frac{1}{2\pi Var[x_1|H_1]}\right)^{1/2}\exp\left(-\frac{(x_1-E[x_1|H_1])^2}{2Var[x_1|H_1]}\right)\\
+&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_1-\sqrt{E_s})^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{充分量统计法---$x_1$}
+$x_1$是高斯变量, 均值和方差
+\begin{align*}
+&E[x_1|H_0]=0,&Var[x_1|H_0]=\frac{N_0}{2}\\
+&E[x_1|H_1]=\sqrt{E_s},&Var[x_1|H_1]=\frac{N_0}{2}
+\end{align*}
+概率密度函数
+\begin{align*}
+p(x_1|H_0)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_1^2}{N_0}\right)\\
+p(x_1|H_1)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_1-\sqrt{E_s})^2}{N_0}\right)
+\end{align*}
+\end{frame}
+
+\begin{frame}{充分量统计法---判决表达式}
+\begin{align*}
+\lambda(x_1)=\frac{p(x_1|H_1)}{x_1|H_0)}&\mathop{\gtrless}_{H_0}^{H_1}\eta\\
+\frac{\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_1-\sqrt{E_s})^2}{N_0}\right)}{\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_1^2}{N_0}\right)}&\mathop{\gtrless}_{H_0}^{H_1}\eta
+\end{align*}
+\textbf{化简得, 判决表达式:}
+\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
+\begin{block}{结论}
+	由任意正交函数集对$x(t)$进行正交级数展开法与由充分统计量法导出的判决表达式是完全一样的，因而也具有相同的检测系统结构和相同的检测性能。
+\end{block}
+\end{frame}
+
+\begin{frame}{简单二元信号波形的检测---总结}
+\begin{enumerate}
+	\setlength{\itemsep}{.5cm}
+	\item 首先，利用随机过程的正交级数展开，将随机过程用一组随机变量来表示;
+	\item 然后，针对展开得到的随机变量，利用第三章的统计检测方法，构建贝叶斯检测表达式;
+	\item 最后，利用展开系数与随机过程之间的表示关系，构建波形信号的检测表达式。
+	\item 两种方法：正交级数展开和充分统计量。所得结果相同。
+\end{enumerate}
+\end{frame}
