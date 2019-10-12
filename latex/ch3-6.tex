@@ -1,8 +1,349 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%ch3-3
 \begin{frame}[shrink]
   \frametitle{ch3.信号检测与估计理论的基础知识}
-  \framesubtitle{ch3-3. 参量信号的统计检测}
+  \framesubtitle{ch3-3. M元信号的统计检测及参量信号的统计检测}
   \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{M元信号的统计检测}
+
+\begin{frame}{M元信号的统计检测}
+\begin{block}{基本要求}
+	\begin{itemize} \setstretch{2.5}
+		\item 了解贝叶斯准则
+		\item 了解最小平均错误概率准则和最大似然准则
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{M元信号检测检测模型}
+\includegraphics[scale=0.4]{M}
+\newline
+\begin{columns}
+\column{0.4\textwidth}
+判决域划分:
+\[\bm{R}=\bigcup_{i=0}^{M-1}R_i, R_i\cap R_j=\emptyset, (i\ne j) \]
+\column{0.6\textwidth}
+\includegraphics[scale=0.4]{R-M}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则}
+给定各假设先验概率及各判决代价因子。问题: 寻找一种判决空间的划分方法, 使平均代价最小。\\
+\textbf{平均代价: }
+\begin{align*}
+C&=P(H_0)C(H_0)+P(H_1)C(H_1)\\
+C(H_0)&=c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0)\\
+C(H_1)&=c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1)\\
+C=&P(H_0)(c_{00}P(H_0|H_0)+c_{10}P(H_1|H_0))+\\
+&P(H_1)(c_{01}P(H_0|H_1)+c_{11}P(H_1|H_1))
+\end{align*}
+\centering$\Downarrow$
+\[
+C=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}c_{ij}P(H_j)P(H_i|H_j)
+\]
+\end{frame}
+
+\begin{frame}[shrink]{平均代价计算}
+\begin{align*}
+C&=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}c_{ij}P(H_j)P(H_i|H_j)\\
+&=\sum_{i=0}^{M-1}c_{ii}P(H_i)P(H_i|H_i)+\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ij}P(H_j)P(H_i|H_j)\\
+&\quad \text{by } P(H_i|H_i)=1-\sum_{j=0,j\ne i}^{M-1}P(H_j|H_i)\\
+&=\sum_{i=0}^{M-1}c_{ii}P(H_i)\left(1-\sum_{j=0,j\ne i}^{M-1}P(H_j|H_i)\right)+\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ij}P(H_j)P(H_i|H_j)\\
+&=\sum_{i=0}^{M-1}c_{ii}P(H_i)-\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ii}P(H_i)P(H_j|H_i)+\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ij}P(H_j)P(H_i|H_j)\\
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{平均代价计算}
+\begin{align*}
+&\text{因为 }\quad \sum_{i=0}^{M-1}\sum_{j=0}^{M-1}c_{ii}P(H_i)P(H_j|H_i)=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}c_{jj}P(H_j)P(H_i|H_j)\\
+&\text{所以 }\quad \sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ii}P(H_i)P(H_j|H_i)=\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{jj}P(H_j)P(H_i|H_j)
+\end{align*}
+\begin{align*}
+C&=\sum_{i=0}^{M-1}c_{ii}P(H_i)-\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ii}P(H_i)P(H_j|H_i)+\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}c_{ij}P(H_j)P(H_i|H_j)\\
+&=\sum_{i=0}^{M-1}c_{ii}P(H_i)+\sum_{i=0}^{M-1}\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)P(H_i|H_j)\\
+&=\sum_{i=0}^{M-1}c_{ii}P(H_i)+\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)d\bm{x}\\
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则}
+\begin{align*}
+C=\sum_{i=0}^{M-1}c_{ii}P(H_i)+\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)d\bm{x}
+\end{align*}
+\begin{align*}
+I_{i}(\bm{x})=\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)
+\end{align*}
+\[c_{ij}\ge c_{jj},\quad P(H_j)\ge 0,\quad p(\bm{x}|H_j)\ge 0\implies I_{i}(\bm{x})\ge 0 \]
+\begin{block}{贝叶斯准则}
+为保证平均风险最小，应把所有使$I_{i}(\bm{x})$最小的$\bm{x}$划分至$R_i$判决区域，即当满足
+\[I_{i}(\bm{x})<I_j(\bm{x}), j=0,1,\cdots,M-1, j\ne i \]
+时, 判决$H_i$成立
+\[R_i=\{\bm{x}|I_i(\bm{x})<I_j(\bm{x}), 0\le j\le M, j\ne i\} \]
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则}
+\begin{block}{贝叶斯准则}
+为保证平均风险最小，应把所有使$I_{i}(\bm{x})$最小的$\bm{x}$划分至$R_i$判决区域，即当满足
+\[I_{i}(\bm{x})<I_j(\bm{x}), j=0,1,\cdots,M-1, j\ne i \]
+时, 判决$H_i$成立
+\[R_i=\{\bm{x}|I_i(\bm{x})<I_j(\bm{x}), 0\le j\le M, j\ne i\} \]
+\end{block}
+\begin{block}{$H_0$成立的判决域, 是满足下列方程组的解}
+\[
+\begin{cases}
+I_0(\bm{x})< I_1(\bm{x})\\
+I_0(\bm{x})< I_2(\bm{x})\\
+\hspace{1cm} \vdots\\
+I_0(\bm{x})< I_{M-1}(\bm{x})
+\end{cases}
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{贝叶斯准则}
+\textbf{\textcolor{blue}{定义似然比函数}}
+\[\lambda_i(\bm{x})=\frac{p(\bm{x}|H_i)}{p(\bm{x}|H_0)}, \quad i=0,1,\cdots,M-1 \]
+\[J_i(\bm{x})=\frac{I_i(\bm{x_i})}{p(\bm{x}|H_0)}=\sum_{j=0,j\ne i}^{M-1}P(H_j)(c_{ij}-c_{jj})\lambda_i(\bm{x}), \quad i=0,1,\cdots,M-1 \]
+\textbf{\textcolor{blue}{定义判决规则}}\\
+~\\
+如果
+\[J_i(\bm{x})<J_j(\bm{x})\quad (j=0,1,\cdots,M-1,j\ne i)\]
+则判决$H_i$成立
+\end{frame}
+
+\begin{frame}[shrink]{最小平均错误准则}
+\begin{align*}
+&C=\sum_{i=0}^{M-1}c_{ii}P(H_i)+\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)d\bm{x}\qquad I_{i}(\bm{x})=\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)\\
+&\text{正确判决代价为0, 错误判决代价为1的条件下: }\quad I_{i}(\bm{x})=\sum_{j=0,j\ne i}^{M-1}P(H_j)p(\bm{x}|H_j)
+\end{align*}
+\begin{block}{最小平均错误准则}
+为保证最小错误概率，应把所有使$I_{i}(\bm{x})$最小的$\bm{x}$划分至$R_i$判决区域，即当满足
+\[I_{i}(\bm{x})<I_j(\bm{x}), j=0,1,\cdots,M-1, j\ne i \]
+时, 判决$H_i$成立
+\[R_i=\{\bm{x}|I_i(\bm{x})<I_j(\bm{x}), 0\le j\le M, j\ne i\} \]
+\end{block}
+\begin{align*}
+&\textbf{\textcolor{blue}{最小平均错误概率:}}\quad P_e=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}P(H_j)P(H_i|H_j),\quad j\ne i
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{最小平均错误准则}
+$H_0$成立的判决域, 是满足下列下面方程组的解
+\[
+\begin{cases}
+I_0(\bm{x})< I_1(\bm{x})\\
+I_0(\bm{x})< I_2(\bm{x})\\
+\hspace{1cm} \vdots\\
+I_0(\bm{x})< I_{M-1}(\bm{x})
+\end{cases}
+\]
+$H_1$成立的判决域, 是满足下列下面方程组的解
+\[
+\begin{cases}
+I_1(\bm{x}) < I_0(\bm{x})\\
+I_1(\bm{x}) < I_2(\bm{x})\\
+\hspace{1cm} \vdots\\
+I_1(\bm{x}) < I_{M-1}(\bm{x})
+\end{cases}
+\]
+\end{frame}
+
+\begin{frame}[shrink]{最大似然准则}
+\begin{align*}
+&C=\sum_{i=0}^{M-1}c_{ii}P(H_i)+\sum_{i=0}^{M-1}\int_{R_i}\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)d\bm{x}\\ &I_{i}(\bm{x})=\sum_{j=0,j\ne i}^{M-1}\left(c_{ij}-c_{jj}\right)P(H_j)p(\bm{x}|H_j)\\
+&\textbf{\textcolor{blue}{正确判决代价为0，错误判决代价为1，且信源的假设先验概率相等: }} P(H_j)=\frac{1}{M} \\
+&I_{i}(\bm{x})=\sum_{j=0,j\ne i}^{M-1}P(H_j)p(\bm{x}|H_j)=\frac{1}{M}\sum_{j=0,j\ne i}^{M-1}p(\bm{x}|H_j)=\frac{1}{M}\left(\sum_{j=0}^{M-1}p(\bm{x}|H_j)-p(\bm{x}|H_i)\right)
+\end{align*}
+\textbf{\textcolor{blue}{判决规则是M个似然函数$p(\bm{x}|H_i), i=0,1,\cdots,M-1$中, 选择使$p(\bm{x}|H_i)$最大的假设成立}}
+\begin{align*}
+&\textbf{\textcolor{blue}{最小平均错误概率:}}\quad P_e=\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}P(H_j)P(H_i|H_j)=\frac{1}{M}\sum_{i=0}^{M-1}\sum_{j=0}^{M-1}P(H_i|H_j),\quad j\ne i
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{最大似然准则}
+$H_0$成立的判决域, 是满足下列下面方程组的解
+\[
+\begin{cases}
+p(\bm{x}|H_0)> p(\bm{x}|H_1)\\
+p(\bm{x}|H_0)> p(\bm{x}|H_2)\\
+\hspace{1cm} \vdots\\
+p(\bm{x}|H_0)> p(\bm{x}|H_{M-1})\\
+\end{cases}
+\]
+$H_1$成立的判决域, 是满足下列下面方程组的解
+\[
+\begin{cases}
+p(\bm{x}|H_1)> p(\bm{x}|H_0)\\
+p(\bm{x}|H_1)> p(\bm{x}|H_2)\\
+\hspace{1cm} \vdots\\
+p(\bm{x}|H_1)> p(\bm{x}|H_{M-1})\\
+\end{cases}
+\]
+\end{frame}
+
+\begin{frame}{M元信号检测例题8}
+例8：在四元通信系统中，信源有四个可能的输出，即假设为$H_0$时输出1，假设为$H_1$时输出为2，假设为$H_2$时输出为3，假设为$H_3$时输出为4。各个假设的先验概率相等，且正确判决代价为0，错误判决代价为1，并进行了N次独立观测。
+信号在传输过程中叠加有均值为零，方差为$\sigma_n^2$的加性高斯白噪声。\\
+~\\
+试设计一个四元信号的最佳检测系统。
+\end{frame}
+
+\begin{frame}{M元信号检测例题9}
+在三元通信系统中，信源有三个可能的输出，即假设为$H_0$时输出$-A$，假设为$H_1$时输出为0，假设为$H_2$时输出为$A$。各个假设的先验概率相等，且正确判决代价为0，错误判决代价为1，并进行了$N$次独立观测。
+信号在传输过程中叠加有均值为零，方差为$\sigma_n^2$的加性高斯白噪声。\\
+~\\
+试按照最小平均错误概率准则设计检测系统，并求正确判决和错误判决的概率。
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解}
+解: 本例的检测模型为:
+\begin{align*}
+&H_0: x_k=-A+n_k\\
+&H_1: x_k=n_k\\
+&H_2: x_k=A+n_k
+\end{align*}
+根据题设: 各个假设的先验概率相等，且正确判决代价为0，错误判决代价为1。\\
+因此本例的贝叶斯检测等价于最大似然检测，即使似然函数$p(\bm{x}|H_i)$最大的观测值划分个判决区域$R_i$.
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解续(1)}
+\textbf{\textcolor{blue}{步骤1: 计算各假设下的似然函数}}\\
+~\\
+由于$n_k$是高斯分布随机变量, 因此在$H_0$假设下, 第$k$次采样值$x_k$服从高斯分布，且均值为$-A$, 方差为$\sigma_n^2$; 在$H_1$假设下, 第$k$次采样值$x_k$服从均值为0, 方差为$\sigma_n^2$的高斯分布; 在$H_2$假设下, 第$k$次采样值$x_k$服从均值为$A$, 方差为$\sigma_n^2$的高斯分布。
+\scriptsize
+\begin{align*}
+p(x_k|H_0)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k+A)^2}{2\sigma_n^2}\right)
+&\implies& p(\bm{x}|H_0)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k+A)^2}{2\sigma_n^2}\right)\\
+p(x_k|H_1)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)&\implies& p(\bm{x}|H_1)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{x_k^2}{2\sigma_n^2}\right)\\
+p(x_k|H_2)&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^2}{2\sigma_n^2}\right)&\implies& p(\bm{x}|H_2)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-A)^2}{2\sigma_n^2}\right)
+\end{align*} 
+\normalsize
+\begin{align*}
+&\textbf{以上3个似然函数统一写成:} \quad p(\bm{x}|H_i)=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-s_i)^2}{2\sigma_n^2}\right),\quad i=0,1,2\\
+&\text{其中,} \quad s_0=-A\qquad s_1=0\qquad s_2=A
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解续(2)}
+\textbf{\textcolor{blue}{步骤2: 按照最大似然准则划分观测空间}}
+%\small
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{align*}
+p(\bm{x}|H_i)&=\prod_{k=1}^{N}\left(\frac{1}{2\pi\sigma_n^2}\right)^{1/2}\exp\left(-\frac{(x_k-s_i)^2}{2\sigma_n^2}\right)\\
+&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{N/2}\exp\left(-\sum_{i=1}^{N}\frac{(x_k-s_i)^2}{2\sigma_n^2}\right)\\
+&=\left(\frac{1}{2\pi\sigma_n^2}\right)^{N/2}\exp\left(-\sum_{i=1}^{N}\frac{x_k^2-2x_ks_i+s_i^2}{2\sigma_n^2}\right)
+\end{align*}
+\column{0.4\textwidth}
+\begin{align*}
+&\text{因此, 判决规则转化为使}\\
+&\left(\sum_{i=1}^{N}2x_ks_i\right)-Ns_i^2\\
+&\text{最大时，判决$H_i$假设成立}\\
+&\text{令 }\quad \bm{\hat{x}}=\frac{1}{N}\sum_{i=1}^{N}x_k, \text{使}\\
+&2s_i\bm{\hat{x}}-s_i^2\\
+&\text{最大时，判决$H_i$假设成立}
+\end{align*}
+\end{columns}
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解续(3)}
+判决规则: 使
+\begin{align*}
+2s_i\bm{\hat{x}}-s_i^2
+\end{align*}
+最大时，判决$H_i$假设成立。
+\begin{align*}
+&H_0: s_0=-A, &2s_i\bm{\hat{x}}-s_i^2&=-2A\bm{\hat{x}}-A^2\\
+&H_1: s_1=0, &2s_i\bm{\hat{x}}-s_i^2&=0\\
+&H_2: s_2=A, &2s_i\bm{\hat{x}}-s_i^2&=2A\bm{\hat{x}}-A^2
+\end{align*}
+因此, 假设$H_0$的判决区域由下列方程组确定
+\begin{columns}
+\column{0.4\textwidth}
+$$
+\begin{cases}
+-2A\bm{\hat{x}}-A^2 &\ge 0\\
+-2A\bm{\hat{x}}-A^2 &\ge 2A\bm{\hat{x}}-A^2
+\end{cases}
+$$
+\column{0.1\textwidth}
+$\implies$
+\column{0.3\textwidth}
+$$
+\begin{cases}
+\bm{\hat{x}}&\le -\frac{A}{2}\\
+\bm{\hat{x}}&\le 0
+\end{cases}
+$$
+\end{columns}
+合并得到, \textbf{当$\bm{\hat{x}}\le -\frac{A}{2}$时，判决$H_0$假设成立。}
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解续(4)}
+判决规则: 使
+\begin{align*}
+2s_i\bm{\hat{x}}-s_i^2
+\end{align*}
+最大时，判决$H_i$假设成立。
+\begin{align*}
+&H_0: s_0=-A, &2s_i\bm{\hat{x}}-s_i^2&=-2A\bm{\hat{x}}-A^2\\
+&H_1: s_1=0, &2s_i\bm{\hat{x}}-s_i^2&=0\\
+&H_2: s_2=A, &2s_i\bm{\hat{x}}-s_i^2&=2A\bm{\hat{x}}-A^2
+\end{align*}
+因此, 假设$H_1$的判决区域由下列方程组确定
+\begin{columns}
+\column{0.4\textwidth}
+$$
+\begin{cases}
+0&> -2A\bm{\hat{x}}-A^2\\
+0&\ge 2A\bm{\hat{x}}-A^2
+\end{cases}
+$$
+\column{0.1\textwidth}
+$\implies$
+\column{0.3\textwidth}
+$$
+\begin{cases}
+\bm{\hat{x}}&> -\frac{A}{2}\\
+\bm{\hat{x}}&\le \frac{A}{2}
+\end{cases}
+$$
+\end{columns}
+合并得到, \textbf{当$-\frac{A}{2}<\bm{\hat{x}}\le \frac{A}{2}$时，判决$H_1$假设成立。}
+\end{frame}
+
+\begin{frame}[shrink]{M元信号检测例题9: 解续(5)}
+判决规则: 使
+\begin{align*}
+2s_i\bm{\hat{x}}-s_i^2
+\end{align*}
+最大时，判决$H_i$假设成立。
+\begin{align*}
+&H_0: s_0=-A, &2s_i\bm{\hat{x}}-s_i^2&=-2A\bm{\hat{x}}-A^2\\
+&H_1: s_1=0, &2s_i\bm{\hat{x}}-s_i^2&=0\\
+&H_2: s_2=A, &2s_i\bm{\hat{x}}-s_i^2&=2A\bm{\hat{x}}-A^2
+\end{align*}
+因此, 假设$H_2$的判决区域由下列方程组确定
+\begin{columns}
+\column{0.4\textwidth}
+$$
+\begin{cases}
+2A\bm{\hat{x}}-A^2 &> -2A\bm{\hat{x}}-A^2\\
+2A\bm{\hat{x}}-A^2 &> 0
+\end{cases}
+$$
+\column{0.1\textwidth}
+$\implies$
+\column{0.3\textwidth}
+$$
+\begin{cases}
+\bm{\hat{x}}&> 0\\
+\bm{\hat{x}}&> \frac{A}{2}
+\end{cases}
+$$
+\end{columns}
+合并得到, \textbf{当$\bm{\hat{x}}>\frac{A}{2}$时，判决$H_2$假设成立。}
 \end{frame}
 
 \section{参量信号检测的基本概念}
@@ -70,7 +411,7 @@ $N$维观测矢量$\bm{x}=(x_1,x_2,\cdots,x_N)^T$的统计特性不仅与观测�
 \end{block}
 参量信号的检测中, 信源在假设$H_j$下的\textbf{条件概率密度函数}为
 \[ p(\bm{x|\theta}_j; H_j)\]
-如何由条件似然函数$p(\bm{x|\theta}_j; H_j)$和未知参量$p(\bm{\theta}_j)$的概率密度函数的到似然函数$p(\bm{x}|H_j)$?
+如何由条件似然函数$p(\bm{x|\theta}_j; H_j)$和未知参量$p(\bm{\theta}_j)$的概率密度函数到似然函数$p(\bm{x}|H_j)$?
 \end{frame}
 
 \begin{frame}[shrink]{概率密度函数已知的情况}
