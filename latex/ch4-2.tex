@@ -18,7 +18,7 @@
 \end{itemize}
 \end{frame}
 
-\subsection{简单二元信号波形的检测}
+\section{简单二元信号波形的检测---正交级数展开法}
 
 \begin{frame}{简单二元信号波形的检测---信号模型}
 在简单二元信号的波形检测中，假设$H_0$下和假设$H_1$的接收信号分别为:
@@ -62,7 +62,7 @@ $n(t)$是均值为零, 功率谱密度为$N_0/2$的\textbf{高斯白噪声}。
 
 \begin{frame}{简单二元信号波形检测---检测思路}
 \begin{columns}
-\column{0.3\textwidth}
+\column{0.25\textwidth}
 \begin{align*}
 &x_k=\int_{0}^{T}x(t)f_k(t)dt\\
 &s_k=\int_{0}^{T}s(t)f_k(t)dt\\
@@ -72,17 +72,17 @@ $n(t)$是均值为零, 功率谱密度为$N_0/2$的\textbf{高斯白噪声}。
 &\ln\lambda(x(t))\mathop{=}^{def}\lim\limits_{N\to\infty}[\lambda(\bm{x}_N)]\\
 &l[x(t)]\mathop{\gtrless}_{H_0}^{H_1}\gamma
 \end{align*}
-\column{0.7\textwidth}
+\column{0.72\textwidth}
 \centering
 \tikzstyle{int}=[draw, fill=blue!20, minimum size=2em]
 \begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
 \node [int] (a) {$x(t)$};
 \node [int] (b) [right of=a] {$x_k$};
-\node [int] (c) [right of=b] {$x_N$};
-\node [int] (d) [below of=c] {$\frac{p(x_N|H_1)}{p(x_N|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$};
-\node [int] (e) [left of=d] {$l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$};
+\node [int] (c) [right of=b] {$\bm{x}_N$};
+\node [int] (d) [below of=c] {$\lambda(\bm{x}_N)\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$};
+\node [int] (e) [left of=d] {$l[x(t)])\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$};
 \path[->] (a) edge node {$\{f_k(t)\}$正交展开} (b);
-\path[->] (b) edge node {前N项$x_k$构成$x_N$} (c);
+\path[->] (b) edge node {前N项$x_k$构成$\bm{x}_N$} (c);
 \path[->] (c) edge [swap] node {贝叶斯检测} (d);
 \path[->] (d) edge [swap] node {$N\to\infty$} (e);
 \end{tikzpicture}
@@ -93,17 +93,22 @@ $n(t)$是均值为零, 功率谱密度为$N_0/2$的\textbf{高斯白噪声}。
 $H_0: x(t)=n(t)$\\
 $H_1: x(t)=s(t)+n(t)$\\
 \textbf{\textcolor{blue}{步骤1，选一组完备的正交函数集$\{f_k(t),k=1,2,\cdots \}$, 对接收信号进行正交级数展开，得到一组随机变量$x_k$}}\\
-因为信号s(t)是确知信号,n(t)是均值为0的高斯白噪声，所以可以任选正交函数集$\{f_k(t)\}$
+因为信号$s(t)$是确知信号, $n(t)$是均值为0的高斯白噪声，所以可以任选正交函数集$\{f_k(t)\}$
 \begin{align*}
-&x_k=\int_{0}^{T}x(t)f_k(t)dt &\qquad x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)\\
-&H_0: x_k=n_k,k=1,2,\dots &\qquad n_k=\int_{0}^{T}n(t)f_k(t)dt\\
-&H_1: x_k=s_k+n_k,k=1,2,\dots &\qquad s_k=\int_{0}^{T}s(t)f_k(t)dt
+&x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)&x_k=\int_{0}^{T}x(t)f_k(t)dt \\
+&H_0: x_k=n_k,k=1,2,\dots &n_k=\int_{0}^{T}n(t)f_k(t)dt\\
+&H_1: x_k=s_k+n_k,k=1,2,\dots &s_k=\int_{0}^{T}s(t)f_k(t)dt
 \end{align*}
 \end{frame}
 
-\begin{frame}{判决表达式---步骤1}
+\begin{frame}[shrink]{判决表达式---步骤1}
+\begin{align*}
+&x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)&x_k=\int_{0}^{T}x(t)f_k(t)dt \\
+&H_0: x_k=n_k,k=1,2,\dots &n_k=\int_{0}^{T}n(t)f_k(t)dt\\
+&H_1: x_k=s_k+n_k,k=1,2,\dots &s_k=\int_{0}^{T}s(t)f_k(t)dt
+\end{align*}
 \begin{itemize}
-	\item 信号s(t)是确知信号,n(t)是均值为0,功率谱密度为$P_n(\omega)=N_0/2$的高斯白噪声;
+	\item 信号$s(t)$是确知信号, $n(t)$是均值为0,功率谱密度为$P_n(\omega)=N_0/2$的高斯白噪声;
 	\item 无论在假设$H_1$下还是在假设$H_2$下，接收信号的$x(t)$都是高斯随机过程;
 	\item 展开系数$x_k$是高斯随机过程的积分结果,因而$x_k$是高斯随机变量;
 	\item 展开系数$x_k$之间是互不相关的,也是相互统计独立的;
@@ -113,16 +118,13 @@ $H_1: x(t)=s(t)+n(t)$\\
 
 \begin{frame}[shrink]{判决表达式---步骤1: 假设$H_0$下$x_k$的均值和方差}
 \begin{align*}
-H_0: x_k=n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt
+&H_0: x_k=n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt, \quad\text{由于$n(t)$是均值为零的高斯白噪声, }\\
+&E[n(t)]=0, E[n(t)n(u)]=r_n(t-u) =\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(\delta(t-u)=1,t=u)\\
+&\text{$f_k(t)$是一组正交函数集, } \int_{0}^{T}f_j(t)f_k(t)dt=1,(j=k)
 \end{align*}
-由于$n(t)$是均值为零的高斯白噪声
-\begin{align*}
-&E[n(t)]=0, \qquad E[n(t)n(u)]=r_n(t-u) =\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(\delta(t-u)=1,t=u)
-\end{align*}
-$f_k(t)$是一组正交函数集$\implies\int_{0}^{T}f_j(t)f_k(t)dt=1,(j=k)$
 \begin{align*}
 E[x_k|H_0]&=E[n_k]=E\left[\int_{0}^{T}n(t)f_k(t)dt\right]=\int_{0}^{T}E[n(t)]f_k(t)dt=0\\
-Var[x_k|H_0]&=E[n_k^2]=E\left[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du\right]\\
+Var[x_k|H_0]&=E[(x_k-E[x_k])^2]=E[n_k^2]=E\left[\int_{0}^{T}n(t)f_k(t)dt\int_{0}^{T}n(u)f_k(u)du\right]\\
 &=\int_{0}^{T}f_k(t)\left\{\int_{0}^{T}E[n(t)n(u)]f_k(u)du\right\}dt=\int_{0}^{T}f_k(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)f_k(u)du\right]dt\\
 &=\int_{0}^{T}f_k(t)\frac{N_0}{2}f_k(t)dt=\frac{N_0}{2}
 \end{align*}
@@ -153,27 +155,26 @@ p(x_k|H_1)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k^2-s_k)^2}{
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{判决表达式---步骤2}
+\begin{frame}[shrink]{判决表达式---步骤2: 假设$H_0,H_1$下$\bm{x}_N$的概率密度}
 \textbf{\textcolor{blue}{步骤2，利用前$N$项展开系数, 构建似然比检验。由于信道是加性高斯白噪声, 由卡亨南---洛维展开可知, 各展开系数是不相关的, 因而也是相互独立的。}}
 \begin{align*}
-p(\bm{x}_N|H_0)&=\prod_{k=1}^{N}p(x_k|H_0)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_k^2}{N_0}\right)\\
-p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k^2-s_k)^2}{N_0}\right)
-\end{align*}
-\[\bm{x}_N=(x_1,x_2,\cdots)^T\]		
+&p(\bm{x}_N|H_0)=\prod_{k=1}^{N}p(x_k|H_0)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_k^2}{N_0}\right)\\
+&p(\bm{x}_N|H_1)=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k-s_k)^2}{N_0}\right)\\
+&\bm{x}_N=(x_1,x_2,\cdots)^T
+\end{align*}	
 \end{frame}
 
 \begin{frame}[shrink]{判决表达式---步骤2: 似然比}
 \begin{align*}
 \lambda(\bm{x}_N)=\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}&\mathop{\gtrless}_{H_0}^{H_1}\eta\\
-\frac{\prod\limits_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_k^2}{N_0}\right)}
-{\prod\limits_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k^2-s_k)^2}{N_0}\right)}&\mathop{\gtrless}_{H_0}^{H_1}\eta
+\frac{\prod\limits_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k-s_k)^2}{N_0}\right)}
+{\prod\limits_{k=1}^{N}\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{x_k^2}{N_0}\right)}&\mathop{\gtrless}_{H_0}^{H_1}\eta
 \end{align*}
 化简，得到
 \[\ln\lambda(\bm{x}_N)=\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}=\frac{2}{N_0}\sum\limits_{k=1}^{N}x_ks_k-\frac{1}{N_0}\sum\limits_{k=1}^{N}s_k^2\mathop{\gtrless}_{H_0}^{H_1}\ln\eta \]
-
 \end{frame}
 
-\begin{frame}[shrink]{判决表达式---步骤3}
+\begin{frame}[shrink]{判决表达式---步骤3: 将离散判决式变成连续形式}
 \[\ln\lambda(\bm{x}_N)=\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}=\frac{2}{N_0}\sum\limits_{k=1}^{N}x_ks_k-\frac{1}{N_0}\sum\limits_{k=1}^{N}s_k^2\mathop{\gtrless}_{H_0}^{H_1}\ln\eta \]
 \textbf{\textcolor{blue}{步骤3, 令$N\to\infty$, 将离散判决式变成连续形式}}
 因为在两个假设下接收信号$x(t)(0\le t\le T)$的展开系数$x_k(k=1,2,\cdots)$是无穷多个，而离散形式判决式只是取前有限$N$项的结果，因此应对上式取$N\to\infty$的极限。
@@ -190,7 +191,7 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 \lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_ks_k&=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_k\right]s_k &&\text{by }s_k=\int_{0}^{T}s(t)f_k(t)dt \\
 &=\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_k\right]\int_{0}^{T}s(t)f_k(t)dt\\
 &=\int_{0}^{T}s(t)\left[\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_kf_k(t)\right]dt &&\text{by }x(t)=\lim\limits_{N\to\infty}\sum\limits_{k=1}^Nx_kf_k(t)\\
-&=\int_{0}^{T}s(t)x(t)dt
+&=\int_{0}^{T}x(t)s(t)dt
 \end{align*}
 \end{frame}
 
@@ -210,12 +211,12 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 \[\ln\lambda(x(t))\mathop{=}^{def}
 \frac{2}{N_0}\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_ks_k-\frac{1}{N_0}\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k^2\mathop{\gtrless}_{H_0}^{H_1}\ln\eta \]
 \begin{align*}
-\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_ks_k=\int_{0}^{T}s(t)x(t)dt, \qquad \lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k^2=E_s
+\lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}x_ks_k=\int_{0}^{T}x(t)s(t)dt, \qquad \lim\limits_{N\to\infty}\sum\limits_{k=1}^{N}s_k^2=E_s
 \end{align*}
-判决表达式:
-\[\ln\lambda(x(t))\mathop{=}^{def}\frac{2}{N_0}\int_{0}^{T}s(t)x(t)dt-\frac{E_s}{N_0}\mathop{\gtrless}_{H_0}^{H_1}\ln\eta\]
-化简为:
-\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}s(t)x(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma\]
+\textbf{判决表达式:}
+\[\ln\lambda(x(t))\mathop{=}^{def}\frac{2}{N_0}\int_{0}^{T}x(t)s(t)dt-\frac{E_s}{N_0}\mathop{\gtrless}_{H_0}^{H_1}\ln\eta\]
+\textbf{化简为:}
+\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma\]
 \end{frame}
 
 \begin{frame}{简单二元信号波形的检测---检测系统结构}
@@ -223,10 +224,10 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 	\column{0.4\textwidth}
 	\small
 	\textbf{检测系统的结构}：最佳检测系统(又称最佳接收机)的结构，根据信号最佳检测的判决表达式来设计。\\
-	检测统计量$l[x(t)$是由接收信号$x(t)$与确知信号$s(t)$经相关运算得到的，所以这种结构称为\textbf{相关检测系统}，是由互相关器和判决器实现。\\
+	检测统计量$l[x(t)]$是由接收信号$x(t)$与确知信号$s(t)$经相关运算得到的，所以这种结构称为\textbf{相关检测系统}，是由互相关器和判决器实现。\\
 	白噪声下t=T时刻匹配滤波器输出信号与相关器输出信号式相等的。所以也可以用匹配滤波器和判决器来实现。
 	\column{0.6\textwidth}
-	\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}s(t)x(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma\]
+	\[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma\]
 	\includegraphics[scale=0.4]{4-8}
 \end{columns}
 \end{frame}
@@ -284,6 +285,7 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 	\includegraphics[scale=0.4]{matlab4}
 \end{columns}
 \end{frame}
+
 \begin{frame}{简单二元信号波形检测---步骤归纳}
 \begin{enumerate}
 	\setlength{\itemsep}{.5cm}
@@ -291,12 +293,12 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 	\item 然后，针对展开得到的随机变量，利用第三章的统计检测方法，构建贝叶斯检测表达式；
 	\item 最后，令N趋向于无穷大, 利用展开系数与随机过程之间的表示关系，构建波形信号的检测表达式。
 \end{enumerate}
-\[ l[x(t)]\mathop{=}^{def}\int_{0}^{T}s(t)x(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
+\[ l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
 \end{frame}
 
 \begin{frame}{简单二元信号波形检测---步骤归纳}
 \begin{columns}
-\column{0.3\textwidth}
+\column{0.25\textwidth}
 \begin{align*}
 &x_k=\int_{0}^{T}x(t)f_k(t)dt\\
 &s_k=\int_{0}^{T}s(t)f_k(t)dt\\
@@ -306,38 +308,41 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 &\ln\lambda(x(t))\mathop{=}^{def}\lim\limits_{N\to\infty}[\lambda(\bm{x}_N)]\\
 &l[x(t)]\mathop{\gtrless}_{H_0}^{H_1}\gamma
 \end{align*}
-\column{0.7\textwidth}
+\column{0.72\textwidth}
 \centering
 \tikzstyle{int}=[draw, fill=blue!20, minimum size=2em]
 \begin{tikzpicture}[node distance=3.5cm,auto,>=latex']
 \node [int] (a) {$x(t)$};
 \node [int] (b) [right of=a] {$x_k$};
-\node [int] (c) [right of=b] {$x_N$};
-\node [int] (d) [below of=c] {$\frac{p(x_N|H_1)}{p(x_N|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$};
-\node [int] (e) [left of=d] {$l(x)\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$};
+\node [int] (c) [right of=b] {$\bm{x}_N$};
+\node [int] (d) [below of=c] {$\lambda(\bm{x}_N)\frac{p(\bm{x}_N|H_1)}{p(\bm{x}_N|H_0)}\mathop{\gtrless}\limits_{H_0}^{H_1}\eta$};
+\node [int] (e) [left of=d] {$l[x(t)])\mathop{\gtrless}\limits_{H_0}^{H_1}\gamma$};
 \path[->] (a) edge node {$\{f_k(t)\}$正交展开} (b);
-\path[->] (b) edge node {前N项$x_k$构成$x_N$} (c);
+\path[->] (b) edge node {前N项$x_k$构成$\bm{x}_N$} (c);
 \path[->] (c) edge [swap] node {贝叶斯检测} (d);
 \path[->] (d) edge [swap] node {$N\to\infty$} (e);
-\end{tikzpicture}
-\[ l[x(t)]\mathop{=}^{def}\int_{0}^{T}s(t)x(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
+\end{tikzpicture}\\
+\[ l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
 \end{columns}
 \end{frame}
 
-\begin{frame}{简单二元信号波形检测要点}
+\begin{frame}[shrink]{简单二元信号波形检测要点}
 \begin{columns}
 	\column{0.4\textwidth}
-	$H_0: x(t)=n(t)$\\
-	$H_1: x(t)=s(t)+n(t)$\\
-	$x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)$\\
-	$x_k=\int_{0}^{T}x(t)f_k(t)dt, k=1,2,\dots$\\
-	$s_k=\int_{0}^{T}s(t)f_k(t)dt, k=1,2,\dots$\\
-	$n_k=\int_{0}^{T}n(t)f_k(t)dt, k=1,2,\dots$\\
-	$H_0: x_k=n_k,k=1,2,\dots$\\
-	$H_1: x_k=s_k+n_k,k=1,2,\dots$
-	\[ \int_{0}^{T}s(t)x(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2} \]
+	\begin{align*}
+	&H_0: x(t)=n(t)\\
+	&H_1: x(t)=s(t)+n(t)\\
+	&x(t)=\lim\limits_{N\to\infty}^N\sum\limits_{k=1}^Nx_kf_k(t)\\
+	&x_k=\int_{0}^{T}x(t)f_k(t)dt, k=1,2,\dots\\
+	&s_k=\int_{0}^{T}s(t)f_k(t)dt, k=1,2,\dots\\
+	&n_k=\int_{0}^{T}n(t)f_k(t)dt, k=1,2,\dots\\
+	&H_0: x_k=n_k,k=1,2,\dots\\
+	&H_1: x_k=s_k+n_k,k=1,2,\dots\\
+    &\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}
+	\end{align*}
 	\column{0.6\textwidth}
 	\begin{itemize}
+		\setlength{\itemsep}{.4cm}
 		\item 信号s(t)是确知信号,n(t)是均值为0,功率谱密度为$P_n(\omega)=N_0/2$的高斯白噪声;
 		\item 无论在假设$H_1$下还是在假设$H_2$下，接收信号的$x(t)$都是高斯随机过程;
 		\item 展开系数$x_k$是高斯随机过程的积分结果,因而$x_k$是高斯随机变量;
@@ -345,6 +350,7 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 		\item 高斯随机变量由均值和方差决定。由此求出两个假设下的概率密度函数$p(x_k|H_j),k=1,2,\dots;j=0,1$。
 	\end{itemize}
 \end{columns}
+\vspace{0.2cm}
 \end{frame}
 
 \begin{frame}{$x_k,s_k,n_k$之间的关系}
@@ -353,9 +359,9 @@ p(\bm{x}_N|H_1)&=\prod_{k=1}^{N}p(x_k|H_1)=\prod_{k=1}^{N}\left(\frac{1}{\pi N_0
 	随机变量$x(t)$展开系数$x_k$=确知信号$s(t)$展开系数$s_k$+噪声$n(t)$展开系数$n_k$
 \end{block}
 \begin{align*}
-x_k&=\int_{0}^{T}f_k(t)x(t)dt\\
-&=\int_{0}^{T}f_k(t)(s(t)+n(t))dt\\
-&=\int_{0}^{T}f_k(t)s(t)dt+\int_{0}^{T}f_k(t)n(t))dt\\
+x_k&=\int_{0}^{T}x(t)f_k(t)dt\\
+&=\int_{0}^{T}(s(t)+n(t))f_k(t)dt\\
+&=\int_{0}^{T}s(t)f_k(t)dt+\int_{0}^{T}n(t))f_k(t)dt\\
 &=s_k+n_k
 \end{align*}
 \end{frame}
