@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%ch4-4
 \begin{frame}[shrink]
   \frametitle{ch4.信号波形的检测}
-  \framesubtitle{ch4-3. 一般二元信号波形的检测---正交级数展开法}
+  \framesubtitle{ch4-4. 一般二元信号波形的检测---正交级数展开法}
   \tableofcontents[hideallsubsections]
 \end{frame}
 
@@ -11,9 +11,9 @@
 在简单二元信号的波形检测中，假设$H_0$下和假设$H_1$的接收信号分别为:
 \begin{align*}
 &H_0: x(t)=s_0(t)+n(t), &&0\le t\le T\\
-&H_1: x(t)=s_(t)+n(t), &&0\le t\le T
+&H_1: x(t)=s_1(t)+n(t), &&0\le t\le T
 \end{align*}
-其中, $s_0(t)$是能量为$E_0$的确知信号, $s_1(t)$是能量为$E_1$的确知信号
+其中, $s_0(t)$是能量为$E_0$的确知信号, $s_1(t)$是能量为$E_1$的确知信号, \\
 $n(t)$是均值为零, 功率谱密度为$N_0/2$的\textbf{高斯白噪声}。
 \end{frame}
 
@@ -96,8 +96,12 @@ $H_1: x(t)=s_1(t)+n(t),\quad 0\le t\le T$\\
 
 \begin{frame}[shrink]{判决表达式---步骤1: 假设$H_0$下$x_k$的均值和方差}
 \begin{align*}
-&H_0: x_k=s_{0k}+n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt, \quad\text{由于$n(t)$是均值为零的高斯白噪声, }\\
-&E[n(t)]=0, E[n(t)n(u)]=r_n(t-u) =\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(\delta(t-u)=1,t=u)\\
+&H_0: x_k=s_{0k}+n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt, \quad\text{由于$n(t)$是均值为零的高斯白噪声, } E[n(t)]=0, \\ &E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u), \quad
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}\\
 &\text{$f_k(t)$是一组正交函数集, } \int_{0}^{T}f_j(t)f_k(t)dt=1,(j=k)
 \end{align*}
 \begin{align*}
@@ -251,9 +255,9 @@ $H_0: x(t)=5\sin(2t)+n(t),\quad 0 \le t\le 2\pi $\\
 \begin{frame}{检测系统性能分析}
 \textbf{统计量}
 \[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s_1(t)dt-\int_{0}^{T}x(t)s_0(t)dt\]
-\textbf{假设$H_0$下, $l$的均值和方差为}
+\textbf{假设$H_0$下, $l$的均值和方差为(推到见下节例题2)}
 \begin{align*}
-E[l|H_0]&=E\left[\int_{0}^{T}x(t)s_1(t)dt|H_0-\int_{0}^{T}x(t)s_0(t)dt|H_0\right]=\rho\sqrt{E_1E_0}-E_0\\
+E[l|H_0]&=E\left[\int_{0}^{T}x(t)s_1(t)dt|H_0-\int_{0}^{T}x(t)s_0(t)dt|H_0\right]=\rho\sqrt{E_0E_1}-E_0\\
 Var[l|H_0]&=E\left\{\left[(l|H_0)-E[l|H_0]\right]^2\right\}=\frac{N_0}{2}(E_1+E_0-2\rho\sqrt{E_0E_1})
 \end{align*}
 式中, 信号$s_0(t)$和$s_1(t)$之间的波形相关系数$\rho$为 \[\rho\mathop{=}\limits^{def}\frac{1}{\sqrt{E_{0}E_{1}}}\int_{0}^{T}s_0(t)s_1(t)dt,\quad(|\rho|\le 1)\]
@@ -264,8 +268,8 @@ Var[l|H_0]&=E\left\{\left[(l|H_0)-E[l|H_0]\right]^2\right\}=\frac{N_0}{2}(E_1+E_
 \[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s_1(t)dt-\int_{0}^{T}x(t)s_0(t)dt\]
 \textbf{类似地, 假设$H_1$下, $l$的均值和方差为}
 \begin{align*}
-E[l|H_1]&=E_1-\rho\sqrt{E_1E_0}\\
-Var[l|H_0]&=\frac{N_0}{2}(E_1+E_0-2\rho\sqrt{E_0E_1})
+E[l|H_1]&=E_1-\rho\sqrt{E_0E_1}\\
+Var[l|H_1]&=\frac{N_0}{2}(E_1+E_0-2\rho\sqrt{E_0E_1})
 \end{align*}
 式中, 信号$s_0(t)$和$s_1(t)$之间的波形相关系数$\rho$为 \[\rho\mathop{=}\limits^{def}\frac{1}{\sqrt{E_{0}E_{1}}}\int_{0}^{T}s_0(t)s_1(t)dt,\quad(|\rho|\le 1)\]
 \end{frame}
@@ -275,8 +279,8 @@ Var[l|H_0]&=\frac{N_0}{2}(E_1+E_0-2\rho\sqrt{E_0E_1})
 \[d^2\mathop{=}\limits^{def}\frac{(E(l|H_1)-E(l|H_0))^2}{Var(l|H_0)}=\frac{2}{N_0}(E_1+E_0-2\rho\sqrt{E_0E_1}) \]
 判决概率为
 \begin{align*}
-P(H_1|H_0)&=\int_{\gamma}^{\infty}p(l|H_0)dl=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)\\
-P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)\\
+P(H_1|H_0)&\mathop{=}^{def}P_F=\int_{\gamma}^{\infty}p(l|H_0)dl=Q\left(\frac{\ln\eta}{d}+\frac{d}{2}\right)\\
+P(H_1|H_1)&\mathop{=}^{def}P_D=\int_{\gamma}^{\infty}p(l|H_1)dl=Q\left(\frac{\ln\eta}{d}-\frac{d}{2}\right)\\
 \end{align*}
 \end{frame}
 
@@ -290,7 +294,7 @@ P(H_1|H_1)&=\int_{\gamma}^{\infty}p(l|H_1)dl=Q\left(\frac{\ln\eta}{d}-\frac{d}{2
 \begin{align*}
 &\textbf{设}\quad E_0=E_1=E_s,\implies\sqrt{E_0E_1}=E_s\\
 &\textbf{如果信号设计成$s_0(t)$和$s_1(t)$互反: }\quad s_0(t)=-s_1(t),\\
-&\quad\int_{0}^{T}s_0(t)s_1(t)dt=E_s\implies |\rho|=-1\\
+&\quad\int_{0}^{T}s_0(t)s_1(t)dt=-E_s\implies |\rho|=-1\\
 &d^2=\frac{8}{N_0}E_s\quad\textbf{取得最大值$\implies$最佳波形设计}
 \end{align*}
 \end{frame}
@@ -344,3 +348,26 @@ $\rho\to 1, d^2\to 0$\textbf{检测性能}$\downarrow$, \textbf{信号波形设�
 	\end{itemize}
 \end{block}
 \end{frame}
+
+\begin{frame}[shrink]{附: 证明}
+证明： 若$a,b$为任意两正数, 当$a+b=2\alpha$时, 证明使$a,b$乘积最大的$a$和$b$应满足$a=b=\alpha$。
+\begin{proof}
+	因为
+	\[(a-b)^2>0 \]
+	所以
+	\[a^2-2ab+b^2\ge 0 \]
+	即
+	\[ab\le\frac{a^2+b^2}{2}\]
+	$a, b$乘积最大为
+	\[ab=\frac{a^2+b^2}{2}\]
+	于是有联立方程
+	\[
+	\begin{cases}
+	a+b=2\alpha\\
+	ab=\frac{a^2+b^2}{2}
+	\end{cases}
+	\]
+	从而解得当满足$a=b=\alpha$时, 乘积ab最大。
+\end{proof}
+\end{frame}
+

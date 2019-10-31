@@ -118,8 +118,13 @@ $H_1: x(t)=s(t)+n(t)$\\
 
 \begin{frame}[shrink]{判决表达式---步骤1: 假设$H_0$下$x_k$的均值和方差}
 \begin{align*}
-&H_0: x_k=n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt, \quad\text{由于$n(t)$是均值为零的高斯白噪声, }\\
-&E[n(t)]=0, E[n(t)n(u)]=r_n(t-u) =\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(\delta(t-u)=1,t=u)\\
+&H_0: x_k=n_k, \quad n_k=\int_{0}^{T}n(t)f_k(t)dt, \quad\text{由于$n(t)$是均值为零的高斯白噪声, } E[n(t)]=0,\\
+&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u), \quad
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}\\
 &\text{$f_k(t)$是一组正交函数集, } \int_{0}^{T}f_j(t)f_k(t)dt=1,(j=k)
 \end{align*}
 \begin{align*}
@@ -353,7 +358,14 @@ p(x_k|H_1)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k^2-s_k)^2}{
 \vspace{0.2cm}
 \end{frame}
 
-\begin{frame}{$x_k,s_k,n_k$之间的关系}
+\begin{frame}{证明$x_k,s_k,n_k$之间的关系}
+\begin{block}{$x_k,s_k,n_k$之间的关系}
+	\[x(t)=s(t)+n(t); \quad x_k=s_k+n_k \]
+	随机变量$x(t)$展开系数$x_k$=确知信号$s(t)$展开系数$s_k$+噪声$n(t)$展开系数$n_k$
+\end{block}
+\end{frame}
+
+\begin{frame}{证明$x_k,s_k,n_k$之间的关系}
 \begin{block}{$x_k,s_k,n_k$之间的关系}
 	\[x(t)=s(t)+n(t); \quad x_k=s_k+n_k \]
 	随机变量$x(t)$展开系数$x_k$=确知信号$s(t)$展开系数$s_k$+噪声$n(t)$展开系数$n_k$
@@ -361,7 +373,7 @@ p(x_k|H_1)&=\left(\frac{1}{\pi N_0}\right)^{1/2}\exp\left(-\frac{(x_k^2-s_k)^2}{
 \begin{align*}
 x_k&=\int_{0}^{T}x(t)f_k(t)dt\\
 &=\int_{0}^{T}(s(t)+n(t))f_k(t)dt\\
-&=\int_{0}^{T}s(t)f_k(t)dt+\int_{0}^{T}n(t))f_k(t)dt\\
+&=\int_{0}^{T}s(t)f_k(t)dt+\int_{0}^{T}n(t)f_k(t)dt\\
 &=s_k+n_k
 \end{align*}
 \end{frame}
@@ -374,9 +386,9 @@ $H_0: x(t)=n(t), \quad H_1: x(t)=s(t)+n(t)$\\
 \[l[x(t)]\mathop{=}^{def}\int_{0}^{T}x(t)s(t)dt\mathop{\gtrless}_{H_0}^{H_1}\frac{N_0}{2}\ln\eta+\frac{E_s}{2}\mathop{=}^{def}\gamma \]
 检验统计量$l[x(t)]$无论在假设$H_0$下，还是在假设$H_1$下，都是由高斯随机过程$x(t)s(t)(0\le t\le T)$经积分得到的，所以\bm{$l[x(t)]$}\textbf{是高斯随机变量}。
 \begin{enumerate}
-	\item 求出检验统计量$l[x(t)]$在两个假设下的均值$E(l|H_j)$和方差$Var(l|H_j),j=0,1$;
-	\item 求各种判决概率$P(H_i|H_j),i,j=0,1$;\\
-	简单二元信号检测与雷达信号检测相对应：$P(H_1|H_0)\mathop{=}\limits^{def}P_F$(称为虚警概率)，$P(H_1|H_1)\mathop{=}\limits^{def}P_D$(称为检测概率)
+	\item 求出检验统计量$l[x(t)]$在两个假设下的均值$E[l|H_j]$和方差$Var[l|H_j],j=0,1$;
+	\item 求各种判决概率$P[H_i|H_j],i,j=0,1$;\\
+	简单二元信号检测与雷达信号检测相对应：$P[H_1|H_0]\mathop{=}\limits^{def}P_F$(称为虚警概率)，$P[H_1|H_1]\mathop{=}\limits^{def}P_D$(称为检测概率)
 	\item 计算检测性能。
 \end{enumerate}
 \end{frame}
@@ -422,14 +434,19 @@ Var[l|H_1]&=E[((l|H_1)-E(l|H_1))^2]=\frac{N_0}{2}E_s
 \begin{frame}[shrink]{计算$E[l|H_0]$和$Var[l|H_0]$}
 \begin{align*}
 &l[x(t)]\mathop{=}\limits^{def}\int_{0}^{T}x(t)s(t)dt,\quad E_s=\int_{0}^{T}s^2(t)dt,\quad H_0:x(t)=n(t), \quad E[n(t)]=0\\
-&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)
+&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u), \quad
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}
 \end{align*}
 \begin{align*}
 E[l|H_0]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_0\right]=E\left[\int_{0}^{T}n(t)s(t)dt\right]=\int_{0}^{T}E[n(t)]s(t)dt=0\\
 Var[l|H_0]&=E[((l|H_0)-E(l|H_0))^2]=E[(l|H_0)^2]=E\left[\left(\int_{0}^{T}x(t)s(t)dt\right)^2\right]\\
 &=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
 &=\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
-&=\frac{N_0}{2}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}E_s
+&=\int_{0}^{T}s(t)\frac{N_0}{2}s(t)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}E_s
 \end{align*}
 \end{frame}
 
@@ -457,14 +474,19 @@ E[l|H_1]&=E\left[\int_{0}^{T}x(t)s(t)dt|H_1\right] &&\text{by }H_1: x(t)=s(t)+n(
 \begin{frame}[shrink]{计算$Var[l|H_1]$}
 \begin{align*}
 &l[x(t)]\mathop{=}\limits^{def}\int_{0}^{T}x(t)s(t)dt,\quad E_s=\int_{0}^{T}s^2(t)dt,\quad H_1:x(t)=s(t)+n(t), \quad E[n(t)]=0\\
-&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=\frac{N_0}{2},(t=u,\delta(t-u)=1)
+&E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u), \quad
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}
 \end{align*}
 \begin{align*}
 Var[l|H_1]&=E[((l|H_1)-E(l|H_1))^2]=E\left[\left(\int_{0}^{T}(s(t)+n(t))s(t)dt-E_s\right)^2\right]\\
 &=E\left[\left(\int_{0}^{T}(s^2(t)dt+\int_{0}^{T}n(t)s(t)dt-E_s\right)^2\right]=E\left[\left(\int_{0}^{T}n(t)s(t)dt\right)^2\right]\\
 &=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(t)s(t)dt\right]=E\left[\int_{0}^{T}n(t)s(t)dt\int_{0}^{T}n(u)s(u)du\right]\\
 &=\int_{0}^{T}s(t)\left\{\int_{0}^{T}E[n(u)n(t)]s(u)du\right\}dt=\int_{0}^{T}s(t)\left[\int_{0}^{T}\frac{N_0}{2}\delta(t-u)s(u)du\right]dt\\
-&=\frac{N_0}{2}\int_{0}^{T}s(t)\left(\int_{0}^{T}s(u)du\right)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}E_s
+&=\int_{0}^{T}s(t)\frac{N_0}{2}s(t)dt=\frac{N_0}{2}\int_{0}^{T}s^2(t)dt=\frac{N_0}{2}E_s
 \end{align*}
 \end{frame}
 
@@ -476,7 +498,7 @@ Var[l|H_1]&=E[((l|H_1)-E(l|H_1))^2]=E\left[\left(\int_{0}^{T}(s(t)+n(t))s(t)dt-E
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{计算$P(H_1|H_0)$}
+\begin{frame}[shrink]{计算$P_F=P(H_1|H_0)$}
 \begin{align*}
 p(l|H_0)&=\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{l^2}{N_0E_s}\right)\\
 P(H_1|H_0)&\mathop{=}^{def}P_F=\int_{\gamma}^{\infty}p(l|H_0)dl\qquad \implies&& Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\
@@ -488,7 +510,7 @@ P(H_1|H_0)&\mathop{=}^{def}P_F=\int_{\gamma}^{\infty}p(l|H_0)dl\qquad \implies&&
 \end{align*}
 \end{frame}
 
-\begin{frame}[shrink]{计算$P(H_0|H_1)$}
+\begin{frame}[shrink]{计算$P_D=P(H_1|H_1)$}
 \begin{align*}
 p(l|H_1)&=\left(\frac{1}{\pi N_0E_s}\right)^{1/2}\exp\left(-\frac{(l-E_s)^2}{N_0E_s}\right)\\
 P(H_1|H_1)&\mathop{=}^{def}P_D=\int_{\gamma}^{\infty}p(l|H_1)dl\qquad \implies&& Q(x)=\int_{x}^{\infty}\left(\frac{1}{2\pi}\right)^{1/2}\exp\left(-\frac{u^2}{2}\right)du\\

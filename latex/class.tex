@@ -180,9 +180,9 @@
 %\include{ch4}  % 部分公式
 %\include{ch4-1} %波形检测基本概念，正交级数展开，卡亨南---洛维展开，白噪声正交函数的任意性，参量随机过程正交级数展开
 %\include{ch4-2} %高斯白噪声确知信号[简单二元波形检测]波形检测及性能分析
-%\include{ch4-3} %简单二元波形检测---充分统计量法
-%\include{ch4-4}  %一般二元波形检测---正交级数展开法
-\include{ch4-5}  %一般二元波形检测---充分统计量法
+%\include{ch4-3} %简单二元波形检测---充分统计量法，作业推导判别式
+%\include{ch4-4}  %一般二元波形检测---正交级数展开法(空45分钟)
+\include{ch4-5}  %一般二元波形检测---充分统计量法，二元波形检测归纳
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%% last frame
@@ -327,6 +327,12 @@ $\left[ .....  \right]$
 $\left( ..... \right)$
 $\left\{ .....  \right.$ %有左无右
 
+%右边大括号
+\begin{align*}
+\left.\sqrt{\frac{E_s}{N_0}(1-\rho)}\right|_{\rho=-0.21}=\sqrt{\frac{E_s^\prime}{N_0}}\\
+E_s^\prime=1.21E_s
+\end{align*}
+
 $\delta_{jk}=
 \begin{cases}
 1, & (i=k)\\
@@ -431,5 +437,76 @@ alertblock 警示环境
 \end{multicols}
 
 \rule{\textwidth}{1pt} %水平线
+
+%设置表格行颜色
+\begin{tabular}{r|r|r}
+	\rowcolor{green}直角边 $a$ & 直角边 $b$ & 斜边 $c$\\
+	3 & 4 & 5 \\
+	5 & 12 & 13 \\
+	7 & 24 & 25 \\
+	8 & 15 & 17 \\
+\end{tabular}
+
+%%%%%%%%%%%%动画
+%\onslide{},可以指定内容在一帧中的第几步显示，使用\onslide时不显示的内容还占用它原来的位置。
+%\only{}命令在不显示的步骤没有额外的占位，可以得带内容替代的效果。
+\begin{frame}{动画效果展示}
+\onslide<1>{只有第一部}
+\onslide<2->{第二部之后}
+\onslide<1,3>{第1,3两步}
+\only{abcd}
+\end{frame}
+
+\begin{frame}{动画显示}
+\begin{itemize}
+\item<1->显示列表一	
+\item<2->显示列表二
+\item<3->显示列表三
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}[<+->]
+\item 开始显示
+\item 其次显示
+\item 最后显示
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\only<1>{\begin{itemize}
+\item item1
+\item item2
+\end{itemize}}
+
+\only<2>{\begin{itemize}
+\item item3
+\item item4
+\end{itemize}}
+\end{frame}
+
+%图片第2页显示图片
+\begin{frame}
+one\\
+\pause
+第二页
+\pause
+第三页
+\includegraphics<3->[scale=0.35]{ex6-8}
+\end{frame} 
+
+\begin{columns}
+\column{0.65\textwidth}<1->
+1234
+\column{0.35\textwidth}<2->
+abcd
+\end{columns}
+
+%%%%%%%%%%公式缩小
+\begin{small}
+\begin{align*}
+equation*
+\end{align*}
+\end{small}
 
 \fi　　　%注释结束

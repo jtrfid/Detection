@@ -1097,6 +1097,101 @@ $|\bm{C_n}|$是$\bm{C_n}$的行列式, $\bm{C_n^{-1}}$是$\bm{C_n}$的逆矩阵�
 \includegraphics[scale=0.4]{WhiteGaussianNoise}
 \end{frame}
 
+\begin{frame}{附: 狄拉克函数(Dirac函数/$\delta$---函数)}
+\begin{definition}[$\delta$---函数]
+	对于任意的无穷次可微的函数$f(t)$, 如果满足:
+	$$\int_{-\infty}^{\infty}\delta (t)f(t)dt=\lim\limits_{\varepsilon\to 0}\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)f(t)dt $$
+	其中:
+	\[
+	\delta_{\varepsilon}(t)=\begin{cases}
+	0,&t<0\\
+	\frac{1}{\varepsilon}, & 0\ge t<\varepsilon\\
+	0, &t>\varepsilon
+	\end{cases}
+	\]
+	则称$\delta_\varepsilon(t)$的弱极限为$\delta$函数，记为$\delta(t)$
+	显然, 对于任意的$\varepsilon>0$, 有:
+	$$\int_{-\infty}^{\infty}\delta_{\varepsilon}(t)dt=\int_{0}^{\varepsilon}\frac{1}{\varepsilon}dt=1\implies \int_{-\infty}^\infty\delta(t)dt=1$$
+\end{definition}
+\end{frame}
+
+\begin{frame}{附: 狄拉克函数(Dirac函数/$\delta$---函数)}
+\begin{block}{注}
+\begin{enumerate}
+	\item $\delta(t)$在$t=0$点的取值为$\infty$, 在$t\ne 0$点的取值为0, 并且满足$\int_{-\infty}^{\infty}\delta(t)dt=1$。
+	\item 工程(信号处理等)上$\delta$---函数也称为\textbf{单位脉冲或单位冲激函数}。
+\end{enumerate}
+\end{block}
+\begin{block}{$\delta$---函数的筛选性质}
+若$f(t)$为无穷次可微的函数,则有:$\int_{I}\delta(t)f(t)dt=f(0) $\\
+其中$I$是包含点$t=0$的任意区间。特殊地, 有:$\int_{-\infty}^{\infty}\delta(t)f(t)dt=f(0) $\\
+更一般地，我们有:
+$$\int_{-\infty}^{\infty}\delta(t-t_0)f(t)dt=f(t_0) $$
+\end{block}
+\end{frame}
+
+\begin{frame}[shrink]{附: 白噪声$n(t)$是相互正交的随机过程}
+$n(t)$功率谱密度为$P_n(\omega)=N_0/2$的白噪声。
+其自相关函数为: 
+\[r_n(t-u)=E[n(t)n(u)]=\frac{N_0}{2}\delta(t-u)=
+\begin{cases}
+\infty & t=u\\
+0 &t\ne u
+\end{cases}  
+\] 
+说明噪声自相关函数在$t=u$时不为0，其他时刻都为0，自相关性最强。\\
+由$\delta$---函数的筛选性质有
+\[
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}
+\]
+\end{frame}
+
+\begin{frame}[shrink]{附: 均值为零的白噪声$n(t)$是互不相关的随机过程}
+如果白噪声$n(t)$的均值为零, $\mu_n=E[n(t)]=0$, 功率谱密度为$P_n(\omega)=N_0/2$的白噪声。\\ 
+则协方差
+\begin{align*}
+E[(n(t)-E[n(t))(n(u)-E[n(u))]&=E[n(t)n(u)]\\
+&=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=0, t\ne u
+\end{align*}
+因而$n(t)$是\textbf{互不相关}的随机过程。\\
+\end{frame}
+
+\begin{frame}[shrink]{附: 高斯噪声$n(t)$统计独立等价于互不相关}
+根据之前的证明,\\
+如果$n(t)$是\textbf{\textcolor{blue}{高斯白噪声}}, 则\textbf{$N$个高斯随机变量$n(t_k) (k=1,2,\cdots,t_N)$互不相关$\Leftrightarrow$相互统计独立}。\\
+~\\
+因而, 高斯噪声$n(t)$的$N$维联合概率密度函数可以表示成各自一维概率密度函数之积的形式:
+\begin{align*}
+p(\bm{n;t})&=\prod\limits_{k=1}^{N}\left(\frac{1}{2\pi\sigma_{n_k}^2}\right)^{1/2}\exp\left[-\frac{(n_k-\mu_{n_k})^2}{2\sigma_{n_k}^2}\right]\\
+&=p(n_1;t_1)p(n_2;t_2)\cdots p(n_N;t_N)
+\end{align*}
+\end{frame}
+
+\begin{frame}[shrink]{零均值的高斯白噪声$n(t)$性质}
+综上，$n(t)$是零均值,功率谱密度为$P_n(\omega)=N_0/2$的白噪声:\\
+均值 $E[n(t)]=\mu_n=0$\\
+自相关函数 
+\[ E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)\]
+协方差
+\begin{align*}
+E[(n(t)-E[n(t))(n(u)-E[n(u))]=E[n(t)n(u)]=r_n(t-u)=\frac{N_0}{2}\delta(t-u)=0, t\ne u
+\end{align*}
+由$\delta$---函数的筛选性质有
+\[
+\int_0^T\delta(t-u)f(t)dt=
+\begin{cases}
+f(u), & (t=u)\\
+0, & (t\ne u) 
+\end{cases}
+\]
+噪声自相关函数在$t=u$时不为0，其他时刻都为0，自相关性最强。\\
+是相互正交, 相互统计独立, 互不相关的随机变量过程。
+\end{frame}
+
 \begin{frame}{有色噪声}
 如果噪声过程$n(t)$的功率谱密度在频域上的分布是不均匀的，则称其为有色噪声。
 \begin{block}{有色噪声的功率谱密度}
